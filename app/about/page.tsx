@@ -235,9 +235,9 @@ export default function AboutPage() {
                   </p>
                   <a
                     className="mt-4 inline-flex w-max items-center gap-1.5 text-xs font-medium text-foreground/60 transition-colors hover:text-foreground"
-                    href="/projects"
+                    href="/work"
                   >
-                    View project
+                    View work
                     <span aria-hidden="true">↗</span>
                   </a>
                 </div>

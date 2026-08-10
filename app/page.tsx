@@ -425,9 +425,9 @@ export default function Home() {
             <div className="h-10 flex items-center justify-center border-b border-dotted border-edge">
               <a
                 className="text-xs font-medium underline underline-offset-4 transition-colors hover:text-muted-foreground"
-                href="/projects"
+                href="/work"
               >
-                See all projects
+                See all work
               </a>
             </div>
           </ContainerWrapper>

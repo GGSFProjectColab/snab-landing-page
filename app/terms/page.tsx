@@ -1,18 +1,8 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "@/lib/site";
 import { Footer } from "../Footer";
-import { BrandLogo } from "../BrandLogo";
-import { MobileMenu } from "../MobileMenu";
 import "../legal.css";
-
-const navItems = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "Projects", href: "/projects" },
-  { label: "Services", href: "/services" },
-  { label: "Contact Us", href: "/contact" },
-  { label: "Careers", href: "/careers" }
-];
+import "../legacy.css";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Terms & Conditions",
@@ -24,14 +14,6 @@ export default function TermsPage() {
   return (
     <main className="legal-page">
       <div className="legal-grid-plane" aria-hidden="true" />
-      
-      <header className="topbar legal-topbar" aria-label="Primary navigation">
-        <a className="brand" href="/" aria-label="SNAB Innovations home">
-          <BrandLogo priority />
-          <span className="brand-name">SNAB Innovations</span>
-        </a>
-        <MobileMenu items={navItems} />
-      </header>
       
       <div className="legal-container">
         <header className="legal-header">

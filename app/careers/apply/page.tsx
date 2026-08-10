@@ -3,9 +3,9 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Footer } from "../../Footer";
 import { ApplicationForm } from "../ApplicationForm";
-import { CareersHeader } from "../CareersHeader";
 import { createPageMetadata } from "@/lib/site";
 import "../careers.css";
+import "../../legacy.css";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Open Application",
@@ -16,7 +16,6 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function GeneralApplicationPage() {
   return <main className="careers-page application-page">
-    <CareersHeader />
     <section className="application-layout">
       <aside className="application-context">
         <Link href="/careers"><ArrowLeft size={16} /> Back to careers</Link>

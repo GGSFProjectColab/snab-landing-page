@@ -1,18 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { createPageMetadata } from "@/lib/site";
-import { MobileMenu } from "../MobileMenu";
 import { BrandLogo } from "../BrandLogo";
 import "./about.css";
-
-const navItems = [
-  { label: "home page", href: "/#home" },
-  { label: "about us", href: "/about" },
-  { label: "projects", href: "/projects" },
-  { label: "services", href: "/services" },
-  { label: "contact us", href: "/contact" },
-  { label: "careers", href: "/careers" },
-];
+import "../legacy.css";
 
 const principles = [
   "We start with the workflow, not the model.",
@@ -121,15 +112,6 @@ function ArrowIcon() {
 export default function AboutPage() {
   return (
     <main className="about-page">
-      <header className="topbar" aria-label="Primary navigation">
-        <a className="brand" href="/" aria-label="SNAB Innovations home">
-          <BrandLogo priority />
-          <span className="brand-name">SNAB Innovations</span>
-        </a>
-
-        <MobileMenu items={navItems} />
-      </header>
-
       <article>
         <section className="about-hero" aria-labelledby="about-title">
           <div className="about-hero-copy">

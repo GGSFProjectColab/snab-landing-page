@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope, Pixelify_Sans, Geist } from "next/font/google";
+import { Manrope, Pixelify_Sans, Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
 import "./footer.css";
@@ -7,19 +7,27 @@ import "./skeletons.css";
 import "@/components/mdx/mdx.css";
 import { cn } from "@/lib/utils";
 import { siteConfig, absoluteUrl } from "@/lib/site";
+import { Providers } from "@/components/site/providers";
+import { SiteHeader } from "@/components/site/site-header";
 
-const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
 
 const bodyFont = Manrope({
   subsets: ["latin"],
   variable: "--font-body",
-  display: "swap"
+  display: "swap",
 });
 
 const displayFont = Pixelify_Sans({
   subsets: ["latin"],
   variable: "--font-display",
-  display: "swap"
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -82,13 +90,29 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={cn(bodyFont.variable, displayFont.variable, "font-sans", geist.variable)}>
-      <body>{children}</body>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+      className={cn(
+        bodyFont.variable,
+        displayFont.variable,
+        geistMono.variable,
+        "font-sans",
+        geist.variable
+      )}
+    >
+      <body>
+        <Providers>
+          <SiteHeader />
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }

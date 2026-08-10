@@ -4,10 +4,10 @@ import { Suspense } from "react";
 import { ArrowRight, ArrowUpRight, CalendarClock, Code2, HeartHandshake, Sparkles } from "lucide-react";
 import { Footer } from "../Footer";
 import { getPublishedJobs } from "@/lib/careers";
-import { CareersHeader } from "./CareersHeader";
 import { RolesSkeleton } from "./RolesSkeleton";
 import { createPageMetadata } from "@/lib/site";
 import "./careers.css";
+import "../legacy.css";
 
 export const dynamic = "force-dynamic";
 
@@ -74,8 +74,6 @@ function OpenRolesFallback() {
 export default function CareersPage() {
   return (
     <main className="careers-page">
-      <CareersHeader />
-
       <section className="careers-hero" aria-labelledby="careers-title">
         <div className="careers-grid" aria-hidden="true" />
         <div className="careers-hero-index" aria-hidden="true">C / 01</div>

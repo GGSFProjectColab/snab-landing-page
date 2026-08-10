@@ -1,18 +1,8 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "@/lib/site";
 import { Footer } from "../Footer";
-import { BrandLogo } from "../BrandLogo";
-import { MobileMenu } from "../MobileMenu";
 import "./services.css";
-
-const navItems = [
-  { label: "home page", href: "/#home" },
-  { label: "about us", href: "/about" },
-  { label: "projects", href: "/projects" },
-  { label: "services", href: "/services" },
-  { label: "contact us", href: "/contact" },
-  { label: "careers", href: "/careers" },
-];
+import "../legacy.css";
 
 const phases = [
   {
@@ -71,14 +61,6 @@ function ArrowIcon() {
 export default function ServicesPage() {
   return (
     <main className="services-page">
-      <header className="topbar services-topbar" aria-label="Primary navigation">
-        <a className="brand" href="/" aria-label="SNAB Innovations home">
-          <BrandLogo priority />
-          <span className="brand-name">SNAB Innovations</span>
-        </a>
-        <MobileMenu items={navItems} />
-      </header>
-
       <section className="services-hero" aria-labelledby="services-title">
         <div className="services-hero-grid" aria-hidden="true" />
         <div className="services-hero-copy">

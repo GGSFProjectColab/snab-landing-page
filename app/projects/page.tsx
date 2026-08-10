@@ -1,26 +1,16 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { MobileMenu } from "../MobileMenu";
 import { Footer } from "../Footer";
-import { BrandLogo } from "../BrandLogo";
 import { createPageMetadata } from "@/lib/site";
 import { ProjectsHorizontalWrapper } from "./ProjectsHorizontalWrapper";
 import "./projects.css";
+import "../legacy.css";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Projects | SNAB Innovations",
   description: "View our selected AI products and software engineering projects built by SNAB Innovations.",
   path: "/projects",
 });
-
-const navItems = [
-  { label: "home page", href: "/" },
-  { label: "about us", href: "/about" },
-  { label: "projects", href: "/projects" },
-  { label: "services", href: "/services" },
-  { label: "contact us", href: "/contact" },
-  { label: "careers", href: "/careers" }
-];
 
 const projects = [
   {
@@ -62,15 +52,6 @@ const projects = [
 export default function ProjectsPage() {
   return (
     <main className="projects-page">
-      <header className="topbar projects-topbar" aria-label="Primary navigation">
-        <a className="brand" href="/" aria-label="SNAB Innovations home">
-          <BrandLogo priority />
-          <span className="brand-name">SNAB Innovations</span>
-        </a>
-
-        <MobileMenu items={navItems} />
-      </header>
-
       <section className="projects-hero">
         <h1>The systems<br />we've shipped<span>.</span></h1>
         <p>A selection of AI products and tools built for real-world professional workflows.</p>

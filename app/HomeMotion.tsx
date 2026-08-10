@@ -44,8 +44,8 @@ const revealGroups = [
     start: "top 78%"
   },
   {
-    trigger: ".site-footer",
-    targets: [".footer-frame"],
+    trigger: ".home-footer",
+    targets: [".home-footer-inner"],
     start: "top 86%"
   }
 ] as const;

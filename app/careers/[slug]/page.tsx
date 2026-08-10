@@ -5,11 +5,11 @@ import { ArrowLeft, ArrowRight, CalendarClock, Check, MapPin } from "lucide-reac
 import { Footer } from "../../Footer";
 import { getPublishedJobBySlug } from "@/lib/careers";
 import { ApplicationForm } from "../ApplicationForm";
-import { CareersHeader } from "../CareersHeader";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { createJobPostingSchema } from "@/lib/job-schema";
 import { createPageMetadata } from "@/lib/site";
 import "../careers.css";
+import "../../legacy.css";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -42,7 +42,6 @@ export default async function JobPage({ params }: Props) {
 
   return <main className="careers-page job-page">
     <JsonLd data={createJobPostingSchema(job)} />
-    <CareersHeader />
     <section className="job-hero">
       <Link href="/careers#open-roles" className="job-back"><ArrowLeft size={16} /> All open roles</Link>
       <p className="careers-kicker"><span /> {job.department}</p>

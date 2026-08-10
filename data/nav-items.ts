@@ -5,19 +5,12 @@ export type NavItem = {
 };
 
 export const NAV_ITEMS: NavItem[] = [
-  { label: "home", href: "/#home" },
-  { label: "about", href: "/about" },
-  { label: "projects", href: "/projects" },
-  { label: "services", href: "/services" },
-  { label: "contact", href: "/contact" },
-  { label: "careers", href: "/careers" },
-  { label: "blogs", href: "/blogs" },
+  { label: "About", href: "/about" },
+  { label: "Projects", href: "/projects" },
+  { label: "Services", href: "/services" },
+  { label: "Careers", href: "/careers" },
+  { label: "Insights", href: "/insights" },
+  { label: "Contact", href: "/contact" },
 ];
 
-export const DESKTOP_LINKS: NavItem[] = NAV_ITEMS.filter((item) =>
-  ["home", "projects"].includes(item.label),
-);
-
-export const MORE_LINKS: NavItem[] = NAV_ITEMS.filter(
-  (item) => !["home", "projects"].includes(item.label),
-);
+export const DESKTOP_LINKS: NavItem[] = NAV_ITEMS;

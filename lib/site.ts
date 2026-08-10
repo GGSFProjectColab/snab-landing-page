@@ -32,6 +32,8 @@ export const siteConfig = {
   links: {
     twitter: "https://x.com/snabInnovations",
     linkedin: "https://www.linkedin.com/company/snab-innovations/posts/?feedView=all",
+    instagram: "https://instagram.com/snabinnovations",
+    youtube: "https://youtube.com/@snabinnovations",
   },
 } as const;
 

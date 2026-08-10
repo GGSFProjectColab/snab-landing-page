@@ -6,12 +6,13 @@ type SectionSeparatorProps = {
 
 export function SectionSeparator({ className }: SectionSeparatorProps) {
   return (
-    <div
-      className={cn(
-        "h-8 border-y border-dotted border-edge section-dot-grid",
-        className
-      )}
-      aria-hidden="true"
-    />
+    <div className="mx-auto max-w-6xl" aria-hidden="true">
+      <div
+        className={cn(
+          "relative mx-2 h-8 border-x border-y border-dotted border-edge section-dot-grid",
+          className
+        )}
+      />
+    </div>
   );
 }

@@ -1,3 +1,21 @@
+/* Footer Styles - Dotted line layout matching homepage */
+
+/* Footer brand cell with background image */
+.footer-brand-cell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: oklch(from var(--background) l c h / 0.85);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.footer-brand-cell > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Legacy Footer Styles - Kept for backward compatibility */
 .site-footer {
   position: relative;
   isolation: isolate;
@@ -161,7 +179,8 @@
   -webkit-font-smoothing: none;
   transition:
     color 160ms ease,
-    transform 160ms ease;
+    transform 160ms ease,
+    padding-left 160ms ease;
 }
 
 .footer-link-column a:hover,
@@ -169,6 +188,7 @@
   color: var(--orange-hot);
   outline: none;
   transform: translateX(4px);
+  padding-left: 4px;
 }
 
 .footer-link-column:nth-child(3) a:hover,

@@ -10,7 +10,7 @@ type ContainerWrapperProps = {
 export function ContainerWrapper({
   children,
   className,
-  crosshairs = "none",
+  crosshairs = "both",
 }: ContainerWrapperProps) {
   return (
     <div className={cn("mx-auto max-w-6xl", className)}>

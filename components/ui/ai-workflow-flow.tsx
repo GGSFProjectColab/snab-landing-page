@@ -1,8 +1,9 @@
 "use client";
 
-import { memo, useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { memo, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import {
   ReactFlow,
+  ReactFlowProvider,
   Background,
   BackgroundVariant,
   Handle,
@@ -27,7 +28,7 @@ const WorkflowNode = memo(function WorkflowNode({ data }: NodeProps<WorkflowNode
     <>
       <Handle
         type="target"
-        position={Position.Top}
+        position={Position.Left}
         style={{ width: 7, height: 7, background: "#9ca3af", border: "2px solid #000" }}
       />
       <div
@@ -48,7 +49,7 @@ const WorkflowNode = memo(function WorkflowNode({ data }: NodeProps<WorkflowNode
       </div>
       <Handle
         type="source"
-        position={Position.Bottom}
+        position={Position.Right}
         style={{ width: 7, height: 7, background: "#9ca3af", border: "2px solid #000" }}
       />
     </>
@@ -63,19 +64,19 @@ const nodes: WorkflowNodeDef[] = [
   {
     id: "trigger",
     type: "workflow",
-    position: { x: 70, y: 6 },
+    position: { x: 0, y: 0 },
     data: { label: "trigger", icon: <Zap size={10} strokeWidth={2.5} /> },
   },
   {
     id: "extract",
     type: "workflow",
-    position: { x: 70, y: 88 },
+    position: { x: 120, y: 0 },
     data: { label: "extract", icon: <Braces size={10} strokeWidth={2.5} /> },
   },
   {
     id: "llm",
     type: "workflow",
-    position: { x: 70, y: 170 },
+    position: { x: 240, y: 0 },
     data: { label: "llm · reason", icon: <Sparkles size={10} strokeWidth={2.5} /> },
   },
 ];
@@ -116,65 +117,12 @@ const flowStyle: CSSProperties = {
   background: "#000000",
 };
 
-function FlowAligner() {
-  const { getNodes, setCenter } = useReactFlow();
-  const nodesInitialized = useNodesInitialized({ includeHiddenNodes: true });
-
-  const align = useCallback(() => {
-    const el = document.querySelector(".ai-workflow-flow");
-    if (!el) return;
-    const { width, height } = el.getBoundingClientRect();
-    if (width === 0 || height === 0) return;
-
-    let minX = Infinity;
-    let minY = Infinity;
-    let maxX = -Infinity;
-    let maxY = -Infinity;
-
-    for (const node of getNodes()) {
-      const w = node.measured?.width ?? 0;
-      const h = node.measured?.height ?? 0;
-      if (w <= 0 || h <= 0) return;
-      minX = Math.min(minX, node.position.x);
-      minY = Math.min(minY, node.position.y);
-      maxX = Math.max(maxX, node.position.x + w);
-      maxY = Math.max(maxY, node.position.y + h);
-    }
-
-    const bw = maxX - minX;
-    const bh = maxY - minY;
-    const padding = 0.1;
-    const zoom = Math.min(
-      (width * (1 - padding * 2)) / bw,
-      (height * (1 - padding * 2)) / bh
-    );
-
-    setCenter((minX + maxX) / 2, (minY + maxY) / 2, { zoom, duration: 0 });
-  }, [getNodes, setCenter]);
-
-  useEffect(() => {
-    if (!nodesInitialized) return;
-    align();
-  }, [nodesInitialized, align]);
-
-  useEffect(() => {
-    const el = document.querySelector(".ai-workflow-flow");
-    if (!el) return;
-
-    const observer = new ResizeObserver(() => {
-      requestAnimationFrame(align);
-    });
-    observer.observe(el);
-
-    return () => observer.disconnect();
-  }, [align]);
-
-  return null;
-}
-
-export function AIWorkflowFlow() {
+function FlowCanvas() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const { fitView } = useReactFlow();
+  const nodesInitialized = useNodesInitialized({ includeHiddenNodes: true });
 
   useEffect(() => {
     const el = wrapperRef.current;
@@ -184,6 +132,7 @@ export function AIWorkflowFlow() {
     const waitForSize = () => {
       const { width, height } = el.getBoundingClientRect();
       if (width > 0 && height > 0) {
+        setDimensions({ width, height });
         setReady(true);
       } else {
         raf = requestAnimationFrame(waitForSize);
@@ -194,9 +143,19 @@ export function AIWorkflowFlow() {
     return () => cancelAnimationFrame(raf);
   }, []);
 
+  useEffect(() => {
+    if (!ready || !nodesInitialized) return;
+    const t = setTimeout(() => fitView({ padding: 0.5, duration: 0 }), 100);
+    return () => clearTimeout(t);
+  }, [ready, nodesInitialized, fitView]);
+
   return (
-    <div ref={wrapperRef} className="ai-workflow-flow h-full w-full">
-      {ready ? (
+    <div
+      ref={wrapperRef}
+      className="ai-workflow-flow h-full w-full min-w-[320px]"
+      style={{ minHeight: 60 }}
+    >
+      {ready && dimensions.width > 0 && dimensions.height > 0 && (
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -209,10 +168,11 @@ export function AIWorkflowFlow() {
           zoomOnScroll={false}
           zoomOnPinch={false}
           zoomOnDoubleClick={false}
-preventScrolling={false}
+          preventScrolling={false}
           proOptions={{ hideAttribution: true }}
+          fitView
+          fitViewOptions={{ padding: 0.5 }}
         >
-          <FlowAligner />
           <Background
             variant={BackgroundVariant.Dots}
             gap={14}
@@ -220,7 +180,15 @@ preventScrolling={false}
             color="#2a2a2a"
           />
         </ReactFlow>
-      ) : null}
+      )}
     </div>
+  );
+}
+
+export function AIWorkflowFlow() {
+  return (
+    <ReactFlowProvider>
+      <FlowCanvas />
+    </ReactFlowProvider>
   );
 }

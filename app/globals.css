@@ -9,48 +9,48 @@
   --font-pixelify: var(--font-display);
   --font-bitcount: var(--font-display);
 
-  /* Light theme (default) */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.88 0 0);
-  --input: oklch(0.88 0 0);
+  /* Dark theme only (always applied) */
+  --background: oklch(0 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 18%);
+  --input: oklch(1 0 0 / 20%);
   --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.714);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.145 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.88 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 18%);
   --sidebar-ring: oklch(0.556 0 0);
-  --edge: oklch(0.145 0 0 / 0.18);
-  --footer-shader-back: #f7f7f7;
-  --footer-shader-front: #e5e5e5;
-  --header-dither-base: #fafafa;
-  --header-dither-wave: #6B4CB8;
-  --github-none: #ebedf0;
-  --github-l1: #9be9a8;
-  --github-l2: #40c463;
-  --github-l3: #30a14e;
-  --github-l4: #216e39;
+  --edge: oklch(1 0 0 / 40%);
+  --footer-shader-back: #080808;
+  --footer-shader-front: #262626;
+  --header-dither-base: #050505;
+  --header-dither-wave: #85858a;
+  --github-none: #161b22;
+  --github-l1: #0e4429;
+  --github-l2: #006d32;
+  --github-l3: #26a641;
+  --github-l4: #39d353;
 }
 
 .dark {
@@ -85,7 +85,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 18%);
   --sidebar-ring: oklch(0.556 0 0);
-  --edge: oklch(1 0 0 / 24%);
+  --edge: oklch(1 0 0 / 40%);
   --footer-shader-back: #080808;
   --footer-shader-front: #262626;
   --header-dither-base: #050505;
@@ -121,11 +121,13 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
 
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body), "Segoe UI", Helvetica, sans-serif;
+    overflow-x: clip;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -361,6 +363,25 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: shimmer var(--shiny-speed, 1.35s) linear infinite;
+}
+
+.ai-workflow-flow .react-flow__edge path {
+  stroke: #5b5b5b !important;
+}
+
+.ai-workflow-flow .react-flow__handle {
+  width: 7px !important;
+  height: 7px !important;
+  background: #9ca3af !important;
+  border: 2px solid #000 !important;
+}
+
+.ai-workflow-flow .react-flow__background {
+  background: #000000 !important;
+}
+
+.ai-workflow-flow .react-flow__attribution {
+  display: none !important;
 }
 
 @keyframes shimmer {

@@ -35,19 +35,19 @@ function Hero() {
       <div className="container mx-auto">
         <div className="flex gap-8 py-20 lg:py-28 items-center justify-center flex-col">
           <div>
-            <Button variant="secondary" size="sm" className="gap-4">
+            <Button variant="secondary" size="sm" className="gap-4 bg-white/10 text-white border-white/20 hover:bg-white/20">
               AI Product Engineering Studio
             </Button>
           </div>
           <div className="flex gap-4 flex-col">
-            <h1 id="hero-title" className="text-4xl md:text-6xl max-w-2xl tracking-tighter text-center font-regular text-white">
+            <h1 id="hero-title" className="text-4xl md:text-6xl max-w-2xl tracking-tighter text-center font-regular text-white drop-shadow-lg">
               <span className="text-white">We build AI for production.</span>
               <span className="relative flex w-full justify-center overflow-hidden text-center font-bitcount md:pb-3 md:pt-0.5">
                 &nbsp;
                 {titles.map((title, index) => (
                   <motion.span
                     key={index}
-                    className="absolute font-semibold text-cyan-300"
+                    className="absolute font-semibold text-cyan-200 drop-shadow-md"
                     initial={{ opacity: 0, y: "-100" }}
                     transition={{ type: "spring", stiffness: 50 }}
                     animate={
@@ -68,11 +68,16 @@ function Hero() {
               </span>
             </h1>
 
-            <p className="text-base md:text-lg leading-relaxed tracking-tight text-white/70 max-w-2xl text-center">
-              We build agentic AI workflows, AI automations, AI agents,
-              intelligent chatbots, RAG pipelines, LLM integrations, data
-              pipelines, web platforms, mobile apps, and custom software from
-              Nashik, India.
+            <p className="text-base md:text-lg leading-relaxed tracking-tight text-white max-w-2xl text-center drop-shadow-md">
+              <span className="md:hidden">
+                AI-powered solutions: workflows, agents, chatbots, web &amp; mobile apps.
+              </span>
+              <span className="hidden md:inline">
+                We build agentic AI workflows, AI automations, AI agents,
+                intelligent chatbots, RAG pipelines, LLM integrations, data
+                pipelines, web platforms, mobile apps, and custom software from
+                Nashik, India.
+              </span>
             </p>
           </div>
           <div className="flex flex-row gap-3">
@@ -80,7 +85,7 @@ function Hero() {
               href="/contact"
               className={cn(
                 buttonVariants({ size: "lg" }),
-                "gap-4 bg-black text-white hover:bg-black/90"
+                "gap-4 bg-white text-black hover:bg-white/90 shadow-lg"
               )}
             >
               Talk to us <MoveRight className="w-4 h-4" />

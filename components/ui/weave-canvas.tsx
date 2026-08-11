@@ -83,7 +83,7 @@ export function WeaveCanvas() {
 
       const tileW = w / (COLS + (COLS - 1) * GUTTER_RATIO);
       const tileH = h / (ROWS + (ROWS - 1) * GUTTER_RATIO);
-      const tile = Math.max(tileW, tileH);
+      const tile = Math.min(tileW, tileH);
       const gutterX = tile * GUTTER_RATIO;
       const gutterY = tile * GUTTER_RATIO;
       const pitchX = tile + gutterX;

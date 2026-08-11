@@ -1,12 +1,15 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { MoveRight } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import SpecularButton from "@/components/ui/SpecularButton";
 
 function Hero() {
+  const router = useRouter();
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(
     () => [
@@ -81,15 +84,24 @@ function Hero() {
             </p>
           </div>
           <div className="flex flex-row gap-3">
-            <a
-              href="/contact"
-              className={cn(
-                buttonVariants({ size: "lg" }),
-                "gap-4 bg-white text-black hover:bg-white/90 shadow-lg"
-              )}
+            <SpecularButton
+              size="lg"
+              radius={18}
+              textColor="#ffffff"
+              lineColor="#ffffff"
+              baseColor="#525252"
+              intensity={1}
+              shineSize={10}
+              shineFade={40}
+              thickness={1}
+              speed={0.35}
+              followMouse
+              proximity={250}
+              autoAnimate={false}
+              onClick={() => router.push('/contact')}
             >
-              Talk to us <MoveRight className="w-4 h-4" />
-            </a>
+              Talk to us <MoveRight className="w-4 h-4 inline-block ml-1" />
+            </SpecularButton>
           </div>
         </div>
       </div>

@@ -105,12 +105,12 @@ export default function ContactPage() {
               aria-hidden="true"
             />
             <div
-              className="absolute inset-0 bg-black/50"
+              className="absolute inset-0 bg-black/20"
               aria-hidden="true"
             />
 
             <div className="relative z-10 flex h-full flex-col justify-end p-6 sm:p-8 md:p-12">
-              <p className="font-mono text-[11px] uppercase tracking-widest text-primary mb-3">
+              <p className="font-mono text-[11px] uppercase tracking-widest text-white/80 mb-3">
                 / contact /
               </p>
               <h1
@@ -119,9 +119,9 @@ export default function ContactPage() {
               >
                 Let&apos;s Talk
               </h1>
-              <div className="mt-4 flex items-center gap-1.5 text-xs text-white/50">
+              <div className="mt-4 flex items-center gap-1.5 text-xs text-white/70">
                 <a
-                  className="transition-colors hover:text-white/80"
+                  className="transition-colors hover:text-white"
                   href="/"
                 >
                   Home

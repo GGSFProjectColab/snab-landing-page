@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 import { ContainerWrapper } from "@/components/site/container";
 import { SectionSeparator } from "@/components/site/separator";
 import { HeaderTitle } from "@/components/profile/header-title";
 import { createPageMetadata } from "@/lib/site";
+import { getBlogPosts, type BlogPost } from "@/lib/blogs";
+import { BlogCardSkeleton } from "./BlogCardSkeleton";
+import { FeaturedPostSkeleton } from "./FeaturedPostSkeleton";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Blogs | SNAB Innovations",
@@ -20,72 +24,6 @@ const categories = [
   "Engineering",
   "Product",
 ];
-
-const blogPosts = [
-  {
-    slug: "ai-product-development",
-    category: "Engineering",
-    title: "AI Product Development: From Demo to Production",
-    excerpt:
-      "A practical framework for choosing the right workflow, designing the system, evaluating behavior, and launching with the controls that real operations need.",
-    image: "/ascii-magic-14.png",
-    readTime: "9 min read",
-    featured: true,
-  },
-  {
-    slug: "ai-workflow-automation",
-    category: "AI Workflows",
-    title: "Building Reliable AI Workflow Automation",
-    excerpt:
-      "How to design automation pipelines that handle edge cases, maintain audit trails, and scale with your business.",
-    image: "/ascii-magic-12.png",
-    readTime: "6 min read",
-    featured: false,
-  },
-  {
-    slug: "rag-systems-production",
-    category: "Engineering",
-    title: "RAG Systems in Production: Lessons Learned",
-    excerpt:
-      "Real-world challenges and solutions for deploying retrieval-augmented generation at scale.",
-    image: "/ascii-magic-13.png",
-    readTime: "7 min read",
-    featured: false,
-  },
-  {
-    slug: "ai-evaluation-strategies",
-    category: "Product",
-    title: "Measuring What Matters: AI Evaluation Strategies",
-    excerpt:
-      "How to define, measure, and iterate on quality metrics for AI-powered products.",
-    image: "/ascii-magic-15.png",
-    readTime: "5 min read",
-    featured: false,
-  },
-  {
-    slug: "notary-expert-case-study",
-    category: "Case Studies",
-    title: "Notary Expert: Streamlining Legal Workflows",
-    excerpt:
-      "How we built an intelligent platform that reduced document processing time by 60%.",
-    image: "/ascii-magic-10.png",
-    readTime: "8 min read",
-    featured: false,
-  },
-  {
-    slug: "interview-expert-case-study",
-    category: "Case Studies",
-    title: "Interview Expert: AI-Powered Interview Management",
-    excerpt:
-      "Building a platform that transforms interview chaos into structured, actionable records.",
-    image: "/ascii-magic-11.png",
-    readTime: "6 min read",
-    featured: false,
-  },
-];
-
-const featuredPost = blogPosts.find((post) => post.featured);
-const gridPosts = blogPosts.filter((post) => !post.featured);
 
 function CategoryFilters() {
   return (
@@ -107,7 +45,7 @@ function CategoryFilters() {
   );
 }
 
-function FeaturedCard({ post }: { post: (typeof blogPosts)[0] }) {
+function FeaturedCard({ post }: { post: BlogPost }) {
   return (
     <Link
       href={`/blogs/${post.slug}`}
@@ -143,7 +81,7 @@ function FeaturedCard({ post }: { post: (typeof blogPosts)[0] }) {
   );
 }
 
-function BlogCard({ post }: { post: (typeof blogPosts)[0] }) {
+function BlogCard({ post }: { post: BlogPost }) {
   return (
     <Link
       href={`/blogs/${post.slug}`}
@@ -181,6 +119,77 @@ function BlogCard({ post }: { post: (typeof blogPosts)[0] }) {
   );
 }
 
+async function FeaturedPost() {
+  const posts = await getBlogPosts();
+  const featuredPost = posts.find((post) => post.featured);
+
+  if (!featuredPost) return null;
+
+  return (
+    <section aria-labelledby="featured-post-title">
+      <ContainerWrapper>
+        <div className="p-4 sm:p-6">
+          <h2
+            id="featured-post-title"
+            className="mb-4 text-xs font-medium uppercase tracking-wider text-muted-foreground"
+          >
+            Featured
+          </h2>
+          <FeaturedCard post={featuredPost} />
+        </div>
+      </ContainerWrapper>
+    </section>
+  );
+}
+
+function FeaturedPostFallback() {
+  return (
+    <section>
+      <ContainerWrapper>
+        <div className="p-4 sm:p-6">
+          <div className="h-3 w-16 rounded-sm bg-muted animate-pulse mb-4" />
+          <FeaturedPostSkeleton />
+        </div>
+      </ContainerWrapper>
+    </section>
+  );
+}
+
+async function BlogGrid() {
+  const posts = await getBlogPosts();
+  const gridPosts = posts.filter((post) => !post.featured);
+
+  return (
+    <section aria-labelledby="latest-posts-title">
+      <ContainerWrapper>
+        <HeaderTitle title="Latest posts" id="latest-posts-title" />
+        <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 sm:p-6 md:grid-cols-3">
+          {gridPosts.map((post) => (
+            <BlogCard key={post.slug} post={post} />
+          ))}
+        </div>
+      </ContainerWrapper>
+    </section>
+  );
+}
+
+function BlogGridFallback() {
+  return (
+    <section>
+      <ContainerWrapper>
+        <div className="py-10 sm:py-14">
+          <div className="h-8 w-32 rounded-sm bg-muted animate-pulse mb-6 mx-4 sm:mx-6" />
+          <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 sm:p-6 md:grid-cols-3">
+            {Array.from({ length: 6 }, (_, i) => (
+              <BlogCardSkeleton key={i} />
+            ))}
+          </div>
+        </div>
+      </ContainerWrapper>
+    </section>
+  );
+}
+
 export default function BlogsPage() {
   return (
     <main className="flex-1">
@@ -202,34 +211,15 @@ export default function BlogsPage() {
 
       <SectionSeparator />
 
-      {featuredPost && (
-        <section aria-labelledby="featured-post-title">
-          <ContainerWrapper>
-            <div className="p-4 sm:p-6">
-              <h2
-                id="featured-post-title"
-                className="mb-4 text-xs font-medium uppercase tracking-wider text-muted-foreground"
-              >
-                Featured
-              </h2>
-              <FeaturedCard post={featuredPost} />
-            </div>
-          </ContainerWrapper>
-        </section>
-      )}
+      <Suspense fallback={<FeaturedPostFallback />}>
+        <FeaturedPost />
+      </Suspense>
 
       <SectionSeparator />
 
-      <section aria-labelledby="latest-posts-title">
-        <ContainerWrapper>
-          <HeaderTitle title="Latest posts" id="latest-posts-title" />
-          <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 sm:p-6 md:grid-cols-3">
-            {gridPosts.map((post) => (
-              <BlogCard key={post.slug} post={post} />
-            ))}
-          </div>
-        </ContainerWrapper>
-      </section>
+      <Suspense fallback={<BlogGridFallback />}>
+        <BlogGrid />
+      </Suspense>
 
       <SectionSeparator />
 

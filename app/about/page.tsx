@@ -58,18 +58,18 @@ export default function AboutPage() {
               sizes="100vw"
               aria-hidden="true"
             />
-            <div className="absolute inset-0 bg-black/50" aria-hidden="true" />
+            <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
             <div className="relative z-10 flex min-h-[340px] flex-col justify-end p-6 sm:min-h-[400px] sm:p-10 md:p-14">
-              <p className="mb-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+              <p className="mb-4 font-mono text-xs uppercase tracking-widest text-white/80">
                 About us
               </p>
               <h1
                 id="about-title"
-                className="max-w-3xl font-pixelify text-4xl font-bold leading-tight sm:text-5xl md:text-6xl"
+                className="max-w-3xl font-pixelify text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl"
               >
                 We build the systems behind intelligent work.
               </h1>
-              <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+              <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/80 sm:text-base">
                 SNAB Innovations is an AI product and software engineering studio
                 based in Nashik, India. We help teams turn complex workflows into
                 dependable systems.
@@ -272,7 +272,7 @@ export default function AboutPage() {
               sizes="100vw"
               aria-hidden="true"
             />
-            <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
+            <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
             <div className="relative z-10 flex h-full flex-col items-start justify-center gap-4 p-6 sm:items-center sm:text-center sm:py-10 md:px-12">
               <h2
                 id="about-cta-title"

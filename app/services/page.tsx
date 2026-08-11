@@ -123,15 +123,15 @@ export default function ServicesPage() {
               sizes="100vw"
               aria-hidden="true"
             />
-            <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
+            <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
             <div className="relative z-10 flex min-h-[460px] flex-col justify-end p-6 sm:min-h-[540px] sm:p-10 md:p-14">
-              <p className="mb-3 font-mono text-xs uppercase tracking-widest text-muted-foreground flex items-center gap-2">
+              <p className="mb-3 font-mono text-xs uppercase tracking-widest text-white/80 flex items-center gap-2">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 Our Services
               </p>
               <h1
                 id="services-hero-title"
-                className="max-w-4xl font-pixelify text-3xl font-bold leading-tight sm:text-4xl md:text-5xl lg:text-6xl"
+                className="max-w-4xl font-pixelify text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
               >
                 Our Mission Is To Make Your{" "}
                 <span className="inline-block bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded font-mono text-2xl sm:text-3xl md:text-4xl lg:text-5xl align-middle">
@@ -139,7 +139,7 @@ export default function ServicesPage() {
                 </span>{" "}
                 Better Through Technology
               </h1>
-              <p className="mt-4 max-w-xl text-xs leading-relaxed text-muted-foreground sm:text-sm md:text-base">
+              <p className="mt-4 max-w-xl text-xs leading-relaxed text-white/80 sm:text-sm md:text-base">
                 End-to-end product delivery. One accountable team to define, design, engineer, launch, and continuously scale your digital platform.
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-3">
@@ -150,7 +150,7 @@ export default function ServicesPage() {
                   Plan your project ↗
                 </a>
                 <a
-                  className="border border-dotted border-edge bg-transparent px-4 py-2 text-xs font-medium text-muted-foreground transition-all hover:border-foreground/30 hover:text-foreground"
+                  className="border border-white/30 bg-transparent px-4 py-2 text-xs font-medium text-white transition-all hover:border-white/50 hover:text-white"
                   href="#delivery-process"
                 >
                   Explore Process ↓
@@ -268,7 +268,7 @@ export default function ServicesPage() {
               sizes="100vw"
               aria-hidden="true"
             />
-            <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
+            <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
             <div className="relative z-10 flex h-full flex-col items-start justify-center gap-4 p-6 sm:items-center sm:text-center sm:py-10 md:px-12">
               <h2
                 id="services-cta-title"

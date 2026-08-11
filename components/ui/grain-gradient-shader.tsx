@@ -1,6 +1,11 @@
 "use client";
 
-import { GrainGradient } from "@paper-design/shaders-react";
+import dynamic from "next/dynamic";
+
+const GrainGradient = dynamic(
+  () => import("@paper-design/shaders-react").then((m) => m.GrainGradient),
+  { ssr: false }
+);
 
 export function GrainGradientShader() {
   return (
@@ -15,6 +20,9 @@ export function GrainGradientShader() {
         noise={0.25}
         shape="corners"
         speed={1}
+        fit="cover"
+        minPixelRatio={1}
+        maxPixelCount={1000000}
       />
     </div>
   );

@@ -9,6 +9,7 @@ import { ContainerWrapper } from "@/components/site/container";
 import { SectionSeparator } from "@/components/site/separator";
 import { HeaderTitle } from "@/components/profile/header-title";
 import { CloudShader } from "@/components/ui/cloud-shader";
+import { GrainGradientShader } from "@/components/ui/grain-gradient-shader";
 import FluidOrb from "@/components/ui/fluid-orb";
 import { AIWorkflowFlow } from "@/components/ui/ai-workflow-flow";
 import { Globe } from "@/components/ui/globe";
@@ -266,17 +267,9 @@ export default function Home() {
         <section id="home" aria-labelledby="hero-title">
           <ContainerWrapper>
             <div className="relative min-h-[600px] overflow-hidden bg-muted/30">
-              <Image
-                className="absolute inset-0 h-full w-full object-cover object-center"
-                src="/ascii-magic-11.png"
-                alt=""
-                fill
-                priority
-                sizes="100vw"
-                aria-hidden="true"
-              />
+              <GrainGradientShader />
               <div
-                className="absolute inset-0 bg-black/20"
+                className="absolute inset-0 bg-black/30"
                 aria-hidden="true"
               />
 

@@ -85,19 +85,22 @@ function Hero() {
           </div>
           <div className="flex flex-row gap-3">
             <SpecularButton
-              size="lg"
-              radius={18}
+              size="md"
+              radius={6}
+              tint="#ffffff"
+              tintOpacity={0.08}
+              blur={12}
               textColor="#ffffff"
               lineColor="#ffffff"
-              baseColor="#525252"
+              baseColor="#666666"
               intensity={1}
               shineSize={10}
               shineFade={40}
               thickness={1}
-              speed={0.35}
-              followMouse
+              speed={0.5}
+              followMouse={false}
               proximity={250}
-              autoAnimate={false}
+              autoAnimate
               onClick={() => router.push('/contact')}
             >
               Talk to us <MoveRight className="w-4 h-4 inline-block ml-1" />

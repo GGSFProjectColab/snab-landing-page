@@ -13,6 +13,7 @@ import { AIWorkflowFlow } from "@/components/ui/ai-workflow-flow";
 import { Globe } from "@/components/ui/globe";
 import Svg1 from "@/components/pixel-perfect/svg-1";
 import Svg4 from "@/components/pixel-perfect/svg-4";
+import { WeaveCanvas } from "@/components/ui/weave-canvas";
 import Svg9 from "@/components/pixel-perfect/svg-9";
 import { TechStackCloud } from "./TechStackCloud";
 import { DottedMap } from "@/components/ui/dotted-map";
@@ -288,16 +289,6 @@ export default function Home() {
 
         <SectionSeparator />
 
-        {/* About snab */}
-        <section aria-labelledby="about-snab-title">
-          <ContainerWrapper>
-            <HeaderTitle title="About snab" id="about-snab-title" />
-            <FeatureSteps features={aboutSnabSteps} autoPlayInterval={4000} />
-          </ContainerWrapper>
-        </section>
-
-        <SectionSeparator />
-
         {/* Services */}
         <ServicesSection services={services} />
 
@@ -442,12 +433,24 @@ export default function Home() {
 
         <SectionSeparator />
 
+        {/* How We Work */}
+        <section aria-labelledby="how-we-work-title">
+          <ContainerWrapper>
+            <HeaderTitle title="How We Work" id="how-we-work-title" />
+            <FeatureSteps features={aboutSnabSteps} autoPlayInterval={4000} />
+          </ContainerWrapper>
+        </section>
+
+        <SectionSeparator />
+
         {/* Why Choose Us */}
         <section aria-labelledby="why-choose-us-title">
           <ContainerWrapper>
             <HeaderTitle title="Why Choose Us" id="why-choose-us-title" />
             <div className="grid grid-cols-1 border-b border-dotted border-edge sm:grid-cols-2 md:grid-cols-3">
-              {whyChooseUs.map((item, i) => (
+              {whyChooseUs.map((item, i) => {
+                const isWeave = "visual" in item && item.visual === "svg4";
+                return (
                 <div
                   className={`group flex flex-col border-b border-dotted border-edge last:border-b-0 sm:border-b-0 ${
                     i % 2 === 0 ? "sm:border-r" : ""
@@ -456,12 +459,12 @@ export default function Home() {
                   }`}
                   key={item.title}
                 >
-                  <div className="relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden bg-muted/30 p-6">
-                    {"visual" in item && item.visual === "svg1" && <Svg1 />}
-                    {"visual" in item && item.visual === "svg4" && <Svg4 />}
-                    {"visual" in item && item.visual === "svg9" && <Svg9 />}
-                    {"visual" in item && item.visual === "techstack" && <TechStackCloud />}
-                    {"visual" in item && item.visual === "dottedmap" && (
+                  <div className={`relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden ${isWeave ? "bg-black" : "bg-muted/30 p-6"}`}>
+                    {isWeave && <WeaveCanvas />}
+                    {!isWeave && "visual" in item && item.visual === "svg1" && <Svg1 />}
+                    {!isWeave && "visual" in item && item.visual === "svg9" && <Svg9 />}
+                    {!isWeave && "visual" in item && item.visual === "techstack" && <TechStackCloud />}
+                    {!isWeave && "visual" in item && item.visual === "dottedmap" && (
                       <DottedMap
                         markers={[
                           { lat: 40.7128, lng: -74.006, size: 0.8, pulse: true },
@@ -477,7 +480,7 @@ export default function Home() {
                         pulse
                       />
                     )}
-                    {!("visual" in item) && (
+                    {!isWeave && !("visual" in item) && (
                       <Image
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                         src={item.image}
@@ -507,7 +510,8 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </ContainerWrapper>
         </section>

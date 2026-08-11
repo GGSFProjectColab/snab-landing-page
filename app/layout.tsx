@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { siteConfig, absoluteUrl } from "@/lib/site";
 import { Providers } from "@/components/site/providers";
 import { SiteHeader } from "@/components/site/site-header";
+import { SiteGradualBlur } from "@/components/site/site-gradual-blur";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -111,6 +112,7 @@ export default function RootLayout({
         <Providers>
           <SiteHeader />
           {children}
+          <SiteGradualBlur />
         </Providers>
       </body>
     </html>

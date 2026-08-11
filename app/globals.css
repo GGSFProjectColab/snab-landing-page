@@ -41,7 +41,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 18%);
   --sidebar-ring: oklch(0.556 0 0);
-  --edge: oklch(1 0 0 / 40%);
+  --edge: oklch(1 0 0 / 50%);
   --footer-shader-back: #080808;
   --footer-shader-front: #262626;
   --header-dither-base: #050505;
@@ -85,7 +85,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 18%);
   --sidebar-ring: oklch(0.556 0 0);
-  --edge: oklch(1 0 0 / 40%);
+  --edge: oklch(1 0 0 / 50%);
   --footer-shader-back: #080808;
   --footer-shader-front: #262626;
   --header-dither-base: #050505;
@@ -177,7 +177,7 @@
   .ending-dot-grid {
     background-image: radial-gradient(
       circle,
-      rgb(113 113 122 / 0.48) 1px,
+      var(--edge) 1px,
       transparent 1.5px
     );
     background-position: 0 0;
@@ -187,11 +187,41 @@
   .section-dot-grid {
     background-image: radial-gradient(
       circle,
-      rgb(113 113 122 / 0.3) 1px,
+      var(--edge) 1px,
       transparent 1.5px
     );
     background-position: 0 0;
     background-size: 24px 24px;
+  }
+
+  .vercel-dotted-border {
+    border: none !important;
+    background-image:
+      repeating-linear-gradient(
+        to right,
+        var(--edge) 0,
+        var(--edge) 2px,
+        transparent 2px,
+        transparent 8px
+      );
+    background-size: 100% 1px;
+    background-position: top;
+    background-repeat: no-repeat;
+  }
+
+  .vercel-dotted-border-bottom {
+    border: none !important;
+    background-image:
+      repeating-linear-gradient(
+        to right,
+        var(--edge) 0,
+        var(--edge) 2px,
+        transparent 2px,
+        transparent 8px
+      );
+    background-size: 100% 1px;
+    background-position: bottom;
+    background-repeat: no-repeat;
   }
 
   .animate-hire-me-bubble {
@@ -271,6 +301,36 @@
   .rail-border {
     border-left: 1px dotted var(--edge);
     border-right: 1px dotted var(--edge);
+  }
+
+  .vercel-dotted-border-left {
+    border: none !important;
+    background-image:
+      repeating-linear-gradient(
+        to bottom,
+        var(--edge) 0,
+        var(--edge) 2px,
+        transparent 2px,
+        transparent 8px
+      );
+    background-size: 1px 100%;
+    background-position: left;
+    background-repeat: no-repeat;
+  }
+
+  .vercel-dotted-border-right {
+    border: none !important;
+    background-image:
+      repeating-linear-gradient(
+        to bottom,
+        var(--edge) 0,
+        var(--edge) 2px,
+        transparent 2px,
+        transparent 8px
+      );
+    background-size: 1px 100%;
+    background-position: right;
+    background-repeat: no-repeat;
   }
 }
 

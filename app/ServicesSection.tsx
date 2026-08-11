@@ -45,17 +45,13 @@ export function ServicesSection({ services }: { services: Service[] }) {
                 className="border-b border-dotted border-edge last:border-b-0 md:border-r"
                 key={service.title}
               >
-                <div className="grid md:h-full md:grid-cols-[1fr_1px_1fr]">
+                <div className="grid md:h-full md:grid-cols-2">
                   <div className="flex flex-col items-center p-3 text-center sm:p-4 md:items-start md:text-left">
                     <h3 className="text-sm font-medium">{service.title}</h3>
                     <p className="mt-2 text-sm text-muted-foreground">
                       {service.description}
                     </p>
                   </div>
-                  <div
-                    className="border-t border-dotted border-edge md:border-l md:border-t-0"
-                    aria-hidden="true"
-                  />
                   {service.visual === "dithering" ? (
                     <div className="relative aspect-video w-full overflow-hidden md:aspect-auto">
                       <CloudShader />
@@ -69,7 +65,7 @@ export function ServicesSection({ services }: { services: Service[] }) {
                       <Globe />
                     </div>
                   ) : (
-                    <div className="flex items-center justify-center border-t border-dotted border-edge bg-muted/40 p-6 md:border-l md:border-t-0">
+                    <div className="flex items-center justify-center bg-muted/40 p-6">
                       <FluidOrb size={200} />
                     </div>
                   )}

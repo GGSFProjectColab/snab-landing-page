@@ -82,7 +82,7 @@ export function WhyChooseUsLayout({
         <ContainerWrapper>
           <HeaderTitle title="What It Means" id="wcu-meaning-title" />
           <div className="grid gap-0 border-b border-dotted border-edge md:grid-cols-2">
-            <div className="flex flex-col justify-center border-b border-dotted border-edge p-6 sm:p-8 md:border-b-0 md:border-r md:p-10">
+            <div className="flex flex-col justify-center p-6 sm:p-8 md:p-10">
               <ul className="space-y-5">
                 {points.map((point) => (
                   <li className="flex gap-4" key={point.number}>

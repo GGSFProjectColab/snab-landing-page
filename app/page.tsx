@@ -499,7 +499,6 @@ export default function Home() {
                       />
                     )}
                   </div>
-                  <div className="border-t border-dotted border-edge" />
                   <div className="flex flex-1 flex-col justify-between p-4 sm:p-5">
                     <div>
                       <h3 className="text-base font-medium sm:text-lg">

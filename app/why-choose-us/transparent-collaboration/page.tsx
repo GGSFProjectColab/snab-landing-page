@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+
 import { createPageMetadata } from "@/lib/site";
 import { WhyChooseUsLayout } from "../WhyChooseUsLayout";
 
@@ -45,11 +45,12 @@ export default function TransparentCollaborationPage() {
       label="Transparent Collaboration"
       headline="See the work as it happens."
       description="Shared dashboards, regular demos, and open communication. You never wonder what's happening — you see it."
-      heroImage="/transparent-collaboration.jpg"
+      heroImage="/ascii-magic-9.png"
       points={points}
-      contentImage="/transparent-collaboration.jpg"
+      contentImage="/ascii-magic-6.png"
       contentImageAlt="Transparent Collaboration visualization"
       capabilities={capabilities}
+      ctaImage="/ascii-magic-18.png"
     />
   );
 }

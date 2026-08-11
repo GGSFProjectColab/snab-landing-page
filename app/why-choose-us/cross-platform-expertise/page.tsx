@@ -44,11 +44,12 @@ export default function CrossPlatformExpertisePage() {
       label="Cross-Platform Expertise"
       headline="Web, mobile, desktop — where your users are."
       description="We build once and deploy everywhere. Shared logic, native experiences, consistent quality across platforms."
-      heroImage="/ascii-magic-11.png"
+      heroImage="/ascii-magic-16.png"
       points={points}
-      contentImage="/ascii-magic-6.png"
+      contentImage="/ascii-magic-19.png"
       contentImageAlt="Cross-Platform Expertise visualization"
       capabilities={capabilities}
+      ctaImage="/ascii-magic-12.png"
     />
   );
 }

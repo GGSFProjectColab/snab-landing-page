@@ -44,11 +44,12 @@ export default function WorkflowCentricDesignPage() {
       label="Workflow-Centric Design"
       headline="Start with the workflow, not the model."
       description="We map how work actually flows before choosing tools. The model serves the process — not the other way around."
-      heroImage="/ascii-magic-11.png"
+      heroImage="/ascii-magic-12.png"
       points={points}
-      contentImage="/ascii-magic-6.png"
+      contentImage="/ascii-magic-13.png"
       contentImageAlt="Workflow-Centric Design visualization"
       capabilities={capabilities}
+      ctaImage="/ascii-magic-10.png"
     />
   );
 }

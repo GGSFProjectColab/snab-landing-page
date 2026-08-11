@@ -44,11 +44,12 @@ export default function ProductionGradeSystemsPage() {
       label="Production-Grade Systems"
       headline="Built for scale, reliability, and security."
       description="Every solution is built for scale, reliability, and security from day one. No shortcuts, no tech debt compromises."
-      heroImage="/ascii-magic-11.png"
+      heroImage="/ascii-magic-18.png"
       points={points}
-      contentImage="/ascii-magic-6.png"
+      contentImage="/ascii-magic-15.png"
       contentImageAlt="Production-Grade Systems visualization"
       capabilities={capabilities}
+      ctaImage="/ascii-magic-17.png"
     />
   );
 }

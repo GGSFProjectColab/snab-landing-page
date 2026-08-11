@@ -44,11 +44,12 @@ export default function EndToEndDeliveryPage() {
       label="End-to-End Delivery"
       headline="From idea to production, one team."
       description="Strategy, design, engineering, deployment, and support — under one roof. No handoff gaps, no blame chains."
-      heroImage="/ascii-magic-11.png"
+      heroImage="/ascii-magic-17.png"
       points={points}
-      contentImage="/ascii-magic-6.png"
+      contentImage="/ascii-magic-10.png"
       contentImageAlt="End-to-End Delivery visualization"
       capabilities={capabilities}
+      ctaImage="/ascii-magic-15.png"
     />
   );
 }

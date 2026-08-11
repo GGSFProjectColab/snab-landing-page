@@ -16,6 +16,7 @@ interface WhyChooseUsPageProps {
   contentImageAlt: string;
   capabilities: string[];
   visual?: React.ReactNode;
+  ctaImage?: string;
 }
 
 export function WhyChooseUsLayout({
@@ -29,6 +30,7 @@ export function WhyChooseUsLayout({
   contentImageAlt,
   capabilities,
   visual,
+  ctaImage = "/ascii-magic-11.png",
 }: WhyChooseUsPageProps) {
   return (
     <main className="flex-1">
@@ -153,7 +155,7 @@ export function WhyChooseUsLayout({
           <div className="relative min-h-[240px] overflow-hidden sm:min-h-[280px]">
             <Image
               className="absolute inset-0 h-full w-full object-cover object-center"
-              src="/ascii-magic-11.png"
+              src={ctaImage}
               alt=""
               fill
               sizes="100vw"

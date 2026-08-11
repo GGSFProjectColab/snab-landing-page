@@ -46,9 +46,10 @@ export default function AiFirstArchitecturePage() {
       description="We design every system with AI at its core, not as an afterthought. Intelligence is built into the foundation — not layered on top."
       heroImage="/ascii-magic-11.png"
       points={points}
-      contentImage="/ascii-magic-6.png"
+      contentImage="/ascii-magic-14.png"
       contentImageAlt="AI-First Architecture visualization"
       capabilities={capabilities}
+      ctaImage="/ascii-magic-6.png"
     />
   );
 }

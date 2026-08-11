@@ -4,6 +4,7 @@ import Link from "next/link";
 import { HomeFooter } from "./HomeFooter";
 import { Hero } from "@/components/ui/animated-hero";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { ContainerWrapper } from "@/components/site/container";
 import { SectionSeparator } from "@/components/site/separator";
 import { HeaderTitle } from "@/components/profile/header-title";
@@ -623,9 +624,9 @@ export default function Home() {
         <section aria-label="Tagline">
           <ContainerWrapper>
             <div className="p-3 py-8 text-center sm:p-4">
-              <p className="font-pixelify text-base text-muted-foreground sm:text-xl md:text-2xl">
+              <AnimatedShinyText className="font-pixelify text-base sm:text-xl md:text-2xl max-w-none inline-flex items-center justify-center">
                 &ldquo;Build AI with production intelligence&rdquo;
-              </p>
+              </AnimatedShinyText>
             </div>
           </ContainerWrapper>
         </section>

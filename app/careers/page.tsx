@@ -26,19 +26,19 @@ async function OpenRoles() {
   return (
     <>
       {jobs.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {jobs.map((job) => (
             <Link
               href={`/careers/${job.slug}`}
               key={job.id}
-              className="job-card group relative flex flex-col p-5 sm:p-6 border border-dotted border-edge rounded-lg bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300"
+              className="job-card group flex flex-col p-6 border border-dotted border-edge bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300"
             >
-              <div className="flex items-start justify-between gap-3 mb-3">
-                <div className="flex-1">
-                  <h3 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors">
+              <div className="flex items-start justify-between gap-4 mb-4">
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors leading-snug">
                     {job.title}
                   </h3>
-                  <div className="flex items-center gap-2 mt-1.5">
+                  <div className="flex items-center gap-2 mt-2">
                     <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
                       <Briefcase size={12} />
                       {job.employment_type}
@@ -49,22 +49,22 @@ async function OpenRoles() {
                     </span>
                   </div>
                 </div>
-                <div className="flex items-center justify-center w-9 h-9 rounded-full border border-dotted border-edge text-muted-foreground transition-all group-hover:bg-foreground group-hover:text-background group-hover:border-foreground shrink-0">
+                <div className="flex items-center justify-center w-9 h-9 border border-dotted border-edge text-muted-foreground transition-all group-hover:bg-foreground group-hover:text-background group-hover:border-foreground shrink-0">
                   <ArrowUpRight size={16} />
                 </div>
               </div>
 
-              <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
+              <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1 line-clamp-3">
                 {job.summary}
               </p>
 
-              <div className="flex items-center gap-3 pt-3 border-t border-dotted border-edge">
+              <div className="flex items-center gap-3 pt-4 border-t border-dotted border-edge">
                 <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
                   <MapPin size={12} />
                   {job.location}
                 </span>
                 {job.featured && (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 text-[10px] font-medium uppercase tracking-wider">
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-500/10 text-green-400 text-[10px] font-medium uppercase tracking-wider">
                     <span className="w-1 h-1 rounded-full bg-green-400" />
                     Featured
                   </span>
@@ -74,7 +74,7 @@ async function OpenRoles() {
           ))}
         </div>
       ) : (
-        <div className="py-14 text-center text-muted-foreground text-sm border border-dotted border-edge rounded-lg">
+        <div className="py-14 text-center text-muted-foreground text-sm border border-dotted border-edge">
           No published roles today. Thoughtful introductions are always welcome.
         </div>
       )}
@@ -91,7 +91,7 @@ export default function CareersPage() {
     <main className="flex-1">
       {/* Hero */}
       <section id="careers" aria-labelledby="careers-title">
-        <ContainerWrapper crosshairs="top" crosshairs="bottom">
+        <ContainerWrapper crosshairs="both">
           <div className="pb-8 pt-6">
             {/* Breadcrumb */}
             <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6" aria-label="Breadcrumb">
@@ -118,41 +118,37 @@ export default function CareersPage() {
       {/* Meet the Team */}
       <section aria-labelledby="team-title">
         <ContainerWrapper>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center pb-8">
-            {/* Left — Text */}
-            <div>
-              <h2
-                id="team-title"
-                className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-tight"
-              >
-                Meet the team work behind our succes
-              </h2>
+          <div className="pb-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+              {/* Left — Heading */}
+              <div>
+                <h2
+                  id="team-title"
+                  className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl md:text-[2.75rem] font-bold tracking-tight text-foreground leading-[1.15]"
+                >
+                  Meet the team work behind our succes
+                </h2>
+              </div>
+
+              {/* Right — Description */}
+              <div className="lg:pt-1">
+                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
+                  Our team consists of a group of talented. We value creativity, collaboration, and a passion for excellence. Our members are very intelligent and deligent.
+                </p>
+              </div>
             </div>
 
-            {/* Right — Description */}
-            <div>
-              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-4">
-                Our team consists of a group of talented. We value creativity, collaboration, and a passion for excellence. Our members are very intelligent and deligent.
-              </p>
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
-              >
-                Learn more about us <ArrowRight size={14} />
-              </Link>
+            {/* Team Image */}
+            <div className="relative w-full aspect-[16/9] sm:aspect-[2.5/1] overflow-hidden mt-8">
+              <Image
+                src="/careers-why-join.jpg"
+                alt="SNAB Innovations team collaborating"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 1024px"
+                priority
+              />
             </div>
-          </div>
-
-          {/* Team Image */}
-          <div className="relative w-full aspect-[16/9] sm:aspect-[2/1] rounded-lg overflow-hidden border border-dotted border-edge mb-4">
-            <Image
-              src="/careers-why-join.jpg"
-              alt="SNAB Innovations team collaborating"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 1024px"
-              priority
-            />
           </div>
         </ContainerWrapper>
       </section>
@@ -164,7 +160,7 @@ export default function CareersPage() {
         <ContainerWrapper>
           <div className="pb-8">
             {/* Section Header */}
-            <div className="text-center mb-8">
+            <div className="text-center mb-10">
               <h2
                 id="roles-title"
                 className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground"
@@ -178,7 +174,7 @@ export default function CareersPage() {
             </Suspense>
 
             {/* General Application CTA */}
-            <div className="mt-8 p-5 sm:p-6 border border-dotted border-edge rounded-lg bg-white/[0.015] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="mt-8 p-6 border border-dotted border-edge bg-white/[0.015] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
                 <h3 className="text-sm font-medium text-foreground">
                   Don&apos;t see your role?
@@ -189,7 +185,7 @@ export default function CareersPage() {
               </div>
               <Link
                 href="/careers/apply"
-                className="inline-flex items-center gap-2 px-4 py-2.5 border border-dotted border-edge rounded bg-foreground text-background text-sm font-medium whitespace-nowrap hover:opacity-90 transition-opacity"
+                className="inline-flex items-center gap-2 px-5 py-2.5 border border-dotted border-edge bg-foreground text-background text-sm font-medium whitespace-nowrap hover:opacity-90 transition-opacity"
               >
                 Make an introduction <ArrowRight size={14} />
               </Link>

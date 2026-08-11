@@ -7,15 +7,12 @@ export default function CareersLoading() {
       {/* Hero Skeleton */}
       <section className="pt-6 pb-8">
         <ContainerWrapper>
-          {/* Breadcrumb skeleton */}
           <div className="flex items-center gap-2 mb-6">
-            <Skeleton className="h-4 w-12 rounded" />
-            <Skeleton className="h-4 w-2 rounded" />
-            <Skeleton className="h-4 w-14 rounded" />
+            <Skeleton className="h-4 w-12 rounded-sm" />
+            <Skeleton className="h-4 w-2 rounded-sm" />
+            <Skeleton className="h-4 w-14 rounded-sm" />
           </div>
-
-          {/* Large heading skeleton */}
-          <Skeleton className="h-16 sm:h-20 md:h-24 lg:h-28 w-64 sm:w-80 rounded" />
+          <Skeleton className="h-16 sm:h-20 md:h-24 lg:h-28 w-64 sm:w-80 rounded-sm" />
         </ContainerWrapper>
       </section>
 
@@ -24,16 +21,15 @@ export default function CareersLoading() {
       {/* Team Section Skeleton */}
       <section className="py-12 md:py-16">
         <ContainerWrapper>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-8">
-            <Skeleton className="h-16 sm:h-20 w-full max-w-md rounded" />
-            <div>
-              <Skeleton className="h-4 w-full rounded mb-2" />
-              <Skeleton className="h-4 w-full rounded mb-2" />
-              <Skeleton className="h-4 w-3/4 rounded mb-4" />
-              <Skeleton className="h-4 w-32 rounded" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start mb-8">
+            <Skeleton className="h-16 sm:h-20 w-full max-w-md rounded-sm" />
+            <div className="lg:pt-1">
+              <Skeleton className="h-4 w-full rounded-sm mb-2" />
+              <Skeleton className="h-4 w-full rounded-sm mb-2" />
+              <Skeleton className="h-4 w-3/4 rounded-sm" />
             </div>
           </div>
-          <Skeleton className="w-full aspect-[16/9] sm:aspect-[2/1] rounded-lg" />
+          <Skeleton className="w-full aspect-[16/9] sm:aspect-[2.5/1] rounded-sm" />
         </ContainerWrapper>
       </section>
 
@@ -42,30 +38,32 @@ export default function CareersLoading() {
       {/* Roles Section Skeleton */}
       <section className="py-12 md:py-16">
         <ContainerWrapper>
-          <div className="text-center mb-8">
-            <Skeleton className="h-10 sm:h-12 w-80 sm:w-96 mx-auto rounded" />
+          <div className="text-center mb-10">
+            <Skeleton className="h-10 sm:h-12 w-80 sm:w-96 mx-auto rounded-sm" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {Array.from({ length: 4 }, (_, i) => (
               <div
-                className="flex flex-col p-5 sm:p-6 border border-dotted border-edge rounded-lg bg-white/[0.02]"
+                className="flex flex-col p-6 border border-dotted border-edge bg-white/[0.02]"
                 key={i}
               >
-                <div className="flex items-start justify-between gap-3 mb-3">
+                <div className="flex items-start justify-between gap-4 mb-4">
                   <div className="flex-1">
-                    <Skeleton className="h-5 w-48 rounded mb-2" />
+                    <Skeleton className="h-5 w-48 rounded-sm mb-2" />
                     <div className="flex items-center gap-2">
-                      <Skeleton className="h-3 w-20 rounded" />
-                      <Skeleton className="h-3 w-16 rounded" />
+                      <Skeleton className="h-3 w-20 rounded-sm" />
+                      <Skeleton className="h-3 w-16 rounded-sm" />
                     </div>
                   </div>
-                  <Skeleton className="h-9 w-9 rounded-full shrink-0" />
+                  <Skeleton className="h-9 w-9 shrink-0" />
                 </div>
-                <Skeleton className="h-3 w-full rounded mb-1" />
-                <Skeleton className="h-3 w-3/4 rounded mb-4" />
-                <div className="flex items-center gap-3 pt-3 border-t border-dotted border-edge">
-                  <Skeleton className="h-3 w-24 rounded" />
+                <div className="mb-5">
+                  <Skeleton className="h-3 w-full rounded-sm mb-1.5" />
+                  <Skeleton className="h-3 w-3/4 rounded-sm" />
+                </div>
+                <div className="flex items-center gap-3 pt-4 border-t border-dotted border-edge">
+                  <Skeleton className="h-3 w-24 rounded-sm" />
                 </div>
               </div>
             ))}

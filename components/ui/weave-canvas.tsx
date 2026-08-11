@@ -83,12 +83,16 @@ export function WeaveCanvas() {
 
       const tileW = w / (COLS + (COLS - 1) * GUTTER_RATIO);
       const tileH = h / (ROWS + (ROWS - 1) * GUTTER_RATIO);
-      const tile = Math.min(tileW, tileH);
-      const gutter = tile * GUTTER_RATIO;
-      const pitch = tile + gutter;
+      const tile = Math.max(tileW, tileH);
+      const gutterX = tile * GUTTER_RATIO;
+      const gutterY = tile * GUTTER_RATIO;
+      const pitchX = tile + gutterX;
+      const pitchY = tile + gutterY;
 
-      const offsetX = w / 2 - 4 * pitch - tile / 2;
-      const offsetY = h / 2 - 4 * pitch - tile / 2;
+      const gridW = COLS * tile + (COLS - 1) * gutterX;
+      const gridH = ROWS * tile + (ROWS - 1) * gutterY;
+      const offsetX = (w - gridW) / 2;
+      const offsetY = (h - gridH) / 2;
 
       const gcx = w / 2;
       const gcy = h / 2;
@@ -102,8 +106,8 @@ export function WeaveCanvas() {
 
       for (let r = 0; r < ROWS; r++) {
         for (let c = 0; c < COLS; c++) {
-          const tx = offsetX + c * pitch;
-          const ty = offsetY + r * pitch;
+          const tx = offsetX + c * pitchX;
+          const ty = offsetY + r * pitchY;
           const cx = tx + tile / 2;
           const cy = ty + tile / 2;
 

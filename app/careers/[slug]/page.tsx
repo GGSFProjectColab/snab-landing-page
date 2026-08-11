@@ -10,6 +10,7 @@ import { createJobPostingSchema } from "@/lib/job-schema";
 import { createPageMetadata } from "@/lib/site";
 import { ContainerWrapper } from "@/components/site/container";
 import { SectionSeparator } from "@/components/site/separator";
+import { HeaderTitle } from "@/components/profile/header-title";
 import "../careers.css";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -48,53 +49,52 @@ export default async function JobPage({ params }: Props) {
       {/* Hero */}
       <section>
         <ContainerWrapper>
-          <div className="pb-8">
+          <div className="px-4 pb-6 pt-5">
             <Link
               href="/careers#open-roles"
-              className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors mb-6"
+              className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors mb-4"
             >
-              <ArrowLeft size={14} />
+              <ArrowLeft size={12} />
               All open roles
             </Link>
 
-            <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground inline-flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-1">
               <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-              {job.department}
-            </p>
+              <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                {job.department}
+              </span>
+            </div>
 
-            <h1 className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+            <h1 className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground">
               {job.title}
             </h1>
 
-            <p className="text-muted-foreground text-sm sm:text-base mt-3 max-w-2xl leading-relaxed">
+            <p className="text-muted-foreground text-xs mt-2 max-w-xl leading-relaxed">
               {job.summary}
             </p>
 
-            <div className="flex flex-wrap gap-2 mt-4">
-              <span className="inline-flex items-center gap-1.5 border border-dotted border-edge rounded px-2.5 py-1 font-mono text-xs text-muted-foreground">
-                <MapPin size={12} />
+            <div className="flex flex-wrap gap-1.5 mt-3">
+              <span className="inline-flex items-center gap-1 border border-dotted border-edge px-2 py-0.5 font-mono text-[10px] text-muted-foreground">
+                <MapPin size={10} />
                 {job.location}
               </span>
-              <span className="border border-dotted border-edge rounded px-2.5 py-1 font-mono text-xs text-muted-foreground">
+              <span className="border border-dotted border-edge px-2 py-0.5 font-mono text-[10px] text-muted-foreground">
                 {job.work_mode}
               </span>
-              <span className="border border-dotted border-edge rounded px-2.5 py-1 font-mono text-xs text-muted-foreground">
+              <span className="border border-dotted border-edge px-2 py-0.5 font-mono text-[10px] text-muted-foreground">
                 {job.employment_type}
               </span>
-              <span className="border border-dotted border-edge rounded px-2.5 py-1 font-mono text-xs text-muted-foreground">
-                {job.experience_level}
-              </span>
-              <span className="inline-flex items-center gap-1.5 border border-dotted border-edge rounded px-2.5 py-1 font-mono text-xs text-muted-foreground">
-                <CalendarClock size={12} />
+              <span className="inline-flex items-center gap-1 border border-dotted border-edge px-2 py-0.5 font-mono text-[10px] text-muted-foreground">
+                <CalendarClock size={10} />
                 {deadlineText(job.closes_at)}
               </span>
             </div>
 
             <a
               href="#apply"
-              className="inline-flex items-center gap-2 mt-5 px-5 py-2.5 border border-dotted border-edge rounded bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-2 mt-4 px-4 py-2 border border-dotted border-edge bg-foreground text-background text-xs font-medium hover:opacity-90 transition-opacity"
             >
-              Apply for this role <ArrowRight size={16} />
+              Apply for this role <ArrowRight size={12} />
             </a>
           </div>
         </ContainerWrapper>
@@ -105,44 +105,42 @@ export default async function JobPage({ params }: Props) {
       {/* Body */}
       <section>
         <ContainerWrapper>
-          <div className="pb-8">
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-8 lg:gap-10">
+          <HeaderTitle title="Role details" />
+          <div className="px-4 pb-6">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_240px] gap-6 lg:gap-8">
               {/* Description */}
-              <div>
-                <div className="mb-6">
-                  <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground mb-2">
+              <div className="space-y-5">
+                <div>
+                  <h3 className="text-xs font-medium text-foreground mb-1.5">
                     The opportunity
-                  </p>
-                  <h2 className="text-lg font-semibold text-foreground mb-2">
-                    Work with us on the full problem.
-                  </h2>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  </h3>
+                  <p className="text-xs text-muted-foreground leading-relaxed">
                     {job.description}
                   </p>
                 </div>
 
-                <div className="mb-6">
-                  <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground mb-2">
+                <div>
+                  <h3 className="text-xs font-medium text-foreground mb-1.5">
                     What you&apos;ll do
-                  </p>
-                  <ul className="flex flex-col gap-2">
+                  </h3>
+                  <ul className="space-y-1">
                     {job.responsibilities.map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-sm text-foreground">
-                        <span className="w-1 h-1 rounded-full bg-foreground mt-2 shrink-0" />
+                      <li key={item} className="flex items-start gap-2 text-xs text-muted-foreground">
+                        <span className="w-1 h-1 rounded-full bg-foreground mt-1.5 shrink-0" />
                         {item}
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="mb-6">
-                  <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground mb-2">
+                <div>
+                  <h3 className="text-xs font-medium text-foreground mb-1.5">
                     What helps you thrive here
-                  </p>
-                  <ul className="flex flex-col gap-2">
+                  </h3>
+                  <ul className="space-y-1">
                     {job.requirements.map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-sm text-foreground">
-                        <span className="w-1 h-1 rounded-full bg-foreground mt-2 shrink-0" />
+                      <li key={item} className="flex items-start gap-2 text-xs text-muted-foreground">
+                        <span className="w-1 h-1 rounded-full bg-foreground mt-1.5 shrink-0" />
                         {item}
                       </li>
                     ))}
@@ -150,13 +148,13 @@ export default async function JobPage({ params }: Props) {
                 </div>
 
                 {job.nice_to_have.length > 0 && (
-                  <div className="mb-6">
-                    <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground mb-2">
-                      Useful, not required
-                    </p>
-                    <ul className="flex flex-col gap-2">
+                  <div>
+                    <h3 className="text-xs font-medium text-foreground mb-1.5">
+                      Nice to have
+                    </h3>
+                    <ul className="space-y-1">
                       {job.nice_to_have.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <li key={item} className="flex items-start gap-2 text-xs text-muted-foreground">
                           <span className="text-foreground/40 mt-0.5 shrink-0">+</span>
                           {item}
                         </li>
@@ -165,41 +163,40 @@ export default async function JobPage({ params }: Props) {
                   </div>
                 )}
 
-                <div className="border-t border-dotted border-edge pt-5 mt-6">
-                  <p className="text-sm text-muted-foreground">
+                <div className="border-t border-dotted border-edge pt-4">
+                  <p className="text-[11px] text-muted-foreground leading-relaxed">
                     <strong className="text-foreground">Come as you are.</strong>{" "}
-                    We value strong evidence and different paths into the work. If the role excites you but your experience doesn&apos;t match every line, we still encourage you to apply.
+                    We value different paths into the work. If the role excites you, apply.
                   </p>
                 </div>
               </div>
 
               {/* Side Card */}
-              <aside className="border border-dotted border-edge rounded-lg p-4 bg-white/[0.02] self-start lg:sticky lg:top-24">
-                <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground mb-3">
-                  Role snapshot
+              <aside className="border border-dotted border-edge p-3 bg-white/[0.02] self-start lg:sticky lg:top-20">
+                <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-2">
+                  Snapshot
                 </p>
-                <dl className="flex flex-col gap-2.5">
+                <dl className="space-y-1.5">
                   {[
                     ["Department", job.department],
                     ["Location", job.location],
                     ["Work style", job.work_mode],
                     ["Type", job.employment_type],
-                    ["Experience", job.experience_level],
                     ["Deadline", deadlineText(job.closes_at)],
                   ].map(([label, value]) => (
-                    <div key={label} className="border-b border-dotted border-edge pb-2.5 last:border-0 last:pb-0">
-                      <dt className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                    <div key={label} className="border-b border-dotted border-edge pb-1.5 last:border-0 last:pb-0">
+                      <dt className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
                         {label}
                       </dt>
-                      <dd className="text-sm text-foreground mt-0.5">{value}</dd>
+                      <dd className="text-[11px] text-foreground mt-0.5">{value}</dd>
                     </div>
                   ))}
                 </dl>
                 <a
                   href="#apply"
-                  className="inline-flex items-center gap-2 mt-4 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
+                  className="inline-flex items-center gap-1.5 mt-3 text-[11px] font-medium text-foreground hover:text-muted-foreground transition-colors"
                 >
-                  Start application <ArrowRight size={14} />
+                  Start application <ArrowRight size={10} />
                 </a>
               </aside>
             </div>
@@ -212,7 +209,8 @@ export default async function JobPage({ params }: Props) {
       {/* Application */}
       <section id="apply">
         <ContainerWrapper>
-          <div className="pb-8">
+          <HeaderTitle title="Apply" />
+          <div className="px-4 pb-6">
             <ApplicationForm job={{ id: job.id, title: job.title }} />
           </div>
         </ContainerWrapper>

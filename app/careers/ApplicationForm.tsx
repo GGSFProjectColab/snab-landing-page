@@ -125,159 +125,151 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
   if (submitted) {
     return (
       <div className="text-center py-12 px-4" role="status">
-        <div className="inline-flex items-center justify-center w-14 h-14 rounded-full border border-dotted border-edge bg-white/[0.03] mb-5">
-          <Check size={22} className="text-foreground" />
+        <div className="inline-flex items-center justify-center w-12 h-12 border border-dotted border-edge bg-white/[0.03] mb-4">
+          <Check size={20} className="text-foreground" />
         </div>
-        <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground mb-2">
+        <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-2">
           Application received
         </p>
-        <h2 className="text-xl font-semibold text-foreground">
+        <h2 className="text-lg font-medium text-foreground">
           Thank you for raising your hand.
         </h2>
-        <p className="text-sm text-muted-foreground mt-3 max-w-md mx-auto leading-relaxed">
-          We&apos;ll review your application carefully. If there&apos;s a strong match, our team will reach out.
+        <p className="text-sm text-muted-foreground mt-2 max-w-sm mx-auto">
+          We&apos;ll review your application. If there&apos;s a match, our team will reach out.
         </p>
         <a
           href="/careers"
-          className="inline-flex items-center gap-2 mt-6 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
+          className="inline-flex items-center gap-2 mt-5 text-xs font-medium text-foreground hover:text-muted-foreground transition-colors"
         >
-          View other opportunities <ArrowRight size={14} />
+          View other roles <ArrowRight size={12} />
         </a>
       </div>
     );
   }
 
   return (
-    <form className="max-w-[640px]" onSubmit={handleSubmit} noValidate={false}>
-      {/* Header */}
-      <div className="mb-8">
-        <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground mb-2">
-          Your application
-        </p>
-        <h2 className="text-xl sm:text-2xl font-semibold text-foreground">
+    <form className="max-w-[520px]" onSubmit={handleSubmit} noValidate={false}>
+      <div className="mb-6">
+        <h2 className="text-lg font-medium text-foreground">
           {job ? `Apply for ${job.title}` : "Join our talent network"}
         </h2>
-        <p className="text-sm text-muted-foreground mt-2">
+        <p className="text-xs text-muted-foreground mt-1">
           Takes about 3 minutes. No account needed.
         </p>
       </div>
 
-      {/* About You */}
-      <fieldset className="border-none p-0 mb-8 border-t border-dotted border-edge pt-6">
-        <legend className="font-mono text-xs uppercase tracking-wider text-foreground font-semibold mb-5">
-          <span className="text-muted-foreground mr-2">01</span>About you
+      <fieldset className="border-none p-0 mb-5 border-t border-dotted border-edge pt-4">
+        <legend className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-3">
+          About you
         </legend>
-        <div className="flex flex-col gap-4">
-          <label className="flex flex-col gap-1.5 text-sm text-foreground">
+        <div className="flex flex-col gap-3">
+          <label className="flex flex-col gap-1 text-sm text-foreground">
             Full name <span className="text-destructive">*</span>
             <input
               name="full_name"
               autoComplete="name"
               required
-              className="w-full border border-dotted border-edge rounded-md bg-white/[0.03] text-foreground px-3.5 py-2.5 text-sm outline-none transition-colors"
+              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-sm outline-none transition-colors"
               placeholder="Jane Smith"
             />
           </label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <label className="flex flex-col gap-1.5 text-sm text-foreground">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <label className="flex flex-col gap-1 text-sm text-foreground">
               Email <span className="text-destructive">*</span>
               <input
                 name="email"
                 type="email"
                 autoComplete="email"
                 required
-                className="w-full border border-dotted border-edge rounded-md bg-white/[0.03] text-foreground px-3.5 py-2.5 text-sm outline-none transition-colors"
+                className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-sm outline-none transition-colors"
                 placeholder="you@example.com"
               />
             </label>
-            <label className="flex flex-col gap-1.5 text-sm text-foreground">
-              Phone <span className="text-muted-foreground text-xs font-normal">Optional</span>
+            <label className="flex flex-col gap-1 text-sm text-foreground">
+              Phone <span className="text-muted-foreground text-[10px]">Optional</span>
               <input
                 name="phone"
                 type="tel"
                 autoComplete="tel"
-                className="w-full border border-dotted border-edge rounded-md bg-white/[0.03] text-foreground px-3.5 py-2.5 text-sm outline-none transition-colors"
+                className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-sm outline-none transition-colors"
               />
             </label>
           </div>
-          <label className="flex flex-col gap-1.5 text-sm text-foreground">
+          <label className="flex flex-col gap-1 text-sm text-foreground">
             Location <span className="text-destructive">*</span>
             <input
               name="location"
               autoComplete="address-level2"
               required
-              className="w-full border border-dotted border-edge rounded-md bg-white/[0.03] text-foreground px-3.5 py-2.5 text-sm outline-none transition-colors"
+              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-sm outline-none transition-colors"
               placeholder="e.g. Nashik, Maharashtra"
             />
           </label>
         </div>
       </fieldset>
 
-      {/* Links */}
-      <fieldset className="border-none p-0 mb-8 border-t border-dotted border-edge pt-6">
-        <legend className="font-mono text-xs uppercase tracking-wider text-foreground font-semibold mb-5">
-          <span className="text-muted-foreground mr-2">02</span>Links
+      <fieldset className="border-none p-0 mb-5 border-t border-dotted border-edge pt-4">
+        <legend className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-3">
+          Links
         </legend>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <label className="flex flex-col gap-1.5 text-sm text-foreground">
-            LinkedIn <span className="text-muted-foreground text-xs font-normal">Optional</span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <label className="flex flex-col gap-1 text-sm text-foreground">
+            LinkedIn <span className="text-muted-foreground text-[10px]">Optional</span>
             <input
               name="linkedin_url"
               type="url"
               inputMode="url"
-              className="w-full border border-dotted border-edge rounded-md bg-white/[0.03] text-foreground px-3.5 py-2.5 text-sm outline-none transition-colors"
+              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-sm outline-none transition-colors"
               placeholder="https://linkedin.com/in/..."
             />
           </label>
-          <label className="flex flex-col gap-1.5 text-sm text-foreground">
-            Portfolio / GitHub <span className="text-muted-foreground text-xs font-normal">Optional</span>
+          <label className="flex flex-col gap-1 text-sm text-foreground">
+            Portfolio / GitHub <span className="text-muted-foreground text-[10px]">Optional</span>
             <input
               name="portfolio_url"
               type="url"
               inputMode="url"
-              className="w-full border border-dotted border-edge rounded-md bg-white/[0.03] text-foreground px-3.5 py-2.5 text-sm outline-none transition-colors"
+              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-sm outline-none transition-colors"
               placeholder="https://"
             />
           </label>
         </div>
       </fieldset>
 
-      {/* Tell Us */}
-      <fieldset className="border-none p-0 mb-8 border-t border-dotted border-edge pt-6">
-        <legend className="font-mono text-xs uppercase tracking-wider text-foreground font-semibold mb-5">
-          <span className="text-muted-foreground mr-2">03</span>Tell us
+      <fieldset className="border-none p-0 mb-5 border-t border-dotted border-edge pt-4">
+        <legend className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-3">
+          Tell us
         </legend>
 
         {!job && (
-          <label className="flex flex-col gap-1.5 text-sm text-foreground mb-4">
+          <label className="flex flex-col gap-1 text-sm text-foreground mb-3">
             Role you&apos;re interested in <span className="text-destructive">*</span>
             <input
               name="preferred_role"
               required
-              className="w-full border border-dotted border-edge rounded-md bg-white/[0.03] text-foreground px-3.5 py-2.5 text-sm outline-none transition-colors"
+              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-sm outline-none transition-colors"
               placeholder="e.g. Product engineering, AI research"
             />
           </label>
         )}
 
-        <label className="flex flex-col gap-1.5 text-sm text-foreground">
+        <label className="flex flex-col gap-1 text-sm text-foreground">
           {job ? "Why this role?" : "What kind of work are you looking to do?"} <span className="text-destructive">*</span>
           <textarea
             name="cover_note"
-            rows={4}
+            rows={3}
             maxLength={1800}
             required
-            className="w-full border border-dotted border-edge rounded-md bg-white/[0.03] text-foreground px-3.5 py-2.5 text-sm outline-none transition-colors resize-none"
-            placeholder="A short, honest note is perfect — no formal cover letter needed."
+            className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-sm outline-none transition-colors resize-none"
+            placeholder="A short, honest note is perfect."
           />
         </label>
 
-        {/* Resume Upload */}
-        <div className="mt-4">
-          <p className="text-sm text-foreground mb-1.5">
+        <div className="mt-3">
+          <p className="text-sm text-foreground mb-1">
             Résumé / CV <span className="text-destructive">*</span>
           </p>
-          <p className="text-xs text-muted-foreground mb-3">PDF, DOC, or DOCX · Max 5 MB</p>
+          <p className="text-[10px] text-muted-foreground mb-2">PDF, DOC, or DOCX · Max 5 MB</p>
           <input
             ref={fileInputRef}
             className="visually-hidden-file"
@@ -288,11 +280,11 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
             required={!file}
           />
           {file ? (
-            <div className="flex items-center gap-3 border border-dotted border-edge rounded-lg px-4 py-3 bg-white/[0.02]">
-              <FileText size={18} className="text-muted-foreground shrink-0" />
+            <div className="flex items-center gap-3 border border-dotted border-edge px-3 py-2 bg-white/[0.02]">
+              <FileText size={14} className="text-muted-foreground shrink-0" />
               <div className="min-w-0 flex-1">
-                <p className="text-sm text-foreground truncate">{file.name}</p>
-                <p className="text-xs text-muted-foreground">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+                <p className="text-xs text-foreground truncate">{file.name}</p>
+                <p className="text-[10px] text-muted-foreground">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
               </div>
               <button
                 type="button"
@@ -303,22 +295,21 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
                 aria-label="Remove résumé"
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
-                <X size={16} />
+                <X size={14} />
               </button>
             </div>
           ) : (
             <label
               htmlFor="resume"
-              className="flex items-center justify-center gap-2 border border-dotted border-edge rounded-lg px-4 py-6 bg-white/[0.02] cursor-pointer hover:bg-white/[0.04] transition-colors text-sm text-muted-foreground"
+              className="flex items-center justify-center gap-2 border border-dotted border-edge px-4 py-5 bg-white/[0.02] cursor-pointer hover:bg-white/[0.04] transition-colors text-xs text-muted-foreground"
             >
-              <Upload size={16} />
+              <Upload size={14} />
               Choose résumé
             </label>
           )}
         </div>
       </fieldset>
 
-      {/* Honeypot */}
       <div className="honeypot" aria-hidden="true">
         <label>
           Website
@@ -326,8 +317,7 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
         </label>
       </div>
 
-      {/* Consent */}
-      <label className="flex items-start gap-3 text-sm text-muted-foreground mb-5 cursor-pointer">
+      <label className="flex items-start gap-2 text-xs text-muted-foreground mb-4 cursor-pointer">
         <input
           type="checkbox"
           name="consent"
@@ -335,39 +325,37 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
           className="mt-0.5 accent-foreground"
         />
         <span>
-          I agree that SNAB Innovations may use my information to evaluate this application and contact me.{" "}
+          I agree that SNAB Innovations may use my information to evaluate this application and contact me.
           <span className="text-destructive">*</span>
         </span>
       </label>
 
-      {/* Error */}
       {error && (
-        <p className="text-sm text-destructive mb-4" role="alert">
+        <p className="text-xs text-destructive mb-3" role="alert">
           {error}
         </p>
       )}
 
-      {/* Submit */}
       <button
-        className="inline-flex items-center justify-center gap-2 px-6 py-3 border-none rounded-md bg-foreground text-background font-semibold text-sm cursor-pointer hover:opacity-90 transition-opacity disabled:opacity-50"
+        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 border border-dotted border-edge bg-foreground text-background text-sm font-medium cursor-pointer hover:opacity-90 transition-opacity disabled:opacity-50"
         type="submit"
         disabled={isSubmitting}
       >
         {isSubmitting ? (
           <>
-            <LoaderCircle className="spin" size={16} />
-            Sending application
+            <LoaderCircle className="spin" size={14} />
+            Sending...
           </>
         ) : (
           <>
             Submit application
-            <ArrowRight size={16} />
+            <ArrowRight size={14} />
           </>
         )}
       </button>
 
-      <p className="text-xs text-muted-foreground mt-4">
-        We only ask for information our hiring team can actually use. Please don&apos;t include sensitive personal data.
+      <p className="text-[10px] text-muted-foreground mt-3">
+        We only ask for what our hiring team needs. No sensitive personal data.
       </p>
     </form>
   );

@@ -5,15 +5,15 @@ export default function CareersLoading() {
   return (
     <main className="min-h-screen bg-background text-foreground" aria-busy="true" aria-label="Loading careers">
       {/* Hero Skeleton */}
-      <section className="pt-6 pb-8">
-        <ContainerWrapper>
-          <div className="flex items-center gap-2 mb-6">
+      <section className="py-20 md:py-28">
+        <div className="mx-auto max-w-6xl px-4 text-center">
+          <div className="flex items-center justify-center gap-2 mb-6">
             <Skeleton className="h-4 w-12 rounded-sm" />
             <Skeleton className="h-4 w-2 rounded-sm" />
             <Skeleton className="h-4 w-14 rounded-sm" />
           </div>
-          <Skeleton className="h-16 sm:h-20 md:h-24 lg:h-28 w-64 sm:w-80 rounded-sm" />
-        </ContainerWrapper>
+          <Skeleton className="h-16 sm:h-20 md:h-24 lg:h-28 w-64 sm:w-80 mx-auto rounded-sm" />
+        </div>
       </section>
 
       <div className="h-8 border-y border-dotted border-edge section-dot-grid" />
@@ -21,7 +21,7 @@ export default function CareersLoading() {
       {/* Team Section Skeleton */}
       <section className="py-12 md:py-16">
         <ContainerWrapper>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <Skeleton className="h-16 sm:h-20 w-full max-w-md rounded-sm" />
             <div className="lg:pt-1">
               <Skeleton className="h-4 w-full rounded-sm mb-2" />
@@ -29,7 +29,6 @@ export default function CareersLoading() {
               <Skeleton className="h-4 w-3/4 rounded-sm" />
             </div>
           </div>
-          <Skeleton className="w-full aspect-[16/9] sm:aspect-[2.5/1] rounded-sm" />
         </ContainerWrapper>
       </section>
 

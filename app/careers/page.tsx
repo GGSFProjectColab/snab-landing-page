@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { Suspense } from "react";
 import { ArrowRight, ArrowUpRight, MapPin, Briefcase } from "lucide-react";
 import { Footer } from "../Footer";
@@ -26,21 +25,21 @@ async function OpenRoles() {
   return (
     <>
       {jobs.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {jobs.map((job) => (
             <Link
               href={`/careers/${job.slug}`}
               key={job.id}
-              className="job-card group flex flex-col p-6 border border-dotted border-edge bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300"
+              className="job-card group flex flex-col p-5 border border-dotted border-edge bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300"
             >
-              <div className="flex items-start justify-between gap-4 mb-4">
+              <div className="flex items-start justify-between gap-4 mb-3">
                 <div className="flex-1 min-w-0">
-                  <h3 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors leading-snug">
+                  <h3 className="text-sm font-medium text-foreground group-hover:text-primary transition-colors leading-snug">
                     {job.title}
                   </h3>
-                  <div className="flex items-center gap-2 mt-2">
+                  <div className="flex items-center gap-2 mt-1.5">
                     <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
-                      <Briefcase size={12} />
+                      <Briefcase size={11} />
                       {job.employment_type}
                     </span>
                     <span className="text-muted-foreground/40">·</span>
@@ -49,18 +48,18 @@ async function OpenRoles() {
                     </span>
                   </div>
                 </div>
-                <div className="flex items-center justify-center w-9 h-9 border border-dotted border-edge text-muted-foreground transition-all group-hover:bg-foreground group-hover:text-background group-hover:border-foreground shrink-0">
-                  <ArrowUpRight size={16} />
+                <div className="flex items-center justify-center w-8 h-8 border border-dotted border-edge text-muted-foreground transition-all group-hover:bg-foreground group-hover:text-background group-hover:border-foreground shrink-0">
+                  <ArrowUpRight size={14} />
                 </div>
               </div>
 
-              <p className="text-sm text-muted-foreground leading-relaxed mb-5 flex-1 line-clamp-3">
+              <p className="text-xs text-muted-foreground leading-relaxed mb-4 flex-1 line-clamp-2">
                 {job.summary}
               </p>
 
-              <div className="flex items-center gap-3 pt-4 border-t border-dotted border-edge">
+              <div className="flex items-center gap-3 pt-3 border-t border-dotted border-edge">
                 <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
-                  <MapPin size={12} />
+                  <MapPin size={11} />
                   {job.location}
                 </span>
                 {job.featured && (
@@ -74,7 +73,7 @@ async function OpenRoles() {
           ))}
         </div>
       ) : (
-        <div className="py-14 text-center text-muted-foreground text-sm border border-dotted border-edge">
+        <div className="py-12 text-center text-muted-foreground text-sm border border-dotted border-edge">
           No published roles today. Thoughtful introductions are always welcome.
         </div>
       )}
@@ -91,24 +90,34 @@ export default function CareersPage() {
     <main className="flex-1">
       {/* Hero */}
       <section id="careers" aria-labelledby="careers-title">
-        <ContainerWrapper crosshairs="both">
-          <div className="pb-8 pt-6">
-            {/* Breadcrumb */}
-            <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6" aria-label="Breadcrumb">
-              <Link href="/" className="hover:text-foreground transition-colors">
-                Home
-              </Link>
-              <span className="text-muted-foreground/40">›</span>
-              <span className="text-foreground" aria-current="page">Career</span>
-            </nav>
+        <ContainerWrapper>
+          <div className="relative py-16 md:py-24 overflow-hidden">
+            {/* Background Image */}
+            <div
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+              style={{ backgroundImage: "url('/careers-hero-bg.png')" }}
+              aria-hidden="true"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" aria-hidden="true" />
 
-            {/* Large Heading */}
-            <h1
-              id="careers-title"
-              className="font-[family-name:var(--font-display)] text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground"
-            >
-              Career
-            </h1>
+            <div className="relative z-10 text-center">
+              {/* Breadcrumb */}
+              <nav className="flex items-center justify-center gap-2 text-sm text-muted-foreground mb-6" aria-label="Breadcrumb">
+                <Link href="/" className="hover:text-foreground transition-colors">
+                  Home
+                </Link>
+                <span className="text-muted-foreground/40">›</span>
+                <span className="text-foreground" aria-current="page">Career</span>
+              </nav>
+
+              {/* Large Heading */}
+              <h1
+                id="careers-title"
+                className="font-[family-name:var(--font-display)] text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground"
+              >
+                Career
+              </h1>
+            </div>
           </div>
         </ContainerWrapper>
       </section>
@@ -118,36 +127,24 @@ export default function CareersPage() {
       {/* Meet the Team */}
       <section aria-labelledby="team-title">
         <ContainerWrapper>
-          <div className="pb-8">
+          <div className="h-10 flex items-center border-b border-dotted border-edge px-2">
+            <h2 id="team-title" className="font-pixelify font-bold text-xl md:text-2xl">About the team</h2>
+          </div>
+          <div className="p-4 pb-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
               {/* Left — Heading */}
               <div>
-                <h2
-                  id="team-title"
-                  className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl md:text-[2.75rem] font-bold tracking-tight text-foreground leading-[1.15]"
-                >
-                  Meet the team work behind our succes
+                <h2 className="font-[family-name:var(--font-display)] text-2xl sm:text-3xl font-bold tracking-tight text-foreground leading-[1.2]">
+                  Meet the team behind our success
                 </h2>
               </div>
 
               {/* Right — Description */}
               <div className="lg:pt-1">
-                <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">
-                  Our team consists of a group of talented. We value creativity, collaboration, and a passion for excellence. Our members are very intelligent and deligent.
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  We value creativity, collaboration, and excellence. Join us in building AI-powered products from Nashik, India.
                 </p>
               </div>
-            </div>
-
-            {/* Team Image */}
-            <div className="relative w-full aspect-[16/9] sm:aspect-[2.5/1] overflow-hidden mt-8">
-              <Image
-                src="/careers-why-join.jpg"
-                alt="SNAB Innovations team collaborating"
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 1024px"
-                priority
-              />
             </div>
           </div>
         </ContainerWrapper>
@@ -158,60 +155,30 @@ export default function CareersPage() {
       {/* Open Roles */}
       <section id="open-roles" aria-labelledby="roles-title">
         <ContainerWrapper>
-          <div className="pb-8">
-            {/* Section Header */}
-            <div className="text-center mb-10">
-              <h2
-                id="roles-title"
-                className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground"
-              >
-                Currently open positions
-              </h2>
-            </div>
-
+          <div className="h-10 flex items-center border-b border-dotted border-edge px-2">
+            <h2 id="roles-title" className="font-pixelify font-bold text-xl md:text-2xl">Open positions</h2>
+          </div>
+          <div className="p-4 pb-8">
             <Suspense fallback={<OpenRolesFallback />}>
               <OpenRoles />
             </Suspense>
 
             {/* General Application CTA */}
-            <div className="mt-8 p-6 border border-dotted border-edge bg-white/[0.015] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="mt-6 p-5 border border-dotted border-edge bg-white/[0.015] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
                 <h3 className="text-sm font-medium text-foreground">
                   Don&apos;t see your role?
                 </h3>
-                <p className="text-sm text-muted-foreground mt-1 max-w-lg">
-                  We&apos;re always interested in exceptional engineers and product thinkers. Tell us what you&apos;re good at.
+                <p className="text-xs text-muted-foreground mt-1 max-w-lg">
+                  We&apos;re always interested in exceptional engineers. Tell us what you&apos;re good at.
                 </p>
               </div>
               <Link
                 href="/careers/apply"
-                className="inline-flex items-center gap-2 px-5 py-2.5 border border-dotted border-edge bg-foreground text-background text-sm font-medium whitespace-nowrap hover:opacity-90 transition-opacity"
+                className="inline-flex items-center gap-2 px-4 py-2 border border-dotted border-edge bg-foreground text-background text-sm font-medium whitespace-nowrap hover:opacity-90 transition-opacity"
               >
                 Make an introduction <ArrowRight size={14} />
               </Link>
-            </div>
-          </div>
-        </ContainerWrapper>
-      </section>
-
-      <SectionSeparator />
-
-      {/* Trusted Companies */}
-      <section aria-label="Trusted companies">
-        <ContainerWrapper>
-          <div className="py-10 text-center">
-            <p className="text-sm text-muted-foreground mb-6">
-              Trusted by <span className="text-foreground font-medium">1800+</span> of the world&apos;s most popular companies
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-8 opacity-40">
-              {["Stripe", "Vercel", "Notion", "Linear", "Figma", "GitHub"].map((name) => (
-                <span
-                  key={name}
-                  className="font-pixelify text-lg sm:text-xl text-muted-foreground hover:text-foreground transition-colors cursor-default"
-                >
-                  {name}
-                </span>
-              ))}
             </div>
           </div>
         </ContainerWrapper>

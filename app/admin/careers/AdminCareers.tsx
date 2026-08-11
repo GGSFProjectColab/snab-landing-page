@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { AdminCareersSkeleton } from "./AdminCareersSkeleton";
 import {
   AlertTriangle,
+  ArrowLeft,
   ArrowUpRight,
   BriefcaseBusiness,
   CalendarClock,
@@ -98,27 +99,43 @@ function deadlineLabel(job: CareerJob) {
   return `${isExpired(job) ? "Expired" : "Closes"} ${formatDate(job.closes_at)}`;
 }
 
-export function AdminCareers() {
+export function AdminCareers({ initialView = "applications", initialJobFilter = null }: { initialView?: "applications" | "jobs"; initialJobFilter?: string | null }) {
   const router = useRouter();
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
   const [applications, setApplications] = useState<CareerApplication[]>([]);
   const [jobs, setJobs] = useState<CareerJob[]>([]);
   const [activeView, setActiveView] = useState<"applications" | "jobs">(
-    "applications"
+    initialView
   );
   const [typeFilter, setTypeFilter] = useState<"all" | "job" | "general">(
-    "all"
+    initialJobFilter ? "job" : "general"
   );
   const [statusFilter, setStatusFilter] = useState<
     "all" | ApplicationStatus
   >("all");
-  const [jobFilter, setJobFilter] = useState("all");
+  const [jobFilter, setJobFilter] = useState(initialJobFilter || "all");
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<CareerApplication | null>(null);
   const [jobDraft, setJobDraft] = useState<JobDraft | null>(null);
   const [jobToDelete, setJobToDelete] = useState<CareerJob | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [jobStatusFilter, setJobStatusFilter] = useState<"active" | "inactive">("active");
+
+  useEffect(() => {
+    setActiveView(initialView);
+  }, [initialView]);
+
+  useEffect(() => {
+    if (initialJobFilter) {
+      setJobFilter(initialJobFilter);
+      setTypeFilter("job");
+      setActiveView("applications");
+    } else if (initialView === "applications") {
+      setJobFilter("all");
+      setTypeFilter("general");
+    }
+  }, [initialJobFilter, initialView]);
 
   const loadData = useCallback(async () => {
     setLoading(true);
@@ -283,18 +300,37 @@ export function AdminCareers() {
     (item) => item.application_type === "general"
   ).length;
 
+  const viewingJobApplicants = activeView === "applications" && jobFilter !== "all";
+  const viewedJob = viewingJobApplicants ? jobs.find((j) => j.id === jobFilter) : null;
+
   return (
     <main className="min-h-screen bg-background">
       <div className="mx-auto max-w-6xl px-6 py-10">
         <div className="mb-8 flex items-end justify-between gap-5">
           <div>
-            <p className="mb-2 text-xs font-pixelify uppercase tracking-wider text-[#ff5a16]">
-              Recruiting / {activeView}
-            </p>
+            {viewingJobApplicants ? (
+              <button
+                onClick={() => {
+                  setJobFilter("all");
+                  setTypeFilter("general");
+                  router.push("/admin/careers?view=applications");
+                }}
+                className="mb-2 flex items-center gap-1.5 text-xs font-pixelify uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <ArrowLeft size={12} />
+                All applications
+              </button>
+            ) : (
+              <p className="mb-2 text-xs font-pixelify uppercase tracking-wider text-[#ff5a16]">
+                Recruiting / {activeView}
+              </p>
+            )}
             <h1 className="font-pixelify text-4xl uppercase tracking-tight text-foreground md:text-5xl">
-              {activeView === "applications"
-                ? "Candidate inbox"
-                : "Job postings"}
+              {viewingJobApplicants
+                ? `${viewedJob?.title || "Job"} applicants`
+                : activeView === "applications"
+                  ? "Open applications"
+                  : "Job postings"}
             </h1>
           </div>
           {activeView === "jobs" ? (
@@ -307,6 +343,31 @@ export function AdminCareers() {
             </button>
           ) : null}
         </div>
+
+        {activeView === "jobs" && !viewingJobApplicants && (
+          <div className="mb-6 flex gap-2">
+            <button
+              onClick={() => setJobStatusFilter("active")}
+              className={`border border-dotted px-4 py-2 font-pixelify text-[9px] uppercase tracking-wider transition-colors ${
+                jobStatusFilter === "active"
+                  ? "border-[#ff5a16] bg-[#ff5a16] text-background"
+                  : "border-edge bg-transparent text-muted-foreground hover:border-[#ff5a16] hover:text-[#ff5a16]"
+              }`}
+            >
+              Active
+            </button>
+            <button
+              onClick={() => setJobStatusFilter("inactive")}
+              className={`border border-dotted px-4 py-2 font-pixelify text-[9px] uppercase tracking-wider transition-colors ${
+                jobStatusFilter === "inactive"
+                  ? "border-[#ff5a16] bg-[#ff5a16] text-background"
+                  : "border-edge bg-transparent text-muted-foreground hover:border-[#ff5a16] hover:text-[#ff5a16]"
+              }`}
+            >
+              Expired / Deleted
+            </button>
+          </div>
+        )}
 
         {error ? (
           <div
@@ -325,10 +386,12 @@ export function AdminCareers() {
             <section className="mb-6 grid grid-cols-3 gap-px border border-dotted border-edge bg-edge">
               <article className="relative grid gap-2 bg-background p-5">
                 <span className="text-[10px] font-pixelify uppercase tracking-wider text-muted-foreground">
-                  Total candidates
+                  {viewingJobApplicants ? "Job applicants" : "Total candidates"}
                 </span>
                 <strong className="font-pixelify text-3xl font-normal text-foreground">
-                  {applications.length}
+                  {viewingJobApplicants
+                    ? applications.filter((a) => a.job_id === jobFilter).length
+                    : applications.filter((a) => a.application_type === "general").length}
                 </strong>
                 <Users
                   size={17}
@@ -340,7 +403,9 @@ export function AdminCareers() {
                   New to review
                 </span>
                 <strong className="font-pixelify text-3xl font-normal text-foreground">
-                  {newCount}
+                  {viewingJobApplicants
+                    ? applications.filter((a) => a.job_id === jobFilter && a.status === "new").length
+                    : applications.filter((a) => a.application_type === "general" && a.status === "new").length}
                 </strong>
                 <FileText
                   size={17}
@@ -349,10 +414,12 @@ export function AdminCareers() {
               </article>
               <article className="relative grid gap-2 bg-background p-5">
                 <span className="text-[10px] font-pixelify uppercase tracking-wider text-muted-foreground">
-                  General applications
+                  {viewingJobApplicants ? "Shortlisted" : "General applications"}
                 </span>
                 <strong className="font-pixelify text-3xl font-normal text-foreground">
-                  {generalCount}
+                  {viewingJobApplicants
+                    ? applications.filter((a) => a.job_id === jobFilter && a.status === "shortlisted").length
+                    : applications.filter((a) => a.application_type === "general").length}
                 </strong>
                 <Mail
                   size={17}
@@ -361,7 +428,7 @@ export function AdminCareers() {
               </article>
             </section>
 
-            <section className="mb-4 grid grid-cols-[minmax(240px,1fr)_repeat(3,minmax(145px,auto))] gap-2.5">
+            <section className={`mb-4 grid gap-2.5 ${viewingJobApplicants ? "grid-cols-[minmax(240px,1fr)_minmax(145px,auto)]" : "grid-cols-[minmax(240px,1fr)_repeat(3,minmax(145px,auto))]"}`}>
               <div className="flex items-center gap-2 border border-dotted border-edge bg-background px-3">
                 <Search size={14} className="text-muted-foreground" />
                 <input
@@ -371,29 +438,33 @@ export function AdminCareers() {
                   className="w-full bg-transparent py-2.5 text-sm text-foreground outline-none placeholder:text-muted-foreground"
                 />
               </div>
-              <select
-                value={typeFilter}
-                onChange={(event) =>
-                  setTypeFilter(event.target.value as typeof typeFilter)
-                }
-                className="border border-dotted border-edge bg-background px-3 text-sm text-muted-foreground outline-none focus:border-[#ff5a16]"
-              >
-                <option value="all">All application types</option>
-                <option value="job">Job-specific</option>
-                <option value="general">General applications</option>
-              </select>
-              <select
-                value={jobFilter}
-                onChange={(event) => setJobFilter(event.target.value)}
-                className="border border-dotted border-edge bg-background px-3 text-sm text-muted-foreground outline-none focus:border-[#ff5a16]"
-              >
-                <option value="all">All roles</option>
-                {jobs.map((job) => (
-                  <option value={job.id} key={job.id}>
-                    {job.title}
-                  </option>
-                ))}
-              </select>
+              {!viewingJobApplicants && (
+                <>
+                  <select
+                    value={typeFilter}
+                    onChange={(event) =>
+                      setTypeFilter(event.target.value as typeof typeFilter)
+                    }
+                    className="border border-dotted border-edge bg-background px-3 text-sm text-muted-foreground outline-none focus:border-[#ff5a16]"
+                  >
+                    <option value="all">All application types</option>
+                    <option value="job">Job-specific</option>
+                    <option value="general">General applications</option>
+                  </select>
+                  <select
+                    value={jobFilter}
+                    onChange={(event) => setJobFilter(event.target.value)}
+                    className="border border-dotted border-edge bg-background px-3 text-sm text-muted-foreground outline-none focus:border-[#ff5a16]"
+                  >
+                    <option value="all">All roles</option>
+                    {jobs.map((job) => (
+                      <option value={job.id} key={job.id}>
+                        {job.title}
+                      </option>
+                    ))}
+                  </select>
+                </>
+              )}
               <select
                 value={statusFilter}
                 onChange={(event) =>
@@ -484,7 +555,12 @@ export function AdminCareers() {
           </>
         ) : (
           <section className="grid gap-3">
-            {jobs.map((job) => {
+            {jobs.filter((job) => {
+              const expired = isExpired(job);
+              const isActive = job.status === "published" && !expired;
+              const isInactive = job.status === "deleted" || expired || job.status === "closed";
+              return jobStatusFilter === "active" ? isActive : isInactive;
+            }).map((job) => {
               const expired = isExpired(job);
               const displayStatus =
                 expired && job.status === "published" ? "expired" : job.status;
@@ -535,6 +611,18 @@ export function AdminCareers() {
                   <div className="flex gap-2">
                     {job.status !== "deleted" ? (
                       <>
+                        <button
+                          onClick={() => {
+                            setJobFilter(job.id);
+                            setTypeFilter("job");
+                            setActiveView("applications");
+                            router.push(`/admin/careers?view=applications&job=${job.id}`);
+                          }}
+                          className="inline-flex items-center gap-1.5 border border-dotted border-edge bg-transparent px-3 py-2 font-pixelify text-[9px] uppercase tracking-wider text-muted-foreground transition-colors hover:border-[#ff5a16] hover:text-[#ff5a16]"
+                        >
+                          <Users size={12} />
+                          View applicants
+                        </button>
                         <button
                           onClick={() => editJob(job)}
                           className="inline-flex items-center gap-1.5 border border-dotted border-edge bg-transparent px-3 py-2 font-pixelify text-[9px] uppercase tracking-wider text-muted-foreground transition-colors hover:border-[#ff5a16] hover:text-[#ff5a16]"

@@ -459,7 +459,7 @@ export default function Home() {
                   }`}
                   key={item.title}
                 >
-                  <div className={`relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden ${isWeave ? "bg-black" : "bg-muted/30 p-6"}`}>
+                  <div className={`relative aspect-[4/3] w-full overflow-hidden ${isWeave ? "bg-black" : "flex items-center justify-center bg-muted/30 p-6"}`}>
                     {isWeave && <WeaveCanvas />}
                     {!isWeave && "visual" in item && item.visual === "svg1" && <Svg1 />}
                     {!isWeave && "visual" in item && item.visual === "svg9" && <Svg9 />}

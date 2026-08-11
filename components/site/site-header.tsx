@@ -187,6 +187,9 @@ export function SiteHeader() {
   const activePath = pathname ?? "/";
   const firstSegment = "/" + activePath.split("/").filter(Boolean)[0];
 
+  // Hide header on admin routes
+  if (firstSegment === "/admin") return null;
+
   const isHomeActive = activePath === "/";
   const isDesktopLinkActive = (href: string) => {
     if (href === "/#home") return isHomeActive;

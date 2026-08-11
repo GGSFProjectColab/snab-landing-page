@@ -77,21 +77,26 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
         return value || null;
       };
 
+      const fullName = String(formData.get("full_name") || "").trim();
+      const nameParts = fullName.split(/\s+/);
+      const firstName = nameParts[0] || "";
+      const lastName = nameParts.slice(1).join(" ") || "";
+
       const application = {
         id: applicationId,
         application_type: job ? "job" : "general",
         job_id: job?.id ?? null,
-        first_name: String(formData.get("first_name") || "").trim(),
-        last_name: String(formData.get("last_name") || "").trim(),
+        first_name: firstName,
+        last_name: lastName,
         email: String(formData.get("email") || "").trim().toLowerCase(),
         phone: optional("phone"),
         location: String(formData.get("location") || "").trim(),
         linkedin_url: optional("linkedin_url"),
         portfolio_url: optional("portfolio_url"),
-        years_experience: optional("years_experience"),
-        current_company: optional("current_company"),
-        current_title: optional("current_title"),
-        notice_period: optional("notice_period"),
+        years_experience: null,
+        current_company: null,
+        current_title: null,
+        notice_period: null,
         preferred_role: job ? null : String(formData.get("preferred_role") || "").trim(),
         cover_note: String(formData.get("cover_note") || "").trim(),
         resume_name: cleanFileName(file.name),
@@ -119,68 +124,160 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
 
   if (submitted) {
     return (
-      <div className="application-success" role="status">
-        <span className="application-success-icon"><Check aria-hidden="true" /></span>
-        <p className="form-kicker">Application received</p>
-        <h2>Thank you for raising your hand.</h2>
-        <p>
-          We&apos;ll review your application carefully. If there&apos;s a strong match, our team will contact you using the email you provided.
+      <div className="text-center py-12 px-4" role="status">
+        <div className="inline-flex items-center justify-center w-14 h-14 rounded-full border border-dotted border-edge bg-white/[0.03] mb-5">
+          <Check size={22} className="text-foreground" />
+        </div>
+        <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground mb-2">
+          Application received
         </p>
-        <a href="/careers">View other opportunities <ArrowRight size={17} /></a>
+        <h2 className="text-xl font-semibold text-foreground">
+          Thank you for raising your hand.
+        </h2>
+        <p className="text-sm text-muted-foreground mt-3 max-w-md mx-auto leading-relaxed">
+          We&apos;ll review your application carefully. If there&apos;s a strong match, our team will reach out.
+        </p>
+        <a
+          href="/careers"
+          className="inline-flex items-center gap-2 mt-6 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
+        >
+          View other opportunities <ArrowRight size={14} />
+        </a>
       </div>
     );
   }
 
   return (
-    <form className="application-form" onSubmit={handleSubmit} noValidate={false}>
-      <div className="form-intro-row">
-        <div>
-          <p className="form-kicker">Your application</p>
-          <h2>{job ? `Apply for ${job.title}` : "Join our talent network"}</h2>
-        </div>
-        <p>About 4 minutes · No account needed</p>
+    <form className="max-w-[640px]" onSubmit={handleSubmit} noValidate={false}>
+      {/* Header */}
+      <div className="mb-8">
+        <p className="font-mono text-xs uppercase tracking-wider text-muted-foreground mb-2">
+          Your application
+        </p>
+        <h2 className="text-xl sm:text-2xl font-semibold text-foreground">
+          {job ? `Apply for ${job.title}` : "Join our talent network"}
+        </h2>
+        <p className="text-sm text-muted-foreground mt-2">
+          Takes about 3 minutes. No account needed.
+        </p>
       </div>
 
-      <fieldset>
-        <legend><span>01</span> About you</legend>
-        <div className="form-grid two-columns">
-          <label>First name <span>*</span><input name="first_name" autoComplete="given-name" required /></label>
-          <label>Last name <span>*</span><input name="last_name" autoComplete="family-name" required /></label>
-          <label>Email address <span>*</span><input name="email" type="email" autoComplete="email" required /></label>
-          <label>Phone number <em>Optional</em><input name="phone" type="tel" autoComplete="tel" /></label>
-          <label className="full-width">Current city / location <span>*</span><input name="location" autoComplete="address-level2" placeholder="e.g. Nashik, Maharashtra" required /></label>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <legend><span>02</span> Your work</legend>
-        <div className="form-grid two-columns">
-          {!job ? <label className="full-width">Role or field you&apos;re interested in <span>*</span><input name="preferred_role" placeholder="e.g. Product engineering, AI research" required /></label> : null}
-          <label>LinkedIn profile <em>Optional</em><input name="linkedin_url" type="url" inputMode="url" placeholder="https://linkedin.com/in/..." /></label>
-          <label>Portfolio / GitHub <em>Optional</em><input name="portfolio_url" type="url" inputMode="url" placeholder="https://" /></label>
-          <label>Years of experience <em>Optional</em>
-            <select name="years_experience" defaultValue="">
-              <option value="">Select</option><option>0–1 year</option><option>2–3 years</option><option>4–6 years</option><option>7–10 years</option><option>10+ years</option>
-            </select>
+      {/* About You */}
+      <fieldset className="border-none p-0 mb-8 border-t border-dotted border-edge pt-6">
+        <legend className="font-mono text-xs uppercase tracking-wider text-foreground font-semibold mb-5">
+          <span className="text-muted-foreground mr-2">01</span>About you
+        </legend>
+        <div className="flex flex-col gap-4">
+          <label className="flex flex-col gap-1.5 text-sm text-foreground">
+            Full name <span className="text-destructive">*</span>
+            <input
+              name="full_name"
+              autoComplete="name"
+              required
+              className="w-full border border-dotted border-edge rounded-md bg-white/[0.03] text-foreground px-3.5 py-2.5 text-sm outline-none transition-colors"
+              placeholder="Jane Smith"
+            />
           </label>
-          <label>Notice period / availability <em>Optional</em><input name="notice_period" placeholder="e.g. 30 days" /></label>
-          <label>Current company <em>Optional</em><input name="current_company" autoComplete="organization" /></label>
-          <label>Current title <em>Optional</em><input name="current_title" autoComplete="organization-title" /></label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <label className="flex flex-col gap-1.5 text-sm text-foreground">
+              Email <span className="text-destructive">*</span>
+              <input
+                name="email"
+                type="email"
+                autoComplete="email"
+                required
+                className="w-full border border-dotted border-edge rounded-md bg-white/[0.03] text-foreground px-3.5 py-2.5 text-sm outline-none transition-colors"
+                placeholder="you@example.com"
+              />
+            </label>
+            <label className="flex flex-col gap-1.5 text-sm text-foreground">
+              Phone <span className="text-muted-foreground text-xs font-normal">Optional</span>
+              <input
+                name="phone"
+                type="tel"
+                autoComplete="tel"
+                className="w-full border border-dotted border-edge rounded-md bg-white/[0.03] text-foreground px-3.5 py-2.5 text-sm outline-none transition-colors"
+              />
+            </label>
+          </div>
+          <label className="flex flex-col gap-1.5 text-sm text-foreground">
+            Location <span className="text-destructive">*</span>
+            <input
+              name="location"
+              autoComplete="address-level2"
+              required
+              className="w-full border border-dotted border-edge rounded-md bg-white/[0.03] text-foreground px-3.5 py-2.5 text-sm outline-none transition-colors"
+              placeholder="e.g. Nashik, Maharashtra"
+            />
+          </label>
         </div>
       </fieldset>
 
-      <fieldset>
-        <legend><span>03</span> The useful context</legend>
-        <label className="textarea-label">
-          {job ? "Why this role, and what would you bring?" : "What kind of work are you looking to do?"} <span>*</span>
-          <textarea name="cover_note" rows={6} maxLength={1800} placeholder="A short, honest note is perfect — no formal cover letter needed." required />
+      {/* Links */}
+      <fieldset className="border-none p-0 mb-8 border-t border-dotted border-edge pt-6">
+        <legend className="font-mono text-xs uppercase tracking-wider text-foreground font-semibold mb-5">
+          <span className="text-muted-foreground mr-2">02</span>Links
+        </legend>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <label className="flex flex-col gap-1.5 text-sm text-foreground">
+            LinkedIn <span className="text-muted-foreground text-xs font-normal">Optional</span>
+            <input
+              name="linkedin_url"
+              type="url"
+              inputMode="url"
+              className="w-full border border-dotted border-edge rounded-md bg-white/[0.03] text-foreground px-3.5 py-2.5 text-sm outline-none transition-colors"
+              placeholder="https://linkedin.com/in/..."
+            />
+          </label>
+          <label className="flex flex-col gap-1.5 text-sm text-foreground">
+            Portfolio / GitHub <span className="text-muted-foreground text-xs font-normal">Optional</span>
+            <input
+              name="portfolio_url"
+              type="url"
+              inputMode="url"
+              className="w-full border border-dotted border-edge rounded-md bg-white/[0.03] text-foreground px-3.5 py-2.5 text-sm outline-none transition-colors"
+              placeholder="https://"
+            />
+          </label>
+        </div>
+      </fieldset>
+
+      {/* Tell Us */}
+      <fieldset className="border-none p-0 mb-8 border-t border-dotted border-edge pt-6">
+        <legend className="font-mono text-xs uppercase tracking-wider text-foreground font-semibold mb-5">
+          <span className="text-muted-foreground mr-2">03</span>Tell us
+        </legend>
+
+        {!job && (
+          <label className="flex flex-col gap-1.5 text-sm text-foreground mb-4">
+            Role you&apos;re interested in <span className="text-destructive">*</span>
+            <input
+              name="preferred_role"
+              required
+              className="w-full border border-dotted border-edge rounded-md bg-white/[0.03] text-foreground px-3.5 py-2.5 text-sm outline-none transition-colors"
+              placeholder="e.g. Product engineering, AI research"
+            />
+          </label>
+        )}
+
+        <label className="flex flex-col gap-1.5 text-sm text-foreground">
+          {job ? "Why this role?" : "What kind of work are you looking to do?"} <span className="text-destructive">*</span>
+          <textarea
+            name="cover_note"
+            rows={4}
+            maxLength={1800}
+            required
+            className="w-full border border-dotted border-edge rounded-md bg-white/[0.03] text-foreground px-3.5 py-2.5 text-sm outline-none transition-colors resize-none"
+            placeholder="A short, honest note is perfect — no formal cover letter needed."
+          />
         </label>
 
-        <div className="resume-field">
-          <div className="resume-field-copy">
-            <p>Résumé / CV <span>*</span></p>
-            <small>PDF, DOC, or DOCX · Maximum 5 MB</small>
-          </div>
+        {/* Resume Upload */}
+        <div className="mt-4">
+          <p className="text-sm text-foreground mb-1.5">
+            Résumé / CV <span className="text-destructive">*</span>
+          </p>
+          <p className="text-xs text-muted-foreground mb-3">PDF, DOC, or DOCX · Max 5 MB</p>
           <input
             ref={fileInputRef}
             className="visually-hidden-file"
@@ -191,30 +288,87 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
             required={!file}
           />
           {file ? (
-            <div className="resume-selected">
-              <FileText size={21} aria-hidden="true" />
-              <span><strong>{file.name}</strong><small>{(file.size / 1024 / 1024).toFixed(2)} MB</small></span>
-              <button type="button" onClick={() => { setFile(null); if (fileInputRef.current) fileInputRef.current.value = ""; }} aria-label="Remove résumé"><X size={18} /></button>
+            <div className="flex items-center gap-3 border border-dotted border-edge rounded-lg px-4 py-3 bg-white/[0.02]">
+              <FileText size={18} className="text-muted-foreground shrink-0" />
+              <div className="min-w-0 flex-1">
+                <p className="text-sm text-foreground truncate">{file.name}</p>
+                <p className="text-xs text-muted-foreground">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setFile(null);
+                  if (fileInputRef.current) fileInputRef.current.value = "";
+                }}
+                aria-label="Remove résumé"
+                className="text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <X size={16} />
+              </button>
             </div>
           ) : (
-            <label className="resume-drop" htmlFor="resume"><Upload size={20} aria-hidden="true" /> Choose résumé</label>
+            <label
+              htmlFor="resume"
+              className="flex items-center justify-center gap-2 border border-dotted border-edge rounded-lg px-4 py-6 bg-white/[0.02] cursor-pointer hover:bg-white/[0.04] transition-colors text-sm text-muted-foreground"
+            >
+              <Upload size={16} />
+              Choose résumé
+            </label>
           )}
         </div>
       </fieldset>
 
-      <div className="honeypot" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
+      {/* Honeypot */}
+      <div className="honeypot" aria-hidden="true">
+        <label>
+          Website
+          <input name="website" tabIndex={-1} autoComplete="off" />
+        </label>
+      </div>
 
-      <label className="consent-row">
-        <input type="checkbox" name="consent" required />
-        <span>I agree that SNAB Innovations may use my information to evaluate this application and contact me about relevant opportunities. <strong>*</strong></span>
+      {/* Consent */}
+      <label className="flex items-start gap-3 text-sm text-muted-foreground mb-5 cursor-pointer">
+        <input
+          type="checkbox"
+          name="consent"
+          required
+          className="mt-0.5 accent-foreground"
+        />
+        <span>
+          I agree that SNAB Innovations may use my information to evaluate this application and contact me.{" "}
+          <span className="text-destructive">*</span>
+        </span>
       </label>
 
-      {error ? <p className="application-error" role="alert">{error}</p> : null}
+      {/* Error */}
+      {error && (
+        <p className="text-sm text-destructive mb-4" role="alert">
+          {error}
+        </p>
+      )}
 
-      <button className="application-submit" type="submit" disabled={isSubmitting}>
-        {isSubmitting ? <><LoaderCircle className="spin" size={19} /> Sending application</> : <>Submit application <ArrowRight size={19} /></>}
+      {/* Submit */}
+      <button
+        className="inline-flex items-center justify-center gap-2 px-6 py-3 border-none rounded-md bg-foreground text-background font-semibold text-sm cursor-pointer hover:opacity-90 transition-opacity disabled:opacity-50"
+        type="submit"
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? (
+          <>
+            <LoaderCircle className="spin" size={16} />
+            Sending application
+          </>
+        ) : (
+          <>
+            Submit application
+            <ArrowRight size={16} />
+          </>
+        )}
       </button>
-      <p className="privacy-note">We only ask for information our hiring team can actually use. Please don&apos;t include sensitive personal data.</p>
+
+      <p className="text-xs text-muted-foreground mt-4">
+        We only ask for information our hiring team can actually use. Please don&apos;t include sensitive personal data.
+      </p>
     </form>
   );
 }

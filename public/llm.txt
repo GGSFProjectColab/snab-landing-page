@@ -59,8 +59,8 @@ An intelligent workflow platform that helps notary professionals manage document
 - About: https://snab.co.in/about
 - Services: https://snab.co.in/services
 - Projects: https://snab.co.in/#projects
-- Insights: https://snab.co.in/insights
-- AI Product Development Guide: https://snab.co.in/insights/ai-product-development
+- Blogs: https://snab.co.in/blogs
+- AI Product Development Guide: https://snab.co.in/blogs/ai-product-development
 - Careers: https://snab.co.in/careers
 - Contact: https://snab.co.in/contact
 

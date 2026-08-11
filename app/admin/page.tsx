@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { ADMIN_COOKIE, isAdminCookie } from "@/lib/admin-auth";
 import { AdminLogin } from "./AdminLogin";
-import "./careers/admin-careers.css";
 
 export const metadata: Metadata = {
   title: "Admin | SNAB Innovations",

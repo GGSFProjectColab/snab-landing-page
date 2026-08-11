@@ -8,9 +8,9 @@ const staticPages: MetadataRoute.Sitemap = [
   { url: absoluteUrl("/about"), changeFrequency: "monthly", priority: 0.8 },
   { url: absoluteUrl("/contact"), changeFrequency: "yearly", priority: 0.7 },
   { url: absoluteUrl("/careers"), changeFrequency: "weekly", priority: 0.7 },
-  { url: absoluteUrl("/insights"), changeFrequency: "monthly", priority: 0.7 },
+  { url: absoluteUrl("/blogs"), changeFrequency: "monthly", priority: 0.7 },
   {
-    url: absoluteUrl("/insights/ai-product-development"),
+    url: absoluteUrl("/blogs/ai-product-development"),
     changeFrequency: "monthly",
     priority: 0.8,
   },

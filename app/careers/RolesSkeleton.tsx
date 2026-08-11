@@ -1,22 +1,30 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-export function RolesSkeleton({ rows = 3 }: { rows?: number }) {
+export function RolesSkeleton({ rows = 4 }: { rows?: number }) {
   return (
-    <div className="roles-list roles-skeleton" aria-hidden="true">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4" aria-hidden="true">
       {Array.from({ length: rows }, (_, index) => (
-        <div className="role-card role-card-skeleton" key={index}>
-          <Skeleton className="role-skeleton-index" />
-          <div className="role-details">
-            <Skeleton className="role-skeleton-label" />
-            <Skeleton className="role-skeleton-title" />
-            <Skeleton className="role-skeleton-summary" />
+        <div
+          className="flex flex-col p-5 sm:p-6 border border-dotted border-edge rounded-lg bg-white/[0.02]"
+          key={index}
+        >
+          <div className="flex items-start justify-between gap-3 mb-3">
+            <div className="flex-1">
+              <Skeleton className="h-5 w-48 rounded mb-2" />
+              <div className="flex items-center gap-2">
+                <Skeleton className="h-3 w-20 rounded" />
+                <Skeleton className="h-3 w-16 rounded" />
+              </div>
+            </div>
+            <Skeleton className="h-9 w-9 rounded-full shrink-0" />
           </div>
-          <div className="role-facts">
-            <Skeleton className="role-skeleton-fact" />
-            <Skeleton className="role-skeleton-fact" />
-            <Skeleton className="role-skeleton-fact" />
+
+          <Skeleton className="h-3 w-full rounded mb-1" />
+          <Skeleton className="h-3 w-3/4 rounded mb-4" />
+
+          <div className="flex items-center gap-3 pt-3 border-t border-dotted border-edge">
+            <Skeleton className="h-3 w-24 rounded" />
           </div>
-          <Skeleton className="role-skeleton-action" />
         </div>
       ))}
     </div>

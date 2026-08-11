@@ -30,16 +30,61 @@ export function AdminLogin() {
   }
 
   return (
-    <main className="admin-login">
-      <a href="/careers"><ArrowLeft size={16} /> Careers site</a>
-      <form onSubmit={login}>
-        <BrandLogo className="admin-login-logo" priority />
-        <p>SNAB / Hiring desk</p>
-        <h1>Admin access</h1>
-        <label>Password<input name="password" type="password" autoFocus required /></label>
-        {error ? <p className="admin-error" role="alert">{error}</p> : null}
-        <button disabled={loading}>{loading ? "Checking…" : "Enter dashboard"}<ChevronRight size={18} /></button>
-      </form>
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background p-6 section-dot-grid">
+      <a
+        href="/careers"
+        className="absolute left-8 top-8 flex items-center gap-2 text-muted-foreground font-pixelify text-xs uppercase tracking-wider transition-colors hover:text-foreground"
+      >
+        <ArrowLeft size={14} />
+        Careers site
+      </a>
+
+      <div className="relative z-10 w-full max-w-md">
+        <div className="relative border border-dotted border-edge bg-card p-10">
+          <span className="crosshair absolute -left-[6px] -top-[6px]" />
+          <span className="crosshair absolute -right-[6px] -top-[6px]" />
+          <span className="crosshair absolute -bottom-[6px] -left-[6px]" />
+          <span className="crosshair absolute -bottom-[6px] -right-[6px]" />
+
+          <div className="mb-8">
+            <BrandLogo className="mb-6 h-16 w-16" priority />
+            <p className="mb-2 text-xs font-pixelify uppercase tracking-wider text-[#ff5a16]">
+              SNAB / Hiring desk
+            </p>
+            <h1 className="font-pixelify text-4xl uppercase tracking-tight text-foreground">
+              Admin access
+            </h1>
+          </div>
+
+          <form onSubmit={login} className="space-y-5">
+            <label className="grid gap-2 text-xs font-pixelify uppercase tracking-wider text-muted-foreground">
+              Password
+              <input
+                name="password"
+                type="password"
+                autoFocus
+                required
+                className="border border-dotted border-edge bg-background px-4 py-3 text-foreground outline-none transition-colors focus:border-[#ff5a16]"
+              />
+            </label>
+
+            {error ? (
+              <p className="text-destructive text-xs" role="alert">
+                {error}
+              </p>
+            ) : null}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="flex w-full min-h-[44px] items-center justify-between gap-4 border border-dotted border-[#ff5a16] bg-[#ff5a16] px-4 text-background font-pixelify text-xs uppercase tracking-wider transition-opacity hover:opacity-90 disabled:opacity-60"
+            >
+              {loading ? "Checking…" : "Enter dashboard"}
+              <ChevronRight size={16} />
+            </button>
+          </form>
+        </div>
+      </div>
     </main>
   );
 }

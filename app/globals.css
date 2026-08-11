@@ -392,3 +392,88 @@
     background-position: -100% 0;
   }
 }
+
+/* Contact map */
+.contact-map-label {
+  position: absolute;
+  z-index: 21;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  height: 26px;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 0 10px;
+  color: #fff;
+  font-family: var(--font-display), "Courier New", monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+}
+
+.contact-map-label span {
+  width: 6px;
+  height: 6px;
+  background: var(--orange-hot);
+  box-shadow: 0 0 0 3px rgba(255, 90, 22, 0.18);
+}
+
+.contact-map-canvas,
+.contact-map-canvas .maplibregl-canvas-container,
+.contact-map-canvas .maplibregl-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.contact-map-marker {
+  display: grid;
+  place-items: center;
+}
+
+.contact-map-marker-pulse {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border: 2px solid rgba(255, 90, 22, 0.86);
+  border-radius: 50%;
+  animation: contact-marker-pulse 2s ease-out infinite;
+}
+
+.contact-map-marker-icon {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 2px solid var(--orange-hot);
+  border-radius: 50% 50% 50% 5px;
+  background: #0a0a0a;
+  color: var(--orange-hot);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.38);
+  transform: rotate(-45deg);
+}
+
+.contact-map-marker-icon svg {
+  transform: rotate(45deg);
+}
+
+.contact-map-tooltip {
+  border-color: var(--orange-hot);
+  background: var(--orange-hot);
+  color: #0a0a0a;
+  font-family: var(--font-display), "Courier New", monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+@keyframes contact-marker-pulse {
+  0% {
+    opacity: 0.88;
+    transform: scale(0.45);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.25);
+  }
+}

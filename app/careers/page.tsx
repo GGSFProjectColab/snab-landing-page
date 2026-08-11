@@ -1,115 +1,81 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 import { Suspense } from "react";
-import { ArrowRight, ArrowUpRight, MapPin } from "lucide-react";
+import { ArrowRight, ArrowUpRight, MapPin, Briefcase } from "lucide-react";
 import { Footer } from "../Footer";
 import { getPublishedJobs } from "@/lib/careers";
 import { RolesSkeleton } from "./RolesSkeleton";
 import { createPageMetadata } from "@/lib/site";
 import { ContainerWrapper } from "@/components/site/container";
 import { SectionSeparator } from "@/components/site/separator";
-import { HeaderTitle } from "@/components/profile/header-title";
 import "./careers.css";
 
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Careers in AI & Software Engineering",
+  title: "Careers — SNAB Innovations",
   description:
-    "Explore open AI, product, design, and software engineering roles at SNAB Innovations in Nashik, India.",
+    "Join SNAB Innovations. Explore open roles in AI, engineering, and product from Nashik, India.",
   path: "/careers",
 });
-
-const benefits = [
-  {
-    number: "01",
-    title: "Mission-Driven Craft",
-    copy: "Every role at SNAB directly contributes to intelligent tools and workflow software that solve real, complex problems for users.",
-  },
-  {
-    number: "02",
-    title: "AI-Native Engineering",
-    copy: "Collaborate alongside experienced engineers building agentic workflows, LLM pipelines, and production-grade applications.",
-  },
-  {
-    number: "03",
-    title: "High Ownership & Growth",
-    copy: "We keep teams small and senior so everyone connects strategy, architecture, implementation, and customer impact.",
-  },
-  {
-    number: "04",
-    title: "Flexible Work Environment",
-    copy: "Low-friction, focused work environment based in Nashik, India with hybrid flexibility—where contribution matters most.",
-  },
-];
-
-const processSteps = [
-  {
-    number: "01",
-    title: "Application Review",
-    copy: "We read every application carefully, evaluating craft, judgment, and past problem ownership.",
-  },
-  {
-    number: "02",
-    title: "Working Conversation",
-    copy: "A focused conversation about what you've built, key learnings, and how you approach complex challenges.",
-  },
-  {
-    number: "03",
-    title: "Practical Collaboration",
-    copy: "A role-relevant exercise or technical deep dive—scoped, respectful, and never speculative work.",
-  },
-  {
-    number: "04",
-    title: "Decision & Clarity",
-    copy: "We communicate decisions clearly and promptly, respecting your time and providing honest feedback.",
-  },
-];
 
 async function OpenRoles() {
   const jobs = await getPublishedJobs();
 
   return (
     <>
-      <div className="roles-header">
-        <div>
-          <p className="careers-kicker">
-            <span className="careers-kicker-dot" /> Current Openings
-          </p>
-          <p className="text-sm text-muted-foreground mt-1">
-            Explore available opportunities to shape the future of AI software with us.
-          </p>
-        </div>
-        <div className="roles-count-badge">
-          <span>{String(jobs.length).padStart(2, "0")} OPEN {jobs.length === 1 ? "ROLE" : "ROLES"}</span>
-        </div>
-      </div>
-
-      {jobs.length ? (
-        <div className="roles-list">
+      {jobs.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {jobs.map((job) => (
-            <Link href={`/careers/${job.slug}`} key={job.id} className="role-card group">
-              <div>
-                <div className="role-department">{job.department}</div>
-                <div className="role-location-badge">
-                  <MapPin size={12} />
-                  <span>{job.location} · {job.work_mode}</span>
+            <Link
+              href={`/careers/${job.slug}`}
+              key={job.id}
+              className="job-card group relative flex flex-col p-5 sm:p-6 border border-dotted border-edge rounded-lg bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300"
+            >
+              <div className="flex items-start justify-between gap-3 mb-3">
+                <div className="flex-1">
+                  <h3 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors">
+                    {job.title}
+                  </h3>
+                  <div className="flex items-center gap-2 mt-1.5">
+                    <span className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+                      <Briefcase size={12} />
+                      {job.employment_type}
+                    </span>
+                    <span className="text-muted-foreground/40">·</span>
+                    <span className="text-xs text-muted-foreground">
+                      {job.work_mode}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex items-center justify-center w-9 h-9 rounded-full border border-dotted border-edge text-muted-foreground transition-all group-hover:bg-foreground group-hover:text-background group-hover:border-foreground shrink-0">
+                  <ArrowUpRight size={16} />
                 </div>
               </div>
-              <div>
-                <h3 className="role-title">{job.title}</h3>
-                <p className="role-summary">{job.summary}</p>
-              </div>
-              <div className="role-action" aria-hidden="true">
-                <ArrowUpRight size={18} />
+
+              <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
+                {job.summary}
+              </p>
+
+              <div className="flex items-center gap-3 pt-3 border-t border-dotted border-edge">
+                <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <MapPin size={12} />
+                  {job.location}
+                </span>
+                {job.featured && (
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green-500/10 text-green-400 text-[10px] font-medium uppercase tracking-wider">
+                    <span className="w-1 h-1 rounded-full bg-green-400" />
+                    Featured
+                  </span>
+                )}
               </div>
             </Link>
           ))}
         </div>
       ) : (
-        <div className="no-openings">
-          <p>There are no published roles today, but thoughtful introductions are always welcome.</p>
+        <div className="py-14 text-center text-muted-foreground text-sm border border-dotted border-edge rounded-lg">
+          No published roles today. Thoughtful introductions are always welcome.
         </div>
       )}
     </>
@@ -117,155 +83,140 @@ async function OpenRoles() {
 }
 
 function OpenRolesFallback() {
-  return (
-    <>
-      <div className="roles-header">
-        <div>
-          <p className="careers-kicker">
-            <span className="careers-kicker-dot" /> Current Openings
-          </p>
-          <p className="text-sm text-muted-foreground mt-1">Loading open roles...</p>
-        </div>
-        <div className="roles-count-badge">
-          <span>LOADING...</span>
-        </div>
-      </div>
-      <RolesSkeleton />
-    </>
-  );
+  return <RolesSkeleton />;
 }
 
 export default function CareersPage() {
   return (
-    <main className="careers-page">
-      {/* Hero Section */}
-      <section className="careers-hero" aria-labelledby="careers-title">
+    <main className="flex-1">
+      {/* Hero */}
+      <section id="careers" aria-labelledby="careers-title">
+        <ContainerWrapper crosshairs="top" crosshairs="bottom">
+          <div className="pb-8 pt-6">
+            {/* Breadcrumb */}
+            <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-6" aria-label="Breadcrumb">
+              <Link href="/" className="hover:text-foreground transition-colors">
+                Home
+              </Link>
+              <span className="text-muted-foreground/40">›</span>
+              <span className="text-foreground" aria-current="page">Career</span>
+            </nav>
+
+            {/* Large Heading */}
+            <h1
+              id="careers-title"
+              className="font-[family-name:var(--font-display)] text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground"
+            >
+              Career
+            </h1>
+          </div>
+        </ContainerWrapper>
+      </section>
+
+      <SectionSeparator />
+
+      {/* Meet the Team */}
+      <section aria-labelledby="team-title">
         <ContainerWrapper>
-          <HeaderTitle title="Careers at SNAB" id="careers-title" />
-          
-          <div className="careers-hero-banner-frame">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center pb-8">
+            {/* Left — Text */}
+            <div>
+              <h2
+                id="team-title"
+                className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground leading-tight"
+              >
+                Meet the team work behind our succes
+              </h2>
+            </div>
+
+            {/* Right — Description */}
+            <div>
+              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed mb-4">
+                Our team consists of a group of talented. We value creativity, collaboration, and a passion for excellence. Our members are very intelligent and deligent.
+              </p>
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-muted-foreground transition-colors"
+              >
+                Learn more about us <ArrowRight size={14} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Team Image */}
+          <div className="relative w-full aspect-[16/9] sm:aspect-[2/1] rounded-lg overflow-hidden border border-dotted border-edge mb-4">
             <Image
-              src="/careers-hero-banner.jpg"
-              alt="SNAB AI Engineering Studio"
-              width={1200}
-              height={675}
-              priority
+              src="/careers-why-join.jpg"
+              alt="SNAB Innovations team collaborating"
+              fill
               className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 1024px"
+              priority
             />
           </div>
-
-          <div className="careers-hero-content">
-            <div>
-              <p className="careers-kicker">
-                <span className="careers-kicker-dot" /> Careers at SNAB Innovations
-              </p>
-              <h1 className="careers-hero-heading">
-                Build work that matters.
-              </h1>
-              <p className="careers-hero-intro">
-                At SNAB, we believe that building high-impact AI products starts with passionate people.
-                Join a small, curious team engineering intelligent software from Nashik for teams worldwide.
-              </p>
-            </div>
-            
-            <div className="careers-hero-meta">
-              <p className="careers-hero-meta-title">At a glance</p>
-              <div className="careers-hero-meta-list">
-                <div className="careers-hero-meta-item">
-                  <span className="careers-hero-meta-label">Location</span>
-                  <span className="careers-hero-meta-val">Nashik, IN / Hybrid</span>
-                </div>
-                <div className="careers-hero-meta-item">
-                  <span className="careers-hero-meta-label">Structure</span>
-                  <span className="careers-hero-meta-val">Small & Senior Team</span>
-                </div>
-                <div className="careers-hero-meta-item">
-                  <span className="careers-hero-meta-label">Culture</span>
-                  <span className="careers-hero-meta-val">High Autonomy</span>
-                </div>
-              </div>
-            </div>
-          </div>
         </ContainerWrapper>
       </section>
 
       <SectionSeparator />
 
-      {/* Why Join SNAB Section */}
-      <section className="py-12 md:py-16" aria-labelledby="why-join-title">
+      {/* Open Roles */}
+      <section id="open-roles" aria-labelledby="roles-title">
         <ContainerWrapper>
-          <HeaderTitle title="Why Join SNAB?" id="why-join-title" />
-          
-          <div className="why-join-grid mt-8">
-            <div className="why-join-image-frame">
-              <Image
-                src="/careers-why-join.jpg"
-                alt="SNAB Team Collaboration"
-                width={800}
-                height={600}
-                className="object-cover"
-              />
+          <div className="pb-8">
+            {/* Section Header */}
+            <div className="text-center mb-8">
+              <h2
+                id="roles-title"
+                className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground"
+              >
+                Currently open positions
+              </h2>
             </div>
 
-            <div className="why-join-benefits">
-              {benefits.map((item) => (
-                <div className="benefit-item" key={item.number}>
-                  <span className="benefit-number">{item.number}</span>
-                  <div>
-                    <h3 className="benefit-title">{item.title}</h3>
-                    <p className="benefit-desc">{item.copy}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </ContainerWrapper>
-      </section>
-
-      <SectionSeparator />
-
-      {/* Join Our Growing Team Section */}
-      <section className="py-12 md:py-16" id="open-roles" aria-labelledby="roles-title">
-        <ContainerWrapper>
-          <HeaderTitle title="Join Our Growing Team" id="roles-title" />
-
-          <div className="mt-8">
             <Suspense fallback={<OpenRolesFallback />}>
               <OpenRoles />
             </Suspense>
-          </div>
 
-          <div className="general-application">
-            <div>
-              <h3 className="general-app-title">Don&apos;t see your specific role?</h3>
-              <p className="general-app-desc">
-                We&apos;re always interested in meeting exceptional AI engineers, full-stack developers, and product thinkers. Tell us what you&apos;re unusually good at and the kind of problem you want to solve.
-              </p>
+            {/* General Application CTA */}
+            <div className="mt-8 p-5 sm:p-6 border border-dotted border-edge rounded-lg bg-white/[0.015] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h3 className="text-sm font-medium text-foreground">
+                  Don&apos;t see your role?
+                </h3>
+                <p className="text-sm text-muted-foreground mt-1 max-w-lg">
+                  We&apos;re always interested in exceptional engineers and product thinkers. Tell us what you&apos;re good at.
+                </p>
+              </div>
+              <Link
+                href="/careers/apply"
+                className="inline-flex items-center gap-2 px-4 py-2.5 border border-dotted border-edge rounded bg-foreground text-background text-sm font-medium whitespace-nowrap hover:opacity-90 transition-opacity"
+              >
+                Make an introduction <ArrowRight size={14} />
+              </Link>
             </div>
-            <Link href="/careers/apply" className="general-app-btn">
-              Make an introduction <ArrowRight size={16} />
-            </Link>
           </div>
         </ContainerWrapper>
       </section>
 
       <SectionSeparator />
 
-      {/* Recruitment Process Section */}
-      <section className="py-12 md:py-16" aria-labelledby="process-title">
+      {/* Trusted Companies */}
+      <section aria-label="Trusted companies">
         <ContainerWrapper>
-          <HeaderTitle title="What Happens Next" id="process-title" />
-
-          <div className="process-grid mt-8">
-            {processSteps.map((step) => (
-              <div className="process-card" key={step.number}>
-                <span className="process-step-num">{step.number}</span>
-                <div>
-                  <h3 className="process-card-title">{step.title}</h3>
-                  <p className="process-card-desc">{step.copy}</p>
-                </div>
-              </div>
-            ))}
+          <div className="py-10 text-center">
+            <p className="text-sm text-muted-foreground mb-6">
+              Trusted by <span className="text-foreground font-medium">1800+</span> of the world&apos;s most popular companies
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-8 opacity-40">
+              {["Stripe", "Vercel", "Notion", "Linear", "Figma", "GitHub"].map((name) => (
+                <span
+                  key={name}
+                  className="font-pixelify text-lg sm:text-xl text-muted-foreground hover:text-foreground transition-colors cursor-default"
+                >
+                  {name}
+                </span>
+              ))}
+            </div>
           </div>
         </ContainerWrapper>
       </section>

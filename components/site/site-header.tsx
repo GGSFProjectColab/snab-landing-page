@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, Sun, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ShinyText } from "@/components/site/shiny-text";
 import { NAV_ITEMS, DESKTOP_LINKS } from "@/data/nav-items";
@@ -219,10 +219,24 @@ export function SiteHeader() {
                 />
               ))}
             </nav>
+            <button
+              type="button"
+              aria-label="Toggle light mode"
+              className="inline-flex size-8 items-center justify-center text-muted-foreground transition-colors hover:text-primary"
+            >
+              <Sun className="size-4" />
+            </button>
           </div>
 
           {/* Mobile — compact actions */}
           <div className="flex items-center gap-2 md:hidden">
+            <button
+              type="button"
+              aria-label="Toggle light mode"
+              className="inline-flex size-8 items-center justify-center text-muted-foreground transition-colors hover:text-primary"
+            >
+              <Sun className="size-4" />
+            </button>
             <button
               type="button"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}

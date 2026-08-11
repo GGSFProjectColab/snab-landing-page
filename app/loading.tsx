@@ -1,5 +1,5 @@
-import { RouteSkeleton } from "./RouteSkeleton";
+import { HomeSkeleton } from "./HomeSkeleton";
 
 export default function Loading() {
-  return <RouteSkeleton />;
+  return <HomeSkeleton />;
 }

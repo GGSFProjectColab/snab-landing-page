@@ -2,15 +2,17 @@
 
 import type { ReactNode } from "react"
 import Link from "next/link"
-import { usePathname, useSearchParams } from "next/navigation"
+import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import {
   Briefcase,
   FileText,
+  LogOut,
   Newspaper,
 } from "lucide-react"
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -45,9 +47,21 @@ const menuItems = [
 ]
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
+  const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const currentView = searchParams.get("view") || "applications"
+
+  const isLoginPage = pathname === "/admin"
+
+  async function logout() {
+    await fetch("/api/admin/careers/session", { method: "DELETE" });
+    router.replace("/admin");
+  }
+
+  if (isLoginPage) {
+    return <>{children}</>
+  }
 
   return (
     <SidebarProvider>
@@ -99,6 +113,17 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
             </SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
+
+        <SidebarFooter>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton onClick={logout} tooltip="Log out">
+                <LogOut />
+                <span>Log out</span>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarFooter>
       </Sidebar>
 
       <SidebarInset>

@@ -48,10 +48,10 @@ export default function AboutPage() {
       {/* Hero */}
       <section aria-labelledby="about-title">
         <ContainerWrapper>
-          <div className="relative min-h-[500px] overflow-hidden sm:min-h-[600px]">
+          <div className="relative min-h-[340px] overflow-hidden sm:min-h-[400px]">
             <Image
               className="absolute inset-0 h-full w-full object-cover object-center"
-              src="/ascii-magic-11.png"
+              src="/ascii-magic-19.png"
               alt=""
               fill
               priority
@@ -59,7 +59,7 @@ export default function AboutPage() {
               aria-hidden="true"
             />
             <div className="absolute inset-0 bg-black/50" aria-hidden="true" />
-            <div className="relative z-10 flex min-h-[500px] flex-col justify-end p-6 sm:min-h-[600px] sm:p-10 md:p-14">
+            <div className="relative z-10 flex min-h-[340px] flex-col justify-end p-6 sm:min-h-[400px] sm:p-10 md:p-14">
               <p className="mb-4 font-mono text-xs uppercase tracking-widest text-muted-foreground">
                 About us
               </p>

@@ -97,7 +97,7 @@ export default function ContactPage() {
           <div className="relative min-h-[340px] overflow-hidden sm:min-h-[380px]">
             <Image
               className="absolute inset-0 h-full w-full object-cover object-center"
-              src="/ascii-magic-11.png"
+              src="/ascii-magic-17.png"
               alt=""
               fill
               priority

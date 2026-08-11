@@ -116,7 +116,7 @@ export default function ServicesPage() {
           <div className="relative min-h-[460px] overflow-hidden sm:min-h-[540px]">
             <Image
               className="absolute inset-0 h-full w-full object-cover object-center"
-              src="/ascii-magic-11.png"
+              src="/ascii-magic-18.png"
               alt=""
               fill
               priority

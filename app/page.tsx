@@ -12,8 +12,7 @@ import FluidOrb from "@/components/ui/fluid-orb";
 import { AIWorkflowFlow } from "@/components/ui/ai-workflow-flow";
 import { Globe } from "@/components/ui/globe";
 import Svg1 from "@/components/pixel-perfect/svg-1";
-import Svg4 from "@/components/pixel-perfect/svg-4";
-import { WeaveCanvas } from "@/components/ui/weave-canvas";
+import { DitheredLogo } from "@/components/ui/dithered-logo";
 import Svg9 from "@/components/pixel-perfect/svg-9";
 import { TechStackCloud } from "./TechStackCloud";
 import { DottedMap } from "@/components/ui/dotted-map";
@@ -163,7 +162,7 @@ const whyChooseUs = [
     title: "Workflow-Centric Design",
     description: "We start with the workflow, not the model — ensuring real-world impact.",
     image: "/ascii-magic-6.png",
-    visual: "svg4",
+    visual: "dithered",
     slug: "workflow-centric-design",
   },
   {
@@ -449,7 +448,7 @@ export default function Home() {
             <HeaderTitle title="Why Choose Us" id="why-choose-us-title" />
             <div className="grid grid-cols-1 border-b border-dotted border-edge sm:grid-cols-2 md:grid-cols-3">
               {whyChooseUs.map((item, i) => {
-                const isWeave = "visual" in item && item.visual === "svg4";
+                const isDithered = "visual" in item && item.visual === "dithered";
                 return (
                 <div
                   className={`group flex flex-col border-b border-dotted border-edge last:border-b-0 sm:border-b-0 ${
@@ -459,12 +458,28 @@ export default function Home() {
                   }`}
                   key={item.title}
                 >
-                  <div className={`relative aspect-[4/3] w-full overflow-hidden p-6 ${isWeave ? "bg-black" : "flex items-center justify-center bg-muted/30"}`}>
-                    {isWeave && <WeaveCanvas />}
-                    {!isWeave && "visual" in item && item.visual === "svg1" && <Svg1 />}
-                    {!isWeave && "visual" in item && item.visual === "svg9" && <Svg9 />}
-                    {!isWeave && "visual" in item && item.visual === "techstack" && <TechStackCloud />}
-                    {!isWeave && "visual" in item && item.visual === "dottedmap" && (
+                  <div className={`relative aspect-[4/3] w-full overflow-hidden p-6 ${isDithered ? "bg-black flex items-center justify-center" : "flex items-center justify-center bg-muted/30"}`}>
+                    {isDithered && (
+                      <DitheredLogo
+                        imageSrc="/logo.png"
+                        className="h-full w-full text-white"
+                        gridSize={120}
+                        scale={0.7}
+                        dotScale={1.2}
+                        invert={true}
+                        cornerRadius={0}
+                        threshold={160}
+                        contrast={20}
+                        gamma={1.2}
+                        blur={3}
+                        diffusionStrength={1}
+                        particleColor="#ffffff"
+                      />
+                    )}
+                    {!isDithered && "visual" in item && item.visual === "svg1" && <Svg1 />}
+                    {!isDithered && "visual" in item && item.visual === "svg9" && <Svg9 />}
+                    {!isDithered && "visual" in item && item.visual === "techstack" && <TechStackCloud />}
+                    {!isDithered && "visual" in item && item.visual === "dottedmap" && (
                       <DottedMap
                         markers={[
                           { lat: 40.7128, lng: -74.006, size: 0.8, pulse: true },
@@ -480,7 +495,7 @@ export default function Home() {
                         pulse
                       />
                     )}
-                    {!isWeave && !("visual" in item) && (
+                    {!isDithered && !("visual" in item) && (
                       <Image
                         className="object-cover transition-transform duration-500 group-hover:scale-105"
                         src={item.image}

@@ -274,7 +274,7 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
           {/* Stacked Service Cards Stage (Responsive sizing across mobile & desktop) */}
           <div
             ref={stageRef}
-            className="relative min-h-[440px] sm:min-h-[480px] h-[calc(100dvh-180px)] md:h-[calc(100vh-190px)] max-h-[580px] w-full overflow-hidden border-b border-dotted border-edge bg-background"
+            className="relative h-[360px] sm:h-[420px] md:h-[calc(100vh-190px)] md:min-h-[480px] md:max-h-[580px] w-full overflow-hidden border-b border-dotted border-edge bg-background"
           >
             {services.map((service, index) => (
               <div
@@ -287,9 +287,9 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
               >
                 <div className="grid h-full w-full grid-rows-[auto_1fr] md:grid-rows-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-dotted divide-edge overflow-hidden">
                   {/* Left Column: Top-aligned Title & Intro (Key Highlights only on md+ web view) */}
-                  <div className="flex flex-col justify-start p-4 sm:p-6 lg:p-8 overflow-hidden">
+                  <div className="flex flex-col justify-start p-3 sm:p-6 lg:p-8 overflow-hidden">
                     {/* Service Title */}
-                    <h3 className="text-lg sm:text-xl lg:text-2xl font-normal tracking-tight text-foreground">
+                    <h3 className="text-base sm:text-xl lg:text-2xl font-medium sm:font-normal tracking-tight text-foreground">
                       {service.title}
                     </h3>
 
@@ -323,15 +323,15 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
                   </div>
 
                   {/* Right Column: Responsive Visual Component calibrated for mobile & desktop */}
-                  <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-background p-2 sm:p-4 lg:p-6">
+                  <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-background p-1.5 sm:p-4 lg:p-6">
                     {service.visual === "flow" ? (
-                      <div className="relative h-full w-full max-h-[250px] sm:max-h-[280px] lg:max-h-[360px] flex items-center justify-center">
+                      <div className="relative h-full w-full max-h-[250px] sm:max-h-[290px] lg:max-h-[360px] flex items-center justify-center">
                         <AIWorkflowFlow expanded={true} />
                       </div>
                     ) : service.visual === "orb" ? (
-                      <div className="flex flex-col items-center justify-center p-2 text-center">
+                      <div className="flex flex-col items-center justify-center p-1 text-center">
                         <div className="block lg:hidden">
-                          <FluidOrb size={190} />
+                          <FluidOrb size={180} />
                         </div>
                         <div className="hidden lg:block">
                           <FluidOrb size={300} />
@@ -354,8 +354,8 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
                         <Globe />
                       </div>
                     ) : (
-                      <div className="flex items-center justify-center p-2">
-                        <FluidOrb size={190} />
+                      <div className="flex items-center justify-center p-1">
+                        <FluidOrb size={180} />
                       </div>
                     )}
                   </div>

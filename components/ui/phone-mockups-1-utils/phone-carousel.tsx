@@ -46,7 +46,7 @@ export function PhoneCarousel({
   return (
     <div className={cn("relative flex flex-col items-center justify-center max-h-full", className)}>
       {/* Phone Hardware Mockup Outer Frame */}
-      <div className="relative h-[250px] sm:h-[285px] md:h-[340px] lg:h-[390px] xl:h-[415px] aspect-[9/19] rounded-[28px] sm:rounded-[32px] md:rounded-[36px] lg:rounded-[42px] p-2 sm:p-2.5 md:p-2.5 lg:p-3 bg-neutral-950 border-[2.5px] sm:border-[3px] md:border-[3px] lg:border-[3.5px] border-neutral-700 shadow-xl md:shadow-2xl shadow-black/70 ring-1 ring-white/10 shrink-0">
+      <div className="relative h-[200px] sm:h-[230px] md:h-[340px] lg:h-[390px] xl:h-[415px] aspect-[9/19] rounded-[24px] sm:rounded-[28px] md:rounded-[36px] lg:rounded-[42px] p-1.5 sm:p-2 md:p-2.5 lg:p-3 bg-neutral-950 border-[2px] sm:border-[2.5px] md:border-[3px] lg:border-[3.5px] border-neutral-700 shadow-xl md:shadow-2xl shadow-black/70 ring-1 ring-white/10 shrink-0">
         {/* Hardware side buttons */}
         <div className="absolute -left-[3px] sm:-left-[4px] md:-left-[5px] top-[24%] h-[8%] w-[2px] sm:w-[3px] md:w-[3.5px] rounded-l-sm bg-neutral-600" />
         <div className="absolute -left-[3px] sm:-left-[4px] md:-left-[5px] top-[34%] h-[12%] w-[2px] sm:w-[3px] md:w-[3.5px] rounded-l-sm bg-neutral-600" />

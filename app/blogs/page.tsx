@@ -16,9 +16,12 @@ export const metadata: Metadata = createPageMetadata({
   path: "/blogs",
 });
 
-
+export const dynamic = "force-dynamic";
 
 function FeaturedCard({ post }: { post: BlogPost }) {
+  const imageSrc = post.cover_image || "/ascii-magic-14.png";
+  const readTimeStr = post.read_time || "5 min read";
+
   return (
     <Link
       href={`/blogs/${post.slug}`}
@@ -27,9 +30,10 @@ function FeaturedCard({ post }: { post: BlogPost }) {
       <div className="relative aspect-[4/3] overflow-hidden bg-muted/30">
         <Image
           className="object-cover transition-transform duration-500 group-hover:scale-105"
-          src={post.image}
+          src={imageSrc}
           alt={post.title}
           fill
+          priority
           sizes="(max-width: 768px) 100vw, 50vw"
         />
       </div>
@@ -44,7 +48,7 @@ function FeaturedCard({ post }: { post: BlogPost }) {
           {post.excerpt}
         </p>
         <div className="mt-6 flex items-center gap-4">
-          <span className="text-caption text-muted-foreground">{post.readTime}</span>
+          <span className="text-caption text-muted-foreground">{readTimeStr}</span>
           <span className="text-caption text-muted-foreground transition-colors group-hover:text-foreground">
             Read more →
           </span>
@@ -55,6 +59,9 @@ function FeaturedCard({ post }: { post: BlogPost }) {
 }
 
 function BlogCard({ post }: { post: BlogPost }) {
+  const imageSrc = post.cover_image || "/ascii-magic-14.png";
+  const readTimeStr = post.read_time || "5 min read";
+
   return (
     <Link
       href={`/blogs/${post.slug}`}
@@ -63,7 +70,7 @@ function BlogCard({ post }: { post: BlogPost }) {
       <div className="relative aspect-[4/3] overflow-hidden bg-muted/30">
         <Image
           className="object-cover transition-transform duration-500 group-hover:scale-105"
-          src={post.image}
+          src={imageSrc}
           alt={post.title}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -81,7 +88,7 @@ function BlogCard({ post }: { post: BlogPost }) {
         </p>
         <div className="mt-4 flex items-center justify-between">
           <span className="text-caption text-muted-foreground">
-            {post.readTime}
+            {readTimeStr}
           </span>
           <span className="text-caption text-muted-foreground transition-colors group-hover:text-foreground">
             →
@@ -92,30 +99,62 @@ function BlogCard({ post }: { post: BlogPost }) {
   );
 }
 
-async function FeaturedPost() {
+async function BlogContent() {
   const posts = await getBlogPosts();
-  const featuredPost = posts.find((post) => post.featured);
 
-  if (!featuredPost) return null;
+  if (posts.length === 0) {
+    return (
+      <section aria-labelledby="latest-posts-title">
+        <ContainerWrapper>
+          <HeaderTitle title="From the blog" id="latest-posts-title" />
+          <div className="py-20 px-4 text-center">
+            <p className="text-body text-muted-foreground">
+              No articles published yet. Check back soon.
+            </p>
+          </div>
+        </ContainerWrapper>
+      </section>
+    );
+  }
+
+  const featuredPost = posts.find((post) => post.featured) || posts[0];
+  const gridPosts = posts.filter((post) => post.slug !== featuredPost?.slug);
 
   return (
-    <section aria-labelledby="featured-post-title">
-      <ContainerWrapper>
-        <div className="p-4 sm:p-6">
-          <h2
-            id="featured-post-title"
-            className="mb-4 text-caption font-medium uppercase tracking-wider text-muted-foreground"
-          >
-            Featured
-          </h2>
-          <FeaturedCard post={featuredPost} />
-        </div>
-      </ContainerWrapper>
-    </section>
+    <>
+      {featuredPost && (
+        <section aria-labelledby="featured-post-title">
+          <ContainerWrapper>
+            <div className="p-4 sm:p-6">
+              <h2
+                id="featured-post-title"
+                className="mb-4 text-caption font-medium uppercase tracking-wider text-muted-foreground"
+              >
+                Featured
+              </h2>
+              <FeaturedCard post={featuredPost} />
+            </div>
+          </ContainerWrapper>
+        </section>
+      )}
+
+      {gridPosts.length > 0 && (
+        <section aria-labelledby="latest-posts-title">
+          <ContainerWrapper>
+            <HeaderTitle title="From the blog" id="latest-posts-title" />
+            <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 sm:p-6 md:grid-cols-3">
+              {gridPosts.map((post) => (
+                <BlogCard key={post.slug} post={post} />
+              ))}
+            </div>
+          </ContainerWrapper>
+        </section>
+      )}
+    </>
   );
 }
 
-function FeaturedPostFallback() {
+function BlogFallback() {
   return (
     <section>
       <ContainerWrapper>
@@ -128,61 +167,12 @@ function FeaturedPostFallback() {
   );
 }
 
-async function BlogGrid() {
-  const posts = await getBlogPosts();
-  const gridPosts = posts.filter((post) => !post.featured);
-
-  return (
-    <section aria-labelledby="latest-posts-title">
-      <ContainerWrapper>
-        <HeaderTitle title="From the blog" id="latest-posts-title" />
-        <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 sm:p-6 md:grid-cols-3">
-          {gridPosts.map((post) => (
-            <BlogCard key={post.slug} post={post} />
-          ))}
-        </div>
-      </ContainerWrapper>
-    </section>
-  );
-}
-
-function BlogGridFallback() {
-  return (
-    <section>
-      <ContainerWrapper>
-        <div className="py-10 sm:py-14">
-          <div className="h-8 w-32 rounded-sm bg-muted animate-pulse mb-6 mx-4 sm:mx-6" />
-          <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 sm:p-6 md:grid-cols-3">
-            {Array.from({ length: 6 }, (_, i) => (
-              <BlogCardSkeleton key={i} />
-            ))}
-          </div>
-        </div>
-      </ContainerWrapper>
-    </section>
-  );
-}
-
 export default function BlogsPage() {
   return (
     <main className="flex-1">
-      <Suspense fallback={<FeaturedPostFallback />}>
-        <FeaturedPost />
+      <Suspense fallback={<BlogFallback />}>
+        <BlogContent />
       </Suspense>
-
-      <Suspense fallback={<BlogGridFallback />}>
-        <BlogGrid />
-      </Suspense>
-
-      <section aria-label="Tagline">
-        <ContainerWrapper>
-          <div className="p-4 py-8 text-center sm:p-6">
-            <p className="text-title font-normal text-muted-foreground">
-              &ldquo;Building intelligent software that holds up&rdquo;
-            </p>
-          </div>
-        </ContainerWrapper>
-      </section>
     </main>
   );
 }

@@ -94,6 +94,7 @@ const services = [
     capabilities: ["iOS", "Android", "React Native", "Flutter"],
     image: null,
     imageAlt: "",
+    visual: "mobile",
   },
   {
     number: "04",
@@ -103,6 +104,7 @@ const services = [
     capabilities: ["Windows", "macOS", "Linux", "Electron"],
     image: null,
     imageAlt: "",
+    visual: "desktop",
   },
   {
     number: "05",

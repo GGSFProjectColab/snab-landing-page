@@ -2,10 +2,9 @@
 
 import { useLayoutEffect } from "react";
 import gsap from "gsap";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+gsap.registerPlugin(ScrollTrigger);
 
 const revealGroups = [
   {
@@ -75,7 +74,6 @@ const cascadeGroups = [
 
 export function HomeMotion() {
   useLayoutEffect(() => {
-    const root = document.documentElement;
     const context = gsap.context(() => {
       const media = gsap.matchMedia();
 
@@ -86,13 +84,12 @@ export function HomeMotion() {
           reducedMotion: "(prefers-reduced-motion: reduce)"
         },
         (matchContext) => {
-          const { desktop, finePointer, reducedMotion } =
+          const { desktop, reducedMotion } =
             matchContext.conditions as {
               desktop: boolean;
               finePointer: boolean;
               reducedMotion: boolean;
             };
-          let smoother: ScrollSmoother | undefined;
 
           if (reducedMotion) {
             gsap.set(
@@ -105,18 +102,6 @@ export function HomeMotion() {
               { clearProps: "all" }
             );
             return;
-          }
-
-          if (desktop && finePointer) {
-            root.classList.add("has-scroll-smoother");
-            smoother = ScrollSmoother.create({
-              wrapper: "#smooth-wrapper",
-              content: "#smooth-content",
-              smooth: 1.05,
-              smoothTouch: false,
-              normalizeScroll: false,
-              effects: false
-            });
           }
 
           gsap
@@ -241,8 +226,7 @@ export function HomeMotion() {
           }
 
           return () => {
-            smoother?.kill();
-            root.classList.remove("has-scroll-smoother");
+            // nothing extra to tear down — Lenis handles scroll cleanup globally
           };
         }
       );
@@ -251,7 +235,6 @@ export function HomeMotion() {
     });
 
     return () => {
-      root.classList.remove("has-scroll-smoother");
       context.revert();
     };
   }, []);

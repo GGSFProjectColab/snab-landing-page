@@ -159,7 +159,7 @@ function BlogFallback() {
     <section>
       <ContainerWrapper>
         <div className="p-4 sm:p-6">
-          <div className="h-3 w-16 rounded-sm bg-muted animate-pulse mb-4" />
+          <div className="h-3 w-16 bg-muted animate-pulse mb-4" />
           <FeaturedPostSkeleton />
         </div>
       </ContainerWrapper>

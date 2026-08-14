@@ -113,63 +113,68 @@ export default async function BlogPostPage({ params }: Props) {
       <JsonLd data={structuredData} />
 
       <main className="flex-1">
-        {/* COMPACT & PROPORTIONATE HERO TITLE BANNER */}
-        <section aria-labelledby="blog-post-title" className="relative">
+        {/* COMPACT & SLEEK TITLE BLOCK WITH ALL AUTHOR & ARTICLE INFO */}
+        <section aria-labelledby="blog-post-title">
           <ContainerWrapper>
-            <div className="relative min-h-[220px] sm:min-h-[260px] overflow-hidden bg-muted/30 border-b border-dotted border-edge flex flex-col justify-between px-4 py-6 sm:px-8 sm:py-8">
-              {/* Dynamic Grain Gradient Shader Effect matching Home Hero */}
+            <div className="relative overflow-hidden bg-muted/30 border-b border-dotted border-edge p-4 sm:p-6 md:p-8">
+              {/* Dynamic Grain Gradient Shader Background */}
               <GrainGradientShader />
               
-              {/* Overlay for optimal readability */}
+              {/* Overlay for legibility */}
               <div
                 className="absolute inset-0 bg-background/55 dark:bg-black/55 backdrop-blur-[2px]"
                 aria-hidden="true"
               />
 
-              {/* Navigation Back link */}
-              <div className="relative z-10 mb-4">
-                <Link
-                  href="/blogs"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors px-3 py-1 rounded-full bg-background/60 dark:bg-black/40 border border-dotted border-edge backdrop-blur-sm"
-                >
-                  <ArrowLeft className="w-3.5 h-3.5" />
-                  Back to all blogs
-                </Link>
-              </div>
+              {/* Top Bar: Back Link + Category + Share */}
+              <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 mb-4">
+                <div className="flex items-center gap-2">
+                  <Link
+                    href="/blogs"
+                    className="inline-flex items-center gap-1.5 font-mono text-caption uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors border border-dotted border-edge px-2.5 py-1 bg-background/60 dark:bg-black/40 backdrop-blur-sm"
+                  >
+                    <ArrowLeft size={12} />
+                    All articles
+                  </Link>
 
-              {/* Title & Metadata */}
-              <div className="relative z-10 max-w-3xl">
-                <div className="flex flex-wrap items-center gap-2 mb-2.5">
-                  <span className="text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-teal/20 border border-teal/40 text-teal backdrop-blur-sm">
+                  <span className="font-mono text-caption uppercase tracking-wider text-teal border border-dotted border-teal/40 px-2.5 py-1 bg-teal/10 backdrop-blur-sm">
                     {post.category}
                   </span>
+
                   {post.featured && (
-                    <span className="flex items-center gap-1 text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-amber-500/20 border border-amber-500/40 text-amber-300 backdrop-blur-sm">
-                      <Sparkles className="w-3 h-3" />
+                    <span className="inline-flex items-center gap-1 font-mono text-caption uppercase tracking-wider text-amber-300 border border-dotted border-amber-500/40 px-2 py-1 bg-amber-500/20 backdrop-blur-sm">
+                      <Sparkles size={10} />
                       Featured
                     </span>
                   )}
                 </div>
 
+                <div className="hidden sm:block">
+                  <ShareButtons title={post.title} slug={post.slug} />
+                </div>
+              </div>
+
+              {/* Title & Excerpt */}
+              <div className="relative z-10 max-w-3xl">
                 <h1
                   id="blog-post-title"
-                  className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight leading-tight text-foreground dark:text-white drop-shadow-xs"
+                  className="text-subheading sm:text-heading font-normal tracking-tight leading-tight text-foreground dark:text-white"
                 >
                   {post.title}
                 </h1>
 
                 {post.excerpt && (
-                  <p className="mt-2.5 text-sm sm:text-base text-muted-foreground dark:text-slate-200 leading-relaxed max-w-2xl">
+                  <p className="mt-2 text-body text-muted-foreground dark:text-slate-200 leading-relaxed">
                     {post.excerpt}
                   </p>
                 )}
               </div>
 
-              {/* Author & Reading Information Bar */}
-              <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 mt-5 pt-4 border-t border-dotted border-edge/60 text-xs text-foreground/80 dark:text-slate-300">
+              {/* Author, Publication Date & Read Time in Title Block */}
+              <div className="relative z-10 mt-5 pt-3.5 border-t border-dotted border-edge/60 flex flex-wrap items-center justify-between gap-3 text-caption text-foreground/80 dark:text-slate-300">
                 <div className="flex items-center gap-2.5">
                   {post.author_image ? (
-                    <div className="relative h-7 w-7 rounded-full overflow-hidden border border-edge bg-muted">
+                    <div className="relative h-7 w-7 overflow-hidden border border-edge bg-muted shrink-0">
                       <Image
                         src={post.author_image}
                         alt={post.author_name}
@@ -178,19 +183,19 @@ export default async function BlogPostPage({ params }: Props) {
                       />
                     </div>
                   ) : (
-                    <div className="flex h-7 w-7 items-center justify-center rounded-full bg-teal/20 border border-teal/40 text-teal font-bold text-[10px] uppercase">
+                    <div className="flex h-7 w-7 items-center justify-center bg-teal/20 border border-teal/40 text-teal font-mono text-caption uppercase shrink-0">
                       {post.author_name.slice(0, 2)}
                     </div>
                   )}
 
                   <div className="flex items-center gap-2">
-                    <span className="font-semibold text-foreground dark:text-white">
+                    <span className="font-medium text-foreground dark:text-white">
                       {post.author_name}
                     </span>
                     {post.author_role && (
                       <>
                         <span className="text-muted-foreground">•</span>
-                        <span className="text-[11px] text-muted-foreground dark:text-slate-400">
+                        <span className="text-muted-foreground dark:text-slate-400">
                           {post.author_role}
                         </span>
                       </>
@@ -198,14 +203,14 @@ export default async function BlogPostPage({ params }: Props) {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 text-xs font-mono text-muted-foreground dark:text-slate-300">
+                <div className="flex items-center gap-3 font-mono text-caption text-muted-foreground dark:text-slate-300">
                   <span className="flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5" />
+                    <Calendar size={11} />
                     {formattedDate}
                   </span>
                   <span>•</span>
                   <span className="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5" />
+                    <Clock size={11} />
                     {post.read_time || "5 min read"}
                   </span>
                 </div>
@@ -214,68 +219,41 @@ export default async function BlogPostPage({ params }: Props) {
           </ContainerWrapper>
         </section>
 
-        {/* BLOG CONTENT SECTION */}
-        <section aria-label="Article content" className="py-8 sm:py-12">
+        {/* CENTERED CLEAN BLOG ARTICLE BODY */}
+        <section aria-label="Article content">
           <ContainerWrapper>
-            <div className="max-w-3xl mx-auto px-4 sm:px-6">
-              {/* Optional Cover Image Banner */}
-              {post.cover_image && !post.cover_image.includes("ascii-magic") && (
-                <div className="relative aspect-[16/9] w-full rounded-lg overflow-hidden mb-8 border border-dotted border-edge bg-muted/20">
-                  <Image
-                    src={post.cover_image}
-                    alt={post.title}
-                    fill
-                    priority
-                    className="object-cover"
-                  />
-                </div>
-              )}
-
-              {/* Main Article Content */}
-              <article
-                className="blog-rich-content prose dark:prose-invert max-w-none text-foreground leading-relaxed font-sans"
-                dangerouslySetInnerHTML={{ __html: post.content }}
-              />
-
-              {/* Social Share & Back */}
-              <div className="mt-12 pt-6 border-t border-dotted border-edge flex flex-col sm:flex-row items-center justify-between gap-4">
-                <Link
-                  href="/blogs"
-                  className="flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  Back to all articles
-                </Link>
-
-                <ShareButtons title={post.title} slug={post.slug} />
-              </div>
-
-              {/* Author Profile Footer Box */}
-              <div className="mt-8 p-5 rounded-lg border border-dotted border-edge bg-muted/10 flex items-start gap-3.5">
-                {post.author_image ? (
-                  <div className="relative h-12 w-12 rounded-full overflow-hidden border border-edge shrink-0 bg-muted">
+            <div className="py-10 sm:py-14 px-4 sm:px-6">
+              <div className="max-w-2xl sm:max-w-3xl mx-auto">
+                {/* Optional Cover Banner */}
+                {post.cover_image && !post.cover_image.includes("ascii-magic") && (
+                  <div className="relative aspect-[16/9] w-full overflow-hidden mb-8 border border-dotted border-edge bg-muted/20">
                     <Image
-                      src={post.author_image}
-                      alt={post.author_name}
+                      src={post.cover_image}
+                      alt={post.title}
                       fill
+                      priority
                       className="object-cover"
                     />
                   </div>
-                ) : (
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-teal/20 border border-teal/40 text-teal font-bold text-sm uppercase shrink-0">
-                    {post.author_name.slice(0, 2)}
-                  </div>
                 )}
 
-                <div>
-                  <h4 className="text-sm font-semibold text-foreground">{post.author_name}</h4>
-                  <p className="text-xs text-muted-foreground">
-                    {post.author_role || "Engineering Team at SNAB Innovations"}
-                  </p>
-                  <p className="text-xs text-muted-foreground leading-relaxed mt-1.5">
-                    Writing about artificial intelligence, workflow automation, modern full-stack
-                    engineering, and building production systems that scale.
-                  </p>
+                {/* Plain, clean, readable blog typography */}
+                <article
+                  className="blog-rich-content text-body text-foreground leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: post.content }}
+                />
+
+                {/* Bottom navigation & share */}
+                <div className="mt-12 pt-6 border-t border-dotted border-edge flex items-center justify-between gap-4">
+                  <Link
+                    href="/blogs"
+                    className="inline-flex items-center gap-1.5 font-mono text-caption uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <ArrowLeft size={12} />
+                    Back to all articles
+                  </Link>
+
+                  <ShareButtons title={post.title} slug={post.slug} />
                 </div>
               </div>
             </div>

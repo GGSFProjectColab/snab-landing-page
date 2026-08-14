@@ -666,7 +666,7 @@
 .blog-content-editable pre {
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px dotted var(--edge);
-  border-radius: 0.5rem;
+  border-radius: 0px;
   padding: 1rem;
   overflow-x: auto;
   font-family: var(--font-geist-mono);
@@ -679,7 +679,7 @@
 .blog-content-editable code:not(pre code) {
   background-color: rgba(255, 255, 255, 0.08);
   padding: 0.15rem 0.35rem;
-  border-radius: 0.25rem;
+  border-radius: 0px;
   font-family: var(--font-geist-mono);
   font-size: 0.85em;
 }
@@ -693,14 +693,71 @@
 }
 
 .blog-highlight {
-  border-radius: 0.25rem;
+  border-radius: 0px;
   padding: 0.1rem 0.35rem;
   font-weight: 500;
   display: inline;
 }
 
+/* Light mode highlights */
+.blog-highlight-yellow { background-color: #fef08a; color: #713f12; }
+.blog-highlight-green { background-color: #bbf7d0; color: #14532d; }
+.blog-highlight-blue { background-color: #bae6fd; color: #0c4a6e; }
+.blog-highlight-purple { background-color: #e9d5ff; color: #581c87; }
+.blog-highlight-pink { background-color: #fecdd3; color: #881337; }
+.blog-highlight-orange { background-color: #fed7aa; color: #7c2d12; }
+
+/* Dark mode highlights: refined glowing tints that look stunning on dark theme */
+.dark .blog-highlight,
+.dark .blog-highlight-yellow {
+  background-color: rgba(254, 240, 138, 0.18) !important;
+  color: #fef08a !important;
+  border-bottom: 1px solid rgba(254, 240, 138, 0.4);
+}
+
+.dark .blog-highlight-green {
+  background-color: rgba(187, 247, 208, 0.18) !important;
+  color: #86efac !important;
+  border-bottom: 1px solid rgba(134, 239, 172, 0.4);
+}
+
+.dark .blog-highlight-blue {
+  background-color: rgba(186, 230, 253, 0.18) !important;
+  color: #7dd3fc !important;
+  border-bottom: 1px solid rgba(125, 211, 252, 0.4);
+}
+
+.dark .blog-highlight-purple {
+  background-color: rgba(233, 213, 255, 0.18) !important;
+  color: #d8b4fe !important;
+  border-bottom: 1px solid rgba(216, 180, 254, 0.4);
+}
+
+.dark .blog-highlight-pink {
+  background-color: rgba(254, 205, 211, 0.18) !important;
+  color: #fda4af !important;
+  border-bottom: 1px solid rgba(253, 164, 175, 0.4);
+}
+
+.dark .blog-highlight-orange {
+  background-color: rgba(254, 215, 170, 0.18) !important;
+  color: #fdba74 !important;
+  border-bottom: 1px solid rgba(253, 186, 116, 0.4);
+}
+
+/* Strip unwanted pasted backgrounds in dark mode from Word/websites */
+.dark .blog-rich-content span:not([class*="blog-highlight"]):not([class*="callout"]),
+.dark .blog-rich-content p:not([class*="callout"]),
+.dark .blog-rich-content div:not([class*="callout"]):not([class*="overflow"]),
+.dark .blog-content-editable span:not([class*="blog-highlight"]):not([class*="callout"]),
+.dark .blog-content-editable p:not([class*="callout"]),
+.dark .blog-content-editable div:not([class*="callout"]) {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
 .callout {
-  border-radius: 0.5rem;
+  border-radius: 0px;
   padding: 1rem 1.25rem;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
@@ -709,15 +766,15 @@
 }
 
 .callout-note {
-  border-left: 4px solid #38bdf8;
+  border-left: 3px solid #38bdf8;
 }
 
 .callout-tip {
-  border-left: 4px solid var(--teal);
+  border-left: 3px solid var(--teal);
 }
 
 .callout-warning {
-  border-left: 4px solid #fbbf24;
+  border-left: 3px solid #fbbf24;
 }
 
 .blog-content-editable:empty:before {

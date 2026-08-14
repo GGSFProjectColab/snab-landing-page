@@ -44,7 +44,7 @@ export function AdminBlogs() {
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");
 
-  // Editor Modal / Drawer State
+  // Editor Modal State
   const [editorOpen, setEditorOpen] = useState(false);
   const [editingBlogId, setEditingBlogId] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
@@ -255,7 +255,7 @@ export function AdminBlogs() {
     setBlogs((prev) =>
       prev.map((b) => {
         if (b.id === blog.id) return { ...b, featured: nextFeatured };
-        if (nextFeatured) return { ...b, featured: false }; // single featured post
+        if (nextFeatured) return { ...b, featured: false };
         return b;
       })
     );
@@ -277,7 +277,7 @@ export function AdminBlogs() {
       }
     } catch (err: any) {
       alert("Error: " + err.message);
-      fetchBlogs(); // rollback
+      fetchBlogs();
     }
   };
 
@@ -336,13 +336,13 @@ export function AdminBlogs() {
       {/* Header Section */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-dotted border-edge pb-6">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-2">
+          <h1 className="text-xl font-semibold tracking-tight text-foreground flex items-center gap-2">
             Blog Management
-            <span className="text-xs font-mono px-2 py-0.5 rounded-full bg-muted border border-edge text-muted-foreground">
+            <span className="text-xs font-mono px-2 py-0.5 bg-muted border border-edge text-muted-foreground">
               {totalCount} Total
             </span>
           </h1>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <p className="mt-1 text-xs text-muted-foreground">
             Publish, edit, and feature articles with real-time updates on your website.
           </p>
         </div>
@@ -351,7 +351,7 @@ export function AdminBlogs() {
           <button
             onClick={fetchBlogs}
             disabled={loading}
-            className="p-2 border border-dotted border-edge rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+            className="p-2 border border-dotted border-edge hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
             title="Refresh Blogs"
           >
             <RefreshCw className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
@@ -359,7 +359,7 @@ export function AdminBlogs() {
 
           <button
             onClick={handleOpenCreate}
-            className="flex items-center gap-2 px-4 py-2 bg-foreground text-background font-semibold text-sm rounded hover:opacity-90 transition-opacity shadow-sm"
+            className="flex items-center gap-2 px-4 py-2 bg-foreground text-background font-medium text-xs hover:opacity-90 transition-opacity"
           >
             <Plus className="w-4 h-4" />
             Create Blog
@@ -369,20 +369,20 @@ export function AdminBlogs() {
 
       {/* Summary Stat Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="border border-dotted border-edge p-4 rounded-lg bg-muted/10">
-          <span className="text-xs text-muted-foreground uppercase font-medium">Published</span>
+        <div className="border border-dotted border-edge p-4 bg-muted/10">
+          <span className="text-[11px] font-mono text-muted-foreground uppercase">Published</span>
           <div className="mt-1 text-2xl font-bold text-foreground">{publishedCount}</div>
         </div>
-        <div className="border border-dotted border-edge p-4 rounded-lg bg-muted/10">
-          <span className="text-xs text-muted-foreground uppercase font-medium">Drafts</span>
+        <div className="border border-dotted border-edge p-4 bg-muted/10">
+          <span className="text-[11px] font-mono text-muted-foreground uppercase">Drafts</span>
           <div className="mt-1 text-2xl font-bold text-amber-500">{draftCount}</div>
         </div>
-        <div className="border border-dotted border-edge p-4 rounded-lg bg-muted/10">
-          <span className="text-xs text-muted-foreground uppercase font-medium">Featured Hero</span>
+        <div className="border border-dotted border-edge p-4 bg-muted/10">
+          <span className="text-[11px] font-mono text-muted-foreground uppercase">Featured Hero</span>
           <div className="mt-1 text-2xl font-bold text-teal">{featuredCount}</div>
         </div>
-        <div className="border border-dotted border-edge p-4 rounded-lg bg-muted/10">
-          <span className="text-xs text-muted-foreground uppercase font-medium">Categories</span>
+        <div className="border border-dotted border-edge p-4 bg-muted/10">
+          <span className="text-[11px] font-mono text-muted-foreground uppercase">Categories</span>
           <div className="mt-1 text-2xl font-bold text-foreground">
             {new Set(blogs.map((b) => b.category)).size}
           </div>
@@ -398,29 +398,27 @@ export function AdminBlogs() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search blogs by title, author, or excerpt..."
-            className="w-full pl-9 pr-4 py-2 bg-background border border-dotted border-edge rounded text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-foreground"
+            className="w-full pl-9 pr-4 py-2 bg-background border border-dotted border-edge text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-foreground"
           />
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          {/* Status Filter */}
           <select
             aria-label="Filter by blog status"
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="h-9 bg-background border border-dotted border-edge rounded px-3 text-xs text-foreground focus:outline-none"
+            className="h-9 bg-background border border-dotted border-edge px-3 text-xs text-foreground focus:outline-none"
           >
             <option value="all">All Status</option>
             <option value="published">Published</option>
             <option value="draft">Drafts</option>
           </select>
 
-          {/* Category Filter */}
           <select
             aria-label="Filter by blog category"
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className="h-9 bg-background border border-dotted border-edge rounded px-3 text-xs text-foreground focus:outline-none"
+            className="h-9 bg-background border border-dotted border-edge px-3 text-xs text-foreground focus:outline-none"
           >
             <option value="all">All Categories</option>
             {Array.from(new Set(blogs.map((b) => b.category))).map((cat) => (
@@ -436,23 +434,23 @@ export function AdminBlogs() {
       {loading ? (
         <div className="py-20 text-center text-muted-foreground flex flex-col items-center justify-center gap-3">
           <RefreshCw className="w-6 h-6 animate-spin text-foreground" />
-          <span>Loading blogs from database...</span>
+          <span className="text-xs">Loading blogs from database...</span>
         </div>
       ) : error ? (
-        <div className="p-6 border border-dotted border-red-500/30 rounded-lg bg-red-500/10 text-red-400 text-center">
+        <div className="p-6 border border-dotted border-red-500/30 bg-red-500/10 text-red-400 text-center">
           <AlertCircle className="w-6 h-6 mx-auto mb-2" />
-          <p className="font-semibold">{error}</p>
+          <p className="font-semibold text-xs">{error}</p>
           <button
             onClick={fetchBlogs}
-            className="mt-3 px-3 py-1.5 bg-foreground text-background rounded text-xs font-semibold"
+            className="mt-3 px-3 py-1.5 bg-foreground text-background text-xs font-semibold"
           >
             Try Again
           </button>
         </div>
       ) : filteredBlogs.length === 0 ? (
-        <div className="py-16 text-center border border-dotted border-edge rounded-lg bg-muted/5">
+        <div className="py-16 text-center border border-dotted border-edge bg-muted/5">
           <FileText className="w-10 h-10 mx-auto text-muted-foreground/50 mb-3" />
-          <p className="text-foreground font-semibold">No blog posts found</p>
+          <p className="text-foreground font-semibold text-sm">No blog posts found</p>
           <p className="text-xs text-muted-foreground mt-1">
             {search || categoryFilter !== "all" || statusFilter !== "all"
               ? "Try adjusting your search or filters."
@@ -460,14 +458,14 @@ export function AdminBlogs() {
           </p>
           <button
             onClick={handleOpenCreate}
-            className="mt-4 inline-flex items-center gap-1.5 px-3 py-1.5 bg-foreground text-background text-xs font-semibold rounded hover:opacity-90"
+            className="mt-4 inline-flex items-center gap-1.5 px-3 py-1.5 bg-foreground text-background text-xs font-semibold hover:opacity-90"
           >
             <Plus className="w-3.5 h-3.5" />
             Create First Blog
           </button>
         </div>
       ) : (
-        <div className="border border-dotted border-edge rounded-lg overflow-hidden divide-y divide-dotted divide-edge">
+        <div className="border border-dotted border-edge overflow-hidden divide-y divide-dotted divide-edge">
           {filteredBlogs.map((blog) => (
             <div
               key={blog.id}
@@ -475,7 +473,7 @@ export function AdminBlogs() {
             >
               {/* Left Column: Image thumbnail + Details */}
               <div className="flex items-start gap-4 flex-1">
-                <div className="relative h-16 w-24 sm:h-20 sm:w-28 shrink-0 overflow-hidden rounded border border-dotted border-edge bg-muted/40">
+                <div className="relative h-16 w-24 sm:h-20 sm:w-28 shrink-0 overflow-hidden border border-dotted border-edge bg-muted/40">
                   <Image
                     src={blog.cover_image || "/ascii-magic-14.png"}
                     alt={blog.title}
@@ -486,17 +484,17 @@ export function AdminBlogs() {
 
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-wrap items-center gap-2 mb-1">
-                    <span className="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded bg-muted border border-edge text-muted-foreground">
+                    <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 bg-muted border border-edge text-muted-foreground">
                       {blog.category}
                     </span>
                     {blog.featured && (
-                      <span className="flex items-center gap-1 text-[10px] font-semibold uppercase px-2 py-0.5 rounded bg-teal/10 border border-teal/30 text-teal">
+                      <span className="flex items-center gap-1 text-[10px] font-mono uppercase px-2 py-0.5 bg-teal/10 border border-teal/30 text-teal">
                         <Sparkles className="w-3 h-3" />
                         Featured
                       </span>
                     )}
                     <span
-                      className={`text-[10px] font-semibold uppercase px-2 py-0.5 rounded border ${
+                      className={`text-[10px] font-mono uppercase px-2 py-0.5 border ${
                         blog.status === "published"
                           ? "bg-green-500/10 text-green-400 border-green-500/30"
                           : "bg-amber-500/10 text-amber-400 border-amber-500/30"
@@ -506,7 +504,7 @@ export function AdminBlogs() {
                     </span>
                   </div>
 
-                  <h3 className="text-base font-semibold text-foreground truncate max-w-xl group-hover:text-teal transition-colors">
+                  <h3 className="text-sm font-semibold text-foreground truncate max-w-xl group-hover:text-teal transition-colors">
                     {blog.title}
                   </h3>
 
@@ -537,11 +535,10 @@ export function AdminBlogs() {
 
               {/* Right Column: Actions */}
               <div className="flex items-center gap-2 self-end md:self-center shrink-0">
-                {/* Featured Toggle Button */}
                 <button
                   type="button"
                   onClick={(e) => handleToggleFeatured(blog, e)}
-                  className={`p-2 rounded border transition-colors ${
+                  className={`p-2 border transition-colors ${
                     blog.featured
                       ? "bg-teal/10 border-teal text-teal"
                       : "border-dotted border-edge text-muted-foreground hover:text-foreground hover:bg-muted"
@@ -551,31 +548,28 @@ export function AdminBlogs() {
                   <Star className={`w-4 h-4 ${blog.featured ? "fill-teal" : ""}`} />
                 </button>
 
-                {/* View Live */}
                 <Link
                   href={`/blogs/${blog.slug}`}
                   target="_blank"
-                  className="p-2 border border-dotted border-edge rounded hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                  className="p-2 border border-dotted border-edge hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
                   title="View Live Blog"
                 >
                   <ExternalLink className="w-4 h-4" />
                 </Link>
 
-                {/* Edit */}
                 <button
                   type="button"
                   onClick={() => handleOpenEdit(blog)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 border border-dotted border-edge rounded hover:bg-muted text-foreground text-xs font-semibold transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-1.5 border border-dotted border-edge hover:bg-muted text-foreground text-xs font-semibold transition-colors"
                 >
                   <Edit2 className="w-3.5 h-3.5" />
                   Edit
                 </button>
 
-                {/* Delete */}
                 <button
                   type="button"
                   onClick={() => setDeletingBlog(blog)}
-                  className="p-2 border border-dotted border-red-500/30 rounded hover:bg-red-500/10 text-red-400 transition-colors"
+                  className="p-2 border border-dotted border-red-500/30 hover:bg-red-500/10 text-red-400 transition-colors"
                   title="Delete Blog"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -586,14 +580,14 @@ export function AdminBlogs() {
         </div>
       )}
 
-      {/* CREATE / EDIT BLOG MODAL / FULL DRAWER */}
+      {/* CREATE / EDIT BLOG MODAL */}
       {editorOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-2 sm:p-4 overflow-y-auto">
-          <div className="w-full max-w-5xl bg-background border border-dotted border-edge rounded-xl shadow-2xl flex flex-col my-auto max-h-[92vh] overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-xs p-2 sm:p-4 overflow-y-auto">
+          <div className="w-full max-w-5xl bg-background border border-dotted border-edge shadow-2xl flex flex-col my-auto max-h-[92vh] overflow-hidden">
             {/* Modal Header */}
             <div className="flex items-center justify-between border-b border-dotted border-edge px-6 py-4 bg-muted/20">
               <div>
-                <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
+                <h2 className="text-base font-bold text-foreground flex items-center gap-2">
                   {editingBlogId ? "Edit Blog Post" : "Create New Blog Post"}
                 </h2>
                 <p className="text-xs text-muted-foreground mt-0.5">
@@ -603,7 +597,7 @@ export function AdminBlogs() {
               <button
                 type="button"
                 onClick={() => setEditorOpen(false)}
-                className="p-1.5 rounded-lg border border-dotted border-edge hover:bg-muted text-muted-foreground hover:text-foreground"
+                className="p-1.5 border border-dotted border-edge hover:bg-muted text-muted-foreground hover:text-foreground"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -622,8 +616,8 @@ export function AdminBlogs() {
                     required
                     value={title}
                     onChange={(e) => handleTitleChange(e.target.value)}
-                    placeholder="e.g. AI Product Development: From Demo to Production"
-                    className="w-full bg-muted/20 border border-dotted border-edge rounded px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-foreground"
+                    placeholder="e.g. High-Speed AI Inference Architecture"
+                    className="w-full bg-muted/20 border border-dotted border-edge px-3 py-2 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-foreground"
                   />
                 </div>
 
@@ -635,7 +629,7 @@ export function AdminBlogs() {
                     <button
                       type="button"
                       onClick={() => setIsSlugManual(!isSlugManual)}
-                      className="text-[10px] text-teal hover:underline"
+                      className="text-[10px] text-teal hover:underline font-mono"
                     >
                       {isSlugManual ? "Auto-generate" : "Custom Slug"}
                     </button>
@@ -648,8 +642,8 @@ export function AdminBlogs() {
                       setIsSlugManual(true);
                       setSlug(slugify(e.target.value));
                     }}
-                    placeholder="e.g. ai-product-development"
-                    className="w-full bg-muted/20 border border-dotted border-edge rounded px-3 py-2 text-sm font-mono text-foreground focus:outline-none focus:ring-1 focus:ring-foreground"
+                    placeholder="e.g. high-speed-ai-inference"
+                    className="w-full bg-muted/20 border border-dotted border-edge px-3 py-2 text-xs font-mono text-foreground focus:outline-none focus:ring-1 focus:ring-foreground"
                   />
                 </div>
               </div>
@@ -664,7 +658,7 @@ export function AdminBlogs() {
                     aria-label="Blog category selection"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full bg-muted/20 border border-dotted border-edge rounded px-3 py-2 text-xs text-foreground focus:outline-none"
+                    className="w-full bg-muted/20 border border-dotted border-edge px-3 py-2 text-xs text-foreground focus:outline-none"
                   >
                     {CATEGORIES.map((cat) => (
                       <option key={cat} value={cat}>
@@ -679,7 +673,7 @@ export function AdminBlogs() {
                       value={customCategory}
                       onChange={(e) => setCustomCategory(e.target.value)}
                       placeholder="Enter custom category"
-                      className="mt-2 w-full bg-muted/20 border border-dotted border-edge rounded px-2.5 py-1 text-xs text-foreground"
+                      className="mt-2 w-full bg-muted/20 border border-dotted border-edge px-2.5 py-1 text-xs text-foreground"
                     />
                   )}
                 </div>
@@ -692,7 +686,7 @@ export function AdminBlogs() {
                     aria-label="Blog publication status"
                     value={status}
                     onChange={(e) => setStatus(e.target.value as any)}
-                    className="w-full bg-muted/20 border border-dotted border-edge rounded px-3 py-2 text-xs text-foreground focus:outline-none"
+                    className="w-full bg-muted/20 border border-dotted border-edge px-3 py-2 text-xs text-foreground focus:outline-none"
                   >
                     <option value="published">Published (Live on Website)</option>
                     <option value="draft">Draft (Private)</option>
@@ -708,17 +702,17 @@ export function AdminBlogs() {
                     value={readTime}
                     onChange={(e) => setReadTime(e.target.value)}
                     placeholder="e.g. 5 min read"
-                    className="w-full bg-muted/20 border border-dotted border-edge rounded px-3 py-2 text-xs text-foreground focus:outline-none"
+                    className="w-full bg-muted/20 border border-dotted border-edge px-3 py-2 text-xs text-foreground focus:outline-none"
                   />
                 </div>
 
                 <div className="flex flex-col justify-end">
-                  <label className="flex items-center gap-2 cursor-pointer p-2 border border-dotted border-edge rounded bg-muted/10 hover:bg-muted/20 transition-colors">
+                  <label className="flex items-center gap-2 cursor-pointer p-2 border border-dotted border-edge bg-muted/10 hover:bg-muted/20 transition-colors">
                     <input
                       type="checkbox"
                       checked={featured}
                       onChange={(e) => setFeatured(e.target.checked)}
-                      className="rounded border-edge text-teal focus:ring-teal h-4 w-4"
+                      className="border-edge text-teal focus:ring-teal h-4 w-4"
                     />
                     <span className="text-xs font-semibold text-foreground flex items-center gap-1">
                       <Sparkles className="w-3.5 h-3.5 text-teal" />
@@ -739,15 +733,15 @@ export function AdminBlogs() {
                   value={excerpt}
                   onChange={(e) => setExcerpt(e.target.value)}
                   placeholder="A short, compelling summary of the article displayed on cards and search results..."
-                  className="w-full bg-muted/20 border border-dotted border-edge rounded p-3 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-foreground"
+                  className="w-full bg-muted/20 border border-dotted border-edge p-3 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-foreground"
                 />
               </div>
 
               {/* Author & Cover Image Info */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 border border-dotted border-edge rounded-lg bg-muted/5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 border border-dotted border-edge bg-muted/5">
                 {/* Author Info */}
                 <div className="space-y-3">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+                  <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
                     <User className="w-3.5 h-3.5" /> Author Information
                   </h4>
                   <div>
@@ -760,7 +754,7 @@ export function AdminBlogs() {
                       value={authorName}
                       onChange={(e) => setAuthorName(e.target.value)}
                       placeholder="e.g. Nimay Kulkarni"
-                      className="w-full bg-muted/20 border border-dotted border-edge rounded px-3 py-1.5 text-xs text-foreground"
+                      className="w-full bg-muted/20 border border-dotted border-edge px-3 py-1.5 text-xs text-foreground"
                     />
                   </div>
                   <div>
@@ -772,7 +766,7 @@ export function AdminBlogs() {
                       value={authorRole}
                       onChange={(e) => setAuthorRole(e.target.value)}
                       placeholder="e.g. Founder & AI Engineer"
-                      className="w-full bg-muted/20 border border-dotted border-edge rounded px-3 py-1.5 text-xs text-foreground"
+                      className="w-full bg-muted/20 border border-dotted border-edge px-3 py-1.5 text-xs text-foreground"
                     />
                   </div>
                   <div>
@@ -791,7 +785,7 @@ export function AdminBlogs() {
                         type="button"
                         onClick={() => authorInputRef.current?.click()}
                         disabled={isUploadingAuthor}
-                        className="px-3 py-1.5 border border-dotted border-edge rounded text-xs text-muted-foreground hover:text-foreground flex items-center gap-1.5"
+                        className="px-3 py-1.5 border border-dotted border-edge text-xs text-muted-foreground hover:text-foreground flex items-center gap-1.5"
                       >
                         <Upload className="w-3.5 h-3.5" />
                         {isUploadingAuthor ? "Uploading..." : "Upload Avatar"}
@@ -801,7 +795,7 @@ export function AdminBlogs() {
                         value={authorImage}
                         onChange={(e) => setAuthorImage(e.target.value)}
                         placeholder="or paste image URL"
-                        className="flex-1 bg-muted/20 border border-dotted border-edge rounded px-3 py-1.5 text-xs text-foreground"
+                        className="flex-1 bg-muted/20 border border-dotted border-edge px-3 py-1.5 text-xs text-foreground"
                       />
                     </div>
                   </div>
@@ -809,7 +803,7 @@ export function AdminBlogs() {
 
                 {/* Cover Image Info */}
                 <div className="space-y-3">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+                  <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
                     <FileText className="w-3.5 h-3.5" /> Cover / Banner Image
                   </h4>
                   <div>
@@ -828,7 +822,7 @@ export function AdminBlogs() {
                         type="button"
                         onClick={() => coverInputRef.current?.click()}
                         disabled={isUploadingCover}
-                        className="px-3 py-1.5 border border-dotted border-edge rounded text-xs text-muted-foreground hover:text-foreground flex items-center gap-1.5"
+                        className="px-3 py-1.5 border border-dotted border-edge text-xs text-muted-foreground hover:text-foreground flex items-center gap-1.5"
                       >
                         <Upload className="w-3.5 h-3.5" />
                         {isUploadingCover ? "Uploading..." : "Upload Cover"}
@@ -839,12 +833,12 @@ export function AdminBlogs() {
                         value={coverImage}
                         onChange={(e) => setCoverImage(e.target.value)}
                         placeholder="/ascii-magic-14.png or https://..."
-                        className="flex-1 bg-muted/20 border border-dotted border-edge rounded px-3 py-1.5 text-xs text-foreground"
+                        className="flex-1 bg-muted/20 border border-dotted border-edge px-3 py-1.5 text-xs text-foreground"
                       />
                     </div>
                   </div>
                   {coverImage && (
-                    <div className="relative h-24 w-full rounded overflow-hidden border border-dotted border-edge bg-muted/20">
+                    <div className="relative h-24 w-full overflow-hidden border border-dotted border-edge bg-muted/20">
                       <Image
                         src={coverImage}
                         alt="Cover preview"
@@ -873,14 +867,14 @@ export function AdminBlogs() {
                 <button
                   type="button"
                   onClick={() => setEditorOpen(false)}
-                  className="px-4 py-2 border border-dotted border-edge rounded text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-muted"
+                  className="px-4 py-2 border border-dotted border-edge text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-muted"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSaving}
-                  className="px-6 py-2 bg-foreground text-background rounded text-xs font-bold hover:opacity-90 disabled:opacity-50 flex items-center gap-2 shadow"
+                  className="px-6 py-2 bg-foreground text-background text-xs font-bold hover:opacity-90 disabled:opacity-50 flex items-center gap-2"
                 >
                   {isSaving ? (
                     <>
@@ -901,26 +895,26 @@ export function AdminBlogs() {
 
       {/* DELETE CONFIRMATION DIALOG */}
       {deletingBlog && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4">
-          <div className="w-full max-w-md bg-background border border-dotted border-red-500/40 rounded-xl p-6 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-xs p-4">
+          <div className="w-full max-w-md bg-background border border-dotted border-red-500/40 p-6">
             <div className="flex items-center gap-3 text-red-400 mb-3">
-              <div className="p-2 rounded-full bg-red-500/10 border border-red-500/30">
+              <div className="p-2 bg-red-500/10 border border-red-500/30">
                 <Trash2 className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-bold text-foreground">Delete Blog Post</h3>
+              <h3 className="text-sm font-bold text-foreground">Delete Blog Post</h3>
             </div>
 
             <p className="text-xs text-muted-foreground leading-relaxed mb-4">
               Are you sure you want to permanently delete{" "}
               <strong className="text-foreground">&ldquo;{deletingBlog.title}&rdquo;</strong>? This
-              action cannot be undone and will immediately remove the blog from your live website.
+              action will immediately remove the blog from your live website.
             </p>
 
             <div className="flex items-center justify-end gap-2">
               <button
                 type="button"
                 onClick={() => setDeletingBlog(null)}
-                className="px-3 py-1.5 border border-dotted border-edge rounded text-xs text-muted-foreground hover:bg-muted"
+                className="px-3 py-1.5 border border-dotted border-edge text-xs text-muted-foreground hover:bg-muted"
               >
                 Cancel
               </button>
@@ -928,7 +922,7 @@ export function AdminBlogs() {
                 type="button"
                 onClick={handleDeleteBlog}
                 disabled={isDeleting}
-                className="px-4 py-1.5 bg-red-500 text-white rounded text-xs font-semibold hover:bg-red-600 disabled:opacity-50 flex items-center gap-1.5"
+                className="px-4 py-1.5 bg-red-500 text-white text-xs font-semibold hover:bg-red-600 disabled:opacity-50 flex items-center gap-1.5"
               >
                 {isDeleting ? "Deleting..." : "Confirm Delete"}
               </button>

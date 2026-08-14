@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { MoveRight } from "lucide-react";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import SpecularButton from "@/components/ui/SpecularButton";
 
@@ -13,11 +13,11 @@ function Hero() {
   const [titleNumber, setTitleNumber] = useState(0);
   const titles = useMemo(
     () => [
-      "agentic AI workflows",
-      "AI automations",
       "web platforms",
       "mobile apps",
-      "AI agents",
+      "AI products",
+      "custom systems",
+      "automation tools",
     ],
     []
   );
@@ -36,15 +36,10 @@ function Hero() {
   return (
     <div className="w-full">
       <div className="container mx-auto">
-        <div className="flex gap-8 py-20 lg:py-28 items-center justify-center flex-col">
-          <div>
-            <Button variant="secondary" size="sm" className="gap-4 bg-white/10 text-white border-white/20 hover:bg-white/20">
-              AI Product Engineering Studio
-            </Button>
-          </div>
+        <div className="flex gap-6 py-20 lg:py-28 items-center justify-center flex-col">
           <div className="flex gap-4 flex-col">
             <h1 id="hero-title" className="text-display max-w-2xl tracking-tighter text-center font-normal text-white drop-shadow-lg">
-              <span className="text-white">We build AI for production.</span>
+              <span className="text-white">We build software that works.</span>
               <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-3 md:pt-0.5">
                 &nbsp;
                 {titles.map((title, index) => (
@@ -73,13 +68,11 @@ function Hero() {
 
             <p className="text-body leading-relaxed tracking-tight text-white max-w-2xl text-center drop-shadow-md">
               <span className="md:hidden">
-                AI-powered solutions: workflows, agents, chatbots, web &amp; mobile apps.
+                Software engineering for AI, web, and mobile.
               </span>
               <span className="hidden md:inline">
-                We build agentic AI workflows, AI automations, AI agents,
-                intelligent chatbots, RAG pipelines, LLM integrations, data
-                pipelines, web platforms, mobile apps, and custom software from
-                Nashik, India.
+                SNAB Innovations is a software engineering studio. We build AI products,
+                web platforms, mobile apps, and custom systems from Nashik, India.
               </span>
             </p>
           </div>

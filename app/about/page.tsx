@@ -7,7 +7,7 @@ import { HeaderTitle } from "@/components/profile/header-title";
 import { Footer } from "../Footer";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "About SNAB Innovations — AI Product Engineering Studio",
+  title: "About SNAB Innovations — Software Engineering Studio",
   description:
     "SNAB Innovations is an AI product and software engineering studio building dependable systems from Nashik, India.",
   path: "/about",

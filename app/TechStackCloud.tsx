@@ -41,21 +41,19 @@ const iconComponents = [
 
 export function TechStackCloud() {
   const { resolvedTheme } = useTheme();
-  const [foreground, setForeground] = useState("#171717");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    const fg = getComputedStyle(document.documentElement)
-      .getPropertyValue("--foreground")
-      .trim();
-    if (fg) {
-      setForeground(fg);
-    }
-  }, [resolvedTheme]);
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted ? resolvedTheme !== "light" : true;
+  const foreground = isDark ? "#ffffff" : "#171717";
 
   const icons = useMemo(
     () =>
       iconComponents.map((Icon, i) => (
-        <Icon key={i} size={64} strokeWidth={1.5} color={foreground} />
+        <Icon key={i} size={64} strokeWidth={1.75} color={foreground} />
       )),
     [foreground],
   );
@@ -63,7 +61,11 @@ export function TechStackCloud() {
   return (
     <div className="flex h-full w-full items-center justify-center">
       <div className="scale-[0.55] sm:scale-75">
-        <IconCloud icons={icons} showControl={false} />
+        <IconCloud
+          key={isDark ? "dark" : "light"}
+          icons={icons}
+          showControl={false}
+        />
       </div>
     </div>
   );

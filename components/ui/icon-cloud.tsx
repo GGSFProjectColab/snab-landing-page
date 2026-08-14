@@ -103,7 +103,7 @@ export function IconCloud({
           offCtx.scale(0.8, 0.8)
           const svgString = renderToString(item as React.ReactElement)
           const img = new Image()
-          img.src = "data:image/svg+xml;base64," + btoa(svgString)
+          img.src = `data:image/svg+xml;utf8,${encodeURIComponent(svgString)}`
           img.onload = () => {
             offCtx.clearRect(0, 0, offscreen.width, offscreen.height)
             offCtx.drawImage(img, 0, 0)

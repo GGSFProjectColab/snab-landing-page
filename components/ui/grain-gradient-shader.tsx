@@ -41,7 +41,7 @@ export function GrainGradientShader() {
           width="100%"
           height="100%"
           colors={["#ffb199", "#d4b8ff", "#ffe3a0", "#9fd8e8"]}
-          colorBack="#f8f5f0"
+          colorBack="#F7F7F4"
           softness={0.85}
           intensity={0.4}
           noise={0.15}

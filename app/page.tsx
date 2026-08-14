@@ -601,6 +601,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
+            <div className="border-b border-dotted border-edge" aria-hidden="true" />
           </ContainerWrapper>
         </section>
 

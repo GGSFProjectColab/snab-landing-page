@@ -6,13 +6,13 @@ import { Dithering } from "@paper-design/shaders-react";
 
 function getComputedHexColor(element: HTMLElement | null, isDark: boolean): string {
   if (typeof window === "undefined" || !element) {
-    return isDark ? "#000000" : "#f7f5f0";
+    return isDark ? "#000000" : "#F7F7F4";
   }
 
   try {
     // Create a temporary canvas context to resolve any CSS color (including oklch, var, etc.) to exact RGB
     const ctx = document.createElement("canvas").getContext("2d");
-    if (!ctx) return isDark ? "#000000" : "#f7f5f0";
+    if (!ctx) return isDark ? "#000000" : "#F7F7F4";
 
     // Read computed background of body or parent
     const bodyBg = window.getComputedStyle(document.body).backgroundColor;
@@ -33,7 +33,7 @@ function getComputedHexColor(element: HTMLElement | null, isDark: boolean): stri
     // fallback
   }
 
-  return isDark ? "#000000" : "#f7f5f0";
+  return isDark ? "#000000" : "#F7F7F4";
 }
 
 export function CloudShader() {

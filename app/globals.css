@@ -62,8 +62,8 @@
 }
 
 .light {
-  /* Warm off-white (Cloud Dancer / paper) palette - never pure white */
-  --background: oklch(0.975 0.005 80);
+  /* Off-white #F7F7F4 background palette */
+  --background: #F7F7F4;
   --foreground: oklch(0.22 0.012 265);
   --card: oklch(0.985 0.004 80);
   --card-foreground: oklch(0.22 0.012 265);
@@ -98,9 +98,9 @@
   --edge: oklch(0.8 0.012 80);
   --teal: oklch(0.48 0.11 180);
   --teal-soft: oklch(0.92 0.03 180);
-  --footer-shader-back: #f3efe8;
+  --footer-shader-back: #F7F7F4;
   --footer-shader-front: #ddd6c9;
-  --header-dither-base: #f1ede6;
+  --header-dither-base: #F7F7F4;
   --header-dither-wave: #7a756c;
   --github-none: #ebedf0;
   --github-l1: #9be9a8;
@@ -111,7 +111,7 @@
   --skeleton-bg: #e9e4db;
   --skeleton-border: rgba(0, 0, 0, 0.06);
   --skeleton-shimmer: rgba(255, 255, 255, 0.6);
-  --skeleton-page-bg: #f8f5f0;
+  --skeleton-page-bg: #F7F7F4;
   --skeleton-color: #6f6a62;
 }
 

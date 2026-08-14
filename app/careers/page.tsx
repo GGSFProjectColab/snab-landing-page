@@ -94,11 +94,11 @@ export default function CareersPage() {
           <div className="relative py-16 md:py-24 overflow-hidden">
             {/* Background Image */}
             <div
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70"
               style={{ backgroundImage: "url('/careers-hero-bg.png')" }}
               aria-hidden="true"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/70 to-background" aria-hidden="true" />
+            <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/45 to-background" aria-hidden="true" />
 
             <div className="relative z-10 text-center">
               {/* Breadcrumb */}
@@ -117,34 +117,6 @@ export default function CareersPage() {
               >
                 Career
               </h1>
-            </div>
-          </div>
-        </ContainerWrapper>
-      </section>
-
-      
-
-      {/* Meet the Team */}
-      <section aria-labelledby="team-title">
-        <ContainerWrapper>
-          <div className="h-10 flex items-center border-b border-dotted border-edge px-2">
-            <h2 id="team-title" className="text-title font-normal">About the team</h2>
-          </div>
-          <div className="p-4 pb-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-              {/* Left — Heading */}
-              <div>
-                <h2 className="text-subheading font-normal tracking-tight text-foreground leading-[1.2]">
-                  Meet the team behind our success
-                </h2>
-              </div>
-
-              {/* Right — Description */}
-              <div className="lg:pt-1">
-                <p className="text-muted-foreground text-body leading-relaxed">
-                  We value creativity, collaboration, and excellence. Join us in building AI-powered products from Nashik, India.
-                </p>
-              </div>
             </div>
           </div>
         </ContainerWrapper>

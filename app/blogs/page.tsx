@@ -16,33 +16,7 @@ export const metadata: Metadata = createPageMetadata({
   path: "/blogs",
 });
 
-const categories = [
-  "All",
-  "AI Workflows",
-  "Case Studies",
-  "Engineering",
-  "Product",
-];
 
-function CategoryFilters() {
-  return (
-    <div className="flex flex-wrap gap-2">
-      {categories.map((category, index) => (
-        <button
-          key={category}
-          type="button"
-          className={`px-3 py-1 text-caption transition-colors ${
-            index === 0
-              ? "border border-foreground bg-foreground text-background"
-              : "border border-dotted border-edge text-muted-foreground hover:border-foreground/40 hover:text-foreground"
-          }`}
-        >
-          {category}
-        </button>
-      ))}
-    </div>
-  );
-}
 
 function FeaturedCard({ post }: { post: BlogPost }) {
   return (
@@ -192,22 +166,6 @@ function BlogGridFallback() {
 export default function BlogsPage() {
   return (
     <main className="flex-1">
-      <section aria-labelledby="blogs-title">
-        <ContainerWrapper>
-          <HeaderTitle title="Blogs" id="blogs-title" />
-          <div className="p-4 sm:p-6">
-            <p className="max-w-2xl text-body leading-relaxed text-muted-foreground">
-              Practical guides and insights from SNAB Innovations on AI product
-              development, workflow automation, and building software that holds
-              up in production.
-            </p>
-            <div className="mt-6">
-              <CategoryFilters />
-            </div>
-          </div>
-        </ContainerWrapper>
-      </section>
-
       <Suspense fallback={<FeaturedPostFallback />}>
         <FeaturedPost />
       </Suspense>

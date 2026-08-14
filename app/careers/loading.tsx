@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { ContainerWrapper } from "@/components/site/container";
-import { SectionSeparator } from "@/components/site/separator";
+
 import { RolesSkeleton } from "./RolesSkeleton";
 
 export default function CareersLoading() {
@@ -22,7 +22,7 @@ export default function CareersLoading() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* Meet the Team Skeleton */}
       <section>
@@ -43,7 +43,7 @@ export default function CareersLoading() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* Open Roles Skeleton */}
       <section>
@@ -66,7 +66,7 @@ export default function CareersLoading() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       <span className="sr-only">Loading careers content…</span>
     </main>

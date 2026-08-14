@@ -19,7 +19,7 @@ export function HeaderTitle({ title, id, className }: HeaderTitleProps) {
     >
       <h2
         id={slugifiedId}
-        className="font-pixelify font-bold text-xl md:text-2xl"
+        className="text-title font-normal"
       >
         <TextScramble text={title} />
       </h2>

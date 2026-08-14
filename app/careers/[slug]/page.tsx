@@ -9,7 +9,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { createJobPostingSchema } from "@/lib/job-schema";
 import { createPageMetadata } from "@/lib/site";
 import { ContainerWrapper } from "@/components/site/container";
-import { SectionSeparator } from "@/components/site/separator";
+
 import { HeaderTitle } from "@/components/profile/header-title";
 import "../careers.css";
 
@@ -52,7 +52,7 @@ export default async function JobPage({ params }: Props) {
           <div className="px-4 pb-6 pt-5">
             <Link
               href="/careers#open-roles"
-              className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors mb-4"
+              className="inline-flex items-center gap-2 font-mono text-caption uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors mb-4"
             >
               <ArrowLeft size={12} />
               All open roles
@@ -60,31 +60,31 @@ export default async function JobPage({ params }: Props) {
 
             <div className="flex items-center gap-2 mb-1">
               <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
-              <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+              <span className="font-mono text-caption uppercase tracking-wider text-muted-foreground">
                 {job.department}
               </span>
             </div>
 
-            <h1 className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+            <h1 className="text-display font-normal tracking-tight text-foreground">
               {job.title}
             </h1>
 
-            <p className="text-muted-foreground text-xs mt-2 max-w-xl leading-relaxed">
+            <p className="text-muted-foreground text-body mt-2 max-w-xl leading-relaxed">
               {job.summary}
             </p>
 
             <div className="flex flex-wrap gap-1.5 mt-3">
-              <span className="inline-flex items-center gap-1 border border-dotted border-edge px-2 py-0.5 font-mono text-[10px] text-muted-foreground">
+              <span className="inline-flex items-center gap-1 border border-dotted border-edge px-2 py-0.5 font-mono text-caption text-muted-foreground">
                 <MapPin size={10} />
                 {job.location}
               </span>
-              <span className="border border-dotted border-edge px-2 py-0.5 font-mono text-[10px] text-muted-foreground">
+              <span className="border border-dotted border-edge px-2 py-0.5 font-mono text-caption text-muted-foreground">
                 {job.work_mode}
               </span>
-              <span className="border border-dotted border-edge px-2 py-0.5 font-mono text-[10px] text-muted-foreground">
+              <span className="border border-dotted border-edge px-2 py-0.5 font-mono text-caption text-muted-foreground">
                 {job.employment_type}
               </span>
-              <span className="inline-flex items-center gap-1 border border-dotted border-edge px-2 py-0.5 font-mono text-[10px] text-muted-foreground">
+              <span className="inline-flex items-center gap-1 border border-dotted border-edge px-2 py-0.5 font-mono text-caption text-muted-foreground">
                 <CalendarClock size={10} />
                 {deadlineText(job.closes_at)}
               </span>
@@ -92,7 +92,7 @@ export default async function JobPage({ params }: Props) {
 
             <a
               href="#apply"
-              className="inline-flex items-center gap-2 mt-4 px-4 py-2 border border-dotted border-edge bg-foreground text-background text-xs font-medium hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-2 mt-4 px-4 py-2 border border-dotted border-edge bg-foreground text-background text-button font-normal hover:opacity-90 transition-opacity"
             >
               Apply for this role <ArrowRight size={12} />
             </a>
@@ -100,7 +100,7 @@ export default async function JobPage({ params }: Props) {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* Body */}
       <section>
@@ -111,21 +111,21 @@ export default async function JobPage({ params }: Props) {
               {/* Description */}
               <div className="space-y-5">
                 <div>
-                  <h3 className="text-xs font-medium text-foreground mb-1.5">
+                  <h3 className="text-label font-medium text-foreground mb-1.5">
                     The opportunity
                   </h3>
-                  <p className="text-xs text-muted-foreground leading-relaxed">
+                  <p className="text-body text-muted-foreground leading-relaxed">
                     {job.description}
                   </p>
                 </div>
 
                 <div>
-                  <h3 className="text-xs font-medium text-foreground mb-1.5">
+                  <h3 className="text-label font-medium text-foreground mb-1.5">
                     What you&apos;ll do
                   </h3>
                   <ul className="space-y-1">
                     {job.responsibilities.map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-xs text-muted-foreground">
+                      <li key={item} className="flex items-start gap-2 text-body text-muted-foreground">
                         <span className="w-1 h-1 rounded-full bg-foreground mt-1.5 shrink-0" />
                         {item}
                       </li>
@@ -134,12 +134,12 @@ export default async function JobPage({ params }: Props) {
                 </div>
 
                 <div>
-                  <h3 className="text-xs font-medium text-foreground mb-1.5">
+                  <h3 className="text-label font-medium text-foreground mb-1.5">
                     What helps you thrive here
                   </h3>
                   <ul className="space-y-1">
                     {job.requirements.map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-xs text-muted-foreground">
+                      <li key={item} className="flex items-start gap-2 text-body text-muted-foreground">
                         <span className="w-1 h-1 rounded-full bg-foreground mt-1.5 shrink-0" />
                         {item}
                       </li>
@@ -149,13 +149,13 @@ export default async function JobPage({ params }: Props) {
 
                 {job.nice_to_have.length > 0 && (
                   <div>
-                    <h3 className="text-xs font-medium text-foreground mb-1.5">
+                    <h3 className="text-label font-medium text-foreground mb-1.5">
                       Nice to have
                     </h3>
                     <ul className="space-y-1">
                       {job.nice_to_have.map((item) => (
-                        <li key={item} className="flex items-start gap-2 text-xs text-muted-foreground">
-                          <span className="text-foreground/40 mt-0.5 shrink-0">+</span>
+                        <li key={item} className="flex items-start gap-2 text-body text-muted-foreground">
+                          <span className="w-1 h-1 rounded-full bg-foreground mt-1.5 shrink-0" />
                           {item}
                         </li>
                       ))}
@@ -164,7 +164,7 @@ export default async function JobPage({ params }: Props) {
                 )}
 
                 <div className="border-t border-dotted border-edge pt-4">
-                  <p className="text-[11px] text-muted-foreground leading-relaxed">
+                  <p className="text-body text-muted-foreground leading-relaxed">
                     <strong className="text-foreground">Come as you are.</strong>{" "}
                     We value different paths into the work. If the role excites you, apply.
                   </p>
@@ -173,7 +173,7 @@ export default async function JobPage({ params }: Props) {
 
               {/* Side Card */}
               <aside className="border border-dotted border-edge p-3 bg-white/[0.02] self-start lg:sticky lg:top-20">
-                <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-2">
+                <p className="font-mono text-caption uppercase tracking-wider text-muted-foreground mb-2">
                   Snapshot
                 </p>
                 <dl className="space-y-1.5">
@@ -185,16 +185,16 @@ export default async function JobPage({ params }: Props) {
                     ["Deadline", deadlineText(job.closes_at)],
                   ].map(([label, value]) => (
                     <div key={label} className="border-b border-dotted border-edge pb-1.5 last:border-0 last:pb-0">
-                      <dt className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground">
+                      <dt className="font-mono text-caption uppercase tracking-wider text-muted-foreground">
                         {label}
                       </dt>
-                      <dd className="text-[11px] text-foreground mt-0.5">{value}</dd>
+                      <dd className="text-caption text-foreground mt-0.5">{value}</dd>
                     </div>
                   ))}
                 </dl>
                 <a
                   href="#apply"
-                  className="inline-flex items-center gap-1.5 mt-3 text-[11px] font-medium text-foreground hover:text-muted-foreground transition-colors"
+                  className="inline-flex items-center gap-1.5 mt-3 text-button font-normal text-foreground hover:text-muted-foreground transition-colors"
                 >
                   Start application <ArrowRight size={10} />
                 </a>
@@ -204,7 +204,7 @@ export default async function JobPage({ params }: Props) {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* Application */}
       <section id="apply">
@@ -216,7 +216,7 @@ export default async function JobPage({ params }: Props) {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       <Footer />
     </main>

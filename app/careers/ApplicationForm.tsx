@@ -128,18 +128,18 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
         <div className="inline-flex items-center justify-center w-12 h-12 border border-dotted border-edge bg-white/[0.03] mb-4">
           <Check size={20} className="text-foreground" />
         </div>
-        <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-2">
+        <p className="font-mono text-caption uppercase tracking-wider text-muted-foreground mb-2">
           Application received
         </p>
-        <h2 className="text-lg font-medium text-foreground">
+        <h2 className="text-title font-normal text-foreground">
           Thank you for raising your hand.
         </h2>
-        <p className="text-sm text-muted-foreground mt-2 max-w-sm mx-auto">
+        <p className="text-body text-muted-foreground mt-2 max-w-sm mx-auto">
           We&apos;ll review your application. If there&apos;s a match, our team will reach out.
         </p>
         <a
           href="/careers"
-          className="inline-flex items-center gap-2 mt-5 text-xs font-medium text-foreground hover:text-muted-foreground transition-colors"
+          className="inline-flex items-center gap-2 mt-5 text-button font-normal text-foreground hover:text-muted-foreground transition-colors"
         >
           View other roles <ArrowRight size={12} />
         </a>
@@ -150,58 +150,58 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
   return (
     <form className="max-w-[520px]" onSubmit={handleSubmit} noValidate={false}>
       <div className="mb-6">
-        <h2 className="text-lg font-medium text-foreground">
+        <h2 className="text-title font-normal text-foreground">
           {job ? `Apply for ${job.title}` : "Join our talent network"}
         </h2>
-        <p className="text-xs text-muted-foreground mt-1">
+        <p className="text-body text-muted-foreground mt-1">
           Takes about 3 minutes. No account needed.
         </p>
       </div>
 
       <fieldset className="border-none p-0 mb-5 border-t border-dotted border-edge pt-4">
-        <legend className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-3">
+        <legend className="font-mono text-caption uppercase tracking-wider text-muted-foreground mb-3">
           About you
         </legend>
         <div className="flex flex-col gap-3">
-          <label className="flex flex-col gap-1 text-sm text-foreground">
+          <label className="flex flex-col gap-1 text-button text-foreground">
             Full name <span className="text-destructive">*</span>
             <input
               name="full_name"
               autoComplete="name"
               required
-              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-sm outline-none transition-colors"
+              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
               placeholder="Jane Smith"
             />
           </label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <label className="flex flex-col gap-1 text-sm text-foreground">
+            <label className="flex flex-col gap-1 text-button text-foreground">
               Email <span className="text-destructive">*</span>
               <input
                 name="email"
                 type="email"
                 autoComplete="email"
                 required
-                className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-sm outline-none transition-colors"
+                className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
                 placeholder="you@example.com"
               />
             </label>
-            <label className="flex flex-col gap-1 text-sm text-foreground">
-              Phone <span className="text-muted-foreground text-[10px]">Optional</span>
+            <label className="flex flex-col gap-1 text-button text-foreground">
+              Phone <span className="text-muted-foreground text-caption">Optional</span>
               <input
                 name="phone"
                 type="tel"
                 autoComplete="tel"
-                className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-sm outline-none transition-colors"
+                className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
               />
             </label>
           </div>
-          <label className="flex flex-col gap-1 text-sm text-foreground">
+          <label className="flex flex-col gap-1 text-button text-foreground">
             Location <span className="text-destructive">*</span>
             <input
               name="location"
               autoComplete="address-level2"
               required
-              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-sm outline-none transition-colors"
+              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
               placeholder="e.g. Nashik, Maharashtra"
             />
           </label>
@@ -209,27 +209,27 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
       </fieldset>
 
       <fieldset className="border-none p-0 mb-5 border-t border-dotted border-edge pt-4">
-        <legend className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-3">
+        <legend className="font-mono text-caption uppercase tracking-wider text-muted-foreground mb-3">
           Links
         </legend>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <label className="flex flex-col gap-1 text-sm text-foreground">
-            LinkedIn <span className="text-muted-foreground text-[10px]">Optional</span>
+          <label className="flex flex-col gap-1 text-button text-foreground">
+            LinkedIn <span className="text-muted-foreground text-caption">Optional</span>
             <input
               name="linkedin_url"
               type="url"
               inputMode="url"
-              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-sm outline-none transition-colors"
+              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
               placeholder="https://linkedin.com/in/..."
             />
           </label>
-          <label className="flex flex-col gap-1 text-sm text-foreground">
-            Portfolio / GitHub <span className="text-muted-foreground text-[10px]">Optional</span>
+          <label className="flex flex-col gap-1 text-button text-foreground">
+            Portfolio / GitHub <span className="text-muted-foreground text-caption">Optional</span>
             <input
               name="portfolio_url"
               type="url"
               inputMode="url"
-              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-sm outline-none transition-colors"
+              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
               placeholder="https://"
             />
           </label>
@@ -237,39 +237,39 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
       </fieldset>
 
       <fieldset className="border-none p-0 mb-5 border-t border-dotted border-edge pt-4">
-        <legend className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground mb-3">
+        <legend className="font-mono text-caption uppercase tracking-wider text-muted-foreground mb-3">
           Tell us
         </legend>
 
         {!job && (
-          <label className="flex flex-col gap-1 text-sm text-foreground mb-3">
+          <label className="flex flex-col gap-1 text-button text-foreground mb-3">
             Role you&apos;re interested in <span className="text-destructive">*</span>
             <input
               name="preferred_role"
               required
-              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-sm outline-none transition-colors"
+              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
               placeholder="e.g. Product engineering, AI research"
             />
           </label>
         )}
 
-        <label className="flex flex-col gap-1 text-sm text-foreground">
+        <label className="flex flex-col gap-1 text-button text-foreground">
           {job ? "Why this role?" : "What kind of work are you looking to do?"} <span className="text-destructive">*</span>
           <textarea
             name="cover_note"
             rows={3}
             maxLength={1800}
             required
-            className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-sm outline-none transition-colors resize-none"
+            className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors resize-none"
             placeholder="A short, honest note is perfect."
           />
         </label>
 
         <div className="mt-3">
-          <p className="text-sm text-foreground mb-1">
+          <p className="text-body text-foreground mb-1">
             Résumé / CV <span className="text-destructive">*</span>
           </p>
-          <p className="text-[10px] text-muted-foreground mb-2">PDF, DOC, or DOCX · Max 5 MB</p>
+          <p className="text-caption text-muted-foreground mb-2">PDF, DOC, or DOCX · Max 5 MB</p>
           <input
             ref={fileInputRef}
             className="visually-hidden-file"
@@ -283,8 +283,8 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
             <div className="flex items-center gap-3 border border-dotted border-edge px-3 py-2 bg-white/[0.02]">
               <FileText size={14} className="text-muted-foreground shrink-0" />
               <div className="min-w-0 flex-1">
-                <p className="text-xs text-foreground truncate">{file.name}</p>
-                <p className="text-[10px] text-muted-foreground">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+                <p className="text-caption text-foreground truncate">{file.name}</p>
+                <p className="text-caption text-muted-foreground">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
               </div>
               <button
                 type="button"
@@ -301,7 +301,7 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
           ) : (
             <label
               htmlFor="resume"
-              className="flex items-center justify-center gap-2 border border-dotted border-edge px-4 py-5 bg-white/[0.02] cursor-pointer hover:bg-white/[0.04] transition-colors text-xs text-muted-foreground"
+              className="flex items-center justify-center gap-2 border border-dotted border-edge px-4 py-5 bg-white/[0.02] cursor-pointer hover:bg-white/[0.04] transition-colors text-button text-muted-foreground"
             >
               <Upload size={14} />
               Choose résumé
@@ -317,7 +317,7 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
         </label>
       </div>
 
-      <label className="flex items-start gap-2 text-xs text-muted-foreground mb-4 cursor-pointer">
+      <label className="flex items-start gap-2 text-button text-muted-foreground mb-4 cursor-pointer">
         <input
           type="checkbox"
           name="consent"
@@ -331,13 +331,13 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
       </label>
 
       {error && (
-        <p className="text-xs text-destructive mb-3" role="alert">
+        <p className="text-button text-destructive mb-3" role="alert">
           {error}
         </p>
       )}
 
       <button
-        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 border border-dotted border-edge bg-foreground text-background text-sm font-medium cursor-pointer hover:opacity-90 transition-opacity disabled:opacity-50"
+        className="inline-flex items-center justify-center gap-2 px-5 py-2.5 border border-dotted border-edge bg-foreground text-background text-button font-normal cursor-pointer hover:opacity-90 transition-opacity disabled:opacity-50"
         type="submit"
         disabled={isSubmitting}
       >
@@ -354,7 +354,7 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
         )}
       </button>
 
-      <p className="text-[10px] text-muted-foreground mt-3">
+      <p className="text-caption text-muted-foreground mt-3">
         We only ask for what our hiring team needs. No sensitive personal data.
       </p>
     </form>

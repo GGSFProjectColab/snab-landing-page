@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { createPageMetadata, siteConfig } from "@/lib/site";
 import { ContainerWrapper } from "@/components/site/container";
-import { SectionSeparator } from "@/components/site/separator";
+
 import { Footer } from "../Footer";
 import { LazyContactMap } from "./LazyContactMap";
 import { ContactForm } from "./ContactForm";
@@ -110,16 +110,16 @@ export default function ContactPage() {
             />
 
             <div className="relative z-10 flex h-full flex-col justify-end p-6 sm:p-8 md:p-12">
-              <p className="font-mono text-[11px] uppercase tracking-widest text-white/80 mb-3">
+              <p className="font-mono text-caption uppercase tracking-widest text-white/80 mb-3">
                 / contact /
               </p>
               <h1
                 id="contact-hero-title"
-                className="font-pixelify text-3xl font-bold text-white sm:text-4xl md:text-5xl"
+                className="text-display font-normal text-white"
               >
                 Let&apos;s Talk
               </h1>
-              <div className="mt-4 flex items-center gap-1.5 text-xs text-white/70">
+              <div className="mt-4 flex items-center gap-1.5 text-caption text-white/70">
                 <a
                   className="transition-colors hover:text-white"
                   href="/"
@@ -134,7 +134,7 @@ export default function ContactPage() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* Content: Form + Details */}
       <section aria-labelledby="contact-content-title">
@@ -143,16 +143,16 @@ export default function ContactPage() {
             {/* Left: Heading + Details + Socials */}
             <div className="flex flex-col gap-8">
               <div>
-                <p className="font-mono text-[11px] uppercase tracking-widest text-primary mb-2">
+                <p className="font-mono text-caption uppercase tracking-widest text-primary mb-2">
                   / get in touch /
                 </p>
                 <h2
                   id="contact-content-title"
-                  className="font-pixelify text-2xl font-bold text-foreground sm:text-3xl"
+                  className="text-subheading font-normal text-foreground"
                 >
                   We&apos;d love to hear from you.
                 </h2>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-3 text-body leading-relaxed text-muted-foreground">
                   Tell us what you are trying to improve, automate, or launch.
                   We will help shape the right product and a practical path to
                   production.
@@ -170,25 +170,25 @@ export default function ContactPage() {
                       {detail.icon}
                     </span>
                     <div className="min-w-0 flex-1">
-                      <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-1">
+                      <p className="font-mono text-caption uppercase tracking-widest text-muted-foreground mb-1">
                         {detail.label}
                       </p>
                       {detail.lines.map((line) => (
                         <p
-                          className="text-sm text-foreground"
+                          className="text-body text-foreground"
                           key={line}
                         >
                           {line}
                         </p>
                       ))}
                       <a
-                        className="mt-1.5 inline-flex items-center gap-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
+                        className="mt-1.5 inline-flex items-center gap-1 text-button text-muted-foreground transition-colors hover:text-foreground"
                         href={detail.link.href}
                         target="_blank"
                         rel="noreferrer"
                       >
                         {detail.link.label}
-                        <span aria-hidden="true" className="text-[10px]">↗</span>
+                        <span aria-hidden="true" className="text-caption">↗</span>
                       </a>
                     </div>
                   </div>
@@ -197,7 +197,7 @@ export default function ContactPage() {
 
               {/* Social links */}
               <div>
-                <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground mb-3">
+                <p className="font-mono text-caption uppercase tracking-widest text-muted-foreground mb-3">
                   Follow us
                 </p>
                 <div className="flex items-center gap-2">
@@ -220,10 +220,10 @@ export default function ContactPage() {
             {/* Right: Form card */}
             <div className="border border-dotted border-edge bg-muted/20 p-5 sm:p-6">
               <div className="mb-5">
-                <p className="font-mono text-[11px] uppercase tracking-widest text-primary mb-2">
+                <p className="font-mono text-caption uppercase tracking-widest text-primary mb-2">
                   / send a message /
                 </p>
-                <h2 className="font-pixelify text-lg font-bold text-foreground sm:text-xl">
+                <h2 className="text-title font-normal text-foreground">
                   Get In Touch
                 </h2>
               </div>
@@ -233,19 +233,19 @@ export default function ContactPage() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* Map */}
       <section aria-labelledby="contact-map-title">
         <ContainerWrapper>
           <div className="p-4 sm:p-6 md:p-8">
             <div className="mb-4">
-              <p className="font-mono text-[11px] uppercase tracking-widest text-primary mb-1">
+              <p className="font-mono text-caption uppercase tracking-widest text-primary mb-1">
                 / find us /
               </p>
               <h2
                 id="contact-map-title"
-                className="font-pixelify text-lg font-bold text-foreground sm:text-xl"
+                className="text-title font-normal text-foreground"
               >
                 Nashik, Maharashtra
               </h2>
@@ -262,7 +262,7 @@ export default function ContactPage() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       <Footer />
     </main>

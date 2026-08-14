@@ -43,14 +43,14 @@ function Hero() {
             </Button>
           </div>
           <div className="flex gap-4 flex-col">
-            <h1 id="hero-title" className="text-4xl md:text-6xl max-w-2xl tracking-tighter text-center font-regular text-white drop-shadow-lg">
+            <h1 id="hero-title" className="text-display max-w-2xl tracking-tighter text-center font-normal text-white drop-shadow-lg">
               <span className="text-white">We build AI for production.</span>
-              <span className="relative flex w-full justify-center overflow-hidden text-center font-bitcount md:pb-3 md:pt-0.5">
+              <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-3 md:pt-0.5">
                 &nbsp;
                 {titles.map((title, index) => (
                   <motion.span
                     key={index}
-                    className="absolute font-semibold text-cyan-200 drop-shadow-md"
+                    className="absolute font-normal text-cyan-200 drop-shadow-md"
                     initial={{ opacity: 0, y: "-100" }}
                     transition={{ type: "spring", stiffness: 50 }}
                     animate={
@@ -71,7 +71,7 @@ function Hero() {
               </span>
             </h1>
 
-            <p className="text-base md:text-lg leading-relaxed tracking-tight text-white max-w-2xl text-center drop-shadow-md">
+            <p className="text-body leading-relaxed tracking-tight text-white max-w-2xl text-center drop-shadow-md">
               <span className="md:hidden">
                 AI-powered solutions: workflows, agents, chatbots, web &amp; mobile apps.
               </span>

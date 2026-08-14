@@ -4,7 +4,7 @@ import { Footer } from "../Footer";
 import { createPageMetadata } from "@/lib/site";
 import { ContainerWrapper } from "@/components/site/container";
 import { HeaderTitle } from "@/components/profile/header-title";
-import { SectionSeparator } from "@/components/site/separator";
+
 
 export const metadata: Metadata = createPageMetadata({
   title: "Work | SNAB Innovations",
@@ -54,23 +54,23 @@ export default function WorkPage() {
       <section aria-labelledby="work-hero-title">
         <ContainerWrapper>
           <div className="border-b border-dotted border-edge p-6 sm:p-10 md:p-14">
-            <span className="font-mono text-xs text-muted-foreground uppercase tracking-widest">
+            <span className="font-mono text-caption text-muted-foreground uppercase tracking-widest">
               PORTFOLIO // SELECTED SYSTEMS
             </span>
             <h1
               id="work-hero-title"
-              className="mt-3 font-pixelify text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl"
+              className="mt-3 text-display font-normal"
             >
               Built for real-world operations<span className="text-primary">.</span>
             </h1>
-            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+            <p className="mt-4 max-w-2xl text-body leading-relaxed text-muted-foreground">
               A collection of AI products, enterprise automation platforms, and software systems engineered for high-impact professional workflows.
             </p>
           </div>
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* Main Work Showcase List */}
       <section aria-labelledby="selected-work-title">
@@ -88,19 +88,19 @@ export default function WorkPage() {
                   <div>
                     {/* Index & Status */}
                     <div className="flex items-center gap-3">
-                      <span className="font-mono text-xs text-muted-foreground">
+                      <span className="font-mono text-caption text-muted-foreground">
                         {item.number}
                       </span>
                       <span className="flex items-center gap-1.5">
                         <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                        <span className="font-mono text-[11px] text-muted-foreground">
+                        <span className="font-mono text-caption text-muted-foreground">
                           {item.status}
                         </span>
                       </span>
                     </div>
 
                     {/* Title */}
-                    <h2 className="mt-2 text-xl font-semibold tracking-tight sm:text-2xl">
+                    <h2 className="mt-2 text-title font-normal tracking-tight">
                       {item.name}
                     </h2>
 
@@ -109,7 +109,7 @@ export default function WorkPage() {
                       {item.categories.map((category) => (
                         <span
                           key={category}
-                          className="rounded-sm border border-dotted border-edge px-2 py-0.5 font-mono text-[10px] text-muted-foreground"
+                          className="rounded-sm border border-dotted border-edge px-2 py-0.5 font-mono text-caption text-muted-foreground"
                         >
                           {category}
                         </span>
@@ -117,13 +117,13 @@ export default function WorkPage() {
                     </div>
 
                     {/* Description */}
-                    <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                    <p className="mt-4 max-w-xl text-body leading-relaxed text-muted-foreground">
                       {item.description}
                     </p>
 
                     {/* Capabilities list */}
                     <div className="mt-4 border-t border-dotted border-edge pt-3">
-                      <span className="block font-mono text-[11px] text-muted-foreground/80">
+                      <span className="block font-mono text-caption text-muted-foreground/80">
                         {item.capabilities.join(" • ")}
                       </span>
                     </div>
@@ -133,7 +133,7 @@ export default function WorkPage() {
                   <div className="mt-6">
                     <a
                       href="#"
-                      className="inline-flex items-center gap-1.5 text-xs font-medium text-foreground transition-colors hover:text-muted-foreground"
+                      className="inline-flex items-center gap-1.5 text-button font-normal text-foreground transition-colors hover:text-muted-foreground"
                     >
                       <span>Explore system</span>
                       <span
@@ -175,7 +175,7 @@ export default function WorkPage() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       <Footer />
     </main>

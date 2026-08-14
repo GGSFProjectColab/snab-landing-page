@@ -66,19 +66,19 @@ export function FeatureSteps({
             >
               <div className="p-3 sm:p-4">
                 <div className="flex items-baseline gap-3">
-                  <span className="font-mono text-xs text-muted-foreground">
+                  <span className="font-mono text-caption text-muted-foreground">
                     {feature.step}
                   </span>
-                  <h3 className="font-sans text-sm font-semibold tracking-tight sm:text-base">
+                  <h3 className="font-sans text-title font-normal tracking-tight">
                     {feature.title}
                   </h3>
                 </div>
                 {feature.subtitle && (
-                  <p className="mt-1 pl-8 text-[10px] font-medium uppercase tracking-wider text-muted-foreground/70">
+                  <p className="mt-1 pl-8 text-caption font-medium uppercase tracking-wider text-muted-foreground/70">
                     {feature.subtitle}
                   </p>
                 )}
-                <p className="mt-1.5 pl-8 text-xs leading-relaxed text-muted-foreground">
+                <p className="mt-1.5 pl-8 text-caption leading-relaxed text-muted-foreground">
                   {feature.content}
                 </p>
               </div>
@@ -126,10 +126,10 @@ export function FeatureSteps({
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
                   <div className="absolute bottom-0 left-0 p-3">
-                    <span className="font-mono text-[10px] text-muted-foreground">
+                    <span className="font-mono text-caption text-muted-foreground">
                       {feature.step}
                     </span>
-                    <h3 className="font-sans mt-0.5 text-sm font-semibold tracking-tight">
+                    <h3 className="font-sans mt-0.5 text-title font-normal tracking-tight">
                       {feature.title}
                     </h3>
                   </div>

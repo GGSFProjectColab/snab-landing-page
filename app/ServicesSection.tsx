@@ -47,8 +47,8 @@ export function ServicesSection({ services }: { services: Service[] }) {
               >
                 <div className="grid md:h-full md:grid-cols-2">
                   <div className="flex flex-col items-center p-3 text-center sm:p-4 md:items-start md:text-left">
-                    <h3 className="text-sm font-medium">{service.title}</h3>
-                    <p className="mt-2 text-sm text-muted-foreground">
+                    <h3 className="text-title font-normal">{service.title}</h3>
+                    <p className="mt-2 text-body text-muted-foreground">
                       {service.description}
                     </p>
                   </div>
@@ -76,8 +76,8 @@ export function ServicesSection({ services }: { services: Service[] }) {
                 className="border-b border-dotted border-edge p-3 last:border-b-0 sm:p-4 md:odd:border-r"
                 key={service.title}
               >
-                <h3 className="text-sm font-medium">{service.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">
+                <h3 className="text-title font-normal">{service.title}</h3>
+                <p className="mt-2 text-body text-muted-foreground">
                   {service.description}
                 </p>
               </div>
@@ -88,7 +88,7 @@ export function ServicesSection({ services }: { services: Service[] }) {
           <div className="flex justify-center py-6 md:hidden">
             <button
               onClick={() => setShowAll(true)}
-              className="text-sm font-medium text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors"
+              className="text-button font-normal text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors"
             >
               View more
             </button>

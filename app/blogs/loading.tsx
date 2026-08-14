@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { ContainerWrapper } from "@/components/site/container";
-import { SectionSeparator } from "@/components/site/separator";
+
 import { BlogCardSkeleton } from "./BlogCardSkeleton";
 import { FeaturedPostSkeleton } from "./FeaturedPostSkeleton";
 
@@ -24,7 +24,7 @@ export default function BlogsLoading() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       <section>
         <ContainerWrapper>
@@ -35,7 +35,7 @@ export default function BlogsLoading() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       <section>
         <ContainerWrapper>
@@ -50,7 +50,7 @@ export default function BlogsLoading() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       <section>
         <ContainerWrapper>

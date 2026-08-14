@@ -19,7 +19,7 @@ export function ContactForm() {
 
   if (state.succeeded) {
     return (
-      <p className="text-sm font-medium text-green-500" role="status">
+      <p className="text-button font-medium text-green-500" role="status">
         Message sent successfully! We&apos;ll get back to you soon.
       </p>
     );
@@ -29,13 +29,13 @@ export function ContactForm() {
     <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-1.5">
         <label
-          className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
+          className="font-mono text-caption uppercase tracking-widest text-muted-foreground"
           htmlFor="name"
         >
           Name
         </label>
         <input
-          className="border-0 border-b border-edge bg-transparent text-sm text-foreground py-2 outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-foreground"
+          className="border-0 border-b border-edge bg-transparent text-button text-foreground py-2 outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-foreground"
           type="text"
           id="name"
           name="name"
@@ -49,13 +49,13 @@ export function ContactForm() {
 
       <div className="flex flex-col gap-1.5">
         <label
-          className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
+          className="font-mono text-caption uppercase tracking-widest text-muted-foreground"
           htmlFor="email"
         >
           Email
         </label>
         <input
-          className="border-0 border-b border-edge bg-transparent text-sm text-foreground py-2 outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-foreground"
+          className="border-0 border-b border-edge bg-transparent text-button text-foreground py-2 outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-foreground"
           type="email"
           id="email"
           name="email"
@@ -69,13 +69,13 @@ export function ContactForm() {
 
       <div className="flex flex-col gap-1.5">
         <label
-          className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
+          className="font-mono text-caption uppercase tracking-widest text-muted-foreground"
           htmlFor="message"
         >
           Message
         </label>
         <textarea
-          className="border-0 border-b border-edge bg-transparent text-sm text-foreground py-2 outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-foreground resize-none min-h-[80px]"
+          className="border-0 border-b border-edge bg-transparent text-button text-foreground py-2 outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-foreground resize-none min-h-[80px]"
           id="message"
           name="message"
           value={formData.message}
@@ -89,7 +89,7 @@ export function ContactForm() {
 
       <button
         type="submit"
-        className="inline-flex items-center gap-2 self-start bg-foreground text-background font-mono text-[11px] uppercase tracking-wider px-5 py-2.5 transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="inline-flex items-center gap-2 self-start bg-foreground text-background font-mono text-caption uppercase tracking-wider px-5 py-2.5 transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
         disabled={state.submitting}
       >
         {state.submitting ? "Sending..." : "Send Message"}
@@ -97,7 +97,7 @@ export function ContactForm() {
       </button>
 
       {state.errors && (
-        <p className="text-sm font-medium text-red-500">
+        <p className="text-button font-medium text-red-500">
           Something went wrong. Please try again or email us directly.
         </p>
       )}

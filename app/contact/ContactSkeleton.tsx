@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { ContainerWrapper } from "@/components/site/container";
-import { SectionSeparator } from "@/components/site/separator";
+
 
 export function ContactSkeleton() {
   return (
@@ -23,7 +23,7 @@ export function ContactSkeleton() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* Content Skeleton */}
       <section>
@@ -92,7 +92,7 @@ export function ContactSkeleton() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* Map Skeleton */}
       <section>
@@ -113,7 +113,7 @@ export function ContactSkeleton() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       <span className="sr-only">Loading contact content…</span>
     </main>

@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { ContainerWrapper } from "@/components/site/container";
-import { SectionSeparator } from "@/components/site/separator";
+
 
 export default function AboutLoading() {
   return (
@@ -19,7 +19,7 @@ export default function AboutLoading() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* Who We Are Skeleton */}
       <section>
@@ -48,7 +48,7 @@ export default function AboutLoading() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* What We Do Skeleton */}
       <section>
@@ -74,7 +74,7 @@ export default function AboutLoading() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* Our Approach Skeleton */}
       <section>
@@ -103,7 +103,7 @@ export default function AboutLoading() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* Selected Work Skeleton */}
       <section>
@@ -131,7 +131,7 @@ export default function AboutLoading() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* CTA Skeleton */}
       <section>
@@ -146,7 +146,7 @@ export default function AboutLoading() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       <span className="sr-only">Loading about content…</span>
     </main>

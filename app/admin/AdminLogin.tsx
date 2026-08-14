@@ -41,11 +41,6 @@ export function AdminLogin() {
 
       <div className="relative z-10 w-full max-w-md">
         <div className="relative border border-dotted border-edge bg-card p-10">
-          <span className="crosshair absolute -left-[6px] -top-[6px]" />
-          <span className="crosshair absolute -right-[6px] -top-[6px]" />
-          <span className="crosshair absolute -bottom-[6px] -left-[6px]" />
-          <span className="crosshair absolute -bottom-[6px] -right-[6px]" />
-
           <div className="mb-8">
             <BrandLogo className="mb-6 h-16 w-16" priority />
             <p className="mb-2 text-xs font-pixelify uppercase tracking-wider text-[#ff5a16]">

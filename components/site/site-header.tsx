@@ -28,7 +28,7 @@ function LogoMark({ className }: { className?: string }) {
         sizes="64px"
         priority
       />
-      <span className="font-pixelify text-base md:text-lg">SNAB Innovations</span>
+      <span className="text-body font-normal">SNAB Innovations</span>
     </Link>
   );
 }
@@ -44,7 +44,7 @@ function NavLink({
     <Link
       href={item.href}
       className={cn(
-        "text-sm font-medium tracking-tight transition-colors",
+        "text-button font-normal tracking-tight transition-colors",
         isActive ? "text-primary" : "text-muted-foreground hover:text-primary",
       )}
     >
@@ -128,7 +128,7 @@ function MobileDrawer({
         aria-label="Site navigation"
       >
         <div className="flex items-center justify-between border-b border-dotted border-edge px-6 py-4">
-          <span className="text-[16px] font-semibold text-primary">
+          <span className="text-title font-normal text-primary">
             Navigation
           </span>
           <button
@@ -155,7 +155,7 @@ function MobileDrawer({
                   tabIndex={open ? 0 : -1}
                   onClick={onClose}
                   className={cn(
-                    "block py-3 text-sm font-medium transition-colors",
+                    "block py-3 text-button font-normal transition-colors",
                     isActive
                       ? "text-primary"
                       : "text-muted-foreground hover:text-primary",
@@ -203,8 +203,8 @@ export function SiteHeader() {
       className="sticky top-0 z-[500] h-14 bg-background/80 backdrop-blur-md md:h-16 full-bleed-border-b"
       aria-label="Primary navigation"
     >
-      <div className="mx-auto h-full max-w-6xl">
-        <div className="relative mx-2 flex h-full items-center justify-between border-x border-dotted border-edge px-2">
+      <div className="mx-auto h-full max-w-[1920px]">
+        <div className="relative mx-4 flex h-full items-center justify-between border-x border-dotted border-edge px-2">
           {/* Left — Logo */}
           <LogoMark />
 

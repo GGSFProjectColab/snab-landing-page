@@ -4,6 +4,19 @@ const config: Config = {
   darkMode: ["class"],
   content: ["./app/**/*.{js,ts,jsx,tsx,mdx}", "./components/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
+    fontSize: {
+      caption: ["11px", { lineHeight: "1.5" }],
+      label: ["13px", { lineHeight: "1.33" }],
+      button: ["14px", { lineHeight: "1.5", letterSpacing: "0.01em" }],
+      body: ["16px", { lineHeight: "1.5" }],
+      title: ["22px", { lineHeight: "1.3", letterSpacing: "-0.005em" }],
+      subheading: ["26px", { lineHeight: "1.25", letterSpacing: "-0.0125em" }],
+      heading: ["36px", { lineHeight: "1.2", letterSpacing: "-0.02em" }],
+      display: [
+        "clamp(44px, 6vw, 72px)",
+        { lineHeight: "1.1", letterSpacing: "-0.03em" },
+      ],
+    },
     extend: {
       colors: {
         background: "var(--background)",
@@ -53,8 +66,6 @@ const config: Config = {
       fontFamily: {
         sans: ["var(--font-sans)", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],
-        pixelify: ["var(--font-pixelify)", "var(--font-sans)", "sans-serif"],
-        bitcount: ["var(--font-bitcount)", "var(--font-mono)", "monospace"],
       },
       keyframes: {
         "shiny-text": {

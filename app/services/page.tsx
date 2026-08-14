@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { createPageMetadata, siteConfig } from "@/lib/site";
 import { ContainerWrapper } from "@/components/site/container";
-import { SectionSeparator } from "@/components/site/separator";
 import { HeaderTitle } from "@/components/profile/header-title";
 import { Footer } from "../Footer";
 
@@ -125,32 +124,32 @@ export default function ServicesPage() {
             />
             <div className="absolute inset-0 bg-black/20" aria-hidden="true" />
             <div className="relative z-10 flex min-h-[460px] flex-col justify-end p-6 sm:min-h-[540px] sm:p-10 md:p-14">
-              <p className="mb-3 font-mono text-xs uppercase tracking-widest text-white/80 flex items-center gap-2">
+              <p className="mb-3 font-mono text-caption uppercase tracking-widest text-white/80 flex items-center gap-2">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 Our Services
               </p>
               <h1
                 id="services-hero-title"
-                className="max-w-4xl font-pixelify text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl"
+                className="max-w-4xl text-display font-normal text-white"
               >
                 Our Mission Is To Make Your{" "}
-                <span className="inline-block bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded font-mono text-2xl sm:text-3xl md:text-4xl lg:text-5xl align-middle">
+                <span className="inline-block bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded font-mono text-subheading font-normal align-middle">
                   Business
                 </span>{" "}
                 Better Through Technology
               </h1>
-              <p className="mt-4 max-w-xl text-xs leading-relaxed text-white/80 sm:text-sm md:text-base">
+              <p className="mt-4 max-w-xl text-body leading-relaxed text-white/80">
                 End-to-end product delivery. One accountable team to define, design, engineer, launch, and continuously scale your digital platform.
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <a
-                  className="bg-white px-4 py-2 text-xs font-medium text-black transition-all hover:bg-white/90"
+                  className="bg-white px-4 py-2 text-button font-normal text-black transition-all hover:bg-white/90"
                   href="/contact"
                 >
                   Plan your project ↗
                 </a>
                 <a
-                  className="border border-white/30 bg-transparent px-4 py-2 text-xs font-medium text-white transition-all hover:border-white/50 hover:text-white"
+                  className="border border-white/30 bg-transparent px-4 py-2 text-button font-normal text-white transition-all hover:border-white/50 hover:text-white"
                   href="#delivery-process"
                 >
                   Explore Process ↓
@@ -160,8 +159,6 @@ export default function ServicesPage() {
           </div>
         </ContainerWrapper>
       </section>
-
-      <SectionSeparator />
 
       {/* Services Grid Section (Inspired by Image's 6 Cards) */}
       <section aria-labelledby="our-services-title">
@@ -187,20 +184,20 @@ export default function ServicesPage() {
                     <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-dotted border-edge bg-background/80">
                       {service.icon}
                     </div>
-                    <span className="font-mono text-xs text-muted-foreground">
+                    <span className="font-mono text-caption text-muted-foreground">
                       {service.number}
                     </span>
                   </div>
 
                   {/* Title & category */}
                   <div className="mt-5">
-                    <span className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                    <span className="font-mono text-caption uppercase tracking-widest text-muted-foreground">
                       {service.category}
                     </span>
-                    <h3 className="mt-1 font-pixelify text-lg font-bold sm:text-xl">
+                    <h3 className="mt-1 text-title font-normal">
                       {service.title}
                     </h3>
-                    <p className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                    <p className="mt-2 text-body leading-relaxed text-muted-foreground">
                       {service.description}
                     </p>
                   </div>
@@ -211,7 +208,7 @@ export default function ServicesPage() {
                   <div className="flex flex-wrap gap-1.5">
                     {service.capabilities.map((cap) => (
                       <span
-                        className="rounded-sm border border-dotted border-edge px-2 py-0.5 text-[10px] text-muted-foreground"
+                        className="rounded-sm border border-dotted border-edge px-2 py-0.5 text-caption text-muted-foreground"
                         key={cap}
                       >
                         {cap}
@@ -225,8 +222,6 @@ export default function ServicesPage() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
-
       {/* Delivery Process */}
       <section id="delivery-process" aria-labelledby="process-title">
         <ContainerWrapper>
@@ -239,13 +234,13 @@ export default function ServicesPage() {
                 }`}
                 key={step.number}
               >
-                <span className="font-mono text-xs text-emerald-400">
+                <span className="font-mono text-caption text-emerald-400">
                   {step.number}
                 </span>
-                <h3 className="mt-2 font-pixelify text-base font-bold sm:text-lg">
+                <h3 className="mt-2 text-title font-normal">
                   {step.title}
                 </h3>
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                <p className="mt-2 text-body leading-relaxed text-muted-foreground">
                   {step.desc}
                 </p>
               </div>
@@ -253,8 +248,6 @@ export default function ServicesPage() {
           </div>
         </ContainerWrapper>
       </section>
-
-      <SectionSeparator />
 
       {/* CTA Section */}
       <section aria-labelledby="services-cta-title">
@@ -272,12 +265,12 @@ export default function ServicesPage() {
             <div className="relative z-10 flex h-full flex-col items-start justify-center gap-4 p-6 sm:items-center sm:text-center sm:py-10 md:px-12">
               <h2
                 id="services-cta-title"
-                className="max-w-xl font-pixelify text-2xl font-bold sm:text-3xl"
+                className="max-w-xl text-subheading font-normal"
               >
                 Bring us the idea.<br />We&apos;ll build the path.
               </h2>
               <a
-                className="bg-white px-5 py-2.5 text-xs font-medium text-black transition-all hover:bg-white/90"
+                className="bg-white px-5 py-2.5 text-button font-normal text-black transition-all hover:bg-white/90"
                 href="/contact"
               >
                 Start with discovery ↗
@@ -286,8 +279,6 @@ export default function ServicesPage() {
           </div>
         </ContainerWrapper>
       </section>
-
-      <SectionSeparator />
 
       {/* Footer */}
       <Footer />

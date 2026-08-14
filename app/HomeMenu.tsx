@@ -54,7 +54,7 @@ export function HomeMenu({ items }: HomeMenuProps) {
     <div className="flex items-center justify-center">
       <button
         ref={triggerRef}
-        className="inline-flex h-10 items-center gap-2 rounded-full border border-border px-4 text-sm font-medium transition-colors hover:bg-accent"
+        className="inline-flex h-10 items-center gap-2 rounded-full border border-border px-4 text-button font-normal transition-colors hover:bg-accent"
         type="button"
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
@@ -119,9 +119,9 @@ export function HomeMenu({ items }: HomeMenuProps) {
                       key={item.label}
                       tabIndex={open ? 0 : -1}
                       onClick={() => setOpen(false)}
-                      className="flex items-baseline gap-4 border-b border-dotted py-5 text-lg"
+                      className="flex items-baseline gap-4 border-b border-dotted py-5 text-title font-normal"
                     >
-                      <span className="text-xs text-muted-foreground">
+                      <span className="text-caption text-muted-foreground">
                         0{index + 1}
                       </span>
                       <span>{item.label}</span>

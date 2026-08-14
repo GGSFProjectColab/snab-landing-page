@@ -6,7 +6,7 @@ import { Hero } from "@/components/ui/animated-hero";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { ContainerWrapper } from "@/components/site/container";
-import { SectionSeparator } from "@/components/site/separator";
+
 import { HeaderTitle } from "@/components/profile/header-title";
 import { CloudShader } from "@/components/ui/cloud-shader";
 import FluidOrb from "@/components/ui/fluid-orb";
@@ -280,12 +280,12 @@ export default function Home() {
           </ContainerWrapper>
         </section>
 
-        <SectionSeparator />
+        
 
         {/* Services */}
         <ServicesSection services={services} />
 
-        <SectionSeparator />
+        
 
         {/* Current Work */}
         <section aria-labelledby="current-work-title">
@@ -316,30 +316,30 @@ export default function Home() {
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
-                        <span className="font-mono text-xs text-muted-foreground">
+                        <span className="font-mono text-caption text-muted-foreground">
                           {project.number}
                         </span>
                         <span className="flex items-center gap-1.5">
                           <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                          <span className="text-[10px] text-muted-foreground">
+                          <span className="text-caption text-muted-foreground">
                             Live
                           </span>
                         </span>
                       </div>
-                      <h3 className="mt-1 text-sm font-medium">
+                      <h3 className="mt-1 text-title font-normal">
                         {project.name}
                       </h3>
                       <div className="mt-1.5 flex flex-wrap gap-1">
                         {project.categories.map((category) => (
                           <span
-                            className="rounded-sm border border-dotted border-edge px-1.5 py-0.5 text-[9px] text-muted-foreground"
+                            className="rounded-sm border border-dotted border-edge px-1.5 py-0.5 text-caption text-muted-foreground"
                             key={category}
                           >
                             {category}
                           </span>
                         ))}
                       </div>
-                      <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                      <p className="mt-2 text-body leading-relaxed text-muted-foreground">
                         {project.description}
                       </p>
                     </div>
@@ -348,37 +348,37 @@ export default function Home() {
                   {/* Desktop: full layout */}
                   <div className="hidden md:block">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-xs text-muted-foreground">
+                      <span className="font-mono text-caption text-muted-foreground">
                         {project.number}
                       </span>
                       <span className="flex items-center gap-2">
                         <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                        <span className="text-xs text-muted-foreground">
+                        <span className="text-caption text-muted-foreground">
                           Live
                         </span>
                       </span>
                     </div>
-                    <h3 className="mt-2 text-sm font-medium md:text-base">
+                    <h3 className="mt-2 text-title font-normal">
                       {project.name}
                     </h3>
                     <div className="mt-2 flex flex-wrap gap-1">
                       {project.categories.map((category) => (
                         <span
-                          className="rounded-sm border border-dotted border-edge px-2 py-0.5 text-[10px] text-muted-foreground"
+                          className="rounded-sm border border-dotted border-edge px-2 py-0.5 text-caption text-muted-foreground"
                           key={category}
                         >
                           {category}
                         </span>
                       ))}
                     </div>
-                    <p className="mt-3 text-sm text-muted-foreground">
+                    <p className="mt-3 text-body text-muted-foreground">
                       {project.description}
                     </p>
-                    <p className="mt-2 font-mono text-xs text-muted-foreground">
+                    <p className="mt-2 font-mono text-caption text-muted-foreground">
                       {project.capabilities.join(" / ")}
                     </p>
                     <a
-                      className="mt-4 inline-flex items-center gap-1 text-xs font-medium transition-colors hover:text-muted-foreground"
+                      className="mt-4 inline-flex items-center gap-1 text-button font-normal transition-colors hover:text-muted-foreground"
                       href="#"
                     >
                       View Project
@@ -415,7 +415,7 @@ export default function Home() {
             </div>
             <div className="h-10 flex items-center justify-center border-b border-dotted border-edge">
               <a
-                className="text-xs font-medium underline underline-offset-4 transition-colors hover:text-muted-foreground"
+                className="text-button font-normal underline underline-offset-4 transition-colors hover:text-muted-foreground"
                 href="/work"
               >
                 See all work
@@ -424,7 +424,7 @@ export default function Home() {
           </ContainerWrapper>
         </section>
 
-        <SectionSeparator />
+        
 
         {/* How We Work */}
         <section aria-labelledby="how-we-work-title">
@@ -434,7 +434,7 @@ export default function Home() {
           </ContainerWrapper>
         </section>
 
-        <SectionSeparator />
+        
 
         {/* Why Choose Us */}
         <section aria-labelledby="why-choose-us-title">
@@ -501,10 +501,10 @@ export default function Home() {
                   </div>
                   <div className="flex flex-1 flex-col justify-between p-4 sm:p-5">
                     <div>
-                      <h3 className="text-base font-medium sm:text-lg">
+                      <h3 className="text-title font-normal">
                         {item.title}
                       </h3>
-                      <p className="mt-2 text-sm text-muted-foreground">
+                      <p className="mt-2 text-body text-muted-foreground">
                         {item.description}
                       </p>
                     </div>
@@ -524,14 +524,14 @@ export default function Home() {
           </ContainerWrapper>
         </section>
 
-        <SectionSeparator />
+        
 
         {/* Ask Your AI */}
         <ContainerWrapper>
           <AskAiSection />
         </ContainerWrapper>
 
-        <SectionSeparator />
+        
 
         {/* FAQ */}
         <section id="faq" aria-labelledby="faq-title">
@@ -541,20 +541,14 @@ export default function Home() {
               {homeFaqs.map((faq, index) => (
                 <div className="p-3 sm:p-4" key={faq.question}>
                   <div className="flex items-start gap-4">
-                    <span className="font-mono text-xs text-muted-foreground">
+                    <span className="font-mono text-caption text-muted-foreground">
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <details className="flex-1">
-                      <summary className="flex cursor-pointer items-center justify-between text-sm font-medium">
+                      <summary className="flex cursor-pointer items-center justify-between text-body font-medium">
                         <span>{faq.question}</span>
-                        <span
-                          className="ml-2 transition-transform duration-200 details-open:rotate-45"
-                          aria-hidden="true"
-                        >
-                          +
-                        </span>
                       </summary>
-                      <p className="mt-3 pl-8 text-sm leading-relaxed text-muted-foreground">
+                      <p className="mt-3 pl-8 text-body leading-relaxed text-muted-foreground">
                         {faq.answer}
                       </p>
                     </details>
@@ -565,7 +559,7 @@ export default function Home() {
           </ContainerWrapper>
         </section>
 
-        <SectionSeparator />
+        
 
         {/* Contact */}
         <section aria-labelledby="contact-title">
@@ -582,10 +576,10 @@ export default function Home() {
               <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
               <div className="relative z-10 flex h-full flex-col items-start justify-center gap-4 py-8 px-5 sm:justify-end sm:py-10 sm:px-6 md:px-12">
                 <div>
-                  <h2 id="contact-title" className="font-pixelify text-xl font-bold text-white drop-shadow-lg sm:text-2xl">
+                  <h2 id="contact-title" className="text-subheading font-normal text-white drop-shadow-lg">
                     Get in Touch
                   </h2>
-                  <p className="mt-2 max-w-xl text-xs leading-relaxed text-white/90 sm:text-sm">
+                  <p className="mt-2 max-w-xl text-body leading-relaxed text-white/90">
                     Have a project in mind? We&apos;d love to hear about it.
                     Whether you need AI integration, workflow automation, or
                     custom software, our team is ready to help.
@@ -593,13 +587,13 @@ export default function Home() {
                 </div>
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                   <a
-                    className="bg-white px-4 py-2 text-xs font-medium text-black transition-all hover:bg-white/90 sm:py-1.5"
+                    className="bg-white px-4 py-2 text-button font-normal text-black transition-all hover:bg-white/90 sm:py-1.5"
                     href="/contact"
                   >
                     Start a project
                   </a>
                   <a
-                    className="text-xs text-white/80 underline underline-offset-4 transition-colors hover:text-white"
+                    className="text-button text-white/80 underline underline-offset-4 transition-colors hover:text-white"
                     href={`mailto:${siteConfig.email}`}
                   >
                     {siteConfig.email}
@@ -610,13 +604,13 @@ export default function Home() {
           </ContainerWrapper>
         </section>
 
-        <SectionSeparator />
+        
 
         {/* Tagline ending */}
         <section aria-label="Tagline">
           <ContainerWrapper>
             <div className="p-3 py-8 text-center sm:p-4">
-              <AnimatedShinyText className="font-pixelify text-base sm:text-xl md:text-2xl max-w-none inline-flex items-center justify-center">
+              <AnimatedShinyText className="text-title font-normal max-w-none inline-flex items-center justify-center">
                 &ldquo;Build AI with production intelligence&rdquo;
               </AnimatedShinyText>
             </div>

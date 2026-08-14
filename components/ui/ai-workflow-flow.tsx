@@ -43,7 +43,7 @@ const WorkflowNode = memo(function WorkflowNode({ data }: NodeProps<WorkflowNode
         <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-[4px] bg-[#232323] text-[#c6c6c6]">
           {data.icon}
         </span>
-        <p className="truncate font-mono text-[9px] font-medium tracking-wide text-[#d6d6d6]">
+        <p className="truncate font-mono text-caption font-medium tracking-wide text-[#d6d6d6]">
           {data.label}
         </p>
       </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Manrope, Pixelify_Sans, Geist, Geist_Mono } from "next/font/google";
+import { Manrope, Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
 import "./footer.css";
@@ -25,7 +25,7 @@ const bodyFont = Manrope({
   display: "swap",
 });
 
-const displayFont = Pixelify_Sans({
+const displayFont = Manrope({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",

@@ -56,7 +56,7 @@ export function AskAiSection() {
             <div className="absolute bottom-5 left-1/2 -translate-x-1/2">
               <button
                 onClick={handleCopy}
-                className="flex items-center gap-2 border border-white/30 bg-black/50 px-5 py-2 text-sm text-white backdrop-blur-sm transition-all hover:bg-black/70 hover:border-white/50"
+                className="flex items-center gap-2 border border-white/30 bg-black/50 px-5 py-2 text-button text-white backdrop-blur-sm transition-all hover:bg-black/70 hover:border-white/50"
               >
                 {copied ? "Copied!" : "Context.MD"}
                 <CopyIcon className="size-4" />
@@ -67,18 +67,18 @@ export function AskAiSection() {
 
         {/* Right side - Text content */}
         <div className="flex flex-col justify-center text-center md:text-left">
-          <p className="font-mono text-[10px] tracking-widest text-muted-foreground uppercase sm:text-xs">
+          <p className="font-mono text-caption tracking-widest text-muted-foreground uppercase">
             /Ask Your AI
           </p>
           <h2
             id="ask-ai-title"
-            className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl md:text-4xl"
+            className="mt-3 text-heading font-normal tracking-tight"
           >
             Feeling fatigue?
             <br />
             Ask AI
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-4 text-body leading-relaxed text-muted-foreground">
             Don&apos;t feel like scrolling? Copy Context.md, paste into{" "}
             <a
               href="https://chat.openai.com"

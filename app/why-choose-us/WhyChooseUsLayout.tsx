@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { ContainerWrapper } from "@/components/site/container";
-import { SectionSeparator } from "@/components/site/separator";
+
 import { HeaderTitle } from "@/components/profile/header-title";
 import { Footer } from "../Footer";
 
@@ -49,22 +49,22 @@ export function WhyChooseUsLayout({
             />
             <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
             <div className="relative z-10 flex min-h-[460px] flex-col justify-end p-6 sm:min-h-[540px] sm:p-10 md:p-14">
-              <p className="mb-3 font-mono text-xs uppercase tracking-widest text-muted-foreground flex items-center gap-2">
+              <p className="mb-3 font-mono text-caption uppercase tracking-widest text-muted-foreground flex items-center gap-2">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 {label}
               </p>
               <h1
                 id="wcu-hero-title"
-                className="max-w-4xl font-pixelify text-3xl font-bold leading-tight sm:text-4xl md:text-5xl lg:text-6xl"
+                className="max-w-4xl text-display font-normal"
               >
                 {headline}
               </h1>
-              <p className="mt-4 max-w-xl text-xs leading-relaxed text-muted-foreground sm:text-sm md:text-base">
+              <p className="mt-4 max-w-xl text-body leading-relaxed text-muted-foreground">
                 {description}
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <a
-                  className="bg-white px-4 py-2 text-xs font-medium text-black transition-all hover:bg-white/90"
+                  className="bg-white px-4 py-2 text-button font-normal text-black transition-all hover:bg-white/90"
                   href="/contact"
                 >
                   Start a project ↗
@@ -75,7 +75,7 @@ export function WhyChooseUsLayout({
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* What It Means — Split Layout */}
       <section aria-labelledby="wcu-meaning-title">
@@ -86,10 +86,10 @@ export function WhyChooseUsLayout({
               <ul className="space-y-5">
                 {points.map((point) => (
                   <li className="flex gap-4" key={point.number}>
-                    <span className="font-mono text-sm text-foreground/40">
+                    <span className="font-mono text-caption text-foreground/40">
                       {point.number}
                     </span>
-                    <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+                    <p className="text-body leading-relaxed text-muted-foreground">
                       {point.text}
                     </p>
                   </li>
@@ -115,7 +115,7 @@ export function WhyChooseUsLayout({
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* How We Do It */}
       <section aria-labelledby="wcu-how-title">
@@ -134,10 +134,10 @@ export function WhyChooseUsLayout({
                   }`}
                   key={cap}
                 >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center border border-dotted border-edge font-mono text-xs text-muted-foreground">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center border border-dotted border-edge font-mono text-caption text-muted-foreground">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-sm text-muted-foreground sm:text-base">
+                  <span className="text-body text-muted-foreground">
                     {cap}
                   </span>
                 </div>
@@ -147,7 +147,7 @@ export function WhyChooseUsLayout({
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* CTA */}
       <section aria-labelledby="wcu-cta-title">
@@ -165,14 +165,14 @@ export function WhyChooseUsLayout({
             <div className="relative z-10 flex h-full flex-col items-start justify-center gap-4 p-6 sm:items-center sm:text-center sm:py-10 md:px-12">
               <h2
                 id="wcu-cta-title"
-                className="max-w-xl font-pixelify text-2xl font-bold sm:text-3xl"
+                className="max-w-xl text-subheading font-normal"
               >
                 Bring us the idea.
                 <br />
                 We&apos;ll build the path.
               </h2>
               <a
-                className="bg-white px-5 py-2.5 text-xs font-medium text-black transition-all hover:bg-white/90"
+                className="bg-white px-5 py-2.5 text-button font-normal text-black transition-all hover:bg-white/90"
                 href="/contact"
               >
                 Start with discovery ↗
@@ -182,7 +182,7 @@ export function WhyChooseUsLayout({
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       <Footer />
     </main>

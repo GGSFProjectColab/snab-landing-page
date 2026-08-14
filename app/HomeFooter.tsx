@@ -38,8 +38,8 @@ export function HomeFooter() {
     <footer className="relative" aria-labelledby="footer-brand">
       <div className="full-bleed-border-t" aria-hidden="true" />
 
-      <div className="mx-auto max-w-6xl">
-        <div className="relative mx-2 border-x border-dotted border-edge">
+      <div className="mx-auto max-w-[1920px]">
+        <div className="relative mx-4 border-x border-dotted border-edge">
           {/* Brand + Nav row */}
           <div className="grid grid-cols-1 gap-0 border-b border-dotted border-edge md:grid-cols-[1fr_2fr]">
             {/* Brand section */}
@@ -50,18 +50,18 @@ export function HomeFooter() {
                 aria-label="SNAB Innovations home"
               >
                 <BrandLogo className="h-10 w-10" />
-                <span id="footer-brand" className="font-pixelify text-lg font-medium">
+                <span id="footer-brand" className="text-title font-normal">
                   SNAB Innovations
                 </span>
               </a>
-              <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">
+              <p className="max-w-xs text-body leading-relaxed text-muted-foreground">
                 AI product engineering studio building intelligent workflows and custom software from Nashik, India.
               </p>
 
               {/* Social icons */}
               <div className="mt-2 flex items-center gap-3">
                 <a
-                  className="inline-flex h-9 w-9 items-center justify-center border border-dotted border-edge text-xs transition-all duration-200 hover:bg-accent hover:border-foreground/20"
+                  className="inline-flex h-9 w-9 items-center justify-center border border-dotted border-edge text-button transition-all duration-200 hover:bg-accent hover:border-foreground/20"
                   href={siteConfig.links.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -72,7 +72,7 @@ export function HomeFooter() {
                   </svg>
                 </a>
                 <a
-                  className="inline-flex h-9 w-9 items-center justify-center border border-dotted border-edge text-xs transition-all duration-200 hover:bg-accent hover:border-foreground/20"
+                  className="inline-flex h-9 w-9 items-center justify-center border border-dotted border-edge text-button transition-all duration-200 hover:bg-accent hover:border-foreground/20"
                   href={siteConfig.links.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -83,7 +83,7 @@ export function HomeFooter() {
                   </svg>
                 </a>
                 <a
-                  className="inline-flex h-9 w-9 items-center justify-center border border-dotted border-edge text-xs transition-all duration-200 hover:bg-accent hover:border-foreground/20"
+                  className="inline-flex h-9 w-9 items-center justify-center border border-dotted border-edge text-button transition-all duration-200 hover:bg-accent hover:border-foreground/20"
                   href={siteConfig.links.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -94,7 +94,7 @@ export function HomeFooter() {
                   </svg>
                 </a>
                 <a
-                  className="inline-flex h-9 w-9 items-center justify-center border border-dotted border-edge text-xs transition-all duration-200 hover:bg-accent hover:border-foreground/20"
+                  className="inline-flex h-9 w-9 items-center justify-center border border-dotted border-edge text-button transition-all duration-200 hover:bg-accent hover:border-foreground/20"
                   href={siteConfig.links.youtube}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -116,13 +116,13 @@ export function HomeFooter() {
                   } ${colIdx > 0 ? "md:pl-6" : "md:pl-6"} ${colIdx < footerColumns.length - 1 ? "md:pr-6" : "md:pr-6"}`}
                   key={column.title}
                 >
-                  <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/80">
+                  <h3 className="text-caption font-medium uppercase tracking-wider text-foreground/80">
                     {column.title}
                   </h3>
                   <div className="flex flex-col gap-2">
                     {column.links.map((item) => (
                       <a
-                        className="text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground hover:translate-x-1 transform"
+                        className="text-button text-muted-foreground transition-colors duration-200 hover:text-foreground hover:translate-x-1 transform"
                         href={item.href}
                         key={item.label}
                       >
@@ -137,17 +137,10 @@ export function HomeFooter() {
 
           {/* Copyright row */}
           <div className="flex flex-col items-center justify-between gap-4 border-t border-dotted border-edge p-4 sm:flex-row sm:px-6">
-            <p className="text-xs text-muted-foreground">
+            <p className="text-caption text-muted-foreground">
               &copy; {new Date().getFullYear()} SNAB Innovations. All rights reserved.
             </p>
           </div>
-        </div>
-      </div>
-
-      {/* Ending dot grid inside the layout */}
-      <div className="mx-auto max-w-6xl">
-        <div className="relative mx-2 border-x border-dotted border-edge">
-          <div className="h-16 sm:h-20 ending-dot-grid" aria-hidden="true" />
         </div>
       </div>
     </footer>

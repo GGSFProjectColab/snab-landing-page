@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { ContainerWrapper } from "@/components/site/container";
-import { SectionSeparator } from "@/components/site/separator";
+
 
 export function HomeSkeleton() {
   return (
@@ -28,7 +28,7 @@ export function HomeSkeleton() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* About snab Skeleton */}
       <section>
@@ -49,7 +49,7 @@ export function HomeSkeleton() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* Services Skeleton */}
       <section>
@@ -87,7 +87,7 @@ export function HomeSkeleton() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* Current Work Skeleton */}
       <section>
@@ -119,7 +119,7 @@ export function HomeSkeleton() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* Why Choose Us Skeleton */}
       <section>
@@ -155,7 +155,7 @@ export function HomeSkeleton() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* Ask Your AI Skeleton */}
       <section>
@@ -169,7 +169,7 @@ export function HomeSkeleton() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* FAQ Skeleton */}
       <section>
@@ -188,7 +188,7 @@ export function HomeSkeleton() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* Contact CTA Skeleton */}
       <section>
@@ -208,7 +208,7 @@ export function HomeSkeleton() {
         </ContainerWrapper>
       </section>
 
-      <SectionSeparator />
+      
 
       {/* Tagline Skeleton */}
       <section>

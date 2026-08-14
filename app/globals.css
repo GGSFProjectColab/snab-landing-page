@@ -6,7 +6,7 @@
   --radius: 0.625rem;
   --font-geist-sans: var(--font-sans);
   --font-geist-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --font-pixelify: var(--font-display);
+  --font-pixelify: var(--font-body);
   --font-bitcount: var(--font-display);
 
   /* Dark theme only (always applied) */
@@ -169,21 +169,6 @@
     letter-spacing: 0;
   }
 
-  .font-bitcount {
-    font-family: var(--font-bitcount), var(--font-geist-mono), monospace;
-    letter-spacing: 0;
-  }
-
-  .ending-dot-grid {
-    background-image: radial-gradient(
-      circle,
-      var(--edge) 1px,
-      transparent 1.5px
-    );
-    background-position: 0 0;
-    background-size: 18px 18px;
-  }
-
   .section-dot-grid {
     background-image: radial-gradient(
       circle,
@@ -270,34 +255,6 @@
     background-clip: content-box;
   }
 
-  .crosshair {
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    pointer-events: none;
-  }
-
-  .crosshair::before,
-  .crosshair::after {
-    content: "";
-    position: absolute;
-    background: var(--foreground);
-  }
-
-  .crosshair::before {
-    width: 1px;
-    height: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .crosshair::after {
-    width: 100%;
-    height: 1px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
   .rail-border {
     border-left: 1px dotted var(--edge);
     border-right: 1px dotted var(--edge);
@@ -371,7 +328,7 @@
 }
 
 #faq .faq-item details > summary {
-  @apply flex cursor-pointer items-center justify-between text-base;
+  @apply flex cursor-pointer items-center justify-between text-body;
 }
 
 #faq .faq-item details summary::-webkit-details-marker {

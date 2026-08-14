@@ -7,6 +7,7 @@ import { getPublishedJobs } from "@/lib/careers";
 import { RolesSkeleton } from "./RolesSkeleton";
 import { createPageMetadata } from "@/lib/site";
 import { ContainerWrapper } from "@/components/site/container";
+import { HeaderTitle } from "@/components/profile/header-title";
 
 import "./careers.css";
 
@@ -127,9 +128,7 @@ export default function CareersPage() {
       {/* Open Roles */}
       <section id="open-roles" aria-labelledby="roles-title">
         <ContainerWrapper>
-          <div className="h-10 flex items-center border-b border-dotted border-edge px-2">
-            <h2 id="roles-title" className="text-title font-normal">Open positions</h2>
-          </div>
+          <HeaderTitle title="Open positions" id="roles-title" />
           <div className="p-4 pb-8">
             <Suspense fallback={<OpenRolesFallback />}>
               <OpenRoles />

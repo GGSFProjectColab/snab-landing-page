@@ -37,7 +37,7 @@ export function ServicesSection({ services }: { services: Service[] }) {
   return (
     <section aria-labelledby="services-title">
       <ContainerWrapper>
-        <HeaderTitle title="Services we provide" id="services-title" />
+        <HeaderTitle title="What services we provide" id="services-title" />
         <div className="grid gap-0 border-b border-dotted border-edge md:grid-cols-2">
           {visibleServices.map((service) =>
             service.visual ? (

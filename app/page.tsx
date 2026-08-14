@@ -14,8 +14,8 @@ import { GrainGradientShader } from "@/components/ui/grain-gradient-shader";
 import { AIWorkflowFlow } from "@/components/ui/ai-workflow-flow";
 import { Globe } from "@/components/ui/globe";
 import Svg1 from "@/components/pixel-perfect/svg-1";
-import { DitheredLogo } from "@/components/ui/dithered-logo";
 import Svg9 from "@/components/pixel-perfect/svg-9";
+import { DitheredLogoVisual } from "@/components/ui/dithered-logo-visual";
 import { TechStackCloud } from "./TechStackCloud";
 import { DottedMap } from "@/components/ui/dotted-map";
 import { FeatureSteps } from "@/components/ui/feature-section";
@@ -320,7 +320,7 @@ export default function Home() {
                           {project.number}
                         </span>
                         <span className="flex items-center gap-1.5">
-                          <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                          <span className="h-2 w-2 rounded-full bg-teal animate-pulse" />
                           <span className="text-caption text-muted-foreground">
                             Live
                           </span>
@@ -352,7 +352,7 @@ export default function Home() {
                         {project.number}
                       </span>
                       <span className="flex items-center gap-2">
-                        <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+                        <span className="h-2 w-2 rounded-full bg-teal animate-pulse" />
                         <span className="text-caption text-muted-foreground">
                           Live
                         </span>
@@ -452,24 +452,8 @@ export default function Home() {
                   }`}
                   key={item.title}
                 >
-                  <div className={`relative aspect-[4/3] w-full overflow-hidden p-6 ${isDithered ? "bg-black flex items-center justify-center" : "flex items-center justify-center bg-muted/30"}`}>
-                    {isDithered && (
-                      <DitheredLogo
-                        imageSrc="/logo.png"
-                        className="h-full w-full text-white"
-                        gridSize={120}
-                        scale={0.7}
-                        dotScale={1.2}
-                        invert={true}
-                        cornerRadius={0}
-                        threshold={160}
-                        contrast={20}
-                        gamma={1.2}
-                        blur={3}
-                        diffusionStrength={1}
-                        particleColor="#ffffff"
-                      />
-                    )}
+                  <div className={`relative aspect-[4/3] w-full overflow-hidden p-6 ${isDithered ? "flex items-center justify-center" : "flex items-center justify-center bg-muted/30"}`}>
+                    {isDithered && <DitheredLogoVisual />}
                     {!isDithered && "visual" in item && item.visual === "svg1" && <Svg1 />}
                     {!isDithered && "visual" in item && item.visual === "svg9" && <Svg9 />}
                     {!isDithered && "visual" in item && item.visual === "techstack" && <TechStackCloud />}

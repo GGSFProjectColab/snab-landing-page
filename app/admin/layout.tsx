@@ -3,6 +3,7 @@
 import type { ReactNode } from "react"
 import Link from "next/link"
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
+import { ThemeProvider as NextThemesProvider } from "next-themes"
 import {
   Briefcase,
   FileText,
@@ -60,11 +61,16 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   }
 
   if (isLoginPage) {
-    return <>{children}</>
+    return (
+      <NextThemesProvider attribute="class" forcedTheme="dark">
+        {children}
+      </NextThemesProvider>
+    )
   }
 
   return (
-    <SidebarProvider>
+    <NextThemesProvider attribute="class" forcedTheme="dark">
+      <SidebarProvider>
       <Sidebar>
         <SidebarHeader>
           <SidebarMenu>
@@ -138,6 +144,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           {children}
         </div>
       </SidebarInset>
-    </SidebarProvider>
+      </SidebarProvider>
+    </NextThemesProvider>
   )
 }

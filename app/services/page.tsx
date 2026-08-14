@@ -22,7 +22,7 @@ const services = [
     capabilities: ["Data Security", "Vulnerability Audits", "Zero-Trust AI"],
     highlight: false,
     icon: (
-      <svg className="w-5 h-5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg className="w-5 h-5 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m0 -10.05a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-9.665-10.826 12.083 12.083 0 01.665-6.479m9 0a12.083 12.083 0 01-9 0" />
       </svg>
     ),
@@ -36,7 +36,7 @@ const services = [
     capabilities: ["Process Automation", "Document Processing", "LLM Integration"],
     highlight: true,
     icon: (
-      <svg className="w-5 h-5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg className="w-5 h-5 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M15.75 3v1.5m0 15V21m-7.5-15h7.5a2.25 2.25 0 012.25 2.25v7.5a2.25 2.25 0 01-2.25 2.25h-7.5A2.25 2.25 0 016 15.75v-7.5A2.25 2.25 0 018.25 6z" />
       </svg>
     ),
@@ -50,7 +50,7 @@ const services = [
     capabilities: ["Architecture Planning", "AI Readiness", "Tech Stack Strategy"],
     highlight: false,
     icon: (
-      <svg className="w-5 h-5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg className="w-5 h-5 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.516 0c.85.493 1.508 1.333 1.508 2.316V18" />
       </svg>
     ),
@@ -64,7 +64,7 @@ const services = [
     capabilities: ["AWS & GCP", "Serverless Architecture", "CI/CD Pipelines"],
     highlight: false,
     icon: (
-      <svg className="w-5 h-5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg className="w-5 h-5 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15a4.5 4.5 0 004.5 4.5H18a3.75 3.75 0 001.332-7.257 3 3 0 00-3.758-3.848 5.25 5.25 0 00-10.233 2.33A4.502 4.502 0 002.25 15z" />
       </svg>
     ),
@@ -78,7 +78,7 @@ const services = [
     capabilities: ["Next.js & React", "Desktop Software", "Cross-Platform Mobile"],
     highlight: false,
     icon: (
-      <svg className="w-5 h-5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg className="w-5 h-5 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
       </svg>
     ),
@@ -92,7 +92,7 @@ const services = [
     capabilities: ["Product Analytics", "SEO Optimization", "Acquisition Pipelines"],
     highlight: false,
     icon: (
-      <svg className="w-5 h-5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <svg className="w-5 h-5 text-teal" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18L9 11.25l4.306 4.307a.5.5 0 00.71 0l7.234-7.31M21 9v3.75m0-3.75h-3.75" />
       </svg>
     ),
@@ -171,9 +171,9 @@ export default function ServicesPage() {
                   i % 2 === 0 ? "sm:border-r" : ""
                 } ${i % 3 !== 2 ? "md:border-r" : "md:border-r-0"} ${
                   i >= 3 ? "md:border-b-0" : ""
-                } ${
+                }                 ${
                   service.highlight
-                    ? "bg-emerald-950/20 border-emerald-500/30"
+                    ? "bg-teal-soft border-teal/40"
                     : "bg-muted/10 hover:bg-muted/30 transition-colors"
                 }`}
                 key={service.title}
@@ -234,7 +234,7 @@ export default function ServicesPage() {
                 }`}
                 key={step.number}
               >
-                <span className="font-mono text-caption text-emerald-400">
+                <span className="font-mono text-caption text-teal">
                   {step.number}
                 </span>
                 <h3 className="mt-2 text-title font-normal">

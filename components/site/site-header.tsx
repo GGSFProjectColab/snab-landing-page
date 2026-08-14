@@ -5,7 +5,8 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { ShinyText } from "@/components/site/shiny-text";
 import { NAV_ITEMS, DESKTOP_LINKS } from "@/data/nav-items";
@@ -176,9 +177,87 @@ function MobileDrawer({
             );
           })}
         </nav>
+
+        {/* Theme toggle - divided from nav links */}
+        <div className="border-t border-dotted border-edge px-6 py-4">
+          <ThemeToggleMobile onClose={onClose} open={open} />
+        </div>
       </div>
     </div>,
     document.body,
+  );
+}
+
+function ThemeToggleMobile({
+  onClose,
+  open,
+}: {
+  onClose: () => void;
+  open: boolean;
+}) {
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = resolvedTheme === "dark";
+
+  return (
+    <button
+      type="button"
+      tabIndex={open ? 0 : -1}
+      aria-label="Switch between light and dark mode"
+      onClick={() => {
+        setTheme(isDark ? "light" : "dark");
+        onClose();
+      }}
+      className="flex w-full items-center justify-between text-button font-normal text-muted-foreground transition-colors hover:text-primary"
+    >
+      <span>{isDark ? "Light mode" : "Dark mode"}</span>
+      {mounted && isDark ? (
+        <Sun className="size-4" />
+      ) : (
+        <Moon className="size-4" />
+      )}
+    </button>
+  );
+}
+
+function ThemeToggle({
+  className,
+  label = "Toggle color theme",
+}: {
+  className?: string;
+  label?: string;
+}) {
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = resolvedTheme === "dark";
+
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      title={label}
+      onClick={() => setTheme(isDark ? "light" : "dark")}
+      className={cn(
+        "inline-flex size-8 items-center justify-center text-muted-foreground transition-colors hover:text-primary",
+        className,
+      )}
+    >
+      {mounted && isDark ? (
+        <Sun className="size-4" />
+      ) : (
+        <Moon className="size-4" />
+      )}
+    </button>
   );
 }
 
@@ -186,6 +265,8 @@ export function SiteHeader() {
   const pathname = usePathname();
   const activePath = pathname ?? "/";
   const firstSegment = "/" + activePath.split("/").filter(Boolean)[0];
+
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   // Hide header on admin routes
   if (firstSegment === "/admin") return null;
@@ -195,8 +276,6 @@ export function SiteHeader() {
     if (href === "/#home") return isHomeActive;
     return firstSegment === href;
   };
-
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <header
@@ -219,10 +298,18 @@ export function SiteHeader() {
                 />
               ))}
             </nav>
+
+            {/* Divider between nav links and theme toggle */}
+            <div
+              className="mx-1 h-5 w-px border-l border-dotted border-edge"
+              aria-hidden="true"
+            />
+            <ThemeToggle label="Switch between light and dark mode" />
           </div>
 
           {/* Mobile — compact actions */}
           <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
             <button
               type="button"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}

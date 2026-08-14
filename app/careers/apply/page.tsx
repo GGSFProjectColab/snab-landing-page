@@ -33,7 +33,7 @@ export default function GeneralApplicationPage() {
               {/* Context */}
               <div className="lg:pt-2">
                 <p className="font-mono text-caption uppercase tracking-wider text-muted-foreground inline-flex items-center gap-2 mb-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-teal" />
                   Open application
                 </p>
                 <h1 className="text-display font-normal tracking-tight">
@@ -43,7 +43,7 @@ export default function GeneralApplicationPage() {
                   If you don&apos;t see the right opening, tell us where you do your best work.
                   Specific examples are more useful than a formal cover letter.
                 </p>
-                <div className="border border-dotted border-edge rounded-lg p-4 mt-5 bg-white/[0.015]">
+                <div className="border border-dotted border-edge rounded-lg p-4 mt-5 bg-foreground/[0.015]">
                   <p className="text-body text-foreground font-medium">
                     Good to include
                   </p>

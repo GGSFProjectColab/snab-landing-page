@@ -55,7 +55,7 @@ export default function CareersLoading() {
             <RolesSkeleton />
 
             {/* General Application CTA Skeleton */}
-            <div className="mt-6 p-5 border border-dotted border-edge bg-white/[0.015] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="mt-6 p-5 border border-dotted border-edge bg-foreground/[0.015] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div className="flex-1">
                 <Skeleton className="h-4 w-40 rounded-sm mb-2" />
                 <Skeleton className="h-3 w-64 rounded-sm" />

@@ -42,6 +42,8 @@
   --sidebar-border: oklch(1 0 0 / 18%);
   --sidebar-ring: oklch(0.556 0 0);
   --edge: oklch(1 0 0 / 20%);
+  --teal: oklch(0.72 0.12 180);
+  --teal-soft: oklch(0.28 0.04 180);
   --footer-shader-back: #080808;
   --footer-shader-front: #262626;
   --header-dither-base: #050505;
@@ -51,6 +53,86 @@
   --github-l2: #006d32;
   --github-l3: #26a641;
   --github-l4: #39d353;
+  --flow-bg: #000000;
+  --flow-dots: #2a2a2a;
+  --flow-edge: #5b5b5b;
+  --flow-node: #131313;
+  --flow-node-border: #2e2e2e;
+  --flow-node-chip: #232323;
+  --flow-node-muted: #c6c6c6;
+  --flow-node-text: #d6d6d6;
+  --flow-handle: #9ca3af;
+  --flow-handle-border: #000000;
+  --input-focus-bg: rgba(255, 255, 255, 0.06);
+  --skeleton-bg: #151515;
+  --skeleton-border: rgba(255, 255, 255, 0.045);
+  --skeleton-shimmer: rgba(255, 255, 255, 0.075);
+  --skeleton-page-bg: #000;
+  --skeleton-color: #fff;
+}
+
+.light {
+  /* Warm off-white (Cloud Dancer / paper) palette - never pure white */
+  --background: oklch(0.975 0.005 80);
+  --foreground: oklch(0.22 0.012 265);
+  --card: oklch(0.985 0.004 80);
+  --card-foreground: oklch(0.22 0.012 265);
+  --popover: oklch(0.99 0.003 80);
+  --popover-foreground: oklch(0.22 0.012 265);
+  --primary: oklch(0.22 0.012 265);
+  --primary-foreground: oklch(0.985 0.004 80);
+  --secondary: oklch(0.94 0.008 80);
+  --secondary-foreground: oklch(0.22 0.012 265);
+  --muted: oklch(0.945 0.008 80);
+  --muted-foreground: oklch(0.5 0.02 265);
+  --accent: oklch(0.93 0.01 80);
+  --accent-foreground: oklch(0.22 0.012 265);
+  --destructive: oklch(0.55 0.17 25);
+  --border: oklch(0.88 0.01 80);
+  --input: oklch(0.88 0.01 80);
+  --ring: oklch(0.58 0.11 185);
+  --chart-1: oklch(0.55 0.12 185);
+  --chart-2: oklch(0.65 0.13 155);
+  --chart-3: oklch(0.72 0.13 75);
+  --chart-4: oklch(0.58 0.16 330);
+  --chart-5: oklch(0.6 0.15 15);
+  --sidebar: oklch(0.985 0.004 80);
+  --sidebar-foreground: oklch(0.22 0.012 265);
+  --sidebar-primary: oklch(0.55 0.12 185);
+  --sidebar-primary-foreground: oklch(0.985 0.004 80);
+  --sidebar-accent: oklch(0.93 0.01 80);
+  --sidebar-accent-foreground: oklch(0.22 0.012 265);
+  --sidebar-border: oklch(0.88 0.01 80);
+  --sidebar-ring: oklch(0.58 0.11 185);
+  /* Dividers must stay clearly visible on the warm paper background */
+  --edge: oklch(0.8 0.012 80);
+  --teal: oklch(0.48 0.11 180);
+  --teal-soft: oklch(0.92 0.03 180);
+  --footer-shader-back: #f3efe8;
+  --footer-shader-front: #ddd6c9;
+  --header-dither-base: #f1ede6;
+  --header-dither-wave: #7a756c;
+  --github-none: #ebedf0;
+  --github-l1: #9be9a8;
+  --github-l2: #40c463;
+  --github-l3: #30a14e;
+  --github-l4: #216e39;
+  --flow-bg: #f4f1eb;
+  --flow-dots: #d9d3c9;
+  --flow-edge: #9a948a;
+  --flow-node: #ffffff;
+  --flow-node-border: #ddd6c9;
+  --flow-node-chip: #ede9e1;
+  --flow-node-muted: #6f6a62;
+  --flow-node-text: #2b2723;
+  --flow-handle: #8b857c;
+  --flow-handle-border: #ffffff;
+  --input-focus-bg: rgba(0, 0, 0, 0.03);
+  --skeleton-bg: #e9e4db;
+  --skeleton-border: rgba(0, 0, 0, 0.06);
+  --skeleton-shimmer: rgba(255, 255, 255, 0.6);
+  --skeleton-page-bg: #f8f5f0;
+  --skeleton-color: #6f6a62;
 }
 
 .dark {
@@ -86,6 +168,8 @@
   --sidebar-border: oklch(1 0 0 / 18%);
   --sidebar-ring: oklch(0.556 0 0);
   --edge: oklch(1 0 0 / 20%);
+  --teal: oklch(0.72 0.12 180);
+  --teal-soft: oklch(0.28 0.04 180);
   --footer-shader-back: #080808;
   --footer-shader-front: #262626;
   --header-dither-base: #050505;
@@ -95,6 +179,22 @@
   --github-l2: #006d32;
   --github-l3: #26a641;
   --github-l4: #39d353;
+  --flow-bg: #000000;
+  --flow-dots: #2a2a2a;
+  --flow-edge: #5b5b5b;
+  --flow-node: #131313;
+  --flow-node-border: #2e2e2e;
+  --flow-node-chip: #232323;
+  --flow-node-muted: #c6c6c6;
+  --flow-node-text: #d6d6d6;
+  --flow-handle: #9ca3af;
+  --flow-handle-border: #000000;
+  --input-focus-bg: rgba(255, 255, 255, 0.06);
+  --skeleton-bg: #151515;
+  --skeleton-border: rgba(255, 255, 255, 0.045);
+  --skeleton-shimmer: rgba(255, 255, 255, 0.075);
+  --skeleton-page-bg: #000;
+  --skeleton-color: #fff;
 }
 
 .shiki {
@@ -383,18 +483,18 @@
 }
 
 .ai-workflow-flow .react-flow__edge path {
-  stroke: #5b5b5b !important;
+  stroke: var(--flow-edge) !important;
 }
 
 .ai-workflow-flow .react-flow__handle {
   width: 7px !important;
   height: 7px !important;
-  background: #9ca3af !important;
-  border: 2px solid #000 !important;
+  background: var(--flow-handle) !important;
+  border: 2px solid var(--flow-handle-border) !important;
 }
 
 .ai-workflow-flow .react-flow__background {
-  background: #000000 !important;
+  background: var(--flow-bg) !important;
 }
 
 .ai-workflow-flow .react-flow__attribution {

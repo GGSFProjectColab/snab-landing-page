@@ -30,7 +30,7 @@ async function OpenRoles() {
             <Link
               href={`/careers/${job.slug}`}
               key={job.id}
-              className="job-card group flex flex-col p-5 border border-dotted border-edge bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300"
+              className="job-card group flex flex-col p-5 border border-dotted border-edge bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-all duration-300"
             >
               <div className="flex items-start justify-between gap-4 mb-3">
                 <div className="flex-1 min-w-0">
@@ -63,8 +63,8 @@ async function OpenRoles() {
                   {job.location}
                 </span>
                 {job.featured && (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-500/10 text-green-400 text-caption font-medium uppercase tracking-wider">
-                    <span className="w-1 h-1 rounded-full bg-green-400" />
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-teal/10 text-teal text-caption font-medium uppercase tracking-wider">
+                    <span className="w-1 h-1 rounded-full bg-teal" />
                     Featured
                   </span>
                 )}
@@ -164,7 +164,7 @@ export default function CareersPage() {
             </Suspense>
 
             {/* General Application CTA */}
-            <div className="mt-6 p-5 border border-dotted border-edge bg-white/[0.015] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="mt-6 p-5 border border-dotted border-edge bg-foreground/[0.015] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
                 <h3 className="text-title font-normal text-foreground">
                   Don&apos;t see your role?

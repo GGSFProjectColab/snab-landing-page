@@ -59,7 +59,7 @@ export default async function JobPage({ params }: Props) {
             </Link>
 
             <div className="flex items-center gap-2 mb-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
+              <span className="w-1.5 h-1.5 rounded-full bg-teal" />
               <span className="font-mono text-caption uppercase tracking-wider text-muted-foreground">
                 {job.department}
               </span>
@@ -172,7 +172,7 @@ export default async function JobPage({ params }: Props) {
               </div>
 
               {/* Side Card */}
-              <aside className="border border-dotted border-edge p-3 bg-white/[0.02] self-start lg:sticky lg:top-20">
+              <aside className="border border-dotted border-edge p-3 bg-foreground/[0.02] self-start lg:sticky lg:top-20">
                 <p className="font-mono text-caption uppercase tracking-wider text-muted-foreground mb-2">
                   Snapshot
                 </p>

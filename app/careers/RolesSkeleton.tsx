@@ -5,7 +5,7 @@ export function RolesSkeleton({ rows = 4 }: { rows?: number }) {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4" aria-hidden="true">
       {Array.from({ length: rows }, (_, index) => (
         <div
-          className="flex flex-col p-5 border border-dotted border-edge bg-white/[0.02]"
+          className="flex flex-col p-5 border border-dotted border-edge bg-foreground/[0.02]"
           key={index}
         >
           <div className="flex items-start justify-between gap-4 mb-3">

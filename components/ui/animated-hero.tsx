@@ -39,7 +39,7 @@ function Hero() {
         <div className="flex gap-6 py-20 lg:py-28 items-center justify-center flex-col">
           <div className="flex gap-4 flex-col">
             <h1 id="hero-title" className="text-display max-w-2xl tracking-tighter text-center font-normal text-white drop-shadow-lg">
-              <span className="text-white">We build software that works.</span>
+              <span className="text-white">We engineer</span>
               <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-3 md:pt-0.5">
                 &nbsp;
                 {titles.map((title, index) => (
@@ -64,6 +64,7 @@ function Hero() {
                   </motion.span>
                 ))}
               </span>
+              <span className="text-white">that perform.</span>
             </h1>
 
             <p className="text-body leading-relaxed tracking-tight text-white max-w-2xl text-center drop-shadow-md">

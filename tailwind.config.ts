@@ -25,6 +25,7 @@ const config: Config = {
         input: "var(--input)",
         ring: "var(--ring)",
         edge: "var(--edge)",
+        teal: { DEFAULT: "var(--teal)", soft: "var(--teal-soft)" },
         primary: { DEFAULT: "var(--primary)", foreground: "var(--primary-foreground)" },
         secondary: { DEFAULT: "var(--secondary)", foreground: "var(--secondary-foreground)" },
         destructive: "var(--destructive)",

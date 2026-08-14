@@ -1,8 +1,8 @@
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.skeleton{position:relative;overflow:hidden;background:#151515;border:1px solid rgba(255,255,255,.045)}
-.skeleton::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.075),transparent);animation:skeleton-shimmer 1.55s ease-in-out infinite}
+.skeleton{position:relative;overflow:hidden;background:var(--skeleton-bg);border:1px solid var(--skeleton-border)}
+.skeleton::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,var(--skeleton-shimmer),transparent);animation:skeleton-shimmer 1.55s ease-in-out infinite}
 @keyframes skeleton-shimmer{to{transform:translateX(100%)}}
-.route-skeleton{min-height:100vh;background:#000;color:#fff}
+.route-skeleton{min-height:100vh;background:var(--skeleton-page-bg);color:var(--skeleton-color)}
 .route-skeleton-nav{display:flex;min-height:var(--nav-height);align-items:center;justify-content:space-between;padding:17px 70px 0}
 .route-skeleton-brand{width:224px;height:39px}.route-skeleton-menu{width:104px;height:40px}
 .route-skeleton-hero{display:grid;min-height:calc(100vh - var(--nav-height));grid-template-columns:minmax(0,.9fr) minmax(320px,1.1fr);align-items:center;gap:clamp(32px,7vw,120px);padding:64px 70px 72px}

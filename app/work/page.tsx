@@ -92,7 +92,7 @@ export default function WorkPage() {
                         {item.number}
                       </span>
                       <span className="flex items-center gap-1.5">
-                        <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                        <span className="h-2 w-2 rounded-full bg-teal animate-pulse" />
                         <span className="font-mono text-caption text-muted-foreground">
                           {item.status}
                         </span>

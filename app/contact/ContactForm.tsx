@@ -19,7 +19,7 @@ export function ContactForm() {
 
   if (state.succeeded) {
     return (
-      <p className="text-button font-medium text-green-500" role="status">
+      <p className="text-button font-medium text-teal" role="status">
         Message sent successfully! We&apos;ll get back to you soon.
       </p>
     );

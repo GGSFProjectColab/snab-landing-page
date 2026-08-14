@@ -125,7 +125,7 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
   if (submitted) {
     return (
       <div className="text-center py-12 px-4" role="status">
-        <div className="inline-flex items-center justify-center w-12 h-12 border border-dotted border-edge bg-white/[0.03] mb-4">
+        <div className="inline-flex items-center justify-center w-12 h-12 border border-dotted border-edge bg-foreground/[0.03] mb-4">
           <Check size={20} className="text-foreground" />
         </div>
         <p className="font-mono text-caption uppercase tracking-wider text-muted-foreground mb-2">
@@ -169,7 +169,7 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
               name="full_name"
               autoComplete="name"
               required
-              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
+              className="w-full border border-dotted border-edge bg-foreground/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
               placeholder="Jane Smith"
             />
           </label>
@@ -181,7 +181,7 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
                 type="email"
                 autoComplete="email"
                 required
-                className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
+                className="w-full border border-dotted border-edge bg-foreground/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
                 placeholder="you@example.com"
               />
             </label>
@@ -191,7 +191,7 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
                 name="phone"
                 type="tel"
                 autoComplete="tel"
-                className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
+                className="w-full border border-dotted border-edge bg-foreground/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
               />
             </label>
           </div>
@@ -201,7 +201,7 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
               name="location"
               autoComplete="address-level2"
               required
-              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
+              className="w-full border border-dotted border-edge bg-foreground/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
               placeholder="e.g. Nashik, Maharashtra"
             />
           </label>
@@ -219,7 +219,7 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
               name="linkedin_url"
               type="url"
               inputMode="url"
-              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
+              className="w-full border border-dotted border-edge bg-foreground/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
               placeholder="https://linkedin.com/in/..."
             />
           </label>
@@ -229,7 +229,7 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
               name="portfolio_url"
               type="url"
               inputMode="url"
-              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
+              className="w-full border border-dotted border-edge bg-foreground/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
               placeholder="https://"
             />
           </label>
@@ -247,7 +247,7 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
             <input
               name="preferred_role"
               required
-              className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
+              className="w-full border border-dotted border-edge bg-foreground/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors"
               placeholder="e.g. Product engineering, AI research"
             />
           </label>
@@ -260,7 +260,7 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
             rows={3}
             maxLength={1800}
             required
-            className="w-full border border-dotted border-edge bg-white/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors resize-none"
+            className="w-full border border-dotted border-edge bg-foreground/[0.03] text-foreground px-3 py-2 text-button outline-none transition-colors resize-none"
             placeholder="A short, honest note is perfect."
           />
         </label>
@@ -280,7 +280,7 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
             required={!file}
           />
           {file ? (
-            <div className="flex items-center gap-3 border border-dotted border-edge px-3 py-2 bg-white/[0.02]">
+            <div className="flex items-center gap-3 border border-dotted border-edge px-3 py-2 bg-foreground/[0.02]">
               <FileText size={14} className="text-muted-foreground shrink-0" />
               <div className="min-w-0 flex-1">
                 <p className="text-caption text-foreground truncate">{file.name}</p>
@@ -301,7 +301,7 @@ export function ApplicationForm({ job }: ApplicationFormProps) {
           ) : (
             <label
               htmlFor="resume"
-              className="flex items-center justify-center gap-2 border border-dotted border-edge px-4 py-5 bg-white/[0.02] cursor-pointer hover:bg-white/[0.04] transition-colors text-button text-muted-foreground"
+              className="flex items-center justify-center gap-2 border border-dotted border-edge px-4 py-5 bg-foreground/[0.02] cursor-pointer hover:bg-foreground/[0.04] transition-colors text-button text-muted-foreground"
             >
               <Upload size={14} />
               Choose résumé

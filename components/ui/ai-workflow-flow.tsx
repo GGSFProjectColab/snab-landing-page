@@ -1,6 +1,7 @@
 "use client";
 
-import { memo, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { memo, useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { useTheme } from "next-themes";
 import {
   ReactFlow,
   ReactFlowProvider,
@@ -21,36 +22,75 @@ import "@xyflow/react/dist/style.css";
 type WorkflowNodeData = {
   label: string;
   icon: ReactNode;
+  colors: {
+    node: string;
+    nodeBorder: string;
+    nodeChip: string;
+    nodeMuted: string;
+    nodeText: string;
+    handle: string;
+    handleBorder: string;
+  };
+};
+
+const DARK_COLORS = {
+  bg: "#000000",
+  dots: "#2a2a2a",
+  edge: "#5b5b5b",
+  node: "#131313",
+  nodeBorder: "#2e2e2e",
+  nodeChip: "#232323",
+  nodeMuted: "#c6c6c6",
+  nodeText: "#d6d6d6",
+  handle: "#9ca3af",
+  handleBorder: "#000000",
+};
+
+const LIGHT_COLORS = {
+  bg: "#f4f1eb",
+  dots: "#d9d3c9",
+  edge: "#9a948a",
+  node: "#ffffff",
+  nodeBorder: "#ddd6c9",
+  nodeChip: "#ede9e1",
+  nodeMuted: "#6f6a62",
+  nodeText: "#2b2723",
+  handle: "#8b857c",
+  handleBorder: "#ffffff",
 };
 
 const WorkflowNode = memo(function WorkflowNode({ data }: NodeProps<WorkflowNodeDef>) {
+  const { colors } = data;
   return (
     <>
       <Handle
         type="target"
         position={Position.Left}
-        style={{ width: 7, height: 7, background: "#9ca3af", border: "2px solid #000" }}
+        style={{ width: 7, height: 7, background: colors.handle, border: `2px solid ${colors.handleBorder}` }}
       />
       <div
         className="flex items-center gap-1.5 rounded-[5px] px-1.5 py-1"
         style={{
           minWidth: 92,
-          background: "#131313",
-          border: "1px solid #2e2e2e",
+          background: colors.node,
+          border: `1px solid ${colors.nodeBorder}`,
           boxShadow: "0 1px 4px rgba(0, 0, 0, 0.5)",
         }}
       >
-        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-[4px] bg-[#232323] text-[#c6c6c6]">
+        <span
+          className="flex h-5 w-5 shrink-0 items-center justify-center rounded-[4px]"
+          style={{ background: colors.nodeChip, color: colors.nodeMuted }}
+        >
           {data.icon}
         </span>
-        <p className="truncate font-mono text-caption font-medium tracking-wide text-[#d6d6d6]">
+        <p className="truncate font-mono text-caption font-medium tracking-wide" style={{ color: colors.nodeText }}>
           {data.label}
         </p>
       </div>
       <Handle
         type="source"
         position={Position.Right}
-        style={{ width: 7, height: 7, background: "#9ca3af", border: "2px solid #000" }}
+        style={{ width: 7, height: 7, background: colors.handle, border: `2px solid ${colors.handleBorder}` }}
       />
     </>
   );
@@ -60,69 +100,81 @@ const nodeTypes = { workflow: WorkflowNode };
 
 type WorkflowNodeDef = Node<WorkflowNodeData, "workflow">;
 
-const nodes: WorkflowNodeDef[] = [
-  {
-    id: "trigger",
-    type: "workflow",
-    position: { x: 0, y: 0 },
-    data: { label: "trigger", icon: <Zap size={10} strokeWidth={2.5} /> },
-  },
-  {
-    id: "extract",
-    type: "workflow",
-    position: { x: 120, y: 0 },
-    data: { label: "extract", icon: <Braces size={10} strokeWidth={2.5} /> },
-  },
-  {
-    id: "llm",
-    type: "workflow",
-    position: { x: 240, y: 0 },
-    data: { label: "llm · reason", icon: <Sparkles size={10} strokeWidth={2.5} /> },
-  },
-];
+function buildNodes(colors: WorkflowNodeData["colors"]): WorkflowNodeDef[] {
+  return [
+    {
+      id: "trigger",
+      type: "workflow",
+      position: { x: 0, y: 0 },
+      data: { label: "trigger", icon: <Zap size={10} strokeWidth={2.5} />, colors },
+    },
+    {
+      id: "extract",
+      type: "workflow",
+      position: { x: 120, y: 0 },
+      data: { label: "extract", icon: <Braces size={10} strokeWidth={2.5} />, colors },
+    },
+    {
+      id: "llm",
+      type: "workflow",
+      position: { x: 240, y: 0 },
+      data: { label: "llm · reason", icon: <Sparkles size={10} strokeWidth={2.5} />, colors },
+    },
+  ];
+}
 
-const edgeStyle = (): Edge["style"] => ({
-  stroke: "#5b5b5b",
-  strokeWidth: 1.5,
-  strokeDasharray: "6 4",
-});
+function buildEdges(edgeColor: string): Edge[] {
+  const edgeStyle = (): Edge["style"] => ({
+    stroke: edgeColor,
+    strokeWidth: 1.5,
+    strokeDasharray: "6 4",
+  });
 
-const edgeArrow = {
-  type: MarkerType.ArrowClosed,
-  color: "#5b5b5b",
-  width: 12,
-  height: 12,
-};
+  const edgeArrow = {
+    type: MarkerType.ArrowClosed,
+    color: edgeColor,
+    width: 12,
+    height: 12,
+  };
 
-const edges: Edge[] = [
-  {
-    id: "e-trigger-extract",
-    source: "trigger",
-    target: "extract",
-    animated: true,
-    style: edgeStyle(),
-    markerEnd: edgeArrow,
-  },
-  {
-    id: "e-extract-llm",
-    source: "extract",
-    target: "llm",
-    animated: true,
-    style: edgeStyle(),
-    markerEnd: edgeArrow,
-  },
-];
-
-const flowStyle: CSSProperties = {
-  background: "#000000",
-};
+  return [
+    {
+      id: "e-trigger-extract",
+      source: "trigger",
+      target: "extract",
+      animated: true,
+      style: edgeStyle(),
+      markerEnd: edgeArrow,
+    },
+    {
+      id: "e-extract-llm",
+      source: "extract",
+      target: "llm",
+      animated: true,
+      style: edgeStyle(),
+      markerEnd: edgeArrow,
+    },
+  ];
+}
 
 function FlowCanvas() {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const { resolvedTheme } = useTheme();
   const { fitView } = useReactFlow();
   const nodesInitialized = useNodesInitialized({ includeHiddenNodes: true });
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted ? resolvedTheme === "dark" : true;
+  const colors = isDark ? DARK_COLORS : LIGHT_COLORS;
+
+  const nodes = useMemo(() => buildNodes(colors), [colors]);
+  const edges = useMemo(() => buildEdges(colors.edge), [colors]);
 
   useEffect(() => {
     const el = wrapperRef.current;
@@ -148,6 +200,10 @@ function FlowCanvas() {
     const t = setTimeout(() => fitView({ padding: 0.5, duration: 0 }), 100);
     return () => clearTimeout(t);
   }, [ready, nodesInitialized, fitView]);
+
+  const flowStyle: CSSProperties = {
+    background: colors.bg,
+  };
 
   return (
     <div
@@ -177,7 +233,7 @@ function FlowCanvas() {
             variant={BackgroundVariant.Dots}
             gap={14}
             size={1}
-            color="#2a2a2a"
+            color={colors.dots}
           />
         </ReactFlow>
       )}

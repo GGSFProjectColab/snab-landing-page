@@ -11,7 +11,7 @@ const config: Config = {
       body: ["16px", { lineHeight: "1.5" }],
       title: ["22px", { lineHeight: "1.3", letterSpacing: "-0.005em" }],
       subheading: ["26px", { lineHeight: "1.25", letterSpacing: "-0.0125em" }],
-      heading: ["36px", { lineHeight: "1.2", letterSpacing: "-0.02em" }],
+      heading: ["52px", { lineHeight: "1.2", letterSpacing: "-0.02em" }],
       display: [
         "clamp(44px, 6vw, 72px)",
         { lineHeight: "1.1", letterSpacing: "-0.03em" },

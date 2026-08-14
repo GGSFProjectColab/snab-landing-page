@@ -13,13 +13,13 @@ export function HeaderTitle({ title, id, className }: HeaderTitleProps) {
   return (
     <div
       className={cn(
-        "h-10 flex items-center border-b border-dotted border-edge px-2",
+        "h-16 flex items-center border-b border-dotted border-edge px-2",
         className
       )}
     >
       <h2
         id={slugifiedId}
-        className="text-title font-normal"
+        className="text-heading font-normal"
       >
         <TextScramble text={title} />
       </h2>

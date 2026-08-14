@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 import { MoveRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
@@ -10,7 +11,14 @@ import SpecularButton from "@/components/ui/SpecularButton";
 
 function Hero() {
   const router = useRouter();
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const [titleNumber, setTitleNumber] = useState(0);
+  const isDark = mounted ? resolvedTheme === "dark" : true;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   const titles = useMemo(
     () => [
       "web platforms",
@@ -38,14 +46,14 @@ function Hero() {
       <div className="container mx-auto">
         <div className="flex gap-6 py-20 lg:py-28 items-center justify-center flex-col">
           <div className="flex gap-4 flex-col">
-            <h1 id="hero-title" className="text-display max-w-2xl tracking-tighter text-center font-normal text-white drop-shadow-lg">
-              <span className="text-white">We engineer</span>
+            <h1 id="hero-title" className="text-display max-w-2xl tracking-tighter text-center font-normal text-foreground dark:text-white dark:drop-shadow-lg">
+              <span className="text-foreground dark:text-white">We engineer</span>
               <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-3 md:pt-0.5">
                 &nbsp;
                 {titles.map((title, index) => (
                   <motion.span
                     key={index}
-                    className="absolute font-normal text-cyan-200 drop-shadow-md"
+                    className="absolute font-normal text-teal dark:text-cyan-200 dark:drop-shadow-md"
                     initial={{ opacity: 0, y: "-100" }}
                     transition={{ type: "spring", stiffness: 50 }}
                     animate={
@@ -64,10 +72,10 @@ function Hero() {
                   </motion.span>
                 ))}
               </span>
-              <span className="text-white">that perform.</span>
+              <span className="text-foreground dark:text-white">that perform.</span>
             </h1>
 
-            <p className="text-body leading-relaxed tracking-tight text-white max-w-2xl text-center drop-shadow-md">
+            <p className="text-body leading-relaxed tracking-tight text-muted-foreground dark:text-white max-w-2xl text-center dark:drop-shadow-md">
               <span className="md:hidden">
                 Software engineering for AI, web, and mobile.
               </span>
@@ -81,12 +89,12 @@ function Hero() {
             <SpecularButton
               size="md"
               radius={6}
-              tint="#ffffff"
-              tintOpacity={0.08}
+              tint={isDark ? "#ffffff" : "#1a191f"}
+              tintOpacity={isDark ? 0.08 : 0.05}
               blur={12}
-              textColor="#ffffff"
-              lineColor="#ffffff"
-              baseColor="#666666"
+              textColor={isDark ? "#ffffff" : "#1a191f"}
+              lineColor={isDark ? "#ffffff" : "#1a191f"}
+              baseColor={isDark ? "#666666" : "#8b8794"}
               intensity={1}
               shineSize={10}
               shineFade={40}

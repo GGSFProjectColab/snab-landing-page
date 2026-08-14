@@ -269,7 +269,7 @@ export default function Home() {
             <div className="relative min-h-[600px] overflow-hidden bg-muted/30">
               <GrainGradientShader />
               <div
-                className="absolute inset-0 bg-black/30"
+                className="absolute inset-0 dark:bg-black/30"
                 aria-hidden="true"
               />
 
@@ -521,7 +521,7 @@ export default function Home() {
         <section id="faq" aria-labelledby="faq-title">
           <ContainerWrapper>
             <HeaderTitle title="FAQ" id="faq-title" />
-            <div className="divide-y divide-dotted divide-edge">
+            <div className="">
               {homeFaqs.map((faq, index) => (
                 <div className="p-3 sm:p-4" key={faq.question}>
                   <div className="flex items-start gap-4">
@@ -540,6 +540,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            <div className="bottom-rail bg-edge" aria-hidden="true" />
           </ContainerWrapper>
         </section>
 

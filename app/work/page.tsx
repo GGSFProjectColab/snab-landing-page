@@ -26,7 +26,8 @@ const workItems = [
       "Automated Summaries",
       "Evaluation Support",
     ],
-    image: "/interviewxpert.png",
+    image: "/interviewxpert-dark.png",
+    imageDark: "/interviewxpert.png",
     imageAlt: "Interview Expert Interface Preview",
   },
   {
@@ -159,13 +160,23 @@ export default function WorkPage() {
                     />
                     <div className="relative h-full w-full overflow-hidden rounded-[6px]">
                       <Image
-                        className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                        className={`h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105 ${'imageDark' in item && item.imageDark ? 'block dark:hidden' : ''}`}
                         src={item.image}
                         alt={item.imageAlt}
                         width={400}
                         height={400}
                         sizes="(max-width: 768px) 100vw, 240px"
                       />
+                      {'imageDark' in item && item.imageDark && (
+                        <Image
+                          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105 hidden dark:block"
+                          src={item.imageDark as string}
+                          alt={item.imageAlt}
+                          width={400}
+                          height={400}
+                          sizes="(max-width: 768px) 100vw, 240px"
+                        />
+                      )}
                     </div>
                   </div>
                 </div>

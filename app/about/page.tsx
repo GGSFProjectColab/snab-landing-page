@@ -33,7 +33,8 @@ const products = [
   {
     name: "Interview Expert",
     description: "AI-enabled platform for organizing interview workflows and turning information into structured records.",
-    image: "/interviewxpert.png",
+    image: "/interviewxpert-dark.png",
+    imageDark: "/interviewxpert.png",
   },
   {
     name: "Notary Expert",
@@ -244,12 +245,21 @@ export default function AboutPage() {
                 <div className="flex items-center justify-center border-t border-dotted border-edge p-6 sm:border-t-0 sm:border-l sm:p-8 md:border-l">
                   <div className="relative h-40 w-40 overflow-hidden rounded border border-dotted border-edge sm:h-48 sm:w-48">
                     <Image
-                      className="object-contain p-4"
+                      className={`object-contain p-4 ${'imageDark' in product && product.imageDark ? 'block dark:hidden' : ''}`}
                       src={product.image}
                       alt={product.name}
                       fill
                       sizes="192px"
                     />
+                    {'imageDark' in product && product.imageDark && (
+                      <Image
+                        className="object-contain p-4 hidden dark:block"
+                        src={product.imageDark as string}
+                        alt={product.name}
+                        fill
+                        sizes="192px"
+                      />
+                    )}
                   </div>
                 </div>
               </div>

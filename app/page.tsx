@@ -45,7 +45,8 @@ const projects = [
       "Summaries",
       "Evaluation Support",
     ],
-    image: "/interviewxpert.png",
+    image: "/interviewxpert-dark.png",
+    imageDark: "/interviewxpert.png",
     imageAlt: "Interview Expert mark",
   },
   {
@@ -317,13 +318,23 @@ export default function Home() {
                         aria-hidden="true"
                       />
                       <Image
-                        className="relative h-full w-full object-cover object-top rounded-t"
+                        className={`relative h-full w-full object-cover object-top rounded-t ${'imageDark' in project && project.imageDark ? 'block dark:hidden' : ''}`}
                         src={project.image}
                         alt={project.imageAlt}
                         width={160}
                         height={160}
                         sizes="80px"
                       />
+                      {'imageDark' in project && project.imageDark && (
+                        <Image
+                          className="relative h-full w-full object-cover object-top rounded-t hidden dark:block"
+                          src={project.imageDark as string}
+                          alt={project.imageAlt}
+                          width={160}
+                          height={160}
+                          sizes="80px"
+                        />
+                      )}
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
@@ -412,13 +423,23 @@ export default function Home() {
                         aria-hidden="true"
                       />
                       <Image
-                        className="relative h-full w-full object-cover object-top rounded-t"
+                        className={`relative h-full w-full object-cover object-top rounded-t ${'imageDark' in project && project.imageDark ? 'block dark:hidden' : ''}`}
                         src={project.image}
                         alt={project.imageAlt}
                         width={320}
                         height={320}
                         sizes="200px"
                       />
+                      {'imageDark' in project && project.imageDark && (
+                        <Image
+                          className="relative h-full w-full object-cover object-top rounded-t hidden dark:block"
+                          src={project.imageDark as string}
+                          alt={project.imageAlt}
+                          width={320}
+                          height={320}
+                          sizes="200px"
+                        />
+                      )}
                     </div>
                   </div>
                 </div>

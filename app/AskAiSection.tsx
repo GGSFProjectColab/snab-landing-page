@@ -44,9 +44,19 @@ export function AskAiSection() {
         {/* Left side - Image with copy button */}
         <div className="relative flex justify-center">
           <div className="relative w-full max-w-[280px] sm:max-w-sm md:max-w-md">
+            {/* Dark mode image */}
             <Image
-              className="w-full h-auto"
+              className="w-full h-auto hidden dark:block"
               src="/ascii-magic-15.png"
+              alt="AI Assistant"
+              width={500}
+              height={500}
+              priority
+            />
+            {/* Light mode image */}
+            <Image
+              className="w-full h-auto block dark:hidden"
+              src="/ascii-magic-15-light.jpg"
               alt="AI Assistant"
               width={500}
               height={500}
@@ -56,7 +66,7 @@ export function AskAiSection() {
             <div className="absolute bottom-5 left-1/2 -translate-x-1/2">
               <button
                 onClick={handleCopy}
-                className="flex items-center gap-2 border border-white/30 bg-black/50 px-5 py-2 text-button text-white backdrop-blur-sm transition-all hover:bg-black/70 hover:border-white/50"
+                className="flex items-center gap-2 border border-black/20 bg-white/70 px-5 py-2 text-button text-black backdrop-blur-sm transition-all hover:bg-white/90 hover:border-black/40 dark:border-white/30 dark:bg-black/50 dark:text-white dark:hover:bg-black/70 dark:hover:border-white/50"
               >
                 {copied ? "Copied!" : "Context.MD"}
                 <CopyIcon className="size-4" />

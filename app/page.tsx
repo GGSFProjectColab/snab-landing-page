@@ -559,22 +559,15 @@ export default function Home() {
         {/* Contact */}
         <section aria-labelledby="contact-title">
           <ContainerWrapper>
-            <div className="relative min-h-[240px] overflow-hidden sm:min-h-[280px]">
-              <Image
-                className="absolute inset-0 h-full w-full object-cover object-center"
-                src="/ascii-magic-11.png"
-                alt=""
-                fill
-                sizes="100vw"
-                aria-hidden="true"
-              />
-              <div className="absolute inset-0 bg-black/60" aria-hidden="true" />
+            <div className="relative min-h-[240px] overflow-hidden bg-muted/30 sm:min-h-[280px]">
+              <GrainGradientShader />
+              <div className="absolute inset-0 bg-white/20 dark:bg-black/50" aria-hidden="true" />
               <div className="relative z-10 flex h-full flex-col items-start justify-center gap-4 py-8 px-5 sm:justify-end sm:py-10 sm:px-6 md:px-12">
                 <div>
-                  <h2 id="contact-title" className="text-subheading font-normal text-white drop-shadow-lg">
+                  <h2 id="contact-title" className="text-subheading font-normal text-foreground dark:text-white drop-shadow-sm">
                     Get in Touch
                   </h2>
-                  <p className="mt-2 max-w-xl text-body leading-relaxed text-white/90">
+                   <p className="mt-2 max-w-xl text-body leading-relaxed text-foreground/80 dark:text-white/90">
                     Have a project in mind? We&apos;d love to hear about it.
                     Whether you need AI integration, workflow automation, or
                     custom software, our team is ready to help.
@@ -582,13 +575,13 @@ export default function Home() {
                 </div>
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                   <a
-                    className="bg-white px-4 py-2 text-button font-normal text-black transition-all hover:bg-white/90 sm:py-1.5"
+                    className="bg-foreground px-4 py-2 text-button font-normal text-background transition-all hover:bg-foreground/90 sm:py-1.5"
                     href="/contact"
                   >
                     Start a project
                   </a>
                   <a
-                    className="text-button text-white/80 underline underline-offset-4 transition-colors hover:text-white"
+                    className="text-button text-foreground/70 underline underline-offset-4 transition-colors hover:text-foreground dark:text-white/80 dark:hover:text-white"
                     href={`mailto:${siteConfig.email}`}
                   >
                     {siteConfig.email}

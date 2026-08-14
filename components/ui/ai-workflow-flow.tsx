@@ -234,6 +234,7 @@ function FlowCanvas() {
             gap={14}
             size={1}
             color={colors.dots}
+            style={{ backgroundColor: "transparent" }}
           />
         </ReactFlow>
       )}

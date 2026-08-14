@@ -452,21 +452,6 @@
   animation: shimmer var(--shiny-speed, 1.35s) linear infinite;
 }
 
-.ai-workflow-flow .react-flow__edge path {
-  stroke: var(--flow-edge) !important;
-}
-
-.ai-workflow-flow .react-flow__handle {
-  width: 7px !important;
-  height: 7px !important;
-  background: var(--flow-handle) !important;
-  border: 2px solid var(--flow-handle-border) !important;
-}
-
-.ai-workflow-flow .react-flow__background {
-  background: var(--flow-bg) !important;
-}
-
 .ai-workflow-flow .react-flow__attribution {
   display: none !important;
 }

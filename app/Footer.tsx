@@ -141,6 +141,12 @@ export function Footer() {
               &copy; {new Date().getFullYear()} SNAB Innovations. All rights reserved.
             </p>
           </div>
+
+          {/* Dotted grid end-of-page decoration */}
+          <div
+            aria-hidden="true"
+            className="footer-dot-grid"
+          />
         </div>
       </div>
     </footer>

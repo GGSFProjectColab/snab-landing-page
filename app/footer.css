@@ -541,3 +541,30 @@
     font-size: 15px;
   }
 }
+
+/* ── End-of-page dotted grid decoration ─────────────────────────────────── */
+.footer-dot-grid {
+  width: 100%;
+  height: 120px;
+  background-image: radial-gradient(
+    circle,
+    color-mix(in oklch, var(--foreground) 40%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 18px 18px;
+  background-position: center top;
+  /* gentle fade to nothing at the very bottom */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.5) 60%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.5) 60%,
+    transparent 100%
+  );
+}
+

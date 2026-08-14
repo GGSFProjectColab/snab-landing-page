@@ -41,7 +41,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 18%);
   --sidebar-ring: oklch(0.556 0 0);
-  --edge: oklch(1 0 0 / 50%);
+  --edge: oklch(1 0 0 / 20%);
   --footer-shader-back: #080808;
   --footer-shader-front: #262626;
   --header-dither-base: #050505;
@@ -85,7 +85,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 18%);
   --sidebar-ring: oklch(0.556 0 0);
-  --edge: oklch(1 0 0 / 50%);
+  --edge: oklch(1 0 0 / 20%);
   --footer-shader-back: #080808;
   --footer-shader-front: #262626;
   --header-dither-base: #050505;

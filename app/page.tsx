@@ -23,6 +23,7 @@ import { homeFaqs } from "@/lib/faqs";
 import { absoluteUrl, createPageMetadata, siteConfig } from "@/lib/site";
 import { AskAiSection } from "./AskAiSection";
 import { ServicesSection } from "./ServicesSection";
+import { MagicText } from "@/components/ui/magic-text";
 
 export const metadata: Metadata = createPageMetadata({
   title: "AI Product & Custom Software Development | SNAB Innovations",
@@ -266,7 +267,7 @@ export default function Home() {
         {/* Hero / Profile Header */}
         <section id="home" aria-labelledby="hero-title">
           <ContainerWrapper>
-            <div className="relative min-h-[600px] overflow-hidden bg-muted/30">
+            <div className="relative min-h-[600px] overflow-hidden bg-muted/30 lg:min-h-[calc(100dvh-4rem)]">
               <GrainGradientShader />
               <div
                 className="absolute inset-0 dark:bg-black/30"
@@ -280,7 +281,14 @@ export default function Home() {
           </ContainerWrapper>
         </section>
 
-        
+        {/* Scroll-Driven Text */}
+        <section aria-label="What we build">
+          <ContainerWrapper>
+            <div className="border-b border-dotted border-edge py-16 sm:py-20 md:py-28 px-4 sm:px-6 md:px-10">
+              <MagicText text="We believe technology should feel less like a tool and more like a teammate. Every line of code we write starts with one question: how do we make someone's day a little easier, a little smarter, a little more human? We're not just building software. We're building trust, one thoughtful solution at a time. From AI workflows and agentic systems to cloud platforms and mobile apps, we engineer products that solve real problems for real people." />
+            </div>
+          </ContainerWrapper>
+        </section>
 
         {/* Services */}
         <ServicesSection services={services} />
@@ -290,7 +298,7 @@ export default function Home() {
         {/* Current Work */}
         <section aria-labelledby="current-work-title">
           <ContainerWrapper>
-            <HeaderTitle title="Current Work" id="current-work-title" />
+            <HeaderTitle title="What we're building" id="current-work-title" />
             <div className="divide-y divide-dotted divide-edge">
               {projects.map((project) => (
                 <div className="p-3 sm:p-4 md:grid md:gap-4 md:grid-cols-[1fr_auto]" key={project.number}>
@@ -371,7 +379,7 @@ export default function Home() {
                         </span>
                       ))}
                     </div>
-                    <p className="mt-3 text-body text-muted-foreground">
+                    <p className="mt-3 max-w-2xl text-body text-muted-foreground">
                       {project.description}
                     </p>
                     <p className="mt-2 font-mono text-caption text-muted-foreground">
@@ -429,7 +437,7 @@ export default function Home() {
         {/* How We Work */}
         <section aria-labelledby="how-we-work-title">
           <ContainerWrapper>
-            <HeaderTitle title="How We Work" id="how-we-work-title" />
+            <HeaderTitle title="How we work" id="how-we-work-title" />
             <FeatureSteps features={aboutSnabSteps} autoPlayInterval={4000} />
           </ContainerWrapper>
         </section>
@@ -439,7 +447,7 @@ export default function Home() {
         {/* Why Choose Us */}
         <section aria-labelledby="why-choose-us-title">
           <ContainerWrapper>
-            <HeaderTitle title="Why Choose Us" id="why-choose-us-title" />
+            <HeaderTitle title="Why teams choose us" id="why-choose-us-title" />
             <div className="grid grid-cols-1 border-b border-dotted border-edge sm:grid-cols-2 md:grid-cols-3">
               {whyChooseUs.map((item, i) => {
                 const isDithered = "visual" in item && item.visual === "dithered";
@@ -520,7 +528,7 @@ export default function Home() {
         {/* FAQ */}
         <section id="faq" aria-labelledby="faq-title">
           <ContainerWrapper>
-            <HeaderTitle title="FAQ" id="faq-title" />
+            <HeaderTitle title="Common questions" id="faq-title" />
             <div className="">
               {homeFaqs.map((faq, index) => (
                 <div className="p-3 sm:p-4" key={faq.question}>

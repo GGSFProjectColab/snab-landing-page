@@ -84,7 +84,7 @@ export default function AboutPage() {
       {/* Who We Are */}
       <section aria-labelledby="who-we-are-title">
         <ContainerWrapper>
-          <HeaderTitle title="Who We Are" id="who-we-are-title" />
+          <HeaderTitle title="Who we are" id="who-we-are-title" />
           <div className="grid gap-0 border-b border-dotted border-edge md:grid-cols-2">
             <div className="flex flex-col justify-center border-b border-dotted border-edge p-6 sm:p-8 md:border-b-0 md:border-r md:p-10">
               <p className="mb-3 font-mono text-caption uppercase tracking-widest text-muted-foreground">
@@ -135,7 +135,7 @@ export default function AboutPage() {
       {/* What We Do */}
       <section aria-labelledby="what-we-do-title">
         <ContainerWrapper>
-          <HeaderTitle title="What We Do" id="what-we-do-title" />
+          <HeaderTitle title="What we do" id="what-we-do-title" />
           <div className="grid gap-0 border-b border-dotted border-edge md:grid-cols-2">
             <div className="relative order-2 min-h-[300px] overflow-hidden bg-muted/30 sm:min-h-[400px] md:order-1">
               <Image
@@ -176,7 +176,7 @@ export default function AboutPage() {
       {/* Our Approach */}
       <section aria-labelledby="approach-title">
         <ContainerWrapper>
-          <HeaderTitle title="Our Approach" id="approach-title" />
+          <HeaderTitle title="How we approach work" id="approach-title" />
           <div className="grid gap-0 border-b border-dotted border-edge md:grid-cols-2">
             <div className="flex flex-col justify-center border-b border-dotted border-edge p-6 sm:p-8 md:border-b-0 md:border-r md:p-10">
               <p className="mb-3 font-mono text-caption uppercase tracking-widest text-muted-foreground">
@@ -219,7 +219,7 @@ export default function AboutPage() {
       {/* Selected Work */}
       <section aria-labelledby="work-title">
         <ContainerWrapper>
-          <HeaderTitle title="Selected Work" id="work-title" />
+          <HeaderTitle title="Work we've shipped" id="work-title" />
           <div className="divide-y divide-dotted divide-edge border-b border-dotted border-edge">
             {products.map((product) => (
               <div

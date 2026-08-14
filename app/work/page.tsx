@@ -75,7 +75,7 @@ export default function WorkPage() {
       {/* Main Work Showcase List */}
       <section aria-labelledby="selected-work-title">
         <ContainerWrapper>
-          <HeaderTitle title="Selected Work" id="selected-work-title" />
+          <HeaderTitle title="Work we've shipped" id="selected-work-title" />
 
           <div className="divide-y divide-dotted divide-edge">
             {workItems.map((item) => (

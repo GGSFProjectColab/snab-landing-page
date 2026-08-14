@@ -64,7 +64,7 @@ export const Casestudy5 = ({
 }: Casestudy5Props) => {
   return (
     <section className={cn("py-16 md:py-24", className)}>
-      <div className="mx-auto max-w-[1920px]">
+      <div className="mx-auto max-w-[1440px]">
         <div className="border border-border">
           <a
             href={featuredCasestudy.link || "#"}

@@ -163,7 +163,7 @@ export default function ServicesPage() {
       {/* Services Grid Section (Inspired by Image's 6 Cards) */}
       <section aria-labelledby="our-services-title">
         <ContainerWrapper>
-          <HeaderTitle title="Our Services" id="our-services-title" />
+          <HeaderTitle title="What we build" id="our-services-title" />
           <div className="grid grid-cols-1 border-b border-dotted border-edge sm:grid-cols-2 md:grid-cols-3">
             {services.map((service, i) => (
               <div
@@ -225,7 +225,7 @@ export default function ServicesPage() {
       {/* Delivery Process */}
       <section id="delivery-process" aria-labelledby="process-title">
         <ContainerWrapper>
-          <HeaderTitle title="Delivery Process" id="process-title" />
+          <HeaderTitle title="How we deliver" id="process-title" />
           <div className="grid grid-cols-1 border-b border-dotted border-edge sm:grid-cols-2 md:grid-cols-4">
             {processSteps.map((step, idx) => (
               <div

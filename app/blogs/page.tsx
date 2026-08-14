@@ -135,7 +135,7 @@ async function BlogGrid() {
   return (
     <section aria-labelledby="latest-posts-title">
       <ContainerWrapper>
-        <HeaderTitle title="Latest posts" id="latest-posts-title" />
+        <HeaderTitle title="From the blog" id="latest-posts-title" />
         <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 sm:p-6 md:grid-cols-3">
           {gridPosts.map((post) => (
             <BlogCard key={post.slug} post={post} />

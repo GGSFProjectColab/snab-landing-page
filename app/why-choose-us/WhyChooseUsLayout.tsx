@@ -80,7 +80,7 @@ export function WhyChooseUsLayout({
       {/* What It Means — Split Layout */}
       <section aria-labelledby="wcu-meaning-title">
         <ContainerWrapper>
-          <HeaderTitle title="What It Means" id="wcu-meaning-title" />
+          <HeaderTitle title="What it means for you" id="wcu-meaning-title" />
           <div className="grid gap-0 border-b border-dotted border-edge md:grid-cols-2">
             <div className="flex flex-col justify-center p-6 sm:p-8 md:p-10">
               <ul className="space-y-5">
@@ -120,7 +120,7 @@ export function WhyChooseUsLayout({
       {/* How We Do It */}
       <section aria-labelledby="wcu-how-title">
         <ContainerWrapper>
-          <HeaderTitle title="How We Do It" id="wcu-how-title" />
+          <HeaderTitle title="How we make it happen" id="wcu-how-title" />
           <div className="border-b border-dotted border-edge">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
               {capabilities.map((cap, i) => (

@@ -105,7 +105,7 @@ export default async function JobPage({ params }: Props) {
       {/* Body */}
       <section>
         <ContainerWrapper>
-          <HeaderTitle title="Role details" />
+          <HeaderTitle title="About this role" />
           <div className="px-4 pb-6">
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_240px] gap-6 lg:gap-8">
               {/* Description */}
@@ -209,7 +209,7 @@ export default async function JobPage({ params }: Props) {
       {/* Application */}
       <section id="apply">
         <ContainerWrapper>
-          <HeaderTitle title="Apply" />
+          <HeaderTitle title="Apply for this role" />
           <div className="px-4 pb-6">
             <ApplicationForm job={{ id: job.id, title: job.title }} />
           </div>

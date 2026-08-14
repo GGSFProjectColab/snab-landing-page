@@ -274,7 +274,7 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
           {/* Stacked Service Cards Stage (Responsive sizing across mobile & desktop) */}
           <div
             ref={stageRef}
-            className="relative min-h-[440px] sm:min-h-[480px] h-[calc(100vh-190px)] max-h-[580px] w-full overflow-hidden border-b border-dotted border-edge bg-background"
+            className="relative min-h-[440px] sm:min-h-[480px] h-[calc(100dvh-180px)] md:h-[calc(100vh-190px)] max-h-[580px] w-full overflow-hidden border-b border-dotted border-edge bg-background"
           >
             {services.map((service, index) => (
               <div
@@ -285,8 +285,8 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
                 className="absolute inset-0 flex h-full w-full bg-background overflow-hidden"
                 style={{ willChange: "transform, opacity" }}
               >
-                <div className="grid h-full w-full grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-dotted divide-edge overflow-hidden">
-                  {/* Left Column: Top-aligned Title, Intro & Compact Key Highlights */}
+                <div className="grid h-full w-full grid-rows-[auto_1fr] md:grid-rows-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-dotted divide-edge overflow-hidden">
+                  {/* Left Column: Top-aligned Title & Intro (Key Highlights only on md+ web view) */}
                   <div className="flex flex-col justify-start p-4 sm:p-6 lg:p-8 overflow-hidden">
                     {/* Service Title */}
                     <h3 className="text-lg sm:text-xl lg:text-2xl font-normal tracking-tight text-foreground">
@@ -298,9 +298,9 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
                       {service.description}
                     </p>
 
-                    {/* Key Highlights */}
+                    {/* Key Highlights - Hidden on mobile, visible on desktop / web view */}
                     {service.highlights && service.highlights.length > 0 && (
-                      <div className="mt-2.5 sm:mt-4 space-y-1 sm:space-y-1.5">
+                      <div className="hidden md:block mt-2.5 sm:mt-4 space-y-1 sm:space-y-1.5">
                         <p className="font-mono text-[9px] sm:text-[10px] font-medium tracking-wider uppercase text-muted-foreground">
                           Key Highlights
                         </p>
@@ -323,9 +323,9 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
                   </div>
 
                   {/* Right Column: Responsive Visual Component calibrated for mobile & desktop */}
-                  <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-background p-1.5 sm:p-4 lg:p-6">
+                  <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-background p-2 sm:p-4 lg:p-6">
                     {service.visual === "flow" ? (
-                      <div className="relative h-full w-full max-h-[220px] sm:max-h-[280px] lg:max-h-[360px] flex items-center justify-center">
+                      <div className="relative h-full w-full max-h-[250px] sm:max-h-[280px] lg:max-h-[360px] flex items-center justify-center">
                         <AIWorkflowFlow expanded={true} />
                       </div>
                     ) : service.visual === "orb" ? (
@@ -346,7 +346,7 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
                         <DesktopAppVisual />
                       </div>
                     ) : service.visual === "dithering" ? (
-                      <div className="relative aspect-video w-full h-[170px] sm:h-[220px] lg:h-[300px] overflow-hidden flex items-center justify-center">
+                      <div className="relative aspect-video w-full max-w-[280px] sm:max-w-none h-[170px] sm:h-[220px] lg:h-[300px] overflow-hidden flex items-center justify-center">
                         <CloudShader />
                       </div>
                     ) : service.visual === "globe" ? (

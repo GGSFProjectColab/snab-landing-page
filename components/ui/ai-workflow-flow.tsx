@@ -380,7 +380,7 @@ export function AIWorkflowFlow({ expanded = true }: { expanded?: boolean }) {
   ];
 
   return (
-    <div className="relative w-full h-full min-h-[220px] flex items-center justify-center select-none overflow-hidden p-1">
+    <div className="relative w-full h-full min-h-0 flex items-center justify-center select-none overflow-hidden p-1">
       <svg
         viewBox="0 0 650 380"
         className="w-full h-full max-h-[380px] object-contain overflow-visible"

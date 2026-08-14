@@ -195,6 +195,7 @@ const whyChooseUs = [
     title: "Transparent Collaboration",
     description: "Shared milestones, demos, and decisions keep you close to the work.",
     image: "/transparent-collaboration.jpg",
+    imageLight: "/transparent-collaboration-light.jpg",
     slug: "transparent-collaboration",
   },
 ];
@@ -484,13 +485,24 @@ export default function Home() {
                       />
                     )}
                     {!isDithered && !("visual" in item) && (
-                      <Image
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        src={item.image}
-                        alt={item.title}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-                      />
+                      <>
+                        <Image
+                          className={`object-cover transition-transform duration-500 group-hover:scale-105 ${"imageLight" in item && item.imageLight ? "hidden dark:block" : ""}`}
+                          src={item.image}
+                          alt={item.title}
+                          fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                        />
+                        {"imageLight" in item && Boolean(item.imageLight) && (
+                          <Image
+                            className="object-cover transition-transform duration-500 group-hover:scale-105 block dark:hidden"
+                            src={item.imageLight as string}
+                            alt={item.title}
+                            fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                          />
+                        )}
+                      </>
                     )}
                   </div>
                   <div className="flex flex-1 flex-col justify-between p-4 sm:p-5">

@@ -323,9 +323,9 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
                   </div>
 
                   {/* Right Column: Responsive Visual Component calibrated for mobile & desktop */}
-                  <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-background p-2 sm:p-4 lg:p-8">
+                  <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-background p-1.5 sm:p-4 lg:p-6">
                     {service.visual === "flow" ? (
-                      <div className="relative h-full w-full max-h-[190px] sm:max-h-[240px] lg:max-h-[300px] flex items-center justify-center">
+                      <div className="relative h-full w-full max-h-[220px] sm:max-h-[280px] lg:max-h-[360px] flex items-center justify-center">
                         <AIWorkflowFlow expanded={true} />
                       </div>
                     ) : service.visual === "orb" ? (

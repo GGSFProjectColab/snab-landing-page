@@ -67,6 +67,7 @@ const TEXT_COLORS = [
 export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorProps) {
   const editorRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const savedRangeRef = useRef<Range | null>(null);
   const [activeTab, setActiveTab] = useState<"write" | "preview" | "html">("write");
   const [showHighlightMenu, setShowHighlightMenu] = useState(false);
   const [showTextColorMenu, setShowTextColorMenu] = useState(false);
@@ -113,35 +114,27 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
   };
 
   const formatBlock = (tag: string) => {
-    exec("formatBlock", tag);
+    exec("formatBlock", tag.startsWith("<") ? tag : `<${tag}>`);
   };
 
-  const handlePaste = (e: React.ClipboardEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const htmlData = e.clipboardData.getData("text/html");
+  const handlePaste = (e: React.ClipboardEvent) => {
+    const html = e.clipboardData.getData("text/html");
     const plainText = e.clipboardData.getData("text/plain");
 
-    if (htmlData) {
+    if (html) {
+      e.preventDefault();
       const parser = new DOMParser();
-      const doc = parser.parseFromString(htmlData, "text/html");
+      const doc = parser.parseFromString(html, "text/html");
 
       doc.querySelectorAll("*").forEach((el) => {
-        const htmlEl = el as HTMLElement;
-        if (htmlEl.style) {
-          htmlEl.style.backgroundColor = "";
-          htmlEl.style.color = "";
-          htmlEl.style.fontFamily = "";
-          htmlEl.style.fontSize = "";
-          htmlEl.style.lineHeight = "";
-        }
-        if (el.tagName.toLowerCase() === "font") {
-          el.replaceWith(...Array.from(el.childNodes));
-        }
+        el.removeAttribute("style");
+        el.removeAttribute("class");
       });
 
       const cleanHtml = doc.body.innerHTML;
       exec("insertHTML", cleanHtml);
     } else if (plainText) {
+      e.preventDefault();
       exec("insertText", plainText);
     }
   };
@@ -173,23 +166,97 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
     exec("foreColor", color);
   };
 
-  const handleInsertLink = () => {
+  const openLinkModal = () => {
+    const selection = window.getSelection();
+    if (selection && selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0);
+      if (editorRef.current && editorRef.current.contains(range.commonAncestorContainer)) {
+        savedRangeRef.current = range.cloneRange();
+        const selectedStr = selection.toString().trim();
+        setLinkText(selectedStr);
+      } else {
+        savedRangeRef.current = null;
+        setLinkText("");
+      }
+    } else {
+      savedRangeRef.current = null;
+      setLinkText("");
+    }
+    setLinkUrl("");
+    setShowLinkModal(true);
+  };
+
+  const handleInsertLink = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     if (!linkUrl) return;
+
     let finalUrl = linkUrl.trim();
-    if (!/^https?:\/\//i.test(finalUrl) && !finalUrl.startsWith("/") && !finalUrl.startsWith("#")) {
+    if (
+      !/^https?:\/\//i.test(finalUrl) &&
+      !finalUrl.startsWith("/") &&
+      !finalUrl.startsWith("#") &&
+      !finalUrl.startsWith("mailto:")
+    ) {
       finalUrl = `https://${finalUrl}`;
     }
 
-    if (linkText) {
-      const html = `<a href="${finalUrl}" target="_blank" rel="noopener noreferrer" class="text-teal underline hover:text-teal/80">${linkText}</a>`;
-      exec("insertHTML", html);
-    } else {
-      exec("createLink", finalUrl);
+    if (editorRef.current) {
+      editorRef.current.focus();
+
+      if (savedRangeRef.current) {
+        const selection = window.getSelection();
+        if (selection) {
+          selection.removeAllRanges();
+          selection.addRange(savedRangeRef.current);
+        }
+
+        const a = document.createElement("a");
+        a.href = finalUrl;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.className = "text-teal underline hover:text-teal/80 font-medium";
+
+        const selectedText = savedRangeRef.current.toString();
+
+        if (!savedRangeRef.current.collapsed && selectedText) {
+          if (!linkText.trim() || linkText.trim() === selectedText.trim()) {
+            try {
+              const extracted = savedRangeRef.current.extractContents();
+              a.appendChild(extracted);
+              savedRangeRef.current.insertNode(a);
+            } catch {
+              document.execCommand("createLink", false, finalUrl);
+            }
+          } else {
+            a.textContent = linkText.trim();
+            savedRangeRef.current.deleteContents();
+            savedRangeRef.current.insertNode(a);
+          }
+        } else {
+          a.textContent = linkText.trim() || finalUrl;
+          savedRangeRef.current.insertNode(a);
+        }
+
+        const newRange = document.createRange();
+        newRange.setStartAfter(a);
+        newRange.collapse(true);
+        if (selection) {
+          selection.removeAllRanges();
+          selection.addRange(newRange);
+        }
+
+        handleContentChange();
+      } else {
+        const textToUse = linkText.trim() || finalUrl;
+        const html = `<a href="${finalUrl}" target="_blank" rel="noopener noreferrer" class="text-teal underline hover:text-teal/80 font-medium">${textToUse}</a>`;
+        exec("insertHTML", html);
+      }
     }
 
     setLinkUrl("");
     setLinkText("");
     setShowLinkModal(false);
+    savedRangeRef.current = null;
   };
 
   const handleInsertImage = () => {
@@ -560,15 +627,17 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
           {/* Media & Embeds */}
           <button
             type="button"
-            onClick={() => setShowLinkModal(true)}
+            onClick={openLinkModal}
+            onMouseDown={(e) => e.preventDefault()}
             className="p-1.5 hover:bg-muted hover:text-foreground transition-colors"
-            title="Insert Link"
+            title="Insert Hyperlink"
           >
             <LinkIcon className="w-4 h-4" />
           </button>
           <button
             type="button"
             onClick={() => setShowImageModal(true)}
+            onMouseDown={(e) => e.preventDefault()}
             className="p-1.5 hover:bg-muted hover:text-foreground transition-colors"
             title="Insert Image"
           >
@@ -577,6 +646,7 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
           <button
             type="button"
             onClick={() => insertTable(3, 3)}
+            onMouseDown={(e) => e.preventDefault()}
             className="p-1.5 hover:bg-muted hover:text-foreground transition-colors"
             title="Insert Table"
           >
@@ -585,6 +655,7 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
           <button
             type="button"
             onClick={() => exec("insertHorizontalRule")}
+            onMouseDown={(e) => e.preventDefault()}
             className="p-1.5 hover:bg-muted hover:text-foreground transition-colors"
             title="Insert Horizontal Divider"
           >
@@ -597,6 +668,7 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
           <button
             type="button"
             onClick={() => insertCallout("note")}
+            onMouseDown={(e) => e.preventDefault()}
             className="px-2 py-1 text-[11px] font-mono bg-muted/60 hover:bg-muted hover:text-foreground transition-colors font-medium border border-dotted border-edge"
             title="Insert Note Box"
           >
@@ -605,6 +677,7 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
           <button
             type="button"
             onClick={() => insertCallout("tip")}
+            onMouseDown={(e) => e.preventDefault()}
             className="px-2 py-1 text-[11px] font-mono bg-muted/60 hover:bg-muted hover:text-foreground transition-colors font-medium text-teal border border-dotted border-edge"
             title="Insert Pro Tip Box"
           >
@@ -615,6 +688,7 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
           <button
             type="button"
             onClick={() => exec("removeFormat")}
+            onMouseDown={(e) => e.preventDefault()}
             className="p-1.5 hover:bg-muted hover:text-foreground transition-colors ml-auto"
             title="Clear Formatting"
           >
@@ -666,19 +740,30 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
 
       {/* Link Insertion Modal */}
       {showLinkModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4">
+        <div
+          className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/60 backdrop-blur-xs p-4"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowLinkModal(false);
+          }}
+        >
           <div className="w-full max-w-md bg-background border border-dotted border-edge p-5 shadow-2xl">
             <h3 className="text-xs font-semibold mb-3">Insert Hyperlink</h3>
             <div className="space-y-3">
               <div>
                 <label className="block text-[11px] font-medium text-muted-foreground mb-1">
-                  Link Text (Optional if text is selected)
+                  Text to Display
                 </label>
                 <input
                   type="text"
                   value={linkText}
                   onChange={(e) => setLinkText(e.target.value)}
-                  placeholder="e.g. Read our documentation"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      handleInsertLink();
+                    }
+                  }}
+                  placeholder="e.g. Read documentation"
                   className="w-full bg-muted/30 border border-dotted border-edge px-3 py-1.5 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-foreground"
                 />
               </div>
@@ -688,28 +773,37 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
                 </label>
                 <input
                   type="url"
+                  autoFocus
+                  required
                   value={linkUrl}
                   onChange={(e) => setLinkUrl(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      handleInsertLink();
+                    }
+                  }}
                   placeholder="https://example.com"
                   className="w-full bg-muted/30 border border-dotted border-edge px-3 py-1.5 text-xs text-foreground focus:outline-none focus:ring-1 focus:ring-foreground"
                 />
               </div>
-            </div>
-            <div className="mt-5 flex justify-end gap-2">
-              <button
-                type="button"
-                onClick={() => setShowLinkModal(false)}
-                className="px-3 py-1.5 text-xs border border-dotted border-edge hover:bg-muted text-muted-foreground"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={handleInsertLink}
-                className="px-4 py-1.5 text-xs bg-foreground text-background font-medium hover:opacity-90"
-              >
-                Insert Link
-              </button>
+
+              <div className="mt-5 flex justify-end gap-2 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowLinkModal(false)}
+                  className="px-3 py-1.5 text-xs border border-dotted border-edge hover:bg-muted text-muted-foreground"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleInsertLink()}
+                  className="px-4 py-1.5 text-xs bg-foreground text-background font-bold hover:opacity-90 transition-opacity"
+                >
+                  Insert Link
+                </button>
+              </div>
             </div>
           </div>
         </div>

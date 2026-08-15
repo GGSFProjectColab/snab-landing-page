@@ -227,15 +227,14 @@ export default async function BlogPostPage({ params }: Props) {
           <ContainerWrapper>
             <div className="py-10 sm:py-14 px-4 sm:px-6">
               <div className="max-w-2xl sm:max-w-3xl mx-auto">
-                {/* Optional Cover Banner */}
+                {/* Full Uncropped Cover Image in Original Dimensions & Aspect Ratio */}
                 {post.cover_image && !post.cover_image.includes("ascii-magic") && (
-                  <div className="relative aspect-[16/9] w-full overflow-hidden mb-8 border border-dotted border-edge bg-muted/20">
-                    <Image
+                  <div className="w-full overflow-hidden mb-8 border border-dotted border-edge bg-muted/10 flex items-center justify-center p-1 sm:p-2">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
                       src={post.cover_image}
                       alt={post.title}
-                      fill
-                      priority
-                      className="object-cover"
+                      className="w-full h-auto max-h-[700px] object-contain mx-auto"
                     />
                   </div>
                 )}

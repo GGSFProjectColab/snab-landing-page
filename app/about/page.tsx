@@ -70,7 +70,7 @@ export default function AboutPage() {
                   staggerDuration={0.045}
                   transition={{ duration: 0.55 }}
                 >
-                  SNAB Innovations is an AI product engineering and custom software studio based in Nashik, Maharashtra, India. We partner with ambitious founders, operational leaders, and enterprise teams across North America, Europe, Southeast Asia, and India who require dependable, production-grade systems that don't just launch—they endure.
+                  SNAB Innovations is an <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">AI product engineering and custom software studio</mark> based in Nashik, Maharashtra, India. We partner with ambitious founders, operational leaders, and enterprise teams across North America, Europe, Southeast Asia, and India who require <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">dependable, production-grade systems</span> that don't just launch—they endure.
                 </TextGenerateEffect>
                 <TextGenerateEffect
                   as="p"
@@ -78,7 +78,7 @@ export default function AboutPage() {
                   staggerDuration={0.045}
                   transition={{ duration: 0.55 }}
                 >
-                  We exist because modern software demands more than fragile AI prototypes. We combine rigorous systems architecture, deterministic fallback mechanisms, and practical engineering to build observable, maintainable platforms that earn trust and power critical business workflows long into the future.
+                  We exist because modern software demands more than fragile AI prototypes. We combine <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">rigorous systems architecture</span>, <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">deterministic fallback mechanisms</span>, and practical engineering to build observable, maintainable platforms that earn trust and power critical business workflows long into the future.
                 </TextGenerateEffect>
               </div>
 
@@ -90,7 +90,7 @@ export default function AboutPage() {
                   staggerDuration={0.045}
                   transition={{ duration: 0.55 }}
                 >
-                  SNAB Innovations is an AI product and custom software studio based in Nashik, India. We bridge the gap between experimental AI prototypes and dependable, production-grade systems engineered to endure.
+                  SNAB Innovations is an <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">AI product and custom software studio</mark> based in Nashik, India. We bridge the gap between experimental AI prototypes and <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">dependable, production-grade systems</span> engineered to endure.
                 </TextGenerateEffect>
               </div>
             </div>
@@ -119,7 +119,7 @@ export default function AboutPage() {
                   staggerDuration={0.045}
                   transition={{ duration: 0.55 }}
                 >
-                  We deliver end-to-end software engineering and AI services tailored to high-growth companies and enterprise operators. Our capabilities span intelligent workflow automation, custom full-stack web and mobile platforms, robust API architectures, and LLM integrations. We specialize in transforming complex manual processes into observable, self-running digital pipelines backed by automated evaluation harnesses, deterministic fallback systems, and enterprise data governance.
+                  We deliver <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">end-to-end software engineering and AI services</mark> tailored to high-growth companies and enterprise operators. Our capabilities span <Link href="/work" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">intelligent workflow automation ↗</Link>, custom full-stack web and mobile platforms, robust API architectures, and LLM integrations. We specialize in transforming complex manual processes into <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">observable, self-running digital pipelines</span> backed by automated evaluation harnesses, deterministic fallback systems, and enterprise data governance.
                 </TextGenerateEffect>
                 {/* Mobile */}
                 <TextGenerateEffect
@@ -128,7 +128,7 @@ export default function AboutPage() {
                   staggerDuration={0.045}
                   transition={{ duration: 0.55 }}
                 >
-                  We deliver full-stack AI workflows, custom web and mobile platforms, and robust software architectures tailored to eliminate operational friction and scale with your business.
+                  We deliver <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">full-stack AI workflows</mark>, <Link href="/work" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">custom web and mobile platforms ↗</Link>, and robust software architectures tailored to eliminate operational friction and scale with your business.
                 </TextGenerateEffect>
               </div>
 
@@ -149,7 +149,7 @@ export default function AboutPage() {
                   staggerDuration={0.045}
                   transition={{ duration: 0.55 }}
                 >
-                  Alongside bespoke client development, we engineer proprietary AI-native software platforms designed to solve acute operational challenges. Our product ecosystem includes Interview Expert, an intelligent platform that streamlines recruitment workflows and synthesizes candidate evaluation records, and Notary Expert, which automates document workflows, appointments, and client case tracking for legal professionals. Each product reflects our core philosophy: dependable software built for daily production use.
+                  Alongside bespoke client development, we engineer <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">proprietary AI-native software platforms</mark> designed to solve acute operational challenges. Our product ecosystem includes <Link href="https://interviewexpert.in" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">Interview Expert ↗</Link>, an intelligent platform that streamlines recruitment workflows and synthesizes candidate evaluation records, and <Link href="/work" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">Notary Expert ↗</Link>, which automates document workflows, appointments, and client case tracking for legal professionals. Each product reflects our core philosophy: <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">dependable software built for daily production use</span>.
                 </TextGenerateEffect>
                 {/* Mobile */}
                 <TextGenerateEffect
@@ -158,7 +158,7 @@ export default function AboutPage() {
                   staggerDuration={0.045}
                   transition={{ duration: 0.55 }}
                 >
-                  We build proprietary AI platforms like Interview Expert for hiring automation and Notary Expert for legal workflow management, engineered for daily production use.
+                  We build proprietary AI platforms like <Link href="https://interviewexpert.in" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">Interview Expert ↗</Link> for hiring automation and <Link href="/work" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">Notary Expert ↗</Link> for legal workflow management, <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">engineered for daily production use</span>.
                 </TextGenerateEffect>
               </div>
             </div>

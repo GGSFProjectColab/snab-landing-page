@@ -60,15 +60,20 @@ export function TeamInteractiveSection() {
         <TextGenerateEffect
           as="h2"
           className="text-title font-normal text-foreground leading-snug"
-          staggerDuration={0.14}
-          transition={{ duration: 0.7 }}
+          staggerDuration={0.09}
+          transition={{ duration: 0.55 }}
         >
           Our Core Team & Vision
         </TextGenerateEffect>
 
         {/* Desktop Narrative */}
         <div className="hidden md:flex flex-col gap-3">
-          <p className="text-body leading-relaxed text-muted-foreground">
+          <TextGenerateEffect
+            as="p"
+            className="text-body leading-relaxed text-muted-foreground"
+            staggerDuration={0.045}
+            transition={{ duration: 0.55 }}
+          >
             At the heart of SNAB Innovations is a dedicated team of four core engineers and product builders:{" "}
             <Link
               href="https://www.linkedin.com/in/sanika-wadnerkar-728068267/"
@@ -130,8 +135,13 @@ export function TeamInteractiveSection() {
               Nimesh Kulkarni ↗
             </Link>
             . Operating from our studio in Nashik, Maharashtra, we combine deep multidisciplinary expertise across machine learning pipelines, distributed software architecture, user experience design, and scalable full-stack engineering to build dependable systems that endure.
-          </p>
-          <p className="text-body leading-relaxed text-muted-foreground">
+          </TextGenerateEffect>
+          <TextGenerateEffect
+            as="p"
+            className="text-body leading-relaxed text-muted-foreground"
+            staggerDuration={0.045}
+            transition={{ duration: 0.55 }}
+          >
             Driven by a bold vision to scale globally and{" "}
             <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">
               make India truly AI-enabled
@@ -148,12 +158,17 @@ export function TeamInteractiveSection() {
               accessible, production-ready AI infrastructure
             </span>{" "}
             and resilient software built to accelerate long-term growth.
-          </p>
+          </TextGenerateEffect>
         </div>
 
         {/* Mobile Narrative */}
         <div className="md:hidden">
-          <p className="text-[14px] leading-relaxed text-muted-foreground">
+          <TextGenerateEffect
+            as="p"
+            className="text-[14px] leading-relaxed text-muted-foreground"
+            staggerDuration={0.045}
+            transition={{ duration: 0.55 }}
+          >
             Led by{" "}
             <Link
               href="https://www.linkedin.com/in/sanika-wadnerkar-728068267/"
@@ -206,7 +221,7 @@ export function TeamInteractiveSection() {
               empower startups with production-ready technology ↗
             </Link>
             .
-          </p>
+          </TextGenerateEffect>
         </div>
       </div>
 

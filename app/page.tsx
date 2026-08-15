@@ -24,6 +24,10 @@ import { AskAiSection } from "./AskAiSection";
 import { ServicesSection } from "./ServicesSection";
 import { MagicText } from "@/components/ui/magic-text";
 import { MarqueeDemo } from "@/components/ui/marquee-demo";
+import {
+  ScrollVelocityContainer,
+  ScrollVelocityRow,
+} from "@/components/ui/scroll-based-velocity";
 
 
 export const metadata: Metadata = createPageMetadata({
@@ -549,6 +553,38 @@ export default function Home() {
         {/* Ask Your AI */}
         <ContainerWrapper>
           <AskAiSection />
+        </ContainerWrapper>
+
+        {/* Scroll Velocity Banner */}
+        <ContainerWrapper>
+          <section aria-label="Scroll velocity banner" className="overflow-hidden py-5 sm:py-7 border-b border-dotted border-edge">
+            <ScrollVelocityContainer className="font-mono">
+              <ScrollVelocityRow baseVelocity={20} direction={1} className="py-1.5">
+                <span className="flex items-center gap-3 pr-3 text-5xl font-bold tracking-tight sm:text-6xl md:text-8xl lg:text-9xl">
+                  <span>BUILD</span>
+                  <span className="text-muted-foreground/35 font-light text-3xl sm:text-4xl md:text-5xl">//</span>
+                  <span>SHIP</span>
+                  <span className="text-muted-foreground/35 font-light text-3xl sm:text-4xl md:text-5xl">//</span>
+                  <span>DESIGN</span>
+                  <span className="text-muted-foreground/35 font-light text-3xl sm:text-4xl md:text-5xl">//</span>
+                  <span>LAUNCH</span>
+                  <span className="text-muted-foreground/35 font-light text-3xl sm:text-4xl md:text-5xl">//</span>
+                </span>
+              </ScrollVelocityRow>
+              <ScrollVelocityRow baseVelocity={20} direction={-1} className="py-1.5">
+                <span className="flex items-center gap-3 pr-3 text-5xl font-bold tracking-tight sm:text-6xl md:text-8xl lg:text-9xl text-muted-foreground/50">
+                  <span>BUILD</span>
+                  <span className="text-muted-foreground/25 font-light text-3xl sm:text-4xl md:text-5xl">//</span>
+                  <span>SHIP</span>
+                  <span className="text-muted-foreground/25 font-light text-3xl sm:text-4xl md:text-5xl">//</span>
+                  <span>DESIGN</span>
+                  <span className="text-muted-foreground/25 font-light text-3xl sm:text-4xl md:text-5xl">//</span>
+                  <span>LAUNCH</span>
+                  <span className="text-muted-foreground/25 font-light text-3xl sm:text-4xl md:text-5xl">//</span>
+                </span>
+              </ScrollVelocityRow>
+            </ScrollVelocityContainer>
+          </section>
         </ContainerWrapper>
 
         

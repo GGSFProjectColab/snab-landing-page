@@ -17,7 +17,7 @@ import Svg9 from "@/components/pixel-perfect/svg-9";
 import { DitheredLogoVisual } from "@/components/ui/dithered-logo-visual";
 import { TechStackCloud } from "./TechStackCloud";
 import { DottedMap } from "@/components/ui/dotted-map";
-import { FeatureSteps } from "@/components/ui/feature-section";
+import { ParallaxHowWeWork } from "@/components/ui/parallax-scroll-feature-section";
 import { homeFaqs } from "@/lib/faqs";
 import { absoluteUrl, createPageMetadata, siteConfig } from "@/lib/site";
 import { AskAiSection } from "./AskAiSection";
@@ -136,7 +136,7 @@ const aboutSnabSteps = [
     title: "Product Thinking",
     subtitle: "Strategy & Discovery",
     content:
-      "We start with the problem, not the technology. Every project begins by understanding your users, workflows, and the outcomes that matter.",
+      "We start with the problem, not the technology. Every project begins by understanding your users, your workflows, and the outcomes that actually matter to your business. We map the gaps, challenge assumptions, and define what success looks like before a single line of code is written.",
     image: "/ascii-magic-14.png",
   },
   {
@@ -144,7 +144,7 @@ const aboutSnabSteps = [
     title: "AI-Native Engineering",
     subtitle: "Build & Iterate",
     content:
-      "We design systems where AI is the core — not a bolt-on. From agentic workflows to retrieval pipelines, every layer is purpose-built.",
+      "We design systems where AI is the core, not a bolt-on feature added at the end. From agentic workflows and retrieval pipelines to fine-tuned models and intelligent automation, every layer is purpose-built for your specific context. We iterate fast, test in the open, and keep you in the loop at every step.",
     image: "/ascii-magic-12.png",
   },
   {
@@ -152,10 +152,12 @@ const aboutSnabSteps = [
     title: "Production Delivery",
     subtitle: "Ship & Scale",
     content:
-      "We ship what we build. Full-stack deployment, infrastructure, and handoff — so your product works from day one.",
+      "We ship what we build. Full-stack deployment, cloud infrastructure, monitoring, and a complete handoff so your product works reliably from day one. We don't hand off a prototype and disappear. We stay until the system is stable, the team is confident, and the product is ready to grow.",
     image: "/ascii-magic-13.png",
   },
 ];
+
+
 
 const whyChooseUs = [
   {
@@ -459,10 +461,11 @@ export default function Home() {
         {/* How We Work */}
         <section aria-labelledby="how-we-work-title">
           <ContainerWrapper>
-            <HeaderTitle title="How we work" id="how-we-work-title" />
-            <FeatureSteps features={aboutSnabSteps} autoPlayInterval={4000} />
+            <HeaderTitle title="How we work" id="how-we-work-title" className="border-b-0" />
+            <ParallaxHowWeWork steps={aboutSnabSteps} />
           </ContainerWrapper>
         </section>
+
 
         
 

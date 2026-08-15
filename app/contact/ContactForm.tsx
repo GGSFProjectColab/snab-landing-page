@@ -7,6 +7,7 @@ export function ContactForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,22 +26,39 @@ export function ContactForm() {
     setErrorMessage(null);
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const [internalRes, formspreeRes] = await Promise.all([
+        fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }),
+        fetch("https://formspree.io/f/mgawlaan", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(formData),
+        }),
+      ]);
 
-      const data = await response.json();
+      if (!formspreeRes.ok) {
+        const fsData = await formspreeRes.json().catch(() => ({}));
+        const fsMessage =
+          fsData?.errors?.map((e: any) => e.message).filter(Boolean).join(", ") ||
+          fsData?.error ||
+          "Failed to submit contact form. Please try again.";
+        throw new Error(fsMessage);
+      }
 
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to submit contact form. Please try again.");
+      if (!internalRes.ok) {
+        await internalRes.json().catch(() => ({}));
       }
 
       setIsSuccess(true);
-      setFormData({ name: "", email: "", message: "" });
+      setFormData({ name: "", email: "", phone: "", message: "" });
     } catch (err: any) {
       setErrorMessage(err.message || "Something went wrong. Please try again or email us directly.");
     } finally {
@@ -105,6 +123,26 @@ export function ContactForm() {
           value={formData.email}
           onChange={handleChange}
           placeholder="your@email.com"
+          required
+          disabled={isSubmitting}
+        />
+      </div>
+
+      <div className="flex flex-col gap-1.5">
+        <label
+          className="font-mono text-caption uppercase tracking-widest text-muted-foreground"
+          htmlFor="phone"
+        >
+          Phone
+        </label>
+        <input
+          className="border-0 border-b border-edge bg-transparent text-button text-foreground py-2 outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-foreground"
+          type="tel"
+          id="phone"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+          placeholder="+91 98765 43210"
           required
           disabled={isSubmitting}
         />

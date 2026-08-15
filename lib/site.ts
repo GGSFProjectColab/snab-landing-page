@@ -28,7 +28,7 @@ export const siteConfig = {
     postalCode: "422005",
     country: "IN",
   },
-  email: "info.snabinnovations@gmail.com",
+  email: "hello@snab.co.in",
   links: {
     twitter: "https://x.com/snabInnovations",
     linkedin: "https://www.linkedin.com/company/snab-innovations/posts/?feedView=all",

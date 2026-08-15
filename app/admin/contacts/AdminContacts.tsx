@@ -122,6 +122,7 @@ export function AdminContacts() {
         !q ||
         c.name.toLowerCase().includes(q) ||
         c.email.toLowerCase().includes(q) ||
+        c.phone.toLowerCase().includes(q) ||
         c.message.toLowerCase().includes(q);
 
       return matchesStatus && matchesSearch;
@@ -314,11 +315,12 @@ export function AdminContacts() {
       return;
     }
 
-    const headers = ["ID", "Name", "Email", "Status", "Received Date", "Message"];
+    const headers = ["ID", "Name", "Email", "Phone", "Status", "Received Date", "Message"];
     const rows = dataToExport.map((contact) => [
       `"${(contact.id || "").replace(/"/g, '""')}"`,
       `"${(contact.name || "").replace(/"/g, '""')}"`,
       `"${(contact.email || "").replace(/"/g, '""')}"`,
+      `"${(contact.phone || "").replace(/"/g, '""')}"`,
       `"${(contact.status || "").replace(/"/g, '""')}"`,
       `"${formatContactDate(contact.created_at).replace(/"/g, '""')}"`,
       `"${(contact.message || "").replace(/"/g, '""').replace(/\r?\n/g, " ")}"`,
@@ -358,6 +360,7 @@ export function AdminContacts() {
           <td style="padding: 8px 6px; vertical-align: top; width: 25px; color: #64748b;">${idx + 1}</td>
           <td style="padding: 8px 6px; vertical-align: top; font-weight: 600; width: 130px; color: #0f172a;">${escapeHtml(c.name)}</td>
           <td style="padding: 8px 6px; vertical-align: top; color: #0284c7; width: 160px;">${escapeHtml(c.email)}</td>
+          <td style="padding: 8px 6px; vertical-align: top; color: #334155; width: 100px;">${escapeHtml(c.phone)}</td>
           <td style="padding: 8px 6px; vertical-align: top; width: 75px;">
             <span style="display: inline-block; padding: 2px 6px; font-size: 9px; font-family: monospace; text-transform: uppercase; border-radius: 3px; background: #f1f5f9; border: 1px solid #cbd5e1;">
               ${c.status}
@@ -443,6 +446,7 @@ export function AdminContacts() {
                 <th>#</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Phone</th>
                 <th>Status</th>
                 <th>Received</th>
                 <th>Message</th>
@@ -815,6 +819,26 @@ export function AdminContacts() {
                             )}
                           </button>
                         </div>
+                        {contact.phone && (
+                          <div className="flex items-center gap-1.5 text-xs text-muted-foreground truncate">
+                            <span className="truncate">{contact.phone}</span>
+                            <button
+                              type="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleCopyEmail(contact.phone, contact.id);
+                              }}
+                              className="text-muted-foreground hover:text-foreground shrink-0 transition-colors"
+                              title="Copy phone number"
+                            >
+                              {copiedId === contact.id ? (
+                                <Check size={11} className="text-teal-400" />
+                              ) : (
+                                <Copy size={11} />
+                              )}
+                            </button>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -925,6 +949,30 @@ export function AdminContacts() {
                       )}
                     </button>
                   </div>
+                  {viewingContact.phone && (
+                    <div className="flex items-center gap-2 mt-0.5">
+                      <a
+                        href={`tel:${viewingContact.phone}`}
+                        className="text-xs text-muted-foreground hover:underline font-mono"
+                      >
+                        {viewingContact.phone}
+                      </a>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          handleCopyEmail(viewingContact.phone, viewingContact.id)
+                        }
+                        className="text-muted-foreground hover:text-foreground text-xs"
+                        title="Copy phone number"
+                      >
+                        {copiedId === viewingContact.id ? (
+                          <Check size={12} className="text-teal-400" />
+                        ) : (
+                          <Copy size={12} />
+                        )}
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
 

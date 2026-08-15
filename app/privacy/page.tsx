@@ -111,10 +111,10 @@ const sections = [
         data, including the right to access, correct, or delete the data we
         hold about you. To exercise these rights, please contact us at{" "}
         <a
-          href="mailto:info.snabinnovations@gmail.com"
+          href="mailto:hello@snab.co.in"
           className="text-foreground underline underline-offset-4 hover:opacity-70 transition-opacity"
         >
-          info.snabinnovations@gmail.com
+          hello@snab.co.in
         </a>
         .
       </p>
@@ -131,11 +131,11 @@ const sections = [
         </p>
         <div className="mt-4 flex flex-col gap-2">
           <a
-            href="mailto:info.snabinnovations@gmail.com"
+            href="mailto:hello@snab.co.in"
             className="inline-flex items-center gap-2 text-body text-foreground underline underline-offset-4 hover:opacity-70 transition-opacity"
           >
             <span className="font-mono text-caption text-foreground/40">→</span>
-            info.snabinnovations@gmail.com
+            hello@snab.co.in
           </a>
           <p className="flex items-center gap-2 text-body text-muted-foreground">
             <span className="font-mono text-caption text-foreground/40">→</span>

@@ -6,10 +6,11 @@ const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json().catch(() => ({}));
-    const { name, email, message } = body;
+    const { name, email, phone, message } = body;
 
     const trimmedName = typeof name === "string" ? name.trim() : "";
     const trimmedEmail = typeof email === "string" ? email.trim().toLowerCase() : "";
+    const trimmedPhone = typeof phone === "string" ? phone.trim() : "";
     const trimmedMessage = typeof message === "string" ? message.trim() : "";
 
     if (!trimmedName) {
@@ -22,6 +23,13 @@ export async function POST(request: NextRequest) {
     if (!trimmedEmail || !EMAIL_REGEX.test(trimmedEmail)) {
       return NextResponse.json(
         { error: "A valid email address is required." },
+        { status: 400 }
+      );
+    }
+
+    if (!trimmedPhone) {
+      return NextResponse.json(
+        { error: "Phone number is required." },
         { status: 400 }
       );
     }
@@ -41,6 +49,7 @@ export async function POST(request: NextRequest) {
         {
           name: trimmedName,
           email: trimmedEmail,
+          phone: trimmedPhone,
           message: trimmedMessage,
           status: "unread",
           created_at: now,

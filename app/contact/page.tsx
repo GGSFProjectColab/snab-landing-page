@@ -45,7 +45,7 @@ const contactDetails = [
       </svg>
     ),
     lines: ["Book a discovery call"],
-    link: { label: "Schedule a call", href: "mailto:hello@snab.ai?subject=Book%20a%20project%20call" },
+    link: { label: "Schedule a call", href: "mailto:hello@snab.co.in?subject=Book%20a%20project%20call" },
   },
 ];
 

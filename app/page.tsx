@@ -465,7 +465,7 @@ export default function Home() {
         <section aria-labelledby="why-choose-us-title">
           <ContainerWrapper>
             <HeaderTitle title="Why teams choose us" id="why-choose-us-title" />
-            <div className="grid grid-cols-1 border-b border-dotted border-edge sm:grid-cols-2 md:grid-cols-3">
+            <div className="grid grid-cols-1 border-b border-dotted border-edge sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-6">
               {whyChooseUs.map((item, i) => {
                 const isDithered = "visual" in item && item.visual === "dithered";
                 return (
@@ -474,7 +474,7 @@ export default function Home() {
                     i % 2 === 0 ? "sm:border-r" : ""
                   } ${i % 3 !== 2 ? "md:border-r" : "md:border-r-0"} ${
                     i < 3 ? "md:border-b" : ""
-                  }`}
+                  } ${i % 6 !== 5 ? "2xl:border-r" : "2xl:border-r-0"} 2xl:border-b-0`}
                   key={item.title}
                 >
                   <div className={`relative aspect-[4/3] w-full overflow-hidden p-6 ${isDithered ? "flex items-center justify-center" : "flex items-center justify-center bg-muted/30"}`}>

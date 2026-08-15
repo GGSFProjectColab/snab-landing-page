@@ -41,7 +41,7 @@ export default function BlogsLoading() {
         <ContainerWrapper>
           <div className="py-10 sm:py-14">
             <Skeleton className="h-8 w-32 rounded-sm mb-6 mx-4 sm:mx-6" />
-            <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 sm:p-6 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 sm:p-6 md:grid-cols-3 xl:grid-cols-4">
               {Array.from({ length: 6 }, (_, i) => (
                 <BlogCardSkeleton key={i} />
               ))}

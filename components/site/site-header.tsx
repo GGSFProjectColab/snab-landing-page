@@ -282,8 +282,8 @@ export function SiteHeader() {
       className="sticky top-0 z-[500] h-14 bg-background/80 backdrop-blur-md md:h-16 full-bleed-border-b"
       aria-label="Primary navigation"
     >
-      <div className="mx-auto h-full max-w-[1440px]">
-        <div className="relative mx-4 flex h-full items-center justify-between border-x border-dotted border-edge px-2">
+      <div className="mx-auto h-full w-full">
+        <div className="relative mx-[clamp(1rem,1.5vw,2.5rem)] flex h-full items-center justify-between border-x border-dotted border-edge px-2">
           {/* Left — Logo */}
           <LogoMark />
 

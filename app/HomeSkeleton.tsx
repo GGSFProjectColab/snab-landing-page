@@ -55,14 +55,14 @@ export function HomeSkeleton() {
       <section>
         <ContainerWrapper>
           <Skeleton className="mb-6 h-8 w-32 rounded-sm" />
-          <div className="grid grid-cols-1 border-b border-dotted border-edge sm:grid-cols-2 md:grid-cols-3">
+          <div className="grid grid-cols-1 border-b border-dotted border-edge sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-6">
             {Array.from({ length: 6 }, (_, i) => (
               <div
                 className={`flex flex-col justify-between p-5 sm:p-6 border-b border-dotted border-edge ${
                   i % 2 === 0 ? "sm:border-r" : ""
                 } ${i % 3 !== 2 ? "md:border-r" : "md:border-r-0"} ${
                   i >= 3 ? "md:border-b-0" : ""
-                }`}
+                } ${i % 6 !== 5 ? "2xl:border-r" : "2xl:border-r-0"} 2xl:border-b-0`}
                 key={i}
               >
                 <div>
@@ -125,14 +125,14 @@ export function HomeSkeleton() {
       <section>
         <ContainerWrapper>
           <Skeleton className="mb-6 h-8 w-40 rounded-sm" />
-          <div className="grid grid-cols-1 border-b border-dotted border-edge sm:grid-cols-2 md:grid-cols-3">
+          <div className="grid grid-cols-1 border-b border-dotted border-edge sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-6">
             {Array.from({ length: 6 }, (_, i) => (
               <div
                 className={`group flex flex-col border-b border-dotted border-edge last:border-b-0 sm:border-b-0 ${
                   i % 2 === 0 ? "sm:border-r" : ""
                 } ${i % 3 !== 2 ? "md:border-r" : "md:border-r-0"} ${
                   i < 3 ? "md:border-b" : ""
-                }`}
+                } ${i % 6 !== 5 ? "2xl:border-r" : "2xl:border-r-0"} 2xl:border-b-0`}
                 key={i}
               >
                 <div className="relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden bg-muted/30 p-6">

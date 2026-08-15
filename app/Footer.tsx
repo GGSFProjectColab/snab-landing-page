@@ -38,8 +38,8 @@ export function Footer() {
     <footer className="relative" aria-labelledby="footer-brand">
       <div className="full-bleed-border-t" aria-hidden="true" />
 
-      <div className="mx-auto max-w-[1440px]">
-        <div className="relative mx-4 border-x border-dotted border-edge">
+      <div className="mx-auto w-full">
+        <div className="relative mx-[clamp(1rem,1.5vw,2.5rem)] border-x border-dotted border-edge">
           {/* Brand + Nav row */}
           <div className="grid grid-cols-1 gap-0 border-b border-dotted border-edge md:grid-cols-[1fr_2fr]">
             {/* Brand section */}

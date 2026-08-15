@@ -142,7 +142,7 @@ async function BlogContent() {
         <section aria-labelledby="latest-posts-title">
           <ContainerWrapper>
             <HeaderTitle title="From the blog" id="latest-posts-title" />
-            <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 sm:p-6 md:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-2 sm:p-6 md:grid-cols-3 xl:grid-cols-4">
               {gridPosts.map((post) => (
                 <BlogCard key={post.slug} post={post} />
               ))}

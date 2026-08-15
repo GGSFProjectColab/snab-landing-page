@@ -72,9 +72,9 @@ export function createPageMetadata({
       description,
       images: [
         {
-          url: absoluteUrl("/seo/pixel-tree-social-bg.png"),
-          width: 1200,
-          height: 630,
+          url: absoluteUrl("/seo/HPcXcGLbMAAxweM.jpg"),
+          width: 2400,
+          height: 1600,
           alt: socialTitle,
         },
       ],
@@ -83,7 +83,7 @@ export function createPageMetadata({
       card: "summary_large_image",
       title: socialTitle,
       description,
-      images: [absoluteUrl("/seo/pixel-tree-social-bg.png")],
+      images: [absoluteUrl("/seo/HPcXcGLbMAAxweM.jpg")],
     },
     robots: noIndex
       ? {

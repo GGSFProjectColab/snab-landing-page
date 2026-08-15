@@ -63,6 +63,11 @@
   --sky-500: #0ea5e9;
 }
 
+mark {
+  background-color: transparent;
+  color: inherit;
+}
+
 
 .light {
   /* Off-white #F7F7F4 background palette */

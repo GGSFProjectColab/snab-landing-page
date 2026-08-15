@@ -59,7 +59,10 @@
   --skeleton-shimmer: rgba(255, 255, 255, 0.075);
   --skeleton-page-bg: #000;
   --skeleton-color: #fff;
+  --sky-400: #38bdf8;
+  --sky-500: #0ea5e9;
 }
+
 
 .light {
   /* Off-white #F7F7F4 background palette */

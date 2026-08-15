@@ -23,6 +23,8 @@ import { absoluteUrl, createPageMetadata, siteConfig } from "@/lib/site";
 import { AskAiSection } from "./AskAiSection";
 import { ServicesSection } from "./ServicesSection";
 import { MagicText } from "@/components/ui/magic-text";
+import { MarqueeDemo } from "@/components/ui/marquee-demo";
+
 
 export const metadata: Metadata = createPageMetadata({
   title: "AI Product & Custom Software Development | SNAB Innovations",
@@ -277,6 +279,9 @@ export default function Home() {
             </div>
           </ContainerWrapper>
         </section>
+
+        {/* Tech stack marquee */}
+        <MarqueeDemo />
 
         {/* Scroll-Driven Text */}
         <section aria-label="What we build">

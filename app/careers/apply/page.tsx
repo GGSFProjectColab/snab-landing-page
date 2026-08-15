@@ -1,6 +1,5 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import { Footer } from "../../Footer";
 import { ApplicationForm } from "../ApplicationForm";
 import { createPageMetadata } from "@/lib/site";
@@ -9,8 +8,8 @@ import { ContainerWrapper } from "@/components/site/container";
 import "../careers.css";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Open Application — Careers",
-  description: "Introduce yourself to the team at SNAB Innovations.",
+  title: "Make an Introduction — Careers",
+  description: "Introduce yourself to the engineering team at SNAB Innovations.",
   path: "/careers/apply",
   noIndex: true,
 });
@@ -18,51 +17,60 @@ export const metadata: Metadata = createPageMetadata({
 export default function GeneralApplicationPage() {
   return (
     <main className="flex-1">
-      <section>
+      {/* Hero Header with Career Background Image */}
+      <section id="apply-hero" aria-labelledby="apply-title">
         <ContainerWrapper>
-          <div className="pb-8">
-            <Link
-              href="/careers"
-              className="inline-flex items-center gap-2 font-mono text-caption uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors mb-6"
-            >
-              <ArrowLeft size={14} />
-              Back to careers
-            </Link>
+          <div className="relative py-16 md:py-24 overflow-hidden border-b border-dotted border-edge">
+            {/* Background Image */}
+            <div
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70"
+              style={{ backgroundImage: "url('/careers-hero-bg.png')" }}
+              aria-hidden="true"
+            />
+            <div
+              className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/45 to-background"
+              aria-hidden="true"
+            />
 
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-8 lg:gap-12">
-              {/* Context */}
-              <div className="lg:pt-2">
-                <p className="font-mono text-caption uppercase tracking-wider text-muted-foreground inline-flex items-center gap-2 mb-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-teal" />
-                  Open application
-                </p>
-                <h1 className="text-display font-normal tracking-tight">
-                  Make a thoughtful introduction.
-                </h1>
-                <p className="text-muted-foreground text-body mt-3 leading-relaxed max-w-md">
-                  If you don&apos;t see the right opening, tell us where you do your best work.
-                  Specific examples are more useful than a formal cover letter.
-                </p>
-                <div className="border border-dotted border-edge rounded-lg p-4 mt-5 bg-foreground/[0.015]">
-                  <p className="text-body text-foreground font-medium">
-                    Good to include
-                  </p>
-                  <p className="text-body text-muted-foreground mt-1">
-                    The problems you enjoy, work you&apos;re proud of, and what you&apos;d like to learn next.
-                  </p>
-                </div>
-              </div>
+            <div className="relative z-10 text-center px-4">
+              {/* Breadcrumb */}
+              <nav
+                className="flex items-center justify-center gap-2 text-button text-muted-foreground mb-6"
+                aria-label="Breadcrumb"
+              >
+                <Link href="/" className="hover:text-foreground transition-colors">
+                  Home
+                </Link>
+                <span className="text-muted-foreground/40">›</span>
+                <Link href="/careers" className="hover:text-foreground transition-colors">
+                  Career
+                </Link>
+                <span className="text-muted-foreground/40">›</span>
+                <span className="text-foreground" aria-current="page">
+                  Apply
+                </span>
+              </nav>
 
-              {/* Form */}
-              <div>
-                <ApplicationForm />
-              </div>
+              {/* Large Heading */}
+              <h1
+                id="apply-title"
+                className="text-display font-normal tracking-tight text-foreground"
+              >
+                Make an introduction
+              </h1>
             </div>
           </div>
         </ContainerWrapper>
       </section>
 
-      
+      {/* Full-width Form Section */}
+      <section id="apply-form-section" aria-label="Application form">
+        <ContainerWrapper>
+          <div className="p-6 sm:p-10 md:p-14 lg:p-16">
+            <ApplicationForm />
+          </div>
+        </ContainerWrapper>
+      </section>
 
       <Footer />
     </main>

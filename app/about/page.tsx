@@ -4,6 +4,7 @@ import Link from "next/link";
 import { createPageMetadata } from "@/lib/site";
 import { ContainerWrapper } from "@/components/site/container";
 import { MagicText } from "@/components/ui/magic-text";
+import { TeamInteractiveSection } from "@/components/about/team-interactive-section";
 import { Footer } from "../Footer";
 
 export const metadata: Metadata = createPageMetadata({
@@ -106,118 +107,8 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Bottom Row: Core Team & Team Image */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
-              {/* Left: Our Core Team & Vision */}
-              <div className="flex flex-col justify-center gap-4">
-                <h2 className="text-title font-normal text-foreground leading-snug">
-                  Our Core Team & Vision
-                </h2>
-                {/* Desktop */}
-                <div className="hidden md:flex flex-col gap-3">
-                  <p className="text-body leading-relaxed text-muted-foreground">
-                    At the heart of SNAB Innovations is a dedicated team of four core engineers and product builders:{" "}
-                    <Link
-                      href="https://www.linkedin.com/in/sanika-wadnerkar-728068267/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors"
-                    >
-                      Sanika Wadnerkar ↗
-                    </Link>
-                    {", "}
-                    <Link
-                      href="https://www.linkedin.com/in/bhavesh-paatil/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors"
-                    >
-                      Bhavesh Patil ↗
-                    </Link>
-                    {", "}
-                    <Link
-                      href="https://www.linkedin.com/in/aaradhyapathak17/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors"
-                    >
-                      Aaradhya Pathak ↗
-                    </Link>
-                    {", and "}
-                    <Link
-                      href="https://www.linkedin.com/in/nimesh-kulkarni-526401266/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors"
-                    >
-                      Nimesh Kulkarni ↗
-                    </Link>
-                    . Operating from our studio in Nashik, Maharashtra, we combine deep multidisciplinary expertise across machine learning pipelines, distributed software architecture, user experience design, and scalable full-stack engineering to build dependable systems that endure.
-                  </p>
-                  <p className="text-body leading-relaxed text-muted-foreground">
-                    Driven by a bold vision to scale globally and <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">make India truly AI-enabled</mark>, we <Link href="/contact" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">partner with startups and enterprises ↗</Link> to deliver <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">accessible, production-ready AI infrastructure</span> and resilient software built to accelerate long-term growth.
-                  </p>
-                </div>
-                {/* Mobile: Single short paragraph */}
-                <div className="md:hidden">
-                  <p className="text-[14px] leading-relaxed text-muted-foreground">
-                    Led by{" "}
-                    <Link
-                      href="https://www.linkedin.com/in/sanika-wadnerkar-728068267/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors"
-                    >
-                      Sanika Wadnerkar ↗
-                    </Link>
-                    {", "}
-                    <Link
-                      href="https://www.linkedin.com/in/bhavesh-paatil/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors"
-                    >
-                      Bhavesh Patil ↗
-                    </Link>
-                    {", "}
-                    <Link
-                      href="https://www.linkedin.com/in/aaradhyapathak17/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors"
-                    >
-                      Aaradhya Pathak ↗
-                    </Link>
-                    {", and "}
-                    <Link
-                      href="https://www.linkedin.com/in/nimesh-kulkarni-526401266/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors"
-                    >
-                      Nimesh Kulkarni ↗
-                    </Link>{" "}
-                    from Nashik, India, our team is driven to scale globally, <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">make India AI-enabled</mark>, and <Link href="/contact" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">empower startups with production-ready technology ↗</Link>.
-                  </p>
-                </div>
-              </div>
-
-              {/* Right: Team Image */}
-              <div className="flex items-center justify-center">
-                <div
-                  className="relative w-full overflow-hidden"
-                  style={{ maxWidth: "600px", aspectRatio: "1179 / 824" }}
-                >
-                  <Image
-                    src="/about-team.jpeg"
-                    alt="SNAB Innovations core team: Sanika Wadnerkar, Bhavesh Patil, Aaradhya Pathak, and Nimesh Kulkarni"
-                    fill
-                    className="object-contain object-center"
-                    sizes="(max-width: 768px) 100vw, 600px"
-                  />
-                </div>
-              </div>
-            </div>
+            {/* Bottom Row: Interactive Core Team & Team Image with Dotted Pointers */}
+            <TeamInteractiveSection />
           </div>
         </div>
 

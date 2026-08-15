@@ -25,32 +25,37 @@ function FeaturedCard({ post }: { post: BlogPost }) {
   return (
     <Link
       href={`/blogs/${post.slug}`}
-      className="group grid grid-cols-1 gap-6 border border-dotted border-edge p-4 transition-colors hover:border-foreground/30 md:grid-cols-[1fr_1fr] md:p-6"
+      className="group grid grid-cols-1 gap-5 border border-dotted border-edge p-4 transition-colors hover:border-foreground/30 md:grid-cols-[340px_1fr] md:p-5 bg-muted/5 items-center"
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-muted/30">
-        <Image
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+      <div className="relative w-full h-48 sm:h-56 overflow-hidden bg-muted/15 border border-dotted border-edge flex items-center justify-center p-2">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          className="w-full h-full object-contain mx-auto transition-transform duration-500 group-hover:scale-102"
           src={imageSrc}
           alt={post.title}
-          fill
-          priority
-          sizes="(max-width: 768px) 100vw, 50vw"
         />
       </div>
       <div className="flex flex-col justify-center">
-        <span className="text-caption font-medium uppercase tracking-wider text-muted-foreground">
-          {post.category}
-        </span>
-        <h2 className="mt-3 text-subheading font-normal leading-tight">
+        <div className="flex items-center gap-2 mb-1.5">
+          <span className="text-caption font-medium uppercase tracking-wider text-teal">
+            {post.category}
+          </span>
+          <span className="text-caption text-muted-foreground">•</span>
+          <span className="text-caption font-mono text-muted-foreground">{readTimeStr}</span>
+        </div>
+        <h2 className="text-lg sm:text-xl font-semibold leading-snug group-hover:text-teal transition-colors">
           {post.title}
         </h2>
-        <p className="mt-4 text-body leading-relaxed text-muted-foreground">
+        <p className="mt-2 text-xs leading-relaxed text-muted-foreground line-clamp-2 sm:line-clamp-3">
           {post.excerpt}
         </p>
-        <div className="mt-6 flex items-center gap-4">
-          <span className="text-caption text-muted-foreground">{readTimeStr}</span>
-          <span className="text-caption text-muted-foreground transition-colors group-hover:text-foreground">
-            Read more →
+        <div className="mt-4 flex items-center justify-between">
+          <span className="text-caption font-mono text-muted-foreground flex items-center gap-1.5">
+            <span>By</span>
+            <strong className="font-semibold text-foreground">{post.author_name}</strong>
+          </span>
+          <span className="text-caption font-mono text-teal font-medium group-hover:underline">
+            Read article →
           </span>
         </div>
       </div>
@@ -65,30 +70,34 @@ function BlogCard({ post }: { post: BlogPost }) {
   return (
     <Link
       href={`/blogs/${post.slug}`}
-      className="group flex flex-col border border-dotted border-edge transition-colors hover:border-foreground/30"
+      className="group flex flex-col border border-dotted border-edge transition-colors hover:border-foreground/30 bg-muted/5"
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-muted/30">
-        <Image
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+      <div className="relative h-44 w-full overflow-hidden bg-muted/15 border-b border-dotted border-edge flex items-center justify-center p-2">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          className="w-full h-full object-contain mx-auto transition-transform duration-500 group-hover:scale-105"
           src={imageSrc}
           alt={post.title}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
       </div>
       <div className="flex flex-1 flex-col p-4">
-        <span className="text-caption font-medium uppercase tracking-wider text-muted-foreground">
-          {post.category}
-        </span>
-        <h3 className="mt-2 text-title font-normal leading-snug">
+        <div className="flex items-center justify-between">
+          <span className="text-caption font-medium uppercase tracking-wider text-muted-foreground">
+            {post.category}
+          </span>
+          <span className="text-caption font-mono text-muted-foreground">
+            {readTimeStr}
+          </span>
+        </div>
+        <h3 className="mt-2 text-sm font-semibold leading-snug group-hover:text-teal transition-colors line-clamp-2">
           {post.title}
         </h3>
-        <p className="mt-2 flex-1 text-body leading-relaxed text-muted-foreground">
+        <p className="mt-2 flex-1 text-xs leading-relaxed text-muted-foreground line-clamp-2">
           {post.excerpt}
         </p>
-        <div className="mt-4 flex items-center justify-between">
-          <span className="text-caption text-muted-foreground">
-            {readTimeStr}
+        <div className="mt-4 flex items-center justify-between pt-2 border-t border-dotted border-edge/60">
+          <span className="text-[11px] font-mono text-muted-foreground">
+            {post.author_name}
           </span>
           <span className="text-caption text-muted-foreground transition-colors group-hover:text-foreground">
             →

@@ -126,6 +126,7 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
   const stageRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
+  const timelineRef = useRef<gsap.core.Timeline | null>(null);
 
   const services = initialServices && initialServices.length === ENRICHED_SERVICES.length
     ? ENRICHED_SERVICES
@@ -170,6 +171,7 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
       });
 
       scrollTriggerRef.current = timeline.scrollTrigger ?? null;
+      timelineRef.current = timeline;
 
       for (let i = 0; i < totalTransitions; i++) {
         const currentCard = cards[i];
@@ -204,7 +206,7 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
     return () => ctx.revert();
   }, [services.length]);
 
-  // Smooth animated scroll to clicked section
+  // Instant jump to clicked section (no scrubbed animation delay)
   const handleTabClick = (targetIndex: number) => {
     const st = scrollTriggerRef.current;
     if (!st) {
@@ -216,15 +218,11 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
     const targetProgress = totalTransitions > 0 ? targetIndex / totalTransitions : 0;
     const targetScroll = st.start + targetProgress * (st.end - st.start);
 
-    const scrollObj = { y: window.scrollY };
-    gsap.to(scrollObj, {
-      y: targetScroll,
-      duration: 1.1,
-      ease: "power2.inOut",
-      onUpdate: () => {
-        window.scrollTo(0, scrollObj.y);
-      },
-    });
+    // Snap the pinned timeline to the exact step first so the card swaps immediately,
+    // then align the window scroll position to match.
+    timelineRef.current?.progress(targetProgress);
+    setActiveStep(targetIndex);
+    window.scrollTo(0, targetScroll);
   };
 
   return (

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Renderer, Program, Mesh, Triangle, Color } from 'ogl';
 import './SpecularButton.css';
 
@@ -113,16 +113,35 @@ const SpecularButton = ({
 }) => {
   const btnRef = useRef<HTMLButtonElement>(null);
   const fxRef = useRef<HTMLSpanElement>(null);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const propsRef = useRef({ radius, lineColor, baseColor, intensity, shineSize, shineFade, thickness, speed, followMouse, proximity, autoAnimate });
 
   propsRef.current = { radius, lineColor, baseColor, intensity, shineSize, shineFade, thickness, speed, followMouse, proximity, autoAnimate };
 
   useEffect(() => {
+    // Check if device is touch-primary (no fine pointer / hover)
+    const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!isFinePointer || reducedMotion) {
+      setIsTouchDevice(true);
+      return;
+    }
+
     const btn = btnRef.current;
     const fx = fxRef.current;
     if (!btn || !fx) return;
 
-    const dpr = window.devicePixelRatio || 1;
+    let inView = true;
+    let observer: IntersectionObserver | null = null;
+    if ('IntersectionObserver' in window) {
+      observer = new IntersectionObserver(([entry]) => {
+        inView = entry.isIntersecting;
+      }, { rootMargin: '50px' });
+      observer.observe(btn);
+    }
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const renderer = new Renderer({ alpha: true, premultipliedAlpha: true, antialias: true, dpr });
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);
@@ -172,6 +191,7 @@ const SpecularButton = ({
     let pointerAngle: number | null = null;
     let proximityT = 0;
     const onPointerMove = (e: PointerEvent) => {
+      if (!inView) return;
       const rect = btn.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
@@ -188,7 +208,7 @@ const SpecularButton = ({
       const t = Math.max(0, 1 - dist / Math.max(propsRef.current.proximity, 1));
       proximityT = t * t * (3 - 2 * t);
     };
-    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
 
     let angle = 2.4;
     let idleAngle = 2.4;
@@ -201,6 +221,8 @@ const SpecularButton = ({
 
     const update = (now: number) => {
       raf = requestAnimationFrame(update);
+      if (!inView) return;
+
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
       const p = propsRef.current;
@@ -231,6 +253,7 @@ const SpecularButton = ({
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
+      observer?.disconnect();
       window.removeEventListener('pointermove', onPointerMove);
       if (gl.canvas.parentNode === fx) fx.removeChild(gl.canvas);
       gl.getExtension('WEBGL_lose_context')?.loseContext();
@@ -243,7 +266,7 @@ const SpecularButton = ({
       type={type}
       disabled={disabled}
       onClick={onClick}
-      className={`specular-button specular-button--${size}${className ? ` ${className}` : ''}`}
+      className={`specular-button specular-button--${size}${isTouchDevice ? ' specular-button--touch-mode' : ''}${className ? ` ${className}` : ''}`}
       style={{
         '--sb-radius': `${radius}px`,
         '--sb-tint': tint,
@@ -252,10 +275,15 @@ const SpecularButton = ({
         '--sb-text-color': textColor
       } as React.CSSProperties}
     >
-      <span ref={fxRef} className="specular-button__fx" aria-hidden="true" />
+      {isTouchDevice ? (
+        <span className="specular-button__css-sheen" aria-hidden="true" />
+      ) : (
+        <span ref={fxRef} className="specular-button__fx" aria-hidden="true" />
+      )}
       <span className="specular-button__label">{children}</span>
     </button>
   );
 };
 
 export default SpecularButton;
+

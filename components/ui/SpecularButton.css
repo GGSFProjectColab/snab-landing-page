@@ -75,7 +75,32 @@
   height: 100%;
 }
 
+/* CSS fallback border glow for touch devices (0 WebGL/JS cost) */
+.specular-button--touch-mode {
+  border: 1px solid color-mix(in srgb, var(--sb-text-color) 25%, transparent);
+}
+
+.specular-button__css-sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--sb-radius);
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--sb-text-color) 45%, transparent) 0%,
+    color-mix(in srgb, var(--sb-text-color) 10%, transparent) 40%,
+    color-mix(in srgb, var(--sb-text-color) 5%, transparent) 60%,
+    color-mix(in srgb, var(--sb-text-color) 35%, transparent) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .specular-button__label {
   position: relative;
   z-index: 2;
 }
+

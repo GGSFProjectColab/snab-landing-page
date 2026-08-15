@@ -5,13 +5,8 @@ import { Hero } from "@/components/ui/animated-hero";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { ContainerWrapper } from "@/components/site/container";
-
 import { HeaderTitle } from "@/components/profile/header-title";
-import { CloudShader } from "@/components/ui/cloud-shader";
-import FluidOrb from "@/components/ui/fluid-orb";
 import { GrainGradientShader } from "@/components/ui/grain-gradient-shader";
-import { AIWorkflowFlow } from "@/components/ui/ai-workflow-flow";
-import { Globe } from "@/components/ui/globe";
 import Svg1 from "@/components/pixel-perfect/svg-1";
 import Svg9 from "@/components/pixel-perfect/svg-9";
 import { DitheredLogoVisual } from "@/components/ui/dithered-logo-visual";
@@ -29,6 +24,9 @@ import {
   ScrollVelocityRow,
 } from "@/components/ui/scroll-based-velocity";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+
+
+
 
 
 export const metadata: Metadata = createPageMetadata({

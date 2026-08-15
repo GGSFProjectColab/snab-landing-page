@@ -1,7 +1,7 @@
 "use client";
 
 import React, { type ElementType, useMemo, type ReactNode } from "react";
-import { motion, type Transition } from "motion/react";
+import { motion, useReducedMotion, type Transition } from "motion/react";
 import { cn } from "@/lib/utils";
 
 export type TextGenerateEffectProps = {
@@ -22,6 +22,7 @@ type RenderOptions = {
   staggerDuration: number;
   transition: Transition;
   filter: boolean;
+  prefersReducedMotion: boolean;
 };
 
 function getWordCount(node: ReactNode): number {
@@ -49,6 +50,10 @@ function renderAnimatedNodes(
     return null;
   }
 
+  if (options.prefersReducedMotion) {
+    return node;
+  }
+
   if (typeof node === "string" || typeof node === "number") {
     const text = String(node);
     const parts = text.split(/(\s+)/);
@@ -60,14 +65,29 @@ function renderAnimatedNodes(
       return (
         <motion.span
           key={`w-${idx}-${i}`}
-          initial={{ filter: options.filter ? "blur(4px)" : undefined, opacity: 0 }}
+          initial={{
+            filter: options.filter ? "blur(4px)" : undefined,
+            opacity: 0,
+            y: 4,
+          }}
           animate={
             options.trigger
-              ? { filter: options.filter ? "blur(0px)" : undefined, opacity: 1 }
-              : { filter: options.filter ? "blur(4px)" : undefined, opacity: 0 }
+              ? {
+                  filter: options.filter ? "blur(0px)" : undefined,
+                  opacity: 1,
+                  y: 0,
+                }
+              : {
+                  filter: options.filter ? "blur(4px)" : undefined,
+                  opacity: 0,
+                  y: 4,
+                }
           }
-          transition={{ ...options.transition, delay: idx * options.staggerDuration }}
-          className={cn("inline-block", options.wordClassName)}
+          transition={{
+            ...options.transition,
+            delay: idx * options.staggerDuration,
+          }}
+          className={cn("inline-block will-change-[transform,opacity]", options.wordClassName)}
         >
           {part}
         </motion.span>
@@ -81,14 +101,26 @@ function renderAnimatedNodes(
     return (
       <motion.span
         key={`elem-${idx}`}
-        initial={{ filter: options.filter ? "blur(4px)" : undefined, opacity: 0 }}
+        initial={{
+          filter: options.filter ? "blur(4px)" : undefined,
+          opacity: 0,
+        }}
         animate={
           options.trigger
-            ? { filter: options.filter ? "blur(0px)" : undefined, opacity: 1 }
-            : { filter: options.filter ? "blur(4px)" : undefined, opacity: 0 }
+            ? {
+                filter: options.filter ? "blur(0px)" : undefined,
+                opacity: 1,
+              }
+            : {
+                filter: options.filter ? "blur(4px)" : undefined,
+                opacity: 0,
+              }
         }
-        transition={{ ...options.transition, delay: idx * options.staggerDuration }}
-        className="inline"
+        transition={{
+          ...options.transition,
+          delay: idx * options.staggerDuration,
+        }}
+        className="inline will-change-[opacity]"
       >
         {node}
       </motion.span>
@@ -113,11 +145,12 @@ export function TextGenerateEffect({
   className,
   wordClassName,
   trigger = true,
-  staggerDuration = 0.14,
-  transition = { duration: 0.65 },
-  filter = true,
+  staggerDuration = 0.08,
+  transition = { duration: 0.45, ease: "easeOut" },
+  filter = false,
 }: TextGenerateEffectProps) {
   const MotionTag = motion[as as keyof typeof motion] as typeof motion.div;
+  const prefersReducedMotion = useReducedMotion() ?? false;
 
   const content = useMemo(() => {
     let wordCounter = 0;
@@ -133,8 +166,18 @@ export function TextGenerateEffect({
       staggerDuration,
       transition,
       filter,
+      prefersReducedMotion,
     });
-  }, [children, wordClassName, trigger, staggerDuration, transition, filter]);
+  }, [children, wordClassName, trigger, staggerDuration, transition, filter, prefersReducedMotion]);
+
+  if (prefersReducedMotion) {
+    const Tag = as as ElementType;
+    return (
+      <Tag id={id} className={cn(as === "p" ? "block" : "inline-block", className)}>
+        {children}
+      </Tag>
+    );
+  }
 
   return (
     <MotionTag
@@ -147,3 +190,4 @@ export function TextGenerateEffect({
 }
 
 export default TextGenerateEffect;
+

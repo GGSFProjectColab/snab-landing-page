@@ -16,6 +16,8 @@ import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
 gsap.registerPlugin(ScrollTrigger);
 
+
+
 export type Service = {
   number: string;
   title: string;

@@ -46,6 +46,42 @@ const workItems = [
     image: "/notary-expert.png",
     imageAlt: "Notary Expert Platform Preview",
   },
+  {
+    number: "03",
+    name: "NyayaAI",
+    status: "Live",
+    categories: ["LEGAL AI", "AI PRODUCT", "JUDICIAL TECH"],
+    description:
+      "An AI-powered legal assistance platform that helps citizens, lawyers, and judges navigate the justice system — with PIL/RTI guidance, court statistics dashboards, document intelligence, and multilingual access.",
+    capabilities: [
+      "Legal Guidance",
+      "Document Intelligence",
+      "Case Analytics",
+      "Multilingual Access",
+    ],
+    image: "/nyaya-ai.png",
+    imageAlt: "NyayaAI Logo",
+    link: "https://nyayai.interviewxpert.in/",
+    contain: true,
+  },
+  {
+    number: "04",
+    name: "RoomMateMatch",
+    status: "Live",
+    categories: ["HOSTEL FINDER", "AI MATCHING", "COMMUNITY PLATFORM"],
+    description:
+      "A platform that helps students find hostels and connect with compatible roommates through AI-powered matching, verified listings, and secure in-app chat.",
+    capabilities: [
+      "AI-Powered Matching",
+      "Verified Listings",
+      "Secure Chat",
+      "Community Events",
+    ],
+    image: "/roommate-match.png",
+    imageAlt: "RoomMateMatch Logo",
+    link: "https://roommate.bluecreast.in/",
+    contain: true,
+  },
 ];
 
 export default function WorkPage() {
@@ -133,7 +169,9 @@ export default function WorkPage() {
                   {/* Minimal Subtle Action Link */}
                   <div className="mt-6">
                     <a
-                      href="#"
+                      href={'link' in item && item.link ? item.link : "#"}
+                      target={'link' in item && item.link ? "_blank" : undefined}
+                      rel={'link' in item && item.link ? "noopener noreferrer" : undefined}
                       className="inline-flex items-center gap-1.5 text-button font-normal text-foreground transition-colors hover:text-muted-foreground"
                     >
                       <span>Explore system</span>
@@ -160,7 +198,7 @@ export default function WorkPage() {
                     />
                     <div className="relative h-full w-full overflow-hidden rounded-[6px]">
                       <Image
-                        className={`h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105 ${'imageDark' in item && item.imageDark ? 'block dark:hidden' : ''}`}
+                        className={`h-full w-full ${'contain' in item && item.contain ? 'object-contain' : 'object-cover object-top'} transition-transform duration-500 group-hover:scale-105 ${'imageDark' in item && item.imageDark ? 'block dark:hidden' : ''}`}
                         src={item.image}
                         alt={item.imageAlt}
                         width={400}
@@ -169,7 +207,7 @@ export default function WorkPage() {
                       />
                       {'imageDark' in item && item.imageDark && (
                         <Image
-                          className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105 hidden dark:block"
+                          className={`h-full w-full ${'contain' in item && item.contain ? 'object-contain' : 'object-cover object-top'} transition-transform duration-500 group-hover:scale-105 hidden dark:block`}
                           src={item.imageDark as string}
                           alt={item.imageAlt}
                           width={400}

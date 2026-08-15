@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { HomeFooter } from "./HomeFooter";
 import { Hero } from "@/components/ui/animated-hero";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -162,42 +161,36 @@ const whyChooseUs = [
     description: "We design every system with AI at its core, not as an afterthought.",
     image: "/ascii-magic-6.png",
     visual: "svg1",
-    slug: "ai-first-architecture",
   },
   {
     title: "Workflow-Centric Design",
     description: "We start with the workflow, not the model — ensuring real-world impact.",
     image: "/ascii-magic-6.png",
     visual: "dithered",
-    slug: "workflow-centric-design",
   },
   {
     title: "End-to-End Delivery",
     description: "From ideation to deployment, we own the full product lifecycle.",
     image: "/ascii-magic-6.png",
     visual: "svg9",
-    slug: "end-to-end-delivery",
   },
   {
     title: "Production-Grade Systems",
     description: "Every solution is built for scale, reliability, and security from day one.",
     image: "/ascii-magic-6.png",
     visual: "dottedmap",
-    slug: "production-grade-systems",
   },
   {
     title: "Cross-Platform Expertise",
     description: "Web, mobile, desktop — we build where your users need us.",
     image: "/ascii-magic-6.png",
     visual: "techstack",
-    slug: "cross-platform-expertise",
   },
   {
     title: "Transparent Collaboration",
     description: "Shared milestones, demos, and decisions keep you close to the work.",
     image: "/transparent-collaboration.jpg",
     imageLight: "/transparent-collaboration-light.jpg",
-    slug: "transparent-collaboration",
   },
 ];
 
@@ -535,15 +528,7 @@ export default function Home() {
                         {item.description}
                       </p>
                     </div>
-                    <div className="mt-4 flex justify-end">
-                      <Link
-                        className="flex h-8 w-8 items-center justify-center border border-dotted border-edge text-muted-foreground transition-colors group-hover:bg-muted"
-                        href={`/why-choose-us/${item.slug}`}
-                      >
-                        ↗
-                      </Link>
                     </div>
-                  </div>
                 </div>
                 );
               })}

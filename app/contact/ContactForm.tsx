@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useForm, ValidationError } from "@formspree/react";
-import { Send } from "lucide-react";
+import { Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -10,18 +9,62 @@ export function ContactForm() {
     email: "",
     message: "",
   });
-  const [state, handleSubmit] = useForm("mrengaww");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errorMessage) setErrorMessage(null);
   };
 
-  if (state.succeeded) {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage(null);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to submit contact form. Please try again.");
+      }
+
+      setIsSuccess(true);
+      setFormData({ name: "", email: "", message: "" });
+    } catch (err: any) {
+      setErrorMessage(err.message || "Something went wrong. Please try again or email us directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (isSuccess) {
     return (
-      <p className="text-button font-medium text-teal" role="status">
-        Message sent successfully! We&apos;ll get back to you soon.
-      </p>
+      <div className="flex flex-col gap-4 py-4">
+        <div className="flex items-center gap-2 text-teal">
+          <CheckCircle2 size={18} className="shrink-0" />
+          <p className="text-button font-medium">
+            Message sent successfully! We&apos;ll get back to you soon.
+          </p>
+        </div>
+        <button
+          type="button"
+          onClick={() => setIsSuccess(false)}
+          className="self-start font-mono text-caption uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground underline underline-offset-4"
+        >
+          Send another message
+        </button>
+      </div>
     );
   }
 
@@ -43,8 +86,8 @@ export function ContactForm() {
           onChange={handleChange}
           placeholder="Your name"
           required
+          disabled={isSubmitting}
         />
-        <ValidationError prefix="Name" field="name" errors={state.errors} />
       </div>
 
       <div className="flex flex-col gap-1.5">
@@ -63,8 +106,8 @@ export function ContactForm() {
           onChange={handleChange}
           placeholder="your@email.com"
           required
+          disabled={isSubmitting}
         />
-        <ValidationError prefix="Email" field="email" errors={state.errors} />
       </div>
 
       <div className="flex flex-col gap-1.5">
@@ -83,23 +126,33 @@ export function ContactForm() {
           placeholder="Tell us about your project..."
           rows={3}
           required
+          disabled={isSubmitting}
         />
-        <ValidationError prefix="Message" field="message" errors={state.errors} />
       </div>
 
       <button
         type="submit"
         className="inline-flex items-center gap-2 self-start bg-foreground text-background font-mono text-caption uppercase tracking-wider px-5 py-2.5 transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
-        disabled={state.submitting}
+        disabled={isSubmitting}
       >
-        {state.submitting ? "Sending..." : "Send Message"}
-        <Send size={14} aria-hidden="true" />
+        {isSubmitting ? (
+          <>
+            <Loader2 size={14} className="animate-spin" />
+            <span>Sending...</span>
+          </>
+        ) : (
+          <>
+            <span>Send Message</span>
+            <Send size={14} aria-hidden="true" />
+          </>
+        )}
       </button>
 
-      {state.errors && (
-        <p className="text-button font-medium text-red-500">
-          Something went wrong. Please try again or email us directly.
-        </p>
+      {errorMessage && (
+        <div className="flex items-center gap-2 text-red-500 text-button">
+          <AlertCircle size={16} className="shrink-0" />
+          <span>{errorMessage}</span>
+        </div>
       )}
     </form>
   );

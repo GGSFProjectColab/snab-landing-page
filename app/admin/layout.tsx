@@ -8,6 +8,7 @@ import {
   Briefcase,
   FileText,
   LogOut,
+  Mail,
   Newspaper,
 } from "lucide-react"
 import {
@@ -44,6 +45,12 @@ const menuItems = [
     pathname: "/admin/blogs",
     view: null,
     icon: Newspaper,
+  },
+  {
+    title: "Contacts",
+    pathname: "/admin/contacts",
+    view: null,
+    icon: Mail,
   },
 ]
 

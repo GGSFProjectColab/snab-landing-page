@@ -10,6 +10,7 @@ import { getBlogPostBySlug, getBlogPosts, type BlogPost } from "@/lib/blogs";
 import { siteConfig, absoluteUrl } from "@/lib/site";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ShareButtons } from "./ShareButtons";
+import { ViewCounter } from "./ViewCounter";
 
 export const dynamic = "force-dynamic";
 
@@ -213,6 +214,8 @@ export default async function BlogPostPage({ params }: Props) {
                     <Clock size={11} />
                     {post.read_time || "5 min read"}
                   </span>
+                  <span>•</span>
+                  <ViewCounter slug={post.slug} initialCount={post.view_count ?? 0} />
                 </div>
               </div>
             </div>

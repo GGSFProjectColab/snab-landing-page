@@ -337,7 +337,7 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
                       </div>
                     ) : service.visual === "mobile" ? (
                       <div className="w-full h-full flex items-center justify-center">
-                        <MobileAppVisual image={service.image} imageAlt={service.imageAlt} />
+                        <MobileAppVisual />
                       </div>
                     ) : service.visual === "desktop" ? (
                       <div className="w-full h-full flex items-center justify-center">

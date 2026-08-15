@@ -37,6 +37,9 @@ export function SmoothScrollProvider() {
     });
 
     lenisRef.current = lenis;
+    if (typeof window !== "undefined") {
+      (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
+    }
 
     // Connect Lenis scroll events → ScrollTrigger so pins stay accurate
     lenis.on("scroll", ScrollTrigger.update);
@@ -57,6 +60,9 @@ export function SmoothScrollProvider() {
       gsap.ticker.remove(onTick);
       lenis.destroy();
       lenisRef.current = null;
+      if (typeof window !== "undefined") {
+        delete (window as unknown as { __lenis?: Lenis }).__lenis;
+      }
     };
   }, []);
 

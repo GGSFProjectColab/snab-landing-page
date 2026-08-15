@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ContainerWrapper } from "@/components/site/container";
@@ -120,8 +120,161 @@ const ENRICHED_SERVICES: Service[] = [
   },
 ];
 
+// Memoized single service card to prevent re-rendering during scroll
+const ServiceCardItem = memo(function ServiceCardItem({
+  service,
+  innerRef,
+}: {
+  service: Service;
+  innerRef: (el: HTMLDivElement | null) => void;
+}) {
+  return (
+    <div
+      ref={innerRef}
+      className="absolute inset-0 flex h-full w-full bg-background overflow-hidden"
+      style={{
+        willChange: "transform, opacity",
+        transform: "translate3d(0, 0, 0)",
+        backfaceVisibility: "hidden",
+      }}
+    >
+      <div className="grid h-full w-full grid-rows-[auto_1fr] md:grid-rows-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-dotted divide-edge overflow-hidden">
+        {/* Left Column: Top-aligned Title & Intro (Key Highlights only on md+ web view) */}
+        <div className="flex flex-col justify-start p-3 sm:p-6 lg:p-8 overflow-hidden">
+          {/* Service Title */}
+          <TextGenerateEffect
+            as="h3"
+            className="text-base sm:text-xl lg:text-2xl font-medium sm:font-normal tracking-tight text-foreground"
+            staggerDuration={0.14}
+            transition={{ duration: 0.65 }}
+            filter={false}
+          >
+            {service.title}
+          </TextGenerateEffect>
+
+          {/* Small Introduction */}
+          <TextGenerateEffect
+            as="p"
+            className="mt-1 sm:mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground max-w-lg"
+            staggerDuration={0.04}
+            transition={{ duration: 0.65 }}
+            filter={false}
+          >
+            {service.description}
+          </TextGenerateEffect>
+
+          {/* Key Highlights - Hidden on mobile, visible on desktop / web view */}
+          {service.highlights && service.highlights.length > 0 && (
+            <div className="hidden md:block mt-2.5 sm:mt-4 space-y-1 sm:space-y-1.5">
+              <p className="font-mono text-[9px] sm:text-[10px] font-medium tracking-wider uppercase text-muted-foreground">
+                Key Highlights
+              </p>
+              <div className="grid gap-1 sm:gap-1.5">
+                {service.highlights.map((highlight) => (
+                  <div
+                    key={highlight}
+                    className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground"
+                  >
+                    <CheckCircle2
+                      size={13}
+                      className="mt-0.5 shrink-0 text-teal"
+                    />
+                    <span className="leading-tight sm:leading-snug">{highlight}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Right Column: Responsive Visual Component calibrated for mobile & desktop */}
+        <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-background p-1.5 sm:p-4 lg:p-6">
+          {service.visual === "flow" ? (
+            <div className="relative h-full w-full max-h-[250px] sm:max-h-[290px] lg:max-h-[360px] flex items-center justify-center">
+              <AIWorkflowFlow expanded={true} />
+            </div>
+          ) : service.visual === "orb" ? (
+            <div className="flex flex-col items-center justify-center p-1 text-center">
+              <div className="block lg:hidden">
+                <FluidOrb size={180} />
+              </div>
+              <div className="hidden lg:block">
+                <FluidOrb size={300} />
+              </div>
+            </div>
+          ) : service.visual === "mobile" ? (
+            <div className="w-full h-full flex items-center justify-center">
+              <MobileAppVisual />
+            </div>
+          ) : service.visual === "desktop" ? (
+            <div className="w-full h-full flex items-center justify-center">
+              <DesktopAppVisual />
+            </div>
+          ) : service.visual === "dithering" ? (
+            <div className="relative aspect-video w-full max-w-[280px] sm:max-w-none h-[170px] sm:h-[220px] lg:h-[300px] overflow-hidden flex items-center justify-center">
+              <CloudShader />
+            </div>
+          ) : service.visual === "globe" ? (
+            <div className="relative aspect-square w-full max-w-[190px] sm:max-w-[260px] lg:max-w-[360px] overflow-hidden flex items-center justify-center">
+              <Globe />
+            </div>
+          ) : (
+            <div className="flex items-center justify-center p-1">
+              <FluidOrb size={180} />
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+});
+
+// Memoized Glider Tabs component
+const GliderTabs = memo(function GliderTabs({
+  services,
+  activeStep,
+  onTabClick,
+}: {
+  services: Service[];
+  activeStep: number;
+  onTabClick: (index: number) => void;
+}) {
+  return (
+    <div className="grid grid-cols-3 md:grid-cols-6 border-b border-dotted border-edge bg-background">
+      {services.map((srv, idx) => {
+        const isActive = activeStep === idx;
+        const mobileIsLastCol = (idx + 1) % 3 === 0;
+        const mobileIsTopRow = idx < 3;
+        const desktopIsLastCol = idx === services.length - 1;
+
+        return (
+          <button
+            key={`glider-tab-${srv.number}`}
+            type="button"
+            onClick={() => onTabClick(idx)}
+            className={[
+              "flex items-center justify-center p-2 sm:py-2.5 lg:py-3",
+              "font-mono text-[9px] sm:text-[10px] lg:text-[11px] uppercase tracking-wider",
+              "transition-colors duration-150 rounded-none cursor-pointer select-none",
+              !mobileIsLastCol ? "border-r border-dotted border-edge md:border-r-0" : "",
+              mobileIsTopRow ? "border-b border-dotted border-edge md:border-b-0" : "",
+              !desktopIsLastCol ? "md:border-r md:border-dotted md:border-edge" : "",
+              isActive
+                ? "bg-foreground text-background font-semibold"
+                : "text-muted-foreground hover:text-foreground hover:bg-muted/30 bg-transparent",
+            ].join(" ")}
+          >
+            <span className="truncate">{srv.title}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+});
+
 export function ServicesSection({ services: initialServices }: { services?: Service[] }) {
   const [activeStep, setActiveStep] = useState(0);
+  const activeStepRef = useRef(0);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -133,85 +286,132 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
     ? ENRICHED_SERVICES
     : (initialServices || ENRICHED_SERVICES);
 
-  // GSAP ScrollTrigger for pinned interactive card animation
+  // GSAP ScrollTrigger with matchMedia for responsive smooth performance
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      const container = containerRef.current;
-      const stage = stageRef.current;
-      const cards = cardsRef.current.filter((c): c is HTMLDivElement => c !== null);
+    const container = containerRef.current;
+    const stage = stageRef.current;
+    const cards = cardsRef.current.filter((c): c is HTMLDivElement => c !== null);
 
-      if (!container || !stage || cards.length < 2) return;
+    if (!container || !stage || cards.length < 2) return;
 
-      gsap.set(cards[0], { xPercent: 0, opacity: 1, zIndex: 10, visibility: "visible" });
-      cards.slice(1).forEach((card, idx) => {
-        gsap.set(card, {
-          xPercent: -100,
-          opacity: 0,
-          zIndex: 10 + idx + 1,
-          visibility: "hidden",
+    const mm = gsap.matchMedia();
+
+    mm.add(
+      {
+        isDesktop: "(min-width: 768px)",
+        isMobile: "(max-width: 767px)",
+        reduceMotion: "(prefers-reduced-motion: reduce)",
+      },
+      (context) => {
+        const { isDesktop, reduceMotion } = (context.conditions || {}) as {
+          isDesktop?: boolean;
+          isMobile?: boolean;
+          reduceMotion?: boolean;
+        };
+
+        if (reduceMotion) {
+          gsap.set(cards, { clearProps: "all" });
+          return;
+        }
+
+        // Set initial states using autoAlpha and hardware-accelerated transforms
+        gsap.set(cards[0], {
+          xPercent: 0,
+          scale: 1,
+          autoAlpha: 1,
+          zIndex: 10,
+          pointerEvents: "auto",
+          force3D: true,
         });
-      });
 
-      const totalTransitions = cards.length - 1;
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: container,
-          pin: true,
-          start: "top 64px",
-          end: `+=${totalTransitions * 800}`,
-          scrub: 0.8,
-          anticipatePin: 1,
-          onUpdate: (self) => {
-            const step = Math.min(
-              cards.length - 1,
-              Math.floor(self.progress * cards.length)
-            );
-            setActiveStep(step);
+        cards.slice(1).forEach((card, idx) => {
+          gsap.set(card, {
+            xPercent: -100,
+            scale: 1,
+            autoAlpha: 0,
+            zIndex: 10 + idx + 1,
+            pointerEvents: "none",
+            force3D: true,
+          });
+        });
+
+        const totalTransitions = cards.length - 1;
+        const scrollDistance = totalTransitions * (isDesktop ? 650 : 450);
+
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: container,
+            pin: true,
+            start: "top 64px",
+            end: `+=${scrollDistance}`,
+            scrub: isDesktop ? 0.5 : 0.25,
+            anticipatePin: isDesktop ? 1 : 0,
+            invalidateOnRefresh: true,
+            fastScrollEnd: true,
+            onUpdate: (self) => {
+              const step = Math.min(
+                totalTransitions,
+                Math.floor(self.progress * totalTransitions + 0.5)
+              );
+              if (step !== activeStepRef.current) {
+                activeStepRef.current = step;
+                setActiveStep(step);
+              }
+            },
           },
-        },
-      });
+        });
 
-      scrollTriggerRef.current = timeline.scrollTrigger ?? null;
-      timelineRef.current = timeline;
+        scrollTriggerRef.current = timeline.scrollTrigger ?? null;
+        timelineRef.current = timeline;
 
-      for (let i = 0; i < totalTransitions; i++) {
-        const currentCard = cards[i];
-        const nextCard = cards[i + 1];
+        // Build transitions with linear ease ('none') for 1:1 scroll synchronization
+        for (let i = 0; i < totalTransitions; i++) {
+          const currentCard = cards[i];
+          const nextCard = cards[i + 1];
 
-        timeline
-          .set(nextCard, { visibility: "visible" })
-          .to(
-            nextCard,
-            {
-              xPercent: 0,
-              opacity: 1,
-              duration: 1,
-              ease: "power2.out",
-            },
-            `step-${i}`
-          )
-          .to(
-            currentCard,
-            {
-              opacity: 0.15,
-              scale: 0.97,
-              duration: 0.8,
-              ease: "power2.inOut",
-            },
-            `step-${i}+=0.1`
-          )
-          .set(currentCard, { visibility: "hidden" });
-      }
-    }, containerRef);
+          timeline
+            .to(
+              nextCard,
+              {
+                xPercent: 0,
+                autoAlpha: 1,
+                pointerEvents: "auto",
+                duration: 1,
+                ease: "none",
+                force3D: true,
+              },
+              `step-${i}`
+            )
+            .to(
+              currentCard,
+              {
+                autoAlpha: 0,
+                scale: 0.98,
+                pointerEvents: "none",
+                duration: 0.9,
+                ease: "none",
+                force3D: true,
+              },
+              `step-${i}`
+            );
+        }
+      },
+      containerRef
+    );
 
-    return () => ctx.revert();
+    return () => {
+      mm.revert();
+      scrollTriggerRef.current = null;
+      timelineRef.current = null;
+    };
   }, [services.length]);
 
-  // Instant jump to clicked section (no scrubbed animation delay)
+  // Smooth jump to clicked tab using Lenis if active, falling back to window smooth scroll
   const handleTabClick = (targetIndex: number) => {
     const st = scrollTriggerRef.current;
     if (!st) {
       setActiveStep(targetIndex);
+      activeStepRef.current = targetIndex;
       return;
     }
 
@@ -219,11 +419,21 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
     const targetProgress = totalTransitions > 0 ? targetIndex / totalTransitions : 0;
     const targetScroll = st.start + targetProgress * (st.end - st.start);
 
-    // Snap the pinned timeline to the exact step first so the card swaps immediately,
-    // then align the window scroll position to match.
-    timelineRef.current?.progress(targetProgress);
+    activeStepRef.current = targetIndex;
     setActiveStep(targetIndex);
-    window.scrollTo(0, targetScroll);
+
+    const lenis = (window as unknown as { __lenis?: { scrollTo: (target: number, opts?: object) => void } }).__lenis;
+    if (lenis && typeof lenis.scrollTo === "function") {
+      lenis.scrollTo(targetScroll, {
+        duration: 0.8,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      });
+    } else {
+      window.scrollTo({
+        top: targetScroll,
+        behavior: "smooth",
+      });
+    }
   };
 
   return (
@@ -233,42 +443,12 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
           {/* Header stays pinned */}
           <HeaderTitle title="What services we provide" id="services-title" />
 
-          {/* Mobile: 3+3 two-row glider / Desktop: all 6 in one row */}
-          <div className="grid grid-cols-3 md:grid-cols-6 border-b border-dotted border-edge bg-background">
-            {services.map((srv, idx) => {
-              const isActive = activeStep === idx;
-
-              // Mobile (3-col): right border on cols 1 & 2, bottom border on top row (0-2)
-              const mobileIsLastCol = (idx + 1) % 3 === 0;
-              const mobileIsTopRow = idx < 3;
-
-              // Desktop (6-col): right border on all except last item
-              const desktopIsLastCol = idx === services.length - 1;
-
-              return (
-                <button
-                  key={`glider-tab-${srv.number}`}
-                  type="button"
-                  onClick={() => handleTabClick(idx)}
-                  className={[
-                    "flex items-center justify-center p-2 sm:py-2.5 lg:py-3",
-                    "font-mono text-[9px] sm:text-[10px] lg:text-[11px] uppercase tracking-wider",
-                    "transition-all duration-200 rounded-none cursor-pointer select-none",
-                    // Mobile borders
-                    !mobileIsLastCol ? "border-r border-dotted border-edge md:border-r-0" : "",
-                    mobileIsTopRow ? "border-b border-dotted border-edge md:border-b-0" : "",
-                    // Desktop borders — right border on all but last
-                    !desktopIsLastCol ? "md:border-r md:border-dotted md:border-edge" : "",
-                    isActive
-                      ? "bg-foreground text-background font-semibold"
-                      : "text-muted-foreground hover:text-foreground hover:bg-muted/30 bg-transparent",
-                  ].join(" ")}
-                >
-                  <span className="truncate">{srv.title}</span>
-                </button>
-              );
-            })}
-          </div>
+          {/* Glider Tabs */}
+          <GliderTabs
+            services={services}
+            activeStep={activeStep}
+            onTabClick={handleTabClick}
+          />
 
           {/* Stacked Service Cards Stage (Responsive sizing across mobile & desktop) */}
           <div
@@ -276,100 +456,13 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
             className="relative h-[360px] sm:h-[420px] md:h-[calc(100vh-190px)] md:min-h-[480px] md:max-h-[580px] w-full overflow-hidden border-b border-dotted border-edge bg-background"
           >
             {services.map((service, index) => (
-              <div
+              <ServiceCardItem
                 key={`service-card-${service.number}`}
-                ref={(el) => {
+                service={service}
+                innerRef={(el) => {
                   cardsRef.current[index] = el;
                 }}
-                className="absolute inset-0 flex h-full w-full bg-background overflow-hidden"
-                style={{ willChange: "transform, opacity" }}
-              >
-                <div className="grid h-full w-full grid-rows-[auto_1fr] md:grid-rows-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-dotted divide-edge overflow-hidden">
-                  {/* Left Column: Top-aligned Title & Intro (Key Highlights only on md+ web view) */}
-                  <div className="flex flex-col justify-start p-3 sm:p-6 lg:p-8 overflow-hidden">
-                    {/* Service Title */}
-                    <TextGenerateEffect
-                      as="h3"
-                      className="text-base sm:text-xl lg:text-2xl font-medium sm:font-normal tracking-tight text-foreground"
-                      staggerDuration={0.14}
-                      transition={{ duration: 0.65 }}
-                    >
-                      {service.title}
-                    </TextGenerateEffect>
-
-                    {/* Small Introduction */}
-                    <TextGenerateEffect
-                      as="p"
-                      className="mt-1 sm:mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground max-w-lg"
-                      staggerDuration={0.04}
-                      transition={{ duration: 0.65 }}
-                    >
-                      {service.description}
-                    </TextGenerateEffect>
-
-                    {/* Key Highlights - Hidden on mobile, visible on desktop / web view */}
-                    {service.highlights && service.highlights.length > 0 && (
-                      <div className="hidden md:block mt-2.5 sm:mt-4 space-y-1 sm:space-y-1.5">
-                        <p className="font-mono text-[9px] sm:text-[10px] font-medium tracking-wider uppercase text-muted-foreground">
-                          Key Highlights
-                        </p>
-                        <div className="grid gap-1 sm:gap-1.5">
-                          {service.highlights.map((highlight) => (
-                            <div
-                              key={highlight}
-                              className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground"
-                            >
-                              <CheckCircle2
-                                size={13}
-                                className="mt-0.5 shrink-0 text-teal"
-                              />
-                              <span className="leading-tight sm:leading-snug">{highlight}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Right Column: Responsive Visual Component calibrated for mobile & desktop */}
-                  <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-background p-1.5 sm:p-4 lg:p-6">
-                    {service.visual === "flow" ? (
-                      <div className="relative h-full w-full max-h-[250px] sm:max-h-[290px] lg:max-h-[360px] flex items-center justify-center">
-                        <AIWorkflowFlow expanded={true} />
-                      </div>
-                    ) : service.visual === "orb" ? (
-                      <div className="flex flex-col items-center justify-center p-1 text-center">
-                        <div className="block lg:hidden">
-                          <FluidOrb size={180} />
-                        </div>
-                        <div className="hidden lg:block">
-                          <FluidOrb size={300} />
-                        </div>
-                      </div>
-                    ) : service.visual === "mobile" ? (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <MobileAppVisual />
-                      </div>
-                    ) : service.visual === "desktop" ? (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <DesktopAppVisual />
-                      </div>
-                    ) : service.visual === "dithering" ? (
-                      <div className="relative aspect-video w-full max-w-[280px] sm:max-w-none h-[170px] sm:h-[220px] lg:h-[300px] overflow-hidden flex items-center justify-center">
-                        <CloudShader />
-                      </div>
-                    ) : service.visual === "globe" ? (
-                      <div className="relative aspect-square w-full max-w-[190px] sm:max-w-[260px] lg:max-w-[360px] overflow-hidden flex items-center justify-center">
-                        <Globe />
-                      </div>
-                    ) : (
-                      <div className="flex items-center justify-center p-1">
-                        <FluidOrb size={180} />
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
+              />
             ))}
           </div>
         </ContainerWrapper>

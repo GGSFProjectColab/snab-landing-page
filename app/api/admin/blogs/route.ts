@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
         category: blogData.category?.trim() || "Engineering",
         excerpt: blogData.excerpt?.trim() || "",
         content: blogData.content || "",
-        cover_image: blogData.cover_image?.trim() || "/ascii-magic-14.png",
+        cover_image: blogData.cover_image?.trim() || "",
         author_name: blogData.author_name?.trim() || "SNAB Team",
         author_image: blogData.author_image?.trim() || "",
         author_role: blogData.author_role?.trim() || "",

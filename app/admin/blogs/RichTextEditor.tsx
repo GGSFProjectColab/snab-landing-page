@@ -214,6 +214,13 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
     const file = e.target.files?.[0];
     if (!file) return;
 
+    const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 2 MB
+    if (file.size > MAX_IMAGE_SIZE) {
+      alert(`Image size exceeds 2 MB limit (${(file.size / (1024 * 1024)).toFixed(2)} MB). Please select an image under 2 MB.`);
+      if (fileInputRef.current) fileInputRef.current.value = "";
+      return;
+    }
+
     setIsUploading(true);
     try {
       const formData = new FormData();
@@ -234,6 +241,7 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
       alert("Error uploading image: " + err.message);
     } finally {
       setIsUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = "";
     }
   };
 
@@ -616,7 +624,7 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
       )}
 
       {/* Editor Content Area */}
-      <div className="flex-1 p-4 overflow-y-auto min-h-[360px] bg-background">
+      <div className={`p-4 bg-background ${isFullscreen ? "flex-1 overflow-y-auto" : "min-h-[300px]"}`}>
         {activeTab === "write" && (
           <div
             ref={editorRef}

@@ -1,6 +1,16 @@
+"use client";
+
+import { usePathname } from "next/navigation";
 import GradualBlur from "@/components/ui/gradual-blur";
 
 export function SiteGradualBlur() {
+  const pathname = usePathname();
+
+  // Hide bottom effect completely on admin routes
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
+
   return (
     <GradualBlur
       position="bottom"
@@ -15,3 +25,4 @@ export function SiteGradualBlur() {
     />
   );
 }
+

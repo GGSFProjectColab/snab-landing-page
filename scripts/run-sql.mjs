@@ -1,4 +1,4 @@
-import { execSync } from "node:child_process";
+import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 
 const sql = fs.readFileSync("scripts/storage-policies.sql", "utf-8");
@@ -10,12 +10,16 @@ const statements = sql
 for (const stmt of statements) {
   try {
     console.log(`Running: ${stmt.slice(0, 60)}...`);
-    const cleanStmt = stmt.replace(/\r?\n/g, " ");
-    const out = execSync(`insforge db query "${cleanStmt.replace(/"/g, '\\"')}"`, {
+    const res = spawnSync("cmd.exe", ["/c", "npx", "insforge", "db", "query", `"${stmt.replace(/"/g, '""')}"`], {
       encoding: "utf-8",
+      windowsVerbatimArguments: true,
     });
-    console.log("Output:", out.trim());
+    if (res.error) console.error("Spawn error:", res.error);
+    if (res.stdout) console.log("Output:", res.stdout.trim());
+    if (res.stderr) console.log("Stderr:", res.stderr.trim());
   } catch (err) {
     console.error("Error executing:", err.message || err);
   }
 }
+
+

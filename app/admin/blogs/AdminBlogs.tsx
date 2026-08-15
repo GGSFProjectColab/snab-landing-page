@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -37,6 +38,7 @@ const CATEGORIES = [
 ];
 
 export function AdminBlogs() {
+  const [mounted, setMounted] = useState(false);
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -57,7 +59,7 @@ export function AdminBlogs() {
   const [customCategory, setCustomCategory] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [content, setContent] = useState("");
-  const [coverImage, setCoverImage] = useState("/ascii-magic-14.png");
+  const [coverImage, setCoverImage] = useState("");
   const [authorName, setAuthorName] = useState("Nimay Kulkarni");
   const [authorImage, setAuthorImage] = useState("");
   const [authorRole, setAuthorRole] = useState("Founder & AI Lead");
@@ -68,12 +70,39 @@ export function AdminBlogs() {
   // Uploading state
   const [isUploadingCover, setIsUploadingCover] = useState(false);
   const [isUploadingAuthor, setIsUploadingAuthor] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+  const [formSuccess, setFormSuccess] = useState<string | null>(null);
   const coverInputRef = useRef<HTMLInputElement>(null);
   const authorInputRef = useRef<HTMLInputElement>(null);
 
   // Delete Confirmation State
   const [deletingBlog, setDeletingBlog] = useState<BlogPost | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  // Handle ESC key and prevent body scroll lock conflicts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (editorOpen && !isSaving) {
+          setEditorOpen(false);
+        } else if (deletingBlog && !isDeleting) {
+          setDeletingBlog(null);
+        }
+      }
+    };
+
+    if (editorOpen || deletingBlog) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [editorOpen, deletingBlog, isSaving, isDeleting]);
 
   // Fetch blogs on load
   const fetchBlogs = async () => {
@@ -94,6 +123,7 @@ export function AdminBlogs() {
   };
 
   useEffect(() => {
+    setMounted(true);
     fetchBlogs();
   }, []);
 
@@ -107,6 +137,8 @@ export function AdminBlogs() {
 
   // Open Create New Blog
   const handleOpenCreate = () => {
+    setFormError(null);
+    setFormSuccess(null);
     setEditingBlogId(null);
     setTitle("");
     setSlug("");
@@ -115,7 +147,7 @@ export function AdminBlogs() {
     setCustomCategory("");
     setExcerpt("");
     setContent(`<h2>Overview</h2><p>Start writing your blog content here...</p>`);
-    setCoverImage("/ascii-magic-14.png");
+    setCoverImage("");
     setAuthorName("Nimay Kulkarni");
     setAuthorImage("");
     setAuthorRole("Founder & AI Lead");
@@ -127,6 +159,8 @@ export function AdminBlogs() {
 
   // Open Edit Blog
   const handleOpenEdit = (blog: BlogPost) => {
+    setFormError(null);
+    setFormSuccess(null);
     setEditingBlogId(blog.id);
     setTitle(blog.title);
     setSlug(blog.slug);
@@ -140,7 +174,7 @@ export function AdminBlogs() {
     }
     setExcerpt(blog.excerpt);
     setContent(blog.content);
-    setCoverImage(blog.cover_image || "/ascii-magic-14.png");
+    setCoverImage(blog.cover_image || "");
     setAuthorName(blog.author_name || "SNAB Team");
     setAuthorImage(blog.author_image || "");
     setAuthorRole(blog.author_role || "");
@@ -150,10 +184,20 @@ export function AdminBlogs() {
     setEditorOpen(true);
   };
 
+  const MAX_IMAGE_SIZE = 2 * 1024 * 1024; // 2 MB max
+
   // Upload Cover Image
   const handleCoverUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    setFormError(null);
+
+    if (file.size > MAX_IMAGE_SIZE) {
+      setFormError(`Cover image size exceeds the 2 MB limit (${(file.size / (1024 * 1024)).toFixed(2)} MB). Please select an image under 2 MB.`);
+      if (coverInputRef.current) coverInputRef.current.value = "";
+      return;
+    }
+
     setIsUploadingCover(true);
     try {
       const fd = new FormData();
@@ -163,12 +207,13 @@ export function AdminBlogs() {
       if (res.ok && data.url) {
         setCoverImage(data.url);
       } else {
-        alert(data.error || "Failed to upload cover image.");
+        setFormError(data.error || "Failed to upload cover image.");
       }
     } catch (err: any) {
-      alert("Error: " + err.message);
+      setFormError("Error uploading cover: " + err.message);
     } finally {
       setIsUploadingCover(false);
+      if (coverInputRef.current) coverInputRef.current.value = "";
     }
   };
 
@@ -176,6 +221,14 @@ export function AdminBlogs() {
   const handleAuthorUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+    setFormError(null);
+
+    if (file.size > MAX_IMAGE_SIZE) {
+      setFormError(`Author avatar size exceeds the 2 MB limit (${(file.size / (1024 * 1024)).toFixed(2)} MB). Please select an image under 2 MB.`);
+      if (authorInputRef.current) authorInputRef.current.value = "";
+      return;
+    }
+
     setIsUploadingAuthor(true);
     try {
       const fd = new FormData();
@@ -185,20 +238,22 @@ export function AdminBlogs() {
       if (res.ok && data.url) {
         setAuthorImage(data.url);
       } else {
-        alert(data.error || "Failed to upload author avatar.");
+        setFormError(data.error || "Failed to upload author avatar.");
       }
     } catch (err: any) {
-      alert("Error: " + err.message);
+      setFormError("Error uploading avatar: " + err.message);
     } finally {
       setIsUploadingAuthor(false);
+      if (authorInputRef.current) authorInputRef.current.value = "";
     }
   };
 
   // Save Blog (Create or Update)
   const handleSaveBlog = async (e: React.FormEvent) => {
     e.preventDefault();
+    setFormError(null);
     if (!title.trim()) {
-      alert("Please enter a blog title.");
+      setFormError("Please enter a blog title.");
       return;
     }
 
@@ -240,7 +295,7 @@ export function AdminBlogs() {
       setEditorOpen(false);
       await fetchBlogs();
     } catch (err: any) {
-      alert(err.message || "Failed to save blog.");
+      setFormError(err.message || "Failed to save blog.");
     } finally {
       setIsSaving(false);
     }
@@ -581,11 +636,18 @@ export function AdminBlogs() {
       )}
 
       {/* CREATE / EDIT BLOG MODAL */}
-      {editorOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-xs p-2 sm:p-4 overflow-y-auto">
-          <div className="w-full max-w-5xl bg-background border border-dotted border-edge shadow-2xl flex flex-col my-auto max-h-[92vh] overflow-hidden">
-            {/* Modal Header */}
-            <div className="flex items-center justify-between border-b border-dotted border-edge px-6 py-4 bg-muted/20">
+      {mounted && editorOpen && createPortal(
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-xs p-2 sm:p-4 md:p-6"
+          onClick={(e) => {
+            if (e.target === e.currentTarget && !isSaving) {
+              setEditorOpen(false);
+            }
+          }}
+        >
+          <div className="relative w-full max-w-5xl h-[90vh] max-h-[90vh] bg-background border border-dotted border-edge shadow-2xl flex flex-col overflow-hidden">
+            {/* Pinned Modal Header (Never scrolls away) */}
+            <div className="shrink-0 flex items-center justify-between border-b border-dotted border-edge px-6 py-4 bg-muted/20">
               <div>
                 <h2 className="text-base font-bold text-foreground flex items-center gap-2">
                   {editingBlogId ? "Edit Blog Post" : "Create New Blog Post"}
@@ -597,14 +659,37 @@ export function AdminBlogs() {
               <button
                 type="button"
                 onClick={() => setEditorOpen(false)}
-                className="p-1.5 border border-dotted border-edge hover:bg-muted text-muted-foreground hover:text-foreground"
+                disabled={isSaving}
+                className="p-1.5 border border-dotted border-edge hover:bg-muted text-muted-foreground hover:text-foreground transition-colors disabled:opacity-50"
+                title="Close modal (Esc)"
               >
                 <X className="w-4 h-4" />
               </button>
             </div>
 
-            {/* Modal Body / Form */}
-            <form onSubmit={handleSaveBlog} className="flex-1 overflow-y-auto p-6 space-y-6">
+            {/* Error Notification inside modal */}
+            {formError && (
+              <div className="shrink-0 mx-6 mt-4 p-3 border border-dotted border-red-500/40 bg-red-500/10 text-red-400 text-xs flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 shrink-0" />
+                  <span>{formError}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setFormError(null)}
+                  className="text-red-400 hover:text-red-300 p-0.5"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            )}
+
+            {/* Scrollable Form Body (flex-1 min-h-0 overflow-y-auto) */}
+            <form
+              id="blog-editor-form"
+              onSubmit={handleSaveBlog}
+              className="flex-1 min-h-0 overflow-y-auto p-4 sm:p-6 space-y-6 overscroll-contain"
+            >
               {/* Row 1: Title & Slug */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
@@ -738,12 +823,15 @@ export function AdminBlogs() {
               </div>
 
               {/* Author & Cover Image Info */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 border border-dotted border-edge bg-muted/5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 sm:p-5 border border-dotted border-edge bg-muted/5">
                 {/* Author Info */}
-                <div className="space-y-3">
-                  <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                    <User className="w-3.5 h-3.5" /> Author Information
-                  </h4>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+                      <User className="w-3.5 h-3.5" /> Author Information
+                    </h4>
+                  </div>
+
                   <div>
                     <label className="block text-[11px] font-medium text-muted-foreground mb-1">
                       Author Name *
@@ -757,6 +845,7 @@ export function AdminBlogs() {
                       className="w-full bg-muted/20 border border-dotted border-edge px-3 py-1.5 text-xs text-foreground"
                     />
                   </div>
+
                   <div>
                     <label className="block text-[11px] font-medium text-muted-foreground mb-1">
                       Author Role / Title (Optional)
@@ -769,82 +858,169 @@ export function AdminBlogs() {
                       className="w-full bg-muted/20 border border-dotted border-edge px-3 py-1.5 text-xs text-foreground"
                     />
                   </div>
+
                   <div>
                     <label className="block text-[11px] font-medium text-muted-foreground mb-1">
                       Author Avatar Image (Optional)
                     </label>
-                    <div className="flex items-center gap-2">
-                      <input
-                        ref={authorInputRef}
-                        type="file"
-                        accept="image/*"
-                        onChange={handleAuthorUpload}
-                        className="hidden"
-                      />
-                      <button
-                        type="button"
-                        onClick={() => authorInputRef.current?.click()}
-                        disabled={isUploadingAuthor}
-                        className="px-3 py-1.5 border border-dotted border-edge text-xs text-muted-foreground hover:text-foreground flex items-center gap-1.5"
-                      >
-                        <Upload className="w-3.5 h-3.5" />
-                        {isUploadingAuthor ? "Uploading..." : "Upload Avatar"}
-                      </button>
-                      <input
-                        type="text"
-                        value={authorImage}
-                        onChange={(e) => setAuthorImage(e.target.value)}
-                        placeholder="or paste image URL"
-                        className="flex-1 bg-muted/20 border border-dotted border-edge px-3 py-1.5 text-xs text-foreground"
-                      />
+                    <div className="flex items-start gap-3">
+                      {/* Avatar preview */}
+                      <div className="relative h-12 w-12 rounded-full overflow-hidden border border-dotted border-edge bg-muted/30 shrink-0 flex items-center justify-center">
+                        {authorImage ? (
+                          /* eslint-disable-next-line @next/next/no-img-element */
+                          <img
+                            src={authorImage}
+                            alt="Author avatar"
+                            className="h-full w-full object-cover"
+                          />
+                        ) : (
+                          <span className="font-mono text-xs text-muted-foreground uppercase">
+                            {authorName ? authorName.slice(0, 2) : "AU"}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="flex-1 space-y-2">
+                        <div className="flex items-center gap-2">
+                          <input
+                            ref={authorInputRef}
+                            type="file"
+                            accept="image/*"
+                            onChange={handleAuthorUpload}
+                            className="hidden"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => authorInputRef.current?.click()}
+                            disabled={isUploadingAuthor}
+                            className="px-3 py-1.5 border border-dotted border-edge text-xs text-muted-foreground hover:text-foreground hover:bg-muted transition-colors flex items-center gap-1.5 font-medium"
+                          >
+                            <Upload className={`w-3.5 h-3.5 ${isUploadingAuthor ? "animate-spin" : ""}`} />
+                            {isUploadingAuthor ? "Uploading..." : "Upload Avatar (Max 2MB)"}
+                          </button>
+                          {authorImage && (
+                            <button
+                              type="button"
+                              onClick={() => setAuthorImage("")}
+                              className="px-2 py-1.5 border border-dotted border-red-500/30 text-red-400 hover:bg-red-500/10 text-xs transition-colors"
+                              title="Remove Avatar"
+                            >
+                              <X className="w-3.5 h-3.5" />
+                            </button>
+                          )}
+                        </div>
+                        <input
+                          type="text"
+                          value={authorImage}
+                          onChange={(e) => setAuthorImage(e.target.value)}
+                          placeholder="or paste image URL (https://...)"
+                          className="w-full bg-muted/20 border border-dotted border-edge px-2.5 py-1 text-xs text-foreground placeholder:text-muted-foreground/50"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Cover Image Info */}
-                <div className="space-y-3">
-                  <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                    <FileText className="w-3.5 h-3.5" /> Cover / Banner Image
-                  </h4>
-                  <div>
-                    <label className="block text-[11px] font-medium text-muted-foreground mb-1">
-                      Cover Image URL or File *
-                    </label>
-                    <div className="flex items-center gap-2">
-                      <input
-                        ref={coverInputRef}
-                        type="file"
-                        accept="image/*"
-                        onChange={handleCoverUpload}
-                        className="hidden"
-                      />
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+                      <FileText className="w-3.5 h-3.5" /> Cover / Banner Image
+                    </h4>
+                    {coverImage && (
                       <button
                         type="button"
-                        onClick={() => coverInputRef.current?.click()}
-                        disabled={isUploadingCover}
-                        className="px-3 py-1.5 border border-dotted border-edge text-xs text-muted-foreground hover:text-foreground flex items-center gap-1.5"
+                        onClick={() => setCoverImage("")}
+                        className="text-[11px] text-red-400 hover:underline flex items-center gap-1 font-mono"
                       >
-                        <Upload className="w-3.5 h-3.5" />
-                        {isUploadingCover ? "Uploading..." : "Upload Cover"}
+                        <Trash2 className="w-3 h-3" /> Remove Cover
                       </button>
-                      <input
-                        type="text"
-                        required
-                        value={coverImage}
-                        onChange={(e) => setCoverImage(e.target.value)}
-                        placeholder="/ascii-magic-14.png or https://..."
-                        className="flex-1 bg-muted/20 border border-dotted border-edge px-3 py-1.5 text-xs text-foreground"
-                      />
-                    </div>
+                    )}
                   </div>
-                  {coverImage && (
-                    <div className="relative h-24 w-full overflow-hidden border border-dotted border-edge bg-muted/20">
-                      <Image
-                        src={coverImage}
-                        alt="Cover preview"
-                        fill
-                        className="object-cover"
-                      />
+
+                  <input
+                    ref={coverInputRef}
+                    type="file"
+                    accept="image/*"
+                    onChange={handleCoverUpload}
+                    className="hidden"
+                  />
+
+                  {coverImage ? (
+                    <div className="space-y-3">
+                      <div className="relative aspect-[16/9] w-full max-h-44 overflow-hidden border border-dotted border-edge bg-muted/20 group">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={coverImage}
+                          alt="Cover preview"
+                          className="h-full w-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                          <button
+                            type="button"
+                            onClick={() => coverInputRef.current?.click()}
+                            disabled={isUploadingCover}
+                            className="px-3 py-1.5 bg-foreground text-background text-xs font-semibold hover:opacity-90 flex items-center gap-1.5"
+                          >
+                            <Upload className="w-3.5 h-3.5" /> Change
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setCoverImage("")}
+                            className="px-3 py-1.5 bg-red-500 text-white text-xs font-semibold hover:bg-red-600 flex items-center gap-1.5"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" /> Remove
+                          </button>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => coverInputRef.current?.click()}
+                          disabled={isUploadingCover}
+                          className="px-3 py-1.5 border border-dotted border-edge text-xs text-muted-foreground hover:text-foreground hover:bg-muted transition-colors flex items-center gap-1.5 shrink-0"
+                        >
+                          <Upload className={`w-3.5 h-3.5 ${isUploadingCover ? "animate-spin" : ""}`} />
+                          {isUploadingCover ? "Uploading..." : "Upload New File"}
+                        </button>
+                        <input
+                          type="text"
+                          value={coverImage}
+                          onChange={(e) => setCoverImage(e.target.value)}
+                          placeholder="Image URL"
+                          className="flex-1 bg-muted/20 border border-dotted border-edge px-2.5 py-1 text-xs text-foreground"
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      <div
+                        onClick={() => coverInputRef.current?.click()}
+                        className="border-2 border-dashed border-edge hover:border-foreground/40 bg-muted/5 hover:bg-muted/15 p-5 text-center cursor-pointer transition-colors flex flex-col items-center justify-center gap-2 group"
+                      >
+                        <div className="p-2.5 border border-dotted border-edge bg-muted/20 group-hover:bg-muted/40 transition-colors">
+                          <Upload className={`w-4 h-4 text-muted-foreground group-hover:text-foreground ${isUploadingCover ? "animate-spin" : ""}`} />
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold text-foreground">
+                            {isUploadingCover ? "Uploading image to cloud..." : "Click to select and upload Cover Image"}
+                          </p>
+                          <p className="text-[11px] text-muted-foreground mt-0.5">
+                            PNG, JPG, WEBP, or AVIF (max 2 MB, recommended 16:9 ratio)
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <span className="text-[11px] font-mono text-muted-foreground shrink-0">Or URL:</span>
+                        <input
+                          type="text"
+                          value={coverImage}
+                          onChange={(e) => setCoverImage(e.target.value)}
+                          placeholder="Paste an image URL directly (https://...)"
+                          className="flex-1 bg-muted/20 border border-dotted border-edge px-2.5 py-1 text-xs text-foreground placeholder:text-muted-foreground/50"
+                        />
+                      </div>
                     </div>
                   )}
                 </div>
@@ -861,20 +1037,32 @@ export function AdminBlogs() {
                   placeholder="Write your article here. Use the toolbar for bold, italic, highlights, headings, lists, tables, callouts, and images..."
                 />
               </div>
+            </form>
 
-              {/* Footer Buttons */}
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-dotted border-edge">
+            {/* Pinned Modal Bottom Action Bar (Never scrolls away) */}
+            <div className="shrink-0 flex items-center justify-between border-t border-dotted border-edge px-6 py-3.5 bg-muted/20">
+              <div className="text-[11px] font-mono text-muted-foreground hidden sm:block">
+                {status === "published" ? (
+                  <span className="text-green-400">● Ready to publish live</span>
+                ) : (
+                  <span className="text-amber-400">● Saving as draft</span>
+                )}
+              </div>
+
+              <div className="flex items-center gap-3 ml-auto">
                 <button
                   type="button"
                   onClick={() => setEditorOpen(false)}
-                  className="px-4 py-2 border border-dotted border-edge text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-muted"
+                  disabled={isSaving}
+                  className="px-4 py-2 border border-dotted border-edge text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-muted transition-colors disabled:opacity-50"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
+                  form="blog-editor-form"
                   disabled={isSaving}
-                  className="px-6 py-2 bg-foreground text-background text-xs font-bold hover:opacity-90 disabled:opacity-50 flex items-center gap-2"
+                  className="px-6 py-2 bg-foreground text-background text-xs font-bold hover:opacity-90 disabled:opacity-50 flex items-center gap-2 transition-opacity"
                 >
                   {isSaving ? (
                     <>
@@ -888,14 +1076,15 @@ export function AdminBlogs() {
                   )}
                 </button>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* DELETE CONFIRMATION DIALOG */}
-      {deletingBlog && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-xs p-4">
+      {mounted && deletingBlog && createPortal(
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/75 backdrop-blur-xs p-4">
           <div className="w-full max-w-md bg-background border border-dotted border-red-500/40 p-6">
             <div className="flex items-center gap-3 text-red-400 mb-3">
               <div className="p-2 bg-red-500/10 border border-red-500/30">
@@ -928,7 +1117,8 @@ export function AdminBlogs() {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

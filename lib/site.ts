@@ -73,8 +73,8 @@ export function createPageMetadata({
       images: [
         {
           url: absoluteUrl("/seo/HPcXcGLbMAAxweM.jpg"),
-          width: 2400,
-          height: 1600,
+          width: 1200,
+          height: 630,
           alt: socialTitle,
         },
       ],

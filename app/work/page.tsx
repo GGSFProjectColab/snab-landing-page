@@ -4,12 +4,11 @@ import { Footer } from "../Footer";
 import { createPageMetadata } from "@/lib/site";
 import { ContainerWrapper } from "@/components/site/container";
 import { HeaderTitle } from "@/components/profile/header-title";
-import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
-
 
 export const metadata: Metadata = createPageMetadata({
   title: "Work | SNAB Innovations",
-  description: "Explore selected AI products, platforms, and custom software systems built by SNAB Innovations.",
+  description:
+    "Explore selected AI products, platforms, and custom software systems built by SNAB Innovations.",
   path: "/work",
 });
 
@@ -95,26 +94,18 @@ export default function WorkPage() {
             <span className="font-mono text-caption text-muted-foreground uppercase tracking-widest">
               PORTFOLIO // SELECTED SYSTEMS
             </span>
-            <TextGenerateEffect
-              as="h1"
+            <h1
               id="work-hero-title"
               className="mt-3 text-display font-normal"
-              staggerDuration={0.06}
             >
-              Built for real-world operations.
-            </TextGenerateEffect>
-            <TextGenerateEffect
-              as="p"
-              className="mt-4 max-w-2xl text-body leading-relaxed text-muted-foreground"
-              staggerDuration={0.02}
-            >
+              Built for real-world operations<span className="text-primary">.</span>
+            </h1>
+            <p className="mt-4 max-w-2xl text-body leading-relaxed text-muted-foreground">
               A collection of AI products, enterprise automation platforms, and software systems engineered for high-impact professional workflows.
-            </TextGenerateEffect>
+            </p>
           </div>
         </ContainerWrapper>
       </section>
-
-      
 
       {/* Main Work Showcase List */}
       <section aria-labelledby="selected-work-title">
@@ -144,13 +135,9 @@ export default function WorkPage() {
                     </div>
 
                     {/* Title */}
-                    <TextGenerateEffect
-                      as="h2"
-                      className="mt-2 text-title font-normal tracking-tight"
-                      staggerDuration={0.06}
-                    >
+                    <h2 className="mt-2 text-title font-normal tracking-tight">
                       {item.name}
-                    </TextGenerateEffect>
+                    </h2>
 
                     {/* Category Badges */}
                     <div className="mt-3 flex flex-wrap gap-1.5">
@@ -165,13 +152,9 @@ export default function WorkPage() {
                     </div>
 
                     {/* Description */}
-                    <TextGenerateEffect
-                      as="p"
-                      className="mt-4 max-w-xl text-body leading-relaxed text-muted-foreground"
-                      staggerDuration={0.02}
-                    >
+                    <p className="mt-4 max-w-xl text-body leading-relaxed text-muted-foreground">
                       {item.description}
-                    </TextGenerateEffect>
+                    </p>
 
                     {/* Capabilities list */}
                     <div className="mt-4 border-t border-dotted border-edge pt-3">
@@ -181,12 +164,12 @@ export default function WorkPage() {
                     </div>
                   </div>
 
-                  {/* Minimal Subtle Action Link */}
+                  {/* Action Link */}
                   <div className="mt-6">
                     <a
-                      href={'link' in item && item.link ? item.link : "#"}
-                      target={'link' in item && item.link ? "_blank" : undefined}
-                      rel={'link' in item && item.link ? "noopener noreferrer" : undefined}
+                      href={"link" in item && item.link ? item.link : "#"}
+                      target={"link" in item && item.link ? "_blank" : undefined}
+                      rel={"link" in item && item.link ? "noopener noreferrer" : undefined}
                       className="inline-flex items-center gap-1.5 text-button font-normal text-foreground transition-colors hover:text-muted-foreground"
                     >
                       <span>Explore system</span>
@@ -213,16 +196,16 @@ export default function WorkPage() {
                     />
                     <div className="relative h-full w-full overflow-hidden rounded-[6px]">
                       <Image
-                        className={`h-full w-full ${'contain' in item && item.contain ? 'object-contain' : 'object-cover object-top'} transition-transform duration-500 group-hover:scale-105 ${'imageDark' in item && item.imageDark ? 'block dark:hidden' : ''}`}
+                        className={`h-full w-full ${"contain" in item && item.contain ? "object-contain" : "object-cover object-top"} transition-transform duration-500 group-hover:scale-105 ${"imageDark" in item && item.imageDark ? "block dark:hidden" : ""}`}
                         src={item.image}
                         alt={item.imageAlt}
                         width={400}
                         height={400}
                         sizes="(max-width: 768px) 100vw, 240px"
                       />
-                      {'imageDark' in item && item.imageDark && (
+                      {"imageDark" in item && item.imageDark && (
                         <Image
-                          className={`h-full w-full ${'contain' in item && item.contain ? 'object-contain' : 'object-cover object-top'} transition-transform duration-500 group-hover:scale-105 hidden dark:block`}
+                          className={`h-full w-full ${"contain" in item && item.contain ? "object-contain" : "object-cover object-top"} transition-transform duration-500 group-hover:scale-105 hidden dark:block`}
                           src={item.imageDark as string}
                           alt={item.imageAlt}
                           width={400}
@@ -238,8 +221,6 @@ export default function WorkPage() {
           </div>
         </ContainerWrapper>
       </section>
-
-      
 
       <Footer />
     </main>

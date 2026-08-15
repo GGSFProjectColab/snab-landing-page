@@ -1,5 +1,6 @@
 import { BrandLogo } from "./BrandLogo";
 import { siteConfig } from "@/lib/site";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
 const footerColumns = [
   {
@@ -52,9 +53,13 @@ export function HomeFooter() {
                   SNAB Innovations
                 </span>
               </a>
-              <p className="max-w-xs text-body leading-relaxed text-muted-foreground">
+              <TextGenerateEffect
+                as="p"
+                className="max-w-xs text-body leading-relaxed text-muted-foreground"
+                staggerDuration={0.03}
+              >
                 AI product engineering studio building intelligent workflows and custom software from Nashik, India.
-              </p>
+              </TextGenerateEffect>
 
               {/* Social icons */}
               <div className="mt-2 flex items-center gap-3">

@@ -3,6 +3,8 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+
 interface HowWeWorkStep {
   step: string;
   title: string;
@@ -59,15 +61,25 @@ function ParallaxStep({
             {step.subtitle}
           </span>
         </div>
-        <h3 className="text-[28px] sm:text-[34px] md:text-[42px] font-normal tracking-tight leading-[1.15]">
-          {step.title}
-        </h3>
-        <motion.p
-          style={{ y: translateY }}
-          className="mt-5 text-body leading-relaxed text-muted-foreground max-w-md"
+        <TextGenerateEffect
+          as="h3"
+          className="text-[28px] sm:text-[34px] md:text-[42px] font-normal tracking-tight leading-[1.15]"
+          staggerDuration={0.06}
         >
-          {step.content}
-        </motion.p>
+          {step.title}
+        </TextGenerateEffect>
+        <motion.div
+          style={{ y: translateY }}
+          className="mt-5 max-w-md"
+        >
+          <TextGenerateEffect
+            as="p"
+            className="text-body leading-relaxed text-muted-foreground"
+            staggerDuration={0.02}
+          >
+            {step.content}
+          </TextGenerateEffect>
+        </motion.div>
       </motion.div>
 
       {/* Image side */}

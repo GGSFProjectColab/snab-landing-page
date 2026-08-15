@@ -9,6 +9,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import SpecularButton from "@/components/ui/SpecularButton";
 
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+
 function Hero() {
   const router = useRouter();
   const { resolvedTheme } = useTheme();
@@ -45,7 +47,7 @@ function Hero() {
     <div className="w-full">
       <div className="container mx-auto">
         <div className="flex gap-6 py-20 lg:py-28 items-center justify-center flex-col">
-          <div className="flex gap-4 flex-col">
+          <div className="flex gap-4 flex-col items-center">
             <h1 id="hero-title" className="text-display max-w-2xl tracking-tighter text-center font-normal text-foreground dark:text-white dark:drop-shadow-lg">
               <span className="text-foreground dark:text-white">We engineer</span>
               <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-3 md:pt-0.5">
@@ -75,15 +77,26 @@ function Hero() {
               <span className="text-foreground dark:text-white">that perform.</span>
             </h1>
 
-            <p className="text-body leading-relaxed tracking-tight text-muted-foreground dark:text-white max-w-2xl text-center dark:drop-shadow-md">
-              <span className="md:hidden">
-                Software engineering for AI, web, and mobile.
-              </span>
-              <span className="hidden md:inline">
-                SNAB Innovations is a software engineering studio. We build AI products,
-                web platforms, mobile apps, and custom systems from Nashik, India.
-              </span>
-            </p>
+            <div className="text-body leading-relaxed tracking-tight text-muted-foreground dark:text-white max-w-2xl text-center dark:drop-shadow-md">
+              <div className="md:hidden">
+                <TextGenerateEffect
+                  as="p"
+                  staggerDuration={0.06}
+                  className="text-body leading-relaxed tracking-tight text-muted-foreground dark:text-white max-w-2xl text-center dark:drop-shadow-md"
+                >
+                  Software engineering for AI, web, and mobile.
+                </TextGenerateEffect>
+              </div>
+              <div className="hidden md:block">
+                <TextGenerateEffect
+                  as="p"
+                  staggerDuration={0.03}
+                  className="text-body leading-relaxed tracking-tight text-muted-foreground dark:text-white max-w-2xl text-center dark:drop-shadow-md"
+                >
+                  SNAB Innovations is a software engineering studio. We build AI products, web platforms, mobile apps, and custom systems from Nashik, India.
+                </TextGenerateEffect>
+              </div>
+            </div>
           </div>
           <div className="flex flex-row gap-3">
             <SpecularButton

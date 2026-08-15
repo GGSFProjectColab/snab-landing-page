@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+
 interface TeamMember {
   id: "sanika" | "bhavesh" | "aaradhya" | "nimesh";
   name: string;
@@ -55,9 +57,14 @@ export function TeamInteractiveSection() {
     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
       {/* Left: Our Core Team & Vision */}
       <div className="flex flex-col justify-center gap-4">
-        <h2 className="text-title font-normal text-foreground leading-snug">
+        <TextGenerateEffect
+          as="h2"
+          className="text-title font-normal text-foreground leading-snug"
+          staggerDuration={0.14}
+          transition={{ duration: 0.7 }}
+        >
           Our Core Team & Vision
-        </h2>
+        </TextGenerateEffect>
 
         {/* Desktop Narrative */}
         <div className="hidden md:flex flex-col gap-3">

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { createPageMetadata } from "@/lib/site";
 import { ContainerWrapper } from "@/components/site/container";
 import { MagicText } from "@/components/ui/magic-text";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { TeamInteractiveSection } from "@/components/about/team-interactive-section";
 import { Footer } from "../Footer";
 
@@ -21,9 +22,14 @@ export default function AboutPage() {
 
         {/* ── Heading: Left-Aligned and Compact ────────────── */}
         <div className="px-6 py-4 sm:px-10 sm:py-5 md:px-14 md:py-6 border-b border-dotted border-edge">
-          <h1 className="text-heading font-normal tracking-tight">
+          <TextGenerateEffect
+            as="h1"
+            className="text-heading font-normal tracking-tight"
+            staggerDuration={0.10}
+            transition={{ duration: 0.55 }}
+          >
             ABOUT US
-          </h1>
+          </TextGenerateEffect>
         </div>
 
         {/* ── Hero Image & First Paragraph Grid ───────────── */}
@@ -48,24 +54,44 @@ export default function AboutPage() {
 
             {/* Right side: First Paragraph block matching image height */}
             <div className="lg:col-span-5 flex flex-col justify-center gap-4">
-              <h2 className="text-title font-normal text-foreground leading-snug">
+              <TextGenerateEffect
+                as="h2"
+                className="text-title font-normal text-foreground leading-snug"
+                staggerDuration={0.09}
+                transition={{ duration: 0.55 }}
+              >
                 What's SNAB Innovations and why SNAB Innovations?
-              </h2>
-              {/* Desktop Copy (Unchanged structure, enhanced readability) */}
+              </TextGenerateEffect>
+              {/* Desktop Copy */}
               <div className="hidden lg:flex flex-col gap-4">
-                <p className="text-body leading-relaxed text-muted-foreground">
-                  SNAB Innovations is an <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">AI product engineering and custom software studio</mark> based in Nashik, Maharashtra, India. We partner with ambitious founders, operational leaders, and enterprise teams across North America, Europe, Southeast Asia, and India who require <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">dependable, production-grade systems</span> that don't just launch—they endure.
-                </p>
-                <p className="text-body leading-relaxed text-muted-foreground">
-                  We exist because modern software demands more than fragile AI prototypes. We combine <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">rigorous systems architecture</span>, <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">deterministic fallback mechanisms</span>, and practical engineering to build observable, maintainable platforms that earn trust and power critical business workflows long into the future.
-                </p>
+                <TextGenerateEffect
+                  as="p"
+                  className="text-body leading-relaxed text-muted-foreground"
+                  staggerDuration={0.045}
+                  transition={{ duration: 0.55 }}
+                >
+                  SNAB Innovations is an AI product engineering and custom software studio based in Nashik, Maharashtra, India. We partner with ambitious founders, operational leaders, and enterprise teams across North America, Europe, Southeast Asia, and India who require dependable, production-grade systems that don't just launch—they endure.
+                </TextGenerateEffect>
+                <TextGenerateEffect
+                  as="p"
+                  className="text-body leading-relaxed text-muted-foreground"
+                  staggerDuration={0.045}
+                  transition={{ duration: 0.55 }}
+                >
+                  We exist because modern software demands more than fragile AI prototypes. We combine rigorous systems architecture, deterministic fallback mechanisms, and practical engineering to build observable, maintainable platforms that earn trust and power critical business workflows long into the future.
+                </TextGenerateEffect>
               </div>
 
-              {/* Mobile Copy (Single Short Paragraph) */}
+              {/* Mobile Copy */}
               <div className="lg:hidden">
-                <p className="text-[14px] leading-relaxed text-muted-foreground">
-                  SNAB Innovations is an <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">AI product and custom software studio</mark> based in Nashik, India. We bridge the gap between experimental AI prototypes and <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">dependable, production-grade systems</span> engineered to endure.
-                </p>
+                <TextGenerateEffect
+                  as="p"
+                  className="text-[14px] leading-relaxed text-muted-foreground"
+                  staggerDuration={0.045}
+                  transition={{ duration: 0.55 }}
+                >
+                  SNAB Innovations is an AI product and custom software studio based in Nashik, India. We bridge the gap between experimental AI prototypes and dependable, production-grade systems engineered to endure.
+                </TextGenerateEffect>
               </div>
             </div>
           </div>
@@ -78,32 +104,62 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
               {/* Left: Services We Provide */}
               <div className="flex flex-col gap-3">
-                <h2 className="text-title font-normal text-foreground leading-snug">
+                <TextGenerateEffect
+                  as="h2"
+                  className="text-title font-normal text-foreground leading-snug"
+                  staggerDuration={0.09}
+                  transition={{ duration: 0.55 }}
+                >
                   Our Services
-                </h2>
+                </TextGenerateEffect>
                 {/* Desktop */}
-                <p className="hidden md:block text-body leading-relaxed text-muted-foreground">
-                  We deliver <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">end-to-end software engineering and AI services</mark> tailored to high-growth companies and enterprise operators. Our capabilities span <Link href="/work" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">intelligent workflow automation ↗</Link>, custom full-stack web and mobile platforms, robust API architectures, and LLM integrations. We specialize in transforming complex manual processes into <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">observable, self-running digital pipelines</span> backed by automated evaluation harnesses, deterministic fallback systems, and enterprise data governance.
-                </p>
+                <TextGenerateEffect
+                  as="p"
+                  className="hidden md:block text-body leading-relaxed text-muted-foreground"
+                  staggerDuration={0.045}
+                  transition={{ duration: 0.55 }}
+                >
+                  We deliver end-to-end software engineering and AI services tailored to high-growth companies and enterprise operators. Our capabilities span intelligent workflow automation, custom full-stack web and mobile platforms, robust API architectures, and LLM integrations. We specialize in transforming complex manual processes into observable, self-running digital pipelines backed by automated evaluation harnesses, deterministic fallback systems, and enterprise data governance.
+                </TextGenerateEffect>
                 {/* Mobile */}
-                <p className="md:hidden text-[14px] leading-relaxed text-muted-foreground">
-                  We deliver <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">full-stack AI workflows</mark>, <Link href="/work" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">custom web and mobile platforms ↗</Link>, and robust software architectures tailored to eliminate operational friction and scale with your business.
-                </p>
+                <TextGenerateEffect
+                  as="p"
+                  className="md:hidden text-[14px] leading-relaxed text-muted-foreground"
+                  staggerDuration={0.045}
+                  transition={{ duration: 0.55 }}
+                >
+                  We deliver full-stack AI workflows, custom web and mobile platforms, and robust software architectures tailored to eliminate operational friction and scale with your business.
+                </TextGenerateEffect>
               </div>
 
               {/* Right: Products We Build & Offer */}
               <div className="flex flex-col gap-3">
-                <h2 className="text-title font-normal text-foreground leading-snug">
+                <TextGenerateEffect
+                  as="h2"
+                  className="text-title font-normal text-foreground leading-snug"
+                  staggerDuration={0.09}
+                  transition={{ duration: 0.55 }}
+                >
                   Our Products
-                </h2>
+                </TextGenerateEffect>
                 {/* Desktop */}
-                <p className="hidden md:block text-body leading-relaxed text-muted-foreground">
-                  Alongside bespoke client development, we engineer <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">proprietary AI-native software platforms</mark> designed to solve acute operational challenges. Our product ecosystem includes <Link href="https://interviewexpert.in" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">Interview Expert ↗</Link>, an intelligent platform that streamlines recruitment workflows and synthesizes candidate evaluation records, and <Link href="/work" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">Notary Expert ↗</Link>, which automates document workflows, appointments, and client case tracking for legal professionals. Each product reflects our core philosophy: <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">dependable software built for daily production use</span>.
-                </p>
+                <TextGenerateEffect
+                  as="p"
+                  className="hidden md:block text-body leading-relaxed text-muted-foreground"
+                  staggerDuration={0.045}
+                  transition={{ duration: 0.55 }}
+                >
+                  Alongside bespoke client development, we engineer proprietary AI-native software platforms designed to solve acute operational challenges. Our product ecosystem includes Interview Expert, an intelligent platform that streamlines recruitment workflows and synthesizes candidate evaluation records, and Notary Expert, which automates document workflows, appointments, and client case tracking for legal professionals. Each product reflects our core philosophy: dependable software built for daily production use.
+                </TextGenerateEffect>
                 {/* Mobile */}
-                <p className="md:hidden text-[14px] leading-relaxed text-muted-foreground">
-                  We build proprietary AI platforms like <Link href="https://interviewexpert.in" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">Interview Expert ↗</Link> for hiring automation and <Link href="/work" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">Notary Expert ↗</Link> for legal workflow management, <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">engineered for daily production use</span>.
-                </p>
+                <TextGenerateEffect
+                  as="p"
+                  className="md:hidden text-[14px] leading-relaxed text-muted-foreground"
+                  staggerDuration={0.045}
+                  transition={{ duration: 0.55 }}
+                >
+                  We build proprietary AI platforms like Interview Expert for hiring automation and Notary Expert for legal workflow management, engineered for daily production use.
+                </TextGenerateEffect>
               </div>
             </div>
 

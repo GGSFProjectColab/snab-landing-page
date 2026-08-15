@@ -23,6 +23,8 @@ function CopyIcon({ className }: { className?: string }) {
   );
 }
 
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+
 export function AskAiSection() {
   const [copied, setCopied] = useState(false);
 
@@ -77,38 +79,28 @@ export function AskAiSection() {
 
         {/* Right side - Text content */}
         <div className="flex flex-col justify-center text-center md:text-left">
-          <p className="font-mono text-caption tracking-widest text-muted-foreground uppercase">
+          <TextGenerateEffect
+            as="p"
+            className="font-mono text-caption tracking-widest text-muted-foreground uppercase"
+            staggerDuration={0.05}
+          >
             /Ask Your AI
-          </p>
-          <h2
+          </TextGenerateEffect>
+          <TextGenerateEffect
+            as="h2"
             id="ask-ai-title"
             className="mt-3 text-heading font-normal tracking-tight"
+            staggerDuration={0.06}
           >
-            Feeling fatigue?
-            <br />
-            Ask AI
-          </h2>
-          <p className="mt-4 text-body leading-relaxed text-muted-foreground">
-            Don&apos;t feel like scrolling? Copy Context.md, paste into{" "}
-            <a
-              href="https://chat.openai.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-4 transition-colors hover:text-foreground"
-            >
-              ChatGPT
-            </a>{" "}
-            or{" "}
-            <a
-              href="https://claude.ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-4 transition-colors hover:text-foreground"
-            >
-              Claude
-            </a>
-            , it explains every style, control and export.
-          </p>
+            Feeling fatigue? Ask AI
+          </TextGenerateEffect>
+          <TextGenerateEffect
+            as="p"
+            className="mt-4 text-body leading-relaxed text-muted-foreground"
+            staggerDuration={0.02}
+          >
+            Don't feel like scrolling? Copy Context.md, paste into ChatGPT or Claude, it explains every style, control and export.
+          </TextGenerateEffect>
         </div>
       </div>
     </section>

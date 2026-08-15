@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { createPageMetadata } from "@/lib/site";
 import { ContainerWrapper } from "@/components/site/container";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { Footer } from "../Footer";
 
 export const metadata: Metadata = createPageMetadata({
@@ -172,12 +173,14 @@ export default function PrivacyPage() {
               <p className="mb-4 font-mono text-caption uppercase tracking-widest text-muted-foreground">
                 Compliance &amp; Trust
               </p>
-              <h1
+              <TextGenerateEffect
+                as="h1"
                 id="privacy-title"
                 className="max-w-2xl text-display font-normal"
+                staggerDuration={0.08}
               >
                 Privacy Policy
-              </h1>
+              </TextGenerateEffect>
               <p className="mt-4 font-mono text-label text-muted-foreground">
                 Last updated: July 17, 2026
               </p>
@@ -216,12 +219,14 @@ export default function PrivacyPage() {
                 <span className="font-mono text-caption text-foreground/30">
                   {section.number}
                 </span>
-                <h2
+                <TextGenerateEffect
+                  as="h2"
                   id={`privacy-${section.number}`}
                   className="text-title font-normal leading-snug tracking-tight"
+                  staggerDuration={0.06}
                 >
                   {section.title}
-                </h2>
+                </TextGenerateEffect>
               </div>
               {/* Right: content */}
               <div className="p-6 sm:p-8 md:p-10">{section.content}</div>

@@ -12,6 +12,7 @@ import { Globe } from "@/components/ui/globe";
 import { MobileAppVisual } from "@/components/ui/mobile-app-visual";
 import { DesktopAppVisual } from "@/components/ui/desktop-app-visual";
 import { CheckCircle2 } from "lucide-react";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -287,14 +288,24 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
                   {/* Left Column: Top-aligned Title & Intro (Key Highlights only on md+ web view) */}
                   <div className="flex flex-col justify-start p-3 sm:p-6 lg:p-8 overflow-hidden">
                     {/* Service Title */}
-                    <h3 className="text-base sm:text-xl lg:text-2xl font-medium sm:font-normal tracking-tight text-foreground">
+                    <TextGenerateEffect
+                      as="h3"
+                      className="text-base sm:text-xl lg:text-2xl font-medium sm:font-normal tracking-tight text-foreground"
+                      staggerDuration={0.14}
+                      transition={{ duration: 0.65 }}
+                    >
                       {service.title}
-                    </h3>
+                    </TextGenerateEffect>
 
                     {/* Small Introduction */}
-                    <p className="mt-1 sm:mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground max-w-lg">
+                    <TextGenerateEffect
+                      as="p"
+                      className="mt-1 sm:mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground max-w-lg"
+                      staggerDuration={0.04}
+                      transition={{ duration: 0.65 }}
+                    >
                       {service.description}
-                    </p>
+                    </TextGenerateEffect>
 
                     {/* Key Highlights - Hidden on mobile, visible on desktop / web view */}
                     {service.highlights && service.highlights.length > 0 && (

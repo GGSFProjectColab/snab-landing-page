@@ -1,4 +1,4 @@
-import { TextScramble } from "./text-scramble";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { cn } from "@/lib/utils";
 
 type HeaderTitleProps = {
@@ -17,12 +17,15 @@ export function HeaderTitle({ title, id, className }: HeaderTitleProps) {
         className
       )}
     >
-      <h2
+      <TextGenerateEffect
+        as="h2"
         id={slugifiedId}
         className="text-heading font-normal tracking-tight leading-[1.15] break-words w-full"
+        staggerDuration={0.14}
+        transition={{ duration: 0.65 }}
       >
-        <TextScramble text={title} />
-      </h2>
+        {title}
+      </TextGenerateEffect>
     </div>
   );
 }

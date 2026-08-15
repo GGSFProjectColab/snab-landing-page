@@ -4,6 +4,7 @@ import { Footer } from "../Footer";
 import { createPageMetadata } from "@/lib/site";
 import { ContainerWrapper } from "@/components/site/container";
 import { HeaderTitle } from "@/components/profile/header-title";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
 
 export const metadata: Metadata = createPageMetadata({
@@ -94,15 +95,21 @@ export default function WorkPage() {
             <span className="font-mono text-caption text-muted-foreground uppercase tracking-widest">
               PORTFOLIO // SELECTED SYSTEMS
             </span>
-            <h1
+            <TextGenerateEffect
+              as="h1"
               id="work-hero-title"
               className="mt-3 text-display font-normal"
+              staggerDuration={0.06}
             >
-              Built for real-world operations<span className="text-primary">.</span>
-            </h1>
-            <p className="mt-4 max-w-2xl text-body leading-relaxed text-muted-foreground">
+              Built for real-world operations.
+            </TextGenerateEffect>
+            <TextGenerateEffect
+              as="p"
+              className="mt-4 max-w-2xl text-body leading-relaxed text-muted-foreground"
+              staggerDuration={0.02}
+            >
               A collection of AI products, enterprise automation platforms, and software systems engineered for high-impact professional workflows.
-            </p>
+            </TextGenerateEffect>
           </div>
         </ContainerWrapper>
       </section>
@@ -137,9 +144,13 @@ export default function WorkPage() {
                     </div>
 
                     {/* Title */}
-                    <h2 className="mt-2 text-title font-normal tracking-tight">
+                    <TextGenerateEffect
+                      as="h2"
+                      className="mt-2 text-title font-normal tracking-tight"
+                      staggerDuration={0.06}
+                    >
                       {item.name}
-                    </h2>
+                    </TextGenerateEffect>
 
                     {/* Category Badges */}
                     <div className="mt-3 flex flex-wrap gap-1.5">
@@ -154,9 +165,13 @@ export default function WorkPage() {
                     </div>
 
                     {/* Description */}
-                    <p className="mt-4 max-w-xl text-body leading-relaxed text-muted-foreground">
+                    <TextGenerateEffect
+                      as="p"
+                      className="mt-4 max-w-xl text-body leading-relaxed text-muted-foreground"
+                      staggerDuration={0.02}
+                    >
                       {item.description}
-                    </p>
+                    </TextGenerateEffect>
 
                     {/* Capabilities list */}
                     <div className="mt-4 border-t border-dotted border-edge pt-3">

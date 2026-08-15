@@ -28,6 +28,7 @@ import {
   ScrollVelocityContainer,
   ScrollVelocityRow,
 } from "@/components/ui/scroll-based-velocity";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
 
 export const metadata: Metadata = createPageMetadata({
@@ -352,9 +353,13 @@ export default function Home() {
                           </span>
                         </span>
                       </div>
-                      <h3 className="mt-1 text-title font-normal">
+                      <TextGenerateEffect
+                        as="h3"
+                        className="mt-1 text-title font-normal"
+                        staggerDuration={0.05}
+                      >
                         {project.name}
-                      </h3>
+                      </TextGenerateEffect>
                       <div className="mt-1.5 flex flex-wrap gap-1">
                         {project.categories.map((category) => (
                           <span
@@ -365,9 +370,13 @@ export default function Home() {
                           </span>
                         ))}
                       </div>
-                      <p className="mt-2 text-body leading-relaxed text-muted-foreground">
+                      <TextGenerateEffect
+                        as="p"
+                        className="mt-2 text-body leading-relaxed text-muted-foreground"
+                        staggerDuration={0.02}
+                      >
                         {project.description}
-                      </p>
+                      </TextGenerateEffect>
                     </div>
                   </div>
 
@@ -384,9 +393,13 @@ export default function Home() {
                         </span>
                       </span>
                     </div>
-                    <h3 className="mt-2 text-title font-normal">
+                    <TextGenerateEffect
+                      as="h3"
+                      className="mt-2 text-title font-normal"
+                      staggerDuration={0.05}
+                    >
                       {project.name}
-                    </h3>
+                    </TextGenerateEffect>
                     <div className="mt-2 flex flex-wrap gap-1">
                       {project.categories.map((category) => (
                         <span
@@ -397,9 +410,13 @@ export default function Home() {
                         </span>
                       ))}
                     </div>
-                    <p className="mt-3 max-w-2xl text-body text-muted-foreground">
+                    <TextGenerateEffect
+                      as="p"
+                      className="mt-3 max-w-2xl text-body text-muted-foreground"
+                      staggerDuration={0.02}
+                    >
                       {project.description}
-                    </p>
+                    </TextGenerateEffect>
                     <p className="mt-2 font-mono text-caption text-muted-foreground">
                       {project.capabilities.join(" / ")}
                     </p>
@@ -533,12 +550,20 @@ export default function Home() {
                   </div>
                   <div className="flex flex-1 flex-col justify-between p-4 sm:p-5">
                     <div>
-                      <h3 className="text-title font-normal">
+                      <TextGenerateEffect
+                        as="h3"
+                        className="text-title font-normal"
+                        staggerDuration={0.05}
+                      >
                         {item.title}
-                      </h3>
-                      <p className="mt-2 text-body text-muted-foreground">
+                      </TextGenerateEffect>
+                      <TextGenerateEffect
+                        as="p"
+                        className="mt-2 text-body text-muted-foreground"
+                        staggerDuration={0.02}
+                      >
                         {item.description}
-                      </p>
+                      </TextGenerateEffect>
                     </div>
                     </div>
                 </div>
@@ -626,14 +651,21 @@ export default function Home() {
               <div className="absolute inset-0 bg-white/20 dark:bg-black/50" aria-hidden="true" />
               <div className="relative z-10 flex h-full flex-col items-start justify-center gap-4 py-8 px-5 sm:justify-end sm:py-10 sm:px-6 md:px-12">
                 <div>
-                  <h2 id="contact-title" className="text-subheading font-normal text-foreground dark:text-white drop-shadow-sm">
+                  <TextGenerateEffect
+                    as="h2"
+                    id="contact-title"
+                    className="text-subheading font-normal text-foreground dark:text-white drop-shadow-sm"
+                    staggerDuration={0.05}
+                  >
                     Get in Touch
-                  </h2>
-                   <p className="mt-2 max-w-xl text-body leading-relaxed text-foreground/80 dark:text-white/90">
-                    Have a project in mind? We&apos;d love to hear about it.
-                    Whether you need AI integration, workflow automation, or
-                    custom software, our team is ready to help.
-                  </p>
+                  </TextGenerateEffect>
+                  <TextGenerateEffect
+                    as="p"
+                    className="mt-2 max-w-xl text-body leading-relaxed text-foreground/80 dark:text-white/90"
+                    staggerDuration={0.02}
+                  >
+                    Have a project in mind? We&apos;d love to hear about it. Whether you need AI integration, workflow automation, or custom software, our team is ready to help.
+                  </TextGenerateEffect>
                 </div>
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                   <a

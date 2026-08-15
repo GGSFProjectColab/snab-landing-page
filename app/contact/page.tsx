@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { createPageMetadata, siteConfig } from "@/lib/site";
 import { ContainerWrapper } from "@/components/site/container";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
 import { Footer } from "../Footer";
 import { LazyContactMap } from "./LazyContactMap";
@@ -113,12 +114,14 @@ export default function ContactPage() {
               <p className="font-mono text-caption uppercase tracking-widest text-white/80 mb-3">
                 / contact /
               </p>
-              <h1
+              <TextGenerateEffect
+                as="h1"
                 id="contact-hero-title"
                 className="text-display font-normal text-white"
+                staggerDuration={0.08}
               >
                 Let&apos;s Talk
-              </h1>
+              </TextGenerateEffect>
               <div className="mt-4 flex items-center gap-1.5 text-caption text-white/70">
                 <a
                   className="transition-colors hover:text-white"
@@ -146,17 +149,21 @@ export default function ContactPage() {
                 <p className="font-mono text-caption uppercase tracking-widest text-primary mb-2">
                   / get in touch /
                 </p>
-                <h2
+                <TextGenerateEffect
+                  as="h2"
                   id="contact-content-title"
                   className="text-subheading font-normal text-foreground"
+                  staggerDuration={0.06}
                 >
                   We&apos;d love to hear from you.
-                </h2>
-                <p className="mt-3 text-body leading-relaxed text-muted-foreground">
-                  Tell us what you are trying to improve, automate, or launch.
-                  We will help shape the right product and a practical path to
-                  production.
-                </p>
+                </TextGenerateEffect>
+                <TextGenerateEffect
+                  as="p"
+                  className="mt-3 text-body leading-relaxed text-muted-foreground"
+                  staggerDuration={0.02}
+                >
+                  Tell us what you are trying to improve, automate, or launch. We will help shape the right product and a practical path to production.
+                </TextGenerateEffect>
               </div>
 
               {/* Contact detail cards */}
@@ -243,12 +250,14 @@ export default function ContactPage() {
               <p className="font-mono text-caption uppercase tracking-widest text-primary mb-1">
                 / find us /
               </p>
-              <h2
+              <TextGenerateEffect
+                as="h2"
                 id="contact-map-title"
                 className="text-title font-normal text-foreground"
+                staggerDuration={0.06}
               >
                 Nashik, Maharashtra
-              </h2>
+              </TextGenerateEffect>
             </div>
 
             <div className="relative h-[300px] overflow-hidden border border-dotted border-edge sm:h-[350px]">

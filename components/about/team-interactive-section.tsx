@@ -144,7 +144,7 @@ export function TeamInteractiveSection() {
           >
             Driven by a bold vision to scale globally and{" "}
             <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">
-              make India truly AI-enabled
+              make India genuinely AI-ready
             </mark>
             , we{" "}
             <Link
@@ -211,7 +211,7 @@ export function TeamInteractiveSection() {
             </Link>{" "}
             from Nashik, India, our team is driven to scale globally,{" "}
             <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">
-              make India AI-enabled
+              make India AI-ready
             </mark>
             , and{" "}
             <Link

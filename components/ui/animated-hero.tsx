@@ -22,11 +22,14 @@ function Hero() {
   }, []);
   const titles = useMemo(
     () => [
-      "web platforms",
-      "mobile apps",
-      "AI products",
-      "custom systems",
-      "automation tools",
+      "native",
+      "fluent",
+      "instinctive",
+      "exacting",
+      "discerning",
+      "deliberate",
+      "attuned",
+      "grounded",
     ],
     []
   );
@@ -38,7 +41,7 @@ function Hero() {
       } else {
         setTitleNumber(titleNumber + 1);
       }
-    }, 2000);
+    }, 1600);
     return () => clearTimeout(timeoutId);
   }, [titleNumber, titles]);
 
@@ -48,13 +51,18 @@ function Hero() {
         <div className="flex gap-6 py-20 lg:py-28 items-center justify-center flex-col">
           <div className="flex gap-4 flex-col items-center">
             <h1 id="hero-title" className="text-display max-w-2xl tracking-tighter text-center font-normal text-foreground dark:text-white dark:drop-shadow-lg">
-              <span className="text-foreground dark:text-white">We engineer</span>
-              <span className="relative flex w-full justify-center overflow-hidden text-center md:pb-3 md:pt-0.5">
-                &nbsp;
+              <span className="sr-only">
+                We build native, fluent, instinctive, exacting, discerning, deliberate, attuned, and grounded software, precisely.
+              </span>
+              <span aria-hidden="true" className="text-foreground dark:text-white">We build</span>
+              <span aria-hidden="true" className="relative flex w-full justify-center overflow-hidden px-1 text-center md:pb-3 md:pt-0.5">
+                <span className="invisible whitespace-nowrap">
+                  {titles.reduce((a, b) => (b.length > a.length ? b : a))}
+                </span>
                 {titles.map((title, index) => (
                   <motion.span
                     key={index}
-                    className="absolute font-normal text-teal dark:text-cyan-200 dark:drop-shadow-md will-change-[transform,opacity]"
+                    className="absolute whitespace-nowrap font-normal text-teal dark:text-cyan-200 dark:drop-shadow-md will-change-[transform,opacity]"
                     initial={false}
                     transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
                     style={{ willChange: "transform, opacity" }}
@@ -74,17 +82,8 @@ function Hero() {
                   </motion.span>
                 ))}
               </span>
-              <span className="text-foreground dark:text-white">that perform.</span>
+              <span aria-hidden="true" className="text-foreground dark:text-white">software, precisely.</span>
             </h1>
-
-            <div className="text-body leading-relaxed tracking-tight text-muted-foreground dark:text-white max-w-2xl text-center dark:drop-shadow-md">
-              <p className="md:hidden">
-                Software engineering for AI, web, and mobile.
-              </p>
-              <p className="hidden md:block">
-                SNAB Innovations is a software engineering studio. We build AI products, web platforms, mobile apps, and custom systems from Nashik, India.
-              </p>
-            </div>
           </div>
           <div className="flex flex-row gap-3">
             <SpecularButton

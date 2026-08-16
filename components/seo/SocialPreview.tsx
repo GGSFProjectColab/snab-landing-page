@@ -9,9 +9,9 @@ type SocialPreviewProps = {
 export function SocialPreview({
   backgroundSrc,
   logoSrc,
-  eyebrow = "AI PRODUCT & SOFTWARE ENGINEERING",
-  title = "The AI brain behind your business.",
-  features = ["AI products", "Workflow automation", "Custom software"],
+  eyebrow = "ENGINEERING FIRM",
+  title = "Systems engineered for production.",
+  features = ["Intelligent platforms", "Workflow orchestration", "Production software"],
 }: SocialPreviewProps) {
   return (
     <div

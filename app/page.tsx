@@ -30,9 +30,9 @@ import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
 
 export const metadata: Metadata = createPageMetadata({
-  title: "AI Product & Custom Software Development | SNAB Innovations",
+  title: "Software Engineering Firm | SNAB Innovations",
   description:
-    "Build AI products, workflow automation, web platforms, apps, and custom software with SNAB Innovations, an AI product engineering studio in Nashik, India.",
+    "Build intelligent platforms, workflow orchestration, web products, and mobile apps with SNAB Innovations, an engineering firm in Nashik, India.",
   path: "/",
 });
 
@@ -40,9 +40,9 @@ const projects = [
   {
     number: "01",
     name: "Interview Expert",
-    categories: ["INTERVIEW AUTOMATION", "AI PRODUCT", "WORKFLOW SOFTWARE"],
+    categories: ["INTERVIEW AUTOMATION", "INTELLIGENT PRODUCT", "WORKFLOW SOFTWARE"],
     description:
-      "An AI-enabled platform that helps teams organize interview workflows, reduce administrative work, and turn interview information into structured, actionable records.",
+      "An intelligent platform that helps teams organize interview workflows, reduce administrative work, and turn interview information into structured, actionable records.",
     capabilities: [
       "Workflow Management",
       "Interview Assistance",
@@ -56,7 +56,7 @@ const projects = [
   {
     number: "02",
     name: "Notary Expert",
-    categories: ["NOTARY AUTOMATION", "LEGAL WORKFLOWS", "AI PRODUCT"],
+    categories: ["NOTARY AUTOMATION", "LEGAL WORKFLOWS", "INTELLIGENT PRODUCT"],
     description:
       "An intelligent workflow platform that helps notary professionals manage documents, appointments, client communication, and case progress more efficiently.",
     capabilities: [
@@ -73,7 +73,7 @@ const projects = [
 const services = [
   {
     number: "01",
-    title: "AI Workflows",
+    title: "Workflow Orchestration",
     description:
       "Intelligent automation pipelines that turn manual, repetitive work into reliable, self-running processes.",
     capabilities: ["Process Automation", "Document Processing", "LLM Integration"],
@@ -83,7 +83,7 @@ const services = [
   },
   {
     number: "02",
-    title: "Agentic AI",
+    title: "Intelligent Agents",
     description:
       "Autonomous AI agents that plan, reason, and take action inside your business systems — with human oversight built in.",
     capabilities: ["AI Agents", "Orchestration", "RAG"],
@@ -113,7 +113,7 @@ const services = [
   },
   {
     number: "05",
-    title: "Cloud Solutions",
+    title: "Cloud Architecture",
     description:
       "Scalable cloud architecture engineered for reliability, security, and cost efficiency from day one.",
     capabilities: ["AWS", "GCP", "Azure", "Serverless"],
@@ -123,7 +123,7 @@ const services = [
   },
   {
     number: "06",
-    title: "DevOps Solutions",
+    title: "DevOps & Reliability",
     description:
       "Delivery pipelines, infrastructure as code, and observability that keep releases fast and systems healthy.",
     capabilities: ["CI/CD", "Infrastructure as Code", "Monitoring"],
@@ -144,7 +144,7 @@ const aboutSnabSteps = [
   },
   {
     step: "02",
-    title: "AI-Native Engineering",
+    title: "Intelligence-First Engineering",
     subtitle: "Build & Iterate",
     content:
       "We design systems where AI is the core, not a bolt-on feature added at the end. From agentic workflows and retrieval pipelines to fine-tuned models and intelligent automation, every layer is purpose-built for your specific context. We iterate fast, test in the open, and keep you in the loop at every step.",
@@ -164,8 +164,8 @@ const aboutSnabSteps = [
 
 const whyChooseUs = [
   {
-    title: "AI-First Architecture",
-    description: "We design every system with AI at its core, not as an afterthought.",
+    title: "Intelligence-First Architecture",
+    description: "We design every system with intelligence at its core, not as an afterthought.",
     image: "/ascii-magic-6.png",
     visual: "svg1",
   },
@@ -234,11 +234,11 @@ export default function Home() {
         },
         areaServed: "Worldwide",
         knowsAbout: [
-          "AI product development",
-          "Workflow automation",
-          "Custom software development",
+          "Intelligent product development",
+          "Workflow orchestration",
+          "Bespoke software development",
           "Web application development",
-          "AI agents",
+          "Intelligent agents",
           "Retrieval-augmented generation",
         ],
         contactPoint: {
@@ -292,7 +292,7 @@ export default function Home() {
         <section aria-label="What we build">
           <ContainerWrapper>
             <div className="border-b border-dotted border-edge py-16 sm:py-20 md:py-28 px-4 sm:px-6 md:px-10">
-              <MagicText text="We believe technology should feel less like a tool and more like a teammate. Every line of code we write starts with one question: how do we make someone's day a little easier, a little smarter, a little more human? We're not just building software. We're building trust, one thoughtful solution at a time. From AI workflows and agentic systems to cloud platforms and mobile apps, we engineer products that solve real problems for real people." />
+              <MagicText text="We believe technology should feel less like a tool and more like a dependable teammate. Every system we engineer begins with one question: how do we make someone's work a little simpler, a little sharper, a little more human? We don't just write code — we build trust, one considered decision at a time. From workflow orchestration and intelligent agents to cloud platforms and mobile products, we deliver systems that solve real problems for real people." />
             </div>
           </ContainerWrapper>
         </section>
@@ -662,7 +662,7 @@ export default function Home() {
                     className="mt-2 max-w-xl text-body leading-relaxed text-foreground/80 dark:text-white/90"
                     staggerDuration={0.02}
                   >
-                    Have a project in mind? We&apos;d love to hear about it. Whether you need AI integration, workflow automation, or custom software, our team is ready to help.
+                    Have a project in mind? We&apos;d love to hear about it. Whether you need workflow orchestration, intelligent automation, or a new platform, our team is ready to help.
                   </TextGenerateEffect>
                 </div>
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -692,7 +692,7 @@ export default function Home() {
           <ContainerWrapper>
             <div className="p-3 py-8 text-center sm:p-4">
               <AnimatedShinyText className="text-title font-normal max-w-none inline-flex items-center justify-center">
-                &ldquo;Build AI with production intelligence&rdquo;
+                &ldquo;Build with production intelligence&rdquo;
               </AnimatedShinyText>
             </div>
           </ContainerWrapper>

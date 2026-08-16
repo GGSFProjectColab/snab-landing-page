@@ -58,7 +58,7 @@ export function Footer() {
                 className="max-w-xs text-body leading-relaxed text-muted-foreground"
                 staggerDuration={0.03}
               >
-                AI product engineering studio building intelligent workflows and custom software from Nashik, India.
+                Engineering firm building intelligent platforms and dependable systems from Nashik, India.
               </TextGenerateEffect>
 
               {/* Social icons */}

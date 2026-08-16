@@ -32,7 +32,7 @@ export type Service = {
 const ENRICHED_SERVICES: Service[] = [
   {
     number: "01",
-    title: "AI Workflows",
+    title: "Workflow Orchestration",
     description:
       "Intelligent automation pipelines turning manual, repetitive work into reliable, self-running processes.",
     capabilities: ["Process Automation", "Document Processing", "LLM Integration"],
@@ -47,7 +47,7 @@ const ENRICHED_SERVICES: Service[] = [
   },
   {
     number: "02",
-    title: "Agentic AI",
+    title: "Intelligent Agents",
     description:
       "Autonomous AI agents that plan, reason, and act inside your systems with human oversight built in.",
     capabilities: ["AI Agents", "Orchestration", "RAG"],
@@ -92,7 +92,7 @@ const ENRICHED_SERVICES: Service[] = [
   },
   {
     number: "05",
-    title: "Cloud Solutions",
+    title: "Cloud Architecture",
     description:
       "Scalable cloud architecture engineered for reliability, enterprise security, and cost efficiency.",
     capabilities: ["AWS", "GCP", "Azure", "Serverless"],
@@ -107,7 +107,7 @@ const ENRICHED_SERVICES: Service[] = [
   },
   {
     number: "06",
-    title: "DevOps Solutions",
+    title: "DevOps & Reliability",
     description:
       "Delivery pipelines and infrastructure as code that keep releases fast and systems healthy.",
     capabilities: ["CI/CD", "IaC", "Monitoring"],
@@ -443,7 +443,7 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
       <div ref={containerRef} className="relative w-full">
         <ContainerWrapper>
           {/* Header stays pinned */}
-          <HeaderTitle title="What services we provide" id="services-title" />
+          <HeaderTitle title="What we deliver" id="services-title" />
 
           {/* Glider Tabs */}
           <GliderTabs

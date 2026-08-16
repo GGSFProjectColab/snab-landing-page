@@ -21,7 +21,7 @@ export const siteConfig = {
   shortName: "SNAB",
   url: getBaseUrl().replace(/\/$/, ""),
   description:
-    "SNAB Innovations designs and engineers AI products, workflow automation, web platforms, apps, and custom software from Nashik, India.",
+    "SNAB Innovations designs and engineers intelligent platforms, workflow orchestration, web products, and mobile apps from Nashik, India.",
   location: {
     locality: "Nashik",
     region: "Maharashtra",

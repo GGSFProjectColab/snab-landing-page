@@ -1,12 +1,15 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useTheme } from "next-themes";
 
 import { cn } from "@/lib/utils";
 
 export type FluidOrbProps = React.ComponentProps<"div"> & {
   size?: number;
   color?: string;
+  darkColor?: string;
+  lightColor?: string;
 };
 
 const VERT = `
@@ -110,12 +113,23 @@ function compile(gl: WebGLRenderingContext, type: number, src: string) {
 
 const FluidOrb = ({
   size = 240,
-  color = "#1A73F2",
+  color,
+  darkColor = "#FF6A00",
+  lightColor = "#10B981",
   className,
   style,
   ...props
 }: FluidOrbProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted ? resolvedTheme === "dark" : true;
+  const activeColor = color || (isDark ? darkColor : lightColor);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -151,7 +165,7 @@ const FluidOrb = ({
 
     const uResolution = gl.getUniformLocation(program, "u_resolution");
     const uTime = gl.getUniformLocation(program, "u_time");
-    gl.uniform3f(gl.getUniformLocation(program, "u_color"), ...hexToRgb(color));
+    gl.uniform3f(gl.getUniformLocation(program, "u_color"), ...hexToRgb(activeColor));
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const px = Math.round(size * dpr);
@@ -178,7 +192,7 @@ const FluidOrb = ({
       gl.deleteShader(frag);
       gl.deleteBuffer(buffer);
     };
-  }, [size, color]);
+  }, [size, activeColor]);
 
   return (
     <div

@@ -24,7 +24,7 @@ export function CloudShader() {
           width="100%"
           height="100%"
           colorBack={isDark ? DARK_BACK : LIGHT_BACK}
-          colorFront={isDark ? "#00b3ff" : "#0f766e"}
+          colorFront={isDark ? "#FF6A00" : "#10B981"}
           shape="sphere"
           type="4x4"
           size={2}

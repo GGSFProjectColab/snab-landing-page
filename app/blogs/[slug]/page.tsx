@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const ogImage = post.cover_image?.startsWith("http")
     ? post.cover_image
-    : absoluteUrl(post.cover_image || "/ascii-magic-14.png");
+    : absoluteUrl(post.cover_image || "/seo/ascii-magic-21.png");
 
   return {
     title: `${post.title} | SNAB Innovations`,
@@ -106,7 +106,7 @@ export default async function BlogPostPage({ params }: Props) {
     },
     image: post.cover_image?.startsWith("http")
       ? post.cover_image
-      : absoluteUrl(post.cover_image || "/ascii-magic-14.png"),
+      : absoluteUrl(post.cover_image || "/seo/ascii-magic-21.png"),
   };
 
   return (
@@ -276,7 +276,7 @@ export default async function BlogPostPage({ params }: Props) {
                   >
                     <div className="relative aspect-[4/3] overflow-hidden bg-muted/30">
                       <Image
-                        src={related.cover_image || "/ascii-magic-14.png"}
+                        src={related.cover_image || "/seo/ascii-magic-21.png"}
                         alt={related.title}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

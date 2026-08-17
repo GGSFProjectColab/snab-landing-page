@@ -39,7 +39,7 @@ async function fetchPublishedBlogPosts(): Promise<BlogPost[]> {
 
     return (data as BlogPost[]).map((blog) => ({
       ...blog,
-      cover_image: blog.cover_image || "/ascii-magic-14.png",
+      cover_image: blog.cover_image || "/seo/ascii-magic-21.png",
     }));
   } catch (err) {
     console.error("Error fetching blogs from InsForge:", err);
@@ -63,7 +63,7 @@ async function fetchPublishedBlogPostBySlug(slug: string): Promise<BlogPost | nu
     const blog = data as BlogPost;
     return {
       ...blog,
-      cover_image: blog.cover_image || "/ascii-magic-14.png",
+      cover_image: blog.cover_image || "/seo/ascii-magic-21.png",
     };
   } catch (err) {
     console.error("Error fetching blog by slug from InsForge:", err);

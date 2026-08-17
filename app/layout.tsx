@@ -53,9 +53,9 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [
       {
-        url: absoluteUrl("/seo/HPcXcGLbMAAxweM.jpg"),
-        width: 1200,
-        height: 630,
+        url: absoluteUrl("/seo/ascii-magic-21.png"),
+        width: 1280,
+        height: 717,
         alt: "SNAB Innovations",
       },
     ],
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SNAB Innovations | AI Product & Software Engineering",
     description: siteConfig.description,
-    images: [absoluteUrl("/seo/HPcXcGLbMAAxweM.jpg")],
+    images: [absoluteUrl("/seo/ascii-magic-21.png")],
   },
   robots: {
     index: true,

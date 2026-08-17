@@ -105,8 +105,7 @@ export default function RootLayout({
         displayFont.variable,
         geistMono.variable,
         "font-sans",
-        geist.variable,
-        "dark"
+        geist.variable
       )}
     >
       <body>

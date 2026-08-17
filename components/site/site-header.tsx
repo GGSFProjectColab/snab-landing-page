@@ -3,14 +3,28 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { createPortal, flushSync } from "react-dom";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import {
+  Menu,
+  X,
+  Sun,
+  Moon,
+  ChevronDown,
+  Briefcase,
+  Users,
+  BookOpen,
+  Mail,
+  Info,
+} from "lucide-react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { ShinyText } from "@/components/site/shiny-text";
-import { NAV_ITEMS, DESKTOP_LINKS } from "@/data/nav-items";
-import type { NavItem } from "@/data/nav-items";
+import {
+  NAV_ITEMS,
+  COMPANY_DROPDOWN_LINKS,
+  type NavItem,
+} from "@/data/nav-items";
 
 function LogoMark({ className }: { className?: string }) {
   return (
@@ -20,7 +34,7 @@ function LogoMark({ className }: { className?: string }) {
       className={cn("flex items-center gap-2", className)}
     >
       <Image
-        className="brand-logo h-7 w-7 md:h-8 md:w-8"
+        className="brand-logo h-7 w-7 md:h-8 md:w-8 shrink-0 object-contain"
         src="/logo.png"
         alt=""
         aria-hidden="true"
@@ -45,8 +59,8 @@ function NavLink({
     <Link
       href={item.href}
       className={cn(
-        "text-button font-normal tracking-tight transition-colors",
-        isActive ? "text-primary" : "text-muted-foreground hover:text-primary",
+        "text-button font-normal tracking-tight transition-colors py-1 px-1.5",
+        isActive ? "text-primary font-medium" : "text-muted-foreground hover:text-primary",
       )}
     >
       {item.shiny ? (
@@ -57,6 +71,164 @@ function NavLink({
         item.label
       )}
     </Link>
+  );
+}
+
+function getIcon(name?: string) {
+  switch (name) {
+    case "briefcase":
+      return Briefcase;
+    case "users":
+      return Users;
+    case "book-open":
+      return BookOpen;
+    case "mail":
+      return Mail;
+    default:
+      return Info;
+  }
+}
+
+function CompanyDropdown({
+  activePath,
+}: {
+  activePath: string;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const isChildActive = COMPANY_DROPDOWN_LINKS.some(
+    (item) =>
+      activePath === item.href ||
+      (item.href !== "/" && activePath.startsWith(item.href)),
+  );
+
+  const handleMouseEnter = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setIsOpen(true);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    timeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 150);
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
+
+  return (
+    <div
+      ref={dropdownRef}
+      className="relative flex items-center"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <button
+        type="button"
+        aria-expanded={isOpen}
+        aria-haspopup="true"
+        onClick={() => setIsOpen((prev) => !prev)}
+        className={cn(
+          "inline-flex items-center gap-1 py-1 px-1.5 text-button font-normal tracking-tight transition-colors outline-none",
+          isChildActive || isOpen
+            ? "text-primary font-medium"
+            : "text-muted-foreground hover:text-primary",
+        )}
+      >
+        <span>Company</span>
+        <ChevronDown
+          className={cn(
+            "size-3.5 transition-transform duration-200 ease-out",
+            isOpen ? "rotate-180 text-primary" : "text-muted-foreground",
+          )}
+          aria-hidden="true"
+        />
+      </button>
+
+      {/* Clean, Plain Dropdown Panel (Follows website light/dark theme palette) */}
+      <div
+        role="menu"
+        aria-orientation="vertical"
+        className={cn(
+          "absolute right-0 top-full pt-1.5 z-50 transition-all duration-150 ease-out origin-top-right",
+          isOpen
+            ? "opacity-100 scale-100 translate-y-0 pointer-events-auto visible"
+            : "opacity-0 scale-95 -translate-y-1 pointer-events-none invisible",
+        )}
+      >
+        <div className="w-64 sm:w-72 rounded-lg border border-border bg-background p-1">
+          <div className="flex flex-col">
+            {COMPANY_DROPDOWN_LINKS.map((item) => {
+              const Icon = getIcon(item.iconName);
+              const isActive =
+                activePath === item.href ||
+                (item.href !== "/" && activePath.startsWith(item.href));
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  role="menuitem"
+                  onClick={() => setIsOpen(false)}
+                  className={cn(
+                    "group flex items-start gap-2.5 rounded-md px-2.5 py-2 transition-colors",
+                    isActive
+                      ? "bg-accent text-primary font-medium"
+                      : "text-muted-foreground hover:bg-accent/70 hover:text-primary",
+                  )}
+                >
+                  <Icon className="size-4 mt-0.5 shrink-0 text-muted-foreground group-hover:text-primary transition-colors" />
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-button font-normal text-foreground group-hover:text-primary">
+                      {item.label}
+                    </span>
+                    {item.description && (
+                      <span className="text-caption text-xs text-muted-foreground font-normal line-clamp-1">
+                        {item.description}
+                      </span>
+                    )}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -158,7 +330,7 @@ function MobileDrawer({
                   className={cn(
                     "block py-3 text-button font-normal transition-colors",
                     isActive
-                      ? "text-primary"
+                      ? "text-primary font-medium"
                       : "text-muted-foreground hover:text-primary",
                   )}
                 >
@@ -296,12 +468,6 @@ export function SiteHeader() {
   // Hide header on admin routes
   if (firstSegment === "/admin") return null;
 
-  const isHomeActive = activePath === "/";
-  const isDesktopLinkActive = (href: string) => {
-    if (href === "/#home") return isHomeActive;
-    return firstSegment === href;
-  };
-
   return (
     <header
       className="sticky top-0 z-[500] h-14 bg-background/80 backdrop-blur-md md:h-16 full-bleed-border-b"
@@ -312,16 +478,17 @@ export function SiteHeader() {
           {/* Left — Logo */}
           <LogoMark />
 
-          {/* Right — Nav links + Actions cluster */}
+          {/* Right — Desktop (Website view) navigation */}
           <div className="hidden items-center gap-3 md:flex">
             <nav className="flex items-center gap-3" aria-label="Primary">
-              {DESKTOP_LINKS.map((item) => (
-                <NavLink
-                  key={item.href}
-                  item={item}
-                  isActive={isDesktopLinkActive(item.href)}
-                />
-              ))}
+              {/* About page link */}
+              <NavLink
+                item={{ label: "About", href: "/about" }}
+                isActive={firstSegment === "/about"}
+              />
+
+              {/* Company dropdown with all other pages */}
+              <CompanyDropdown activePath={firstSegment} />
             </nav>
 
             {/* Divider between nav links and theme toggle */}

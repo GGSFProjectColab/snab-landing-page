@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Dithering } from "@paper-design/shaders-react";
 
-const DARK_BACK = "#000000";
+const DARK_BACK = "#14120B";
 const LIGHT_BACK = "#F7F7F4";
 
 export function CloudShader() {

@@ -271,7 +271,7 @@ export default function Home() {
         {/* Hero Section */}
         <section id="home" aria-labelledby="hero-title">
           <ContainerWrapper>
-            <div className="relative h-[calc(100dvh-3.5rem)] md:h-[calc(100dvh-4rem)] min-h-[560px] max-h-[920px] overflow-hidden border-b border-dotted border-edge">
+            <div className="relative min-h-[580px] overflow-hidden bg-muted/30 lg:min-h-[calc(100dvh-4rem)] border-b border-dotted border-edge">
               <Hero20 />
             </div>
           </ContainerWrapper>

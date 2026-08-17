@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { BuildingParticles } from "@/components/originkit/ui/hero-20/building-particles";
+import { GrainGradientShader } from "@/components/ui/grain-gradient-shader";
 import { Reveal, RevealGroup } from "@/components/originkit/ui/hero-20/reveal";
 
 /** Public asset under /originkit/hero-20/ */
@@ -58,37 +58,19 @@ export const Section24Hero = () => {
   const isDark = mounted ? resolvedTheme === "dark" : true;
 
   return (
-    <div className="relative mx-auto flex h-[calc(100dvh-3.5rem)] md:h-[calc(100dvh-4rem)] min-h-[560px] max-h-[920px] w-full flex-col items-center overflow-hidden ultrawide:max-w-[2000px] bg-background/40">
-      {/*
-        Building background render — sits behind the content,
-        anchored solidly to the bottom hero line.
-        Adjusted with translate-y to cancel the transparent padding in the asset
-        so the bottommost particle row rests directly on the hero bottom line.
-      */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 top-[18%] sm:top-[16%] md:top-[14%] mx-auto w-full max-w-[1440px] desktop-sm:max-w-[1680px] ultrawide:max-w-[2000px] translate-y-[11.2%]">
-        <img
-          src={asset("mobile-hero.png")}
-          alt=""
-          width={753}
-          height={571}
-          className="size-full object-contain object-bottom ipad:hidden dark:invert dark:opacity-75 translate-y-[-2.8%]"
-          style={{
-            maskImage:
-              "linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%)",
-          }}
-        />
-        <div className="hidden size-full ipad:block pointer-events-auto">
-          <BuildingParticles />
-        </div>
-      </div>
+    <div className="relative mx-auto flex min-h-[580px] lg:min-h-[calc(100dvh-4rem)] w-full flex-col items-center justify-center overflow-hidden py-14 sm:py-16 md:py-20">
+      {/* Old Gradient Background */}
+      <GrainGradientShader />
+      <div
+        className="absolute inset-0 dark:bg-black/30"
+        aria-hidden="true"
+      />
 
-      {/* Hero Foreground Content — starts comfortably close to top, eliminating vacant gap */}
-      <div className="relative z-10 mx-auto mt-7 sm:mt-9 md:mt-11 flex w-full max-w-[420px] flex-col items-center gap-5 sm:gap-6 px-4 sm:px-6 ipad:max-w-[760px] desktop-sm:max-w-[800px] full-hd:max-w-[920px]">
+      {/* Hero Foreground Content */}
+      <div className="relative z-10 mx-auto flex w-full max-w-[440px] flex-col items-center gap-5 sm:gap-6 px-4 sm:px-6 ipad:max-w-[760px] desktop-sm:max-w-[820px] full-hd:max-w-[940px]">
         <RevealGroup className="flex flex-col items-center gap-4 sm:gap-5" delay={0.1}>
           {/* Badge */}
-          <Reveal className="relative flex items-center justify-center gap-[7.222px] border-[0.722px] border-dashed border-foreground/20 dark:border-white/25 px-4 py-2 sm:py-2.5 backdrop-blur-[2px]">
+          <Reveal className="relative flex items-center justify-center gap-[7.222px] border-[0.722px] border-dashed border-foreground/20 dark:border-white/25 px-4 py-2 sm:py-2.5 backdrop-blur-[2px] bg-background/20 dark:bg-black/20">
             <CornerTicks />
             <span
               aria-hidden
@@ -117,7 +99,7 @@ export const Section24Hero = () => {
             <Reveal>
               <h1
                 id="hero-title"
-                className="text-center font-instrument-serif text-[44px] leading-[1.05] tracking-[-1.4px] text-foreground dark:text-white sm:text-[58px] sm:leading-[1.06] sm:tracking-[-1.8px] md:text-[70px] md:leading-[1.06] md:tracking-[-2.2px] full-hd:text-[88px] full-hd:leading-[1.06] full-hd:tracking-[-2.6px]"
+                className="text-center font-instrument-serif text-[44px] leading-[1.05] tracking-[-1.4px] text-foreground dark:text-white sm:text-[58px] sm:leading-[1.06] sm:tracking-[-1.8px] md:text-[72px] md:leading-[1.06] md:tracking-[-2.2px] full-hd:text-[90px] full-hd:leading-[1.06] full-hd:tracking-[-2.6px]"
               >
                 Engineered for Intelligence,
                 <br />
@@ -126,7 +108,7 @@ export const Section24Hero = () => {
             </Reveal>
 
             <Reveal>
-              <p className="max-w-[320px] text-center font-tight text-[15px] leading-[23px] tracking-[-0.3px] text-foreground/75 dark:text-neutral-300 sm:max-w-[420px] sm:text-[17px] sm:leading-[26px] md:max-w-[490px] md:text-[18px] md:leading-[27px] full-hd:max-w-[560px] full-hd:text-[20px] full-hd:leading-[30px]">
+              <p className="max-w-[340px] text-center font-tight text-[15px] leading-[23px] tracking-[-0.3px] text-foreground/80 dark:text-neutral-200 sm:max-w-[440px] sm:text-[17px] sm:leading-[26px] md:max-w-[540px] md:text-[18px] md:leading-[27px] full-hd:max-w-[600px] full-hd:text-[20px] full-hd:leading-[30px]">
                 Intelligent platforms, workflow orchestration, and bespoke software designed
                 and built for production reliability.
               </p>
@@ -151,7 +133,7 @@ export const Section24Hero = () => {
 
           <Link
             href="/about"
-            className="group relative inline-flex cursor-pointer items-center justify-center gap-2.5 border border-dotted border-edge bg-muted/30 hover:bg-muted/60 text-foreground dark:text-white px-5 py-2.5 sm:px-6 sm:py-3 backdrop-blur-[2px] transition-all duration-200 ease-out active:scale-[0.98]"
+            className="group relative inline-flex cursor-pointer items-center justify-center gap-2.5 border border-dotted border-edge bg-background/40 dark:bg-muted/30 hover:bg-background/70 dark:hover:bg-muted/60 text-foreground dark:text-white px-5 py-2.5 sm:px-6 sm:py-3 backdrop-blur-[2px] transition-all duration-200 ease-out active:scale-[0.98]"
           >
             <span className="font-lato text-[13px] sm:text-[14px] leading-normal font-medium tracking-tight whitespace-nowrap">
               About us

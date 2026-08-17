@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
-import { createPortal } from "react-dom";
+import { createPortal, flushSync } from "react-dom";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
@@ -188,6 +188,31 @@ function MobileDrawer({
   );
 }
 
+function switchThemeWithTransition(
+  nextTheme: "light" | "dark",
+  setTheme: (theme: string) => void,
+) {
+  if (typeof document === "undefined") {
+    setTheme(nextTheme);
+    return;
+  }
+
+  const doc = document as Document & {
+    startViewTransition?: (cb: () => void | Promise<void>) => unknown;
+  };
+
+  if (!doc.startViewTransition) {
+    setTheme(nextTheme);
+    return;
+  }
+
+  doc.startViewTransition(() => {
+    flushSync(() => {
+      setTheme(nextTheme);
+    });
+  });
+}
+
 function ThemeToggleMobile({
   onClose,
   open,
@@ -210,7 +235,7 @@ function ThemeToggleMobile({
       tabIndex={open ? 0 : -1}
       aria-label="Switch between light and dark mode"
       onClick={() => {
-        setTheme(isDark ? "light" : "dark");
+        switchThemeWithTransition(isDark ? "light" : "dark", setTheme);
         onClose();
       }}
       className="flex w-full items-center justify-between text-button font-normal text-muted-foreground transition-colors hover:text-primary"
@@ -246,7 +271,7 @@ function ThemeToggle({
       type="button"
       aria-label={label}
       title={label}
-      onClick={() => setTheme(isDark ? "light" : "dark")}
+      onClick={() => switchThemeWithTransition(isDark ? "light" : "dark", setTheme)}
       className={cn(
         "inline-flex size-8 items-center justify-center text-muted-foreground transition-colors hover:text-primary",
         className,

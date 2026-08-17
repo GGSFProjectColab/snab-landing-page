@@ -64,25 +64,7 @@ const workItems = [
     link: "https://nyayai.interviewxpert.in/",
     contain: true,
   },
-  {
-    number: "04",
-    name: "RoomMateMatch",
-    status: "Live",
-    categories: ["HOSTEL FINDER", "AI MATCHING", "COMMUNITY PLATFORM"],
-    description:
-      "A platform that helps students find hostels and connect with compatible roommates through AI-powered matching, verified listings, and secure in-app chat.",
-    capabilities: [
-      "AI-Powered Matching",
-      "Verified Listings",
-      "Secure Chat",
-      "Community Events",
-    ],
-    image: "/roommate-match.png",
-    imageAlt: "RoomMateMatch Logo",
-    link: "https://roommate.bluecreast.in/",
-    contain: true,
-  },
-];
+  ];
 
 export default function WorkPage() {
   return (

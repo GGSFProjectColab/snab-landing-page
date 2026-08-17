@@ -21,7 +21,6 @@ const footerColumns: FooterColumn[] = [
       { label: "Interview Expert", href: "https://interviewexpert.in", external: true },
       { label: "Notary Expert", href: "https://notaryexpert.in", external: true },
       { label: "NyayaAI", href: "https://nyayai.interviewxpert.in/", external: true },
-      { label: "RoomMateMatch", href: "https://roommate.bluecreast.in/", external: true },
     ],
   },
   {

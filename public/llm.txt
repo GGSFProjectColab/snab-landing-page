@@ -67,12 +67,6 @@
 - **Overview**: An AI-powered legal assistance system that helps citizens, legal professionals, and researchers navigate legal processes — featuring PIL/RTI guidance, case analytics, document intelligence, and multilingual accessibility.
 - **Key Capabilities**: Legal Guidance, Document Intelligence, Case Analytics, Multilingual Access.
 
-### 4. RoomMateMatch
-- **URL**: https://roommate.bluecreast.in/
-- **Category**: Student Housing / AI-Powered Compatibility Matching
-- **Overview**: A modern student platform that pairs students with compatible roommates and verified hostel accommodations through preference-based AI matching algorithms and secure in-app communication.
-- **Key Capabilities**: AI-Powered Matching, Verified Listings, Secure Chat, Community Coordination.
-
 ---
 
 ## 4. Engineering & Delivery Process

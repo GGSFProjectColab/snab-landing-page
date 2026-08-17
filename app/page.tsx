@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { HomeFooter } from "./HomeFooter";
-import { Hero } from "@/components/ui/animated-hero";
+import Hero20 from "@/components/originkit/hero-20";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { ContainerWrapper } from "@/components/site/container";
@@ -268,19 +268,11 @@ export default function Home() {
       <JsonLd data={structuredData} />
 
       <main className="flex-1">
-        {/* Hero / Profile Header */}
+        {/* Hero Section */}
         <section id="home" aria-labelledby="hero-title">
           <ContainerWrapper>
-            <div className="relative min-h-[600px] overflow-hidden bg-muted/30 lg:min-h-[calc(100dvh-4rem)]">
-              <GrainGradientShader />
-              <div
-                className="absolute inset-0 dark:bg-black/30"
-                aria-hidden="true"
-              />
-
-              <div className="absolute inset-0 z-10 flex items-center justify-center px-4 sm:px-6 md:px-12">
-                <Hero />
-              </div>
+            <div className="relative h-[calc(100dvh-3.5rem)] md:h-[calc(100dvh-4rem)] min-h-[560px] max-h-[920px] overflow-hidden border-b border-dotted border-edge">
+              <Hero20 />
             </div>
           </ContainerWrapper>
         </section>

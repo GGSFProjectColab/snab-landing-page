@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300;400;500;600;700&family=Lato:wght@400;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,6 +9,9 @@
   --font-geist-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-pixelify: var(--font-body);
   --font-bitcount: var(--font-display);
+  --font-instrument-serif: "Instrument Serif", Georgia, serif;
+  --font-tight: "Inter Tight", Inter, sans-serif;
+  --font-lato: Lato, ui-sans-serif, system-ui, sans-serif;
 
   /* Dark theme only (always applied) */
   --background: oklch(0 0 0);

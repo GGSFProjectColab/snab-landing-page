@@ -64,9 +64,30 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      screens: {
+        "android-sm": "360px",
+        iphone: "390px",
+        "iphone-max": "430px",
+        ipad: "768px",
+        "ipad-air": "834px",
+        "ipad-landscape": "1024px",
+        "desktop-sm": "1280px",
+        laptop: "1440px",
+        wide: "1536px",
+        "wide-lg": "1600px",
+        "full-hd": "1920px",
+        ultrawide: "2560px",
+      },
       fontFamily: {
         sans: ["var(--font-sans)", "sans-serif"],
         mono: ["var(--font-mono)", "monospace"],
+        "instrument-serif": ["var(--font-instrument-serif)", "Georgia", "serif"],
+        tight: ["var(--font-tight)", "Inter", "sans-serif"],
+        lato: ["var(--font-lato)", "ui-sans-serif", "system-ui", "sans-serif"],
+      },
+      aspectRatio: {
+        "753/571": "753 / 571",
+        "1383/942": "1383 / 942",
       },
       keyframes: {
         "shiny-text": {

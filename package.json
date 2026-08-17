@@ -47,13 +47,15 @@
     "shadcn": "^4.11.0",
     "svg-dotted-map": "^2.0.1",
     "tailwind-merge": "^3.6.0",
-    "unicornstudio-react": "^2.1.12"
+    "unicornstudio-react": "^2.1.12",
+    "uuid": "^14.0.1"
   },
   "devDependencies": {
     "@types/geojson": "^7946.0.16",
     "@types/node": "25.9.3",
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
+    "@types/uuid": "^10.0.0",
     "autoprefixer": "^10.5.0",
     "esbuild": "^0.28.1",
     "postcss": "^8.5.15",

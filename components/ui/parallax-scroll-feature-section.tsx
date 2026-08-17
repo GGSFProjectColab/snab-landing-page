@@ -4,6 +4,8 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+import { PixelTrail } from "@/components/ui/pixel-trail";
+import { useScreenSize } from "@/components/hooks/use-screen-size";
 
 interface HowWeWorkStep {
   step: string;
@@ -112,11 +114,23 @@ function ParallaxStep({
 }
 
 export function ParallaxHowWeWork({ steps }: ParallaxHowWeWorkProps) {
+  const screenSize = useScreenSize();
+
   return (
-    <div className="flex flex-col">
-      {steps.map((step, index) => (
-        <ParallaxStep key={step.step} step={step} index={index} />
-      ))}
+    <div className="relative overflow-hidden border-b border-dotted border-edge">
+      <div className="absolute inset-0 z-0">
+        <PixelTrail
+          pixelSize={screenSize.lessThan("md") ? 48 : 80}
+          fadeDuration={500}
+          delay={1200}
+          pixelClassName="rounded-full bg-[#ffa04f]"
+        />
+      </div>
+      <div className="relative z-10 flex flex-col pointer-events-none">
+        {steps.map((step, index) => (
+          <ParallaxStep key={step.step} step={step} index={index} />
+        ))}
+      </div>
     </div>
   );
 }

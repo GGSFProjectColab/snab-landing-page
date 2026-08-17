@@ -14,7 +14,7 @@
   --font-lato: Lato, ui-sans-serif, system-ui, sans-serif;
 
   /* Dark theme only (always applied) */
-  --background: oklch(0 0 0);
+  --background: #14120B;
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -61,7 +61,7 @@
   --skeleton-bg: #151515;
   --skeleton-border: rgba(255, 255, 255, 0.045);
   --skeleton-shimmer: rgba(255, 255, 255, 0.075);
-  --skeleton-page-bg: #000;
+  --skeleton-page-bg: #14120B;
   --skeleton-color: #fff;
   --sky-400: #38bdf8;
   --sky-500: #0ea5e9;
@@ -128,7 +128,7 @@ mark {
 }
 
 .dark {
-  --background: oklch(0 0 0);
+  --background: #14120B;
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -175,7 +175,7 @@ mark {
   --skeleton-bg: #151515;
   --skeleton-border: rgba(255, 255, 255, 0.045);
   --skeleton-shimmer: rgba(255, 255, 255, 0.075);
-  --skeleton-page-bg: #000;
+  --skeleton-page-bg: #14120B;
   --skeleton-color: #fff;
 }
 

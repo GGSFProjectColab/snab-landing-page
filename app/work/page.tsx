@@ -64,6 +64,25 @@ const workItems = [
     link: "https://nyayai.interviewxpert.in/",
     contain: true,
   },
+  {
+    number: "04",
+    name: "Termy",
+    status: "Live",
+    categories: ["RUST DESKTOP", "TERMINAL WORKSPACE", "OPEN SOURCE"],
+    description:
+      "A focused Windows terminal workspace, engineered in Rust. Run Windows PowerShell and Command Prompt through ConPTY with persistent project workspaces, split panes, restored layouts, and recent terminal context. Termy uses eframe, egui, wgpu, and SQLite-backed state to keep desktop terminal sessions fast, local, and easy to resume. An open-source agentic coding environment.",
+    capabilities: [
+      "ConPTY Sessions",
+      "Split Panes",
+      "Persistent Workspaces",
+      "Layout Restoration",
+    ],
+    image: "/termy.png",
+    imageAlt: "Termy App Icon",
+    link: "https://termyy.vercel.app/",
+    contain: true,
+    imagePadding: "p-8",
+  },
   ];
 
 export default function WorkPage() {
@@ -178,7 +197,7 @@ export default function WorkPage() {
                     />
                     <div className="relative h-full w-full overflow-hidden rounded-[6px]">
                       <Image
-                        className={`h-full w-full ${"contain" in item && item.contain ? "object-contain" : "object-cover object-top"} transition-transform duration-500 group-hover:scale-105 ${"imageDark" in item && item.imageDark ? "block dark:hidden" : ""}`}
+                        className={`h-full w-full ${"contain" in item && item.contain ? "object-contain" : "object-cover object-top"} transition-transform duration-500 group-hover:scale-105 ${"imageDark" in item && item.imageDark ? "block dark:hidden" : ""} ${"imagePadding" in item && item.imagePadding ? item.imagePadding : ""}`}
                         src={item.image}
                         alt={item.imageAlt}
                         width={400}
@@ -187,7 +206,7 @@ export default function WorkPage() {
                       />
                       {"imageDark" in item && item.imageDark && (
                         <Image
-                          className={`h-full w-full ${"contain" in item && item.contain ? "object-contain" : "object-cover object-top"} transition-transform duration-500 group-hover:scale-105 hidden dark:block`}
+                          className={`h-full w-full ${"contain" in item && item.contain ? "object-contain" : "object-cover object-top"} transition-transform duration-500 group-hover:scale-105 hidden dark:block ${"imagePadding" in item && item.imagePadding ? item.imagePadding : ""}`}
                           src={item.imageDark as string}
                           alt={item.imageAlt}
                           width={400}

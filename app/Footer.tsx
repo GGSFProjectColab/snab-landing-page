@@ -38,6 +38,7 @@ const footerColumns: FooterColumn[] = [
     links: [
       { label: "Blogs", href: "/blogs" },
       { label: "robots.txt", href: "/robots.txt", external: true },
+      { label: "llm.txt", href: "/llm.txt", external: true },
     ],
   },
   {

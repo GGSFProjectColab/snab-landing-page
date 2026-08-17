@@ -70,7 +70,7 @@ const workItems = [
     status: "Live",
     categories: ["RUST DESKTOP", "TERMINAL WORKSPACE", "OPEN SOURCE"],
     description:
-      "A focused Windows terminal workspace, engineered in Rust. Run Windows PowerShell and Command Prompt through ConPTY with persistent project workspaces, split panes, restored layouts, and recent terminal context. Termy uses eframe, egui, wgpu, and SQLite-backed state to keep desktop terminal sessions fast, local, and easy to resume. An open-source agentic coding environment.",
+      "A focused Windows terminal workspace, engineered in Rust. Run PowerShell and Command Prompt through ConPTY with persistent project workspaces, split panes, and restored layouts. An open-source agentic coding environment.",
     capabilities: [
       "ConPTY Sessions",
       "Split Panes",
@@ -197,7 +197,7 @@ export default function WorkPage() {
                     />
                     <div className="relative h-full w-full overflow-hidden rounded-[6px]">
                       <Image
-                        className={`h-full w-full ${"contain" in item && item.contain ? "object-contain" : "object-cover object-top"} transition-transform duration-500 group-hover:scale-105 ${"imageDark" in item && item.imageDark ? "block dark:hidden" : ""} ${"imagePadding" in item && item.imagePadding ? item.imagePadding : ""}`}
+                        className={`h-full w-full ${"contain" in item && item.contain ? "object-contain" : "object-cover object-top"} transition-transform duration-500 group-hover:scale-105 ${"imageDark" in item && item.imageDark ? "block dark:hidden" : ""} ${(item as { imagePadding?: string }).imagePadding ?? ""}`}
                         src={item.image}
                         alt={item.imageAlt}
                         width={400}
@@ -206,7 +206,7 @@ export default function WorkPage() {
                       />
                       {"imageDark" in item && item.imageDark && (
                         <Image
-                          className={`h-full w-full ${"contain" in item && item.contain ? "object-contain" : "object-cover object-top"} transition-transform duration-500 group-hover:scale-105 hidden dark:block ${"imagePadding" in item && item.imagePadding ? item.imagePadding : ""}`}
+                          className={`h-full w-full ${"contain" in item && item.contain ? "object-contain" : "object-cover object-top"} transition-transform duration-500 group-hover:scale-105 hidden dark:block ${(item as { imagePadding?: string }).imagePadding ?? ""}`}
                           src={item.imageDark as string}
                           alt={item.imageAlt}
                           width={400}

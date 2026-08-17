@@ -12,10 +12,12 @@ interface WordProps {
   children: string;
   progress: any;
   range: [number, number];
+  prefersReducedMotion?: boolean | null;
 }
 
-const Word: React.FC<WordProps> = ({ children, progress, range }) => {
-  const opacity = useTransform(progress, range, [0, 1]);
+const Word: React.FC<WordProps> = ({ children, progress, range, prefersReducedMotion }) => {
+  const scrollOpacity = useTransform(progress, range, [0, 1]);
+  const opacity = prefersReducedMotion ? 1 : scrollOpacity;
 
   return (
     <span className="magic-text-word">
@@ -47,12 +49,13 @@ export const MagicText: React.FC<MagicTextProps> = ({ text }) => {
         const start = i / words.length;
         const end = start + 1 / words.length;
 
-        return prefersReducedMotion ? (
-          <span key={i} className="magic-text-word">
-            {word}
-          </span>
-        ) : (
-          <Word key={i} progress={scrollYProgress} range={[start, end]}>
+        return (
+          <Word
+            key={i}
+            progress={scrollYProgress}
+            range={[start, end]}
+            prefersReducedMotion={prefersReducedMotion}
+          >
             {word}
           </Word>
         );

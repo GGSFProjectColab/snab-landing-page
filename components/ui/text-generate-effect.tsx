@@ -50,10 +50,6 @@ function renderAnimatedNodes(
     return null;
   }
 
-  if (options.prefersReducedMotion) {
-    return node;
-  }
-
   if (typeof node === "string" || typeof node === "number") {
     const text = String(node);
     const parts = text.split(/(\s+)/);
@@ -83,10 +79,14 @@ function renderAnimatedNodes(
                   y: 4,
                 }
           }
-          transition={{
-            ...options.transition,
-            delay: idx * options.staggerDuration,
-          }}
+          transition={
+            options.prefersReducedMotion
+              ? { duration: 0, delay: 0 }
+              : {
+                  ...options.transition,
+                  delay: idx * options.staggerDuration,
+                }
+          }
           className={cn("inline-block will-change-[transform,opacity]", options.wordClassName)}
         >
           {part}
@@ -116,10 +116,14 @@ function renderAnimatedNodes(
                 opacity: 0,
               }
         }
-        transition={{
-          ...options.transition,
-          delay: idx * options.staggerDuration,
-        }}
+        transition={
+          options.prefersReducedMotion
+            ? { duration: 0, delay: 0 }
+            : {
+                ...options.transition,
+                delay: idx * options.staggerDuration,
+              }
+        }
         className="inline will-change-[opacity]"
       >
         {node}
@@ -149,7 +153,9 @@ export function TextGenerateEffect({
   transition = { duration: 0.45, ease: "easeOut" },
   filter = false,
 }: TextGenerateEffectProps) {
-  const MotionTag = motion[as as keyof typeof motion] as typeof motion.div;
+  const MotionTag = (typeof as === "string" && as in motion
+    ? motion[as as keyof typeof motion]
+    : motion.div) as typeof motion.div;
   const prefersReducedMotion = useReducedMotion() ?? false;
 
   const content = useMemo(() => {
@@ -169,15 +175,6 @@ export function TextGenerateEffect({
       prefersReducedMotion,
     });
   }, [children, wordClassName, trigger, staggerDuration, transition, filter, prefersReducedMotion]);
-
-  if (prefersReducedMotion) {
-    const Tag = as as ElementType;
-    return (
-      <Tag id={id} className={cn(as === "p" ? "block" : "inline-block", className)}>
-        {children}
-      </Tag>
-    );
-  }
 
   return (
     <MotionTag

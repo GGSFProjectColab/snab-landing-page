@@ -18,9 +18,10 @@ const footerColumns: FooterColumn[] = [
   {
     title: "Product",
     links: [
-      { label: "Interview Expert", href: "https://interviewexpert.in", external: true },
+      { label: "Interview Expert", href: "https://interviewxpert.in", external: true },
       { label: "Notary Expert", href: "https://notaryexpert.in", external: true },
       { label: "NyayaAI", href: "https://nyayai.interviewxpert.in/", external: true },
+      { label: "Termy", href: "https://termyy.vercel.app/", external: true },
     ],
   },
   {

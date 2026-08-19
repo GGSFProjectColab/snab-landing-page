@@ -5,43 +5,65 @@ import { ContainerWrapper } from "@/components/site/container";
 export function ContactSkeleton() {
   return (
     <main className="flex-1" aria-busy="true" aria-label="Loading contact">
-      {/* Hero Skeleton */}
+      {/* Section 1: Image + Contact */}
       <section>
         <ContainerWrapper>
-          <div className="relative min-h-[340px] overflow-hidden sm:min-h-[380px]">
-            <Skeleton className="absolute inset-0 h-full w-full" />
-            <div className="relative z-10 flex h-full flex-col justify-end p-6 sm:p-8 md:p-12">
-              <Skeleton className="h-3 w-20 rounded-sm mb-3" />
-              <Skeleton className="h-10 w-48 sm:h-12 sm:w-56 rounded-sm" />
-              <div className="mt-4 flex items-center gap-1.5">
-                <Skeleton className="h-3 w-10 rounded-sm" />
-                <Skeleton className="h-3 w-2 rounded-sm" />
-                <Skeleton className="h-3 w-14 rounded-sm" />
-              </div>
+          <div className="grid grid-cols-1 lg:min-h-[calc(100svh-4rem)] lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+            {/* Image half Skeleton */}
+            <div className="relative min-h-[260px] overflow-hidden border-b border-dotted border-edge sm:min-h-[320px] lg:min-h-full lg:border-b-0">
+              <Skeleton className="absolute inset-0 h-full w-full" />
             </div>
-          </div>
-        </ContainerWrapper>
-      </section>
 
-      
-
-      {/* Content Skeleton */}
-      <section>
-        <ContainerWrapper>
-          <div className="grid grid-cols-1 gap-10 p-4 sm:p-6 md:grid-cols-2 md:gap-12 md:p-8">
-            {/* Left Column Skeleton */}
-            <div className="flex flex-col gap-8">
+            {/* Content half Skeleton */}
+            <div className="flex flex-col justify-center gap-10 p-6 sm:p-10 lg:p-12 xl:p-16">
               <div>
-                <Skeleton className="h-3 w-24 rounded-sm mb-2" />
-                <Skeleton className="h-8 w-64 sm:h-10 sm:w-80 rounded-sm" />
-                <div className="mt-3">
+                <Skeleton className="h-12 w-44 sm:h-14 sm:w-52 rounded-sm" />
+                <div className="mt-4 max-w-xl">
                   <Skeleton className="h-4 w-full rounded-sm mb-2" />
                   <Skeleton className="h-4 w-full rounded-sm mb-2" />
                   <Skeleton className="h-4 w-3/4 rounded-sm" />
                 </div>
               </div>
 
-              {/* Contact Details Skeleton */}
+              {/* Form Skeleton */}
+              <div>
+                <Skeleton className="h-3 w-28 rounded-sm mb-2" />
+                <Skeleton className="h-6 w-32 rounded-sm" />
+                <div className="mt-6 flex flex-col gap-6">
+                  <div className="flex flex-col gap-1.5">
+                    <Skeleton className="h-3 w-16 rounded-sm" />
+                    <Skeleton className="h-10 w-full rounded-sm" />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <Skeleton className="h-3 w-12 rounded-sm" />
+                    <Skeleton className="h-10 w-full rounded-sm" />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <Skeleton className="h-3 w-12 rounded-sm" />
+                    <Skeleton className="h-10 w-full rounded-sm" />
+                  </div>
+                  <div className="flex flex-col gap-1.5">
+                    <Skeleton className="h-3 w-16 rounded-sm" />
+                    <Skeleton className="h-24 w-full rounded-sm" />
+                  </div>
+                  <Skeleton className="h-10 w-36 rounded-sm" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </ContainerWrapper>
+      </section>
+
+      {/* Section 2: Map + Details */}
+      <section className="full-bleed-border-t">
+        <ContainerWrapper>
+          <div className="grid grid-cols-1 pb-10 pt-10 sm:pb-14 sm:pt-14 lg:grid-cols-2">
+            {/* Details half Skeleton */}
+            <div className="flex flex-col justify-center gap-8 p-6 sm:p-10 lg:p-12 xl:p-16">
+              <div>
+                <Skeleton className="h-3 w-16 rounded-sm mb-2" />
+                <Skeleton className="h-8 w-56 rounded-sm" />
+              </div>
               <div className="flex flex-col divide-y divide-dotted divide-edge">
                 {Array.from({ length: 3 }, (_, i) => (
                   <div className="flex items-start gap-3 py-4 first:pt-0 last:pb-0" key={i}>
@@ -66,54 +88,19 @@ export function ContactSkeleton() {
               </div>
             </div>
 
-            {/* Right Column Skeleton (Form) */}
-            <div className="border border-dotted border-edge bg-muted/20 p-5 sm:p-6">
-              <div className="mb-5">
-                <Skeleton className="h-3 w-28 rounded-sm mb-2" />
-                <Skeleton className="h-6 w-32 rounded-sm" />
-              </div>
-              <div className="flex flex-col gap-5">
-                <div className="flex flex-col gap-1.5">
-                  <Skeleton className="h-3 w-12 rounded-sm" />
-                  <Skeleton className="h-10 w-full rounded-sm" />
+            {/* Map half Skeleton */}
+            <div className="relative min-h-[260px] border-b border-dotted border-edge lg:min-h-[360px] lg:border-b-0">
+              <div className="absolute inset-6 lg:inset-8">
+                <div className="contact-map-skeleton">
+                  <Skeleton className="contact-map-skeleton-grid" />
+                  <Skeleton className="contact-map-skeleton-pin" />
+                  <span>Map loading</span>
                 </div>
-                <div className="flex flex-col gap-1.5">
-                  <Skeleton className="h-3 w-12 rounded-sm" />
-                  <Skeleton className="h-10 w-full rounded-sm" />
-                </div>
-                <div className="flex flex-col gap-1.5">
-                  <Skeleton className="h-3 w-16 rounded-sm" />
-                  <Skeleton className="h-24 w-full rounded-sm" />
-                </div>
-                <Skeleton className="h-10 w-32 rounded-sm" />
               </div>
             </div>
           </div>
         </ContainerWrapper>
       </section>
-
-      
-
-      {/* Map Skeleton */}
-      <section>
-        <ContainerWrapper>
-          <div className="p-4 sm:p-6 md:p-8">
-            <div className="mb-4">
-              <Skeleton className="h-3 w-16 rounded-sm mb-1" />
-              <Skeleton className="h-6 w-48 rounded-sm" />
-            </div>
-            <div className="relative h-[300px] overflow-hidden border border-dotted border-edge sm:h-[350px]">
-              <div className="contact-map-skeleton">
-                <Skeleton className="contact-map-skeleton-grid" />
-                <Skeleton className="contact-map-skeleton-pin" />
-                <span>Map loading</span>
-              </div>
-            </div>
-          </div>
-        </ContainerWrapper>
-      </section>
-
-      
 
       <span className="sr-only">Loading contact content…</span>
     </main>

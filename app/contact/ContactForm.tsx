@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Send, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -87,13 +87,13 @@ export function ContactForm() {
   }
 
   return (
-    <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+    <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-1.5">
         <label
           className="font-mono text-caption uppercase tracking-widest text-muted-foreground"
           htmlFor="name"
         >
-          Name
+          Full Name
         </label>
         <input
           className="border-0 border-b border-edge bg-transparent text-button text-foreground py-2 outline-none transition-colors placeholder:text-muted-foreground/50 focus:border-foreground"
@@ -102,7 +102,7 @@ export function ContactForm() {
           name="name"
           value={formData.name}
           onChange={handleChange}
-          placeholder="Your name"
+          placeholder="Your full name"
           required
           disabled={isSubmitting}
         />
@@ -180,8 +180,8 @@ export function ContactForm() {
           </>
         ) : (
           <>
-            <span>Send Message</span>
-            <Send size={14} aria-hidden="true" />
+            <span>Submit Request</span>
+            <ArrowRight size={14} aria-hidden="true" />
           </>
         )}
       </button>

@@ -43,8 +43,8 @@ const contactDetails = [
         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
       </svg>
     ),
-    lines: ["Book a discovery call"],
-    link: { label: "Schedule a call", href: "mailto:hello@snab.co.in?subject=Book%20a%20project%20call" },
+    lines: ["+91 91759 17293", "+91 95455 56045"],
+    link: { label: "Schedule a call", href: "tel:+919175917293" },
   },
 ];
 
@@ -90,75 +90,83 @@ const socialLinks = [
 export default function ContactPage() {
   return (
     <main className="flex-1">
-      {/* Hero */}
-      <section aria-labelledby="contact-hero-title">
+      {/* Section 1: Image + Contact */}
+      <section aria-labelledby="contact-title">
         <ContainerWrapper>
-          <div className="relative min-h-[340px] overflow-hidden sm:min-h-[380px]">
-            <Image
-              className="absolute inset-0 h-full w-full object-cover object-center"
-              src="/ascii-magic-17.png"
-              alt=""
-              fill
-              priority
-              sizes="100vw"
-              aria-hidden="true"
-            />
-            <div
-              className="absolute inset-0 bg-black/20"
-              aria-hidden="true"
-            />
-
-            <div className="relative z-10 flex h-full flex-col justify-end p-6 sm:p-8 md:p-12">
-              <p className="font-mono text-caption uppercase tracking-widest text-white/80 mb-3">
-                / contact /
-              </p>
-              <h1
-                id="contact-hero-title"
-                className="text-display font-normal text-white"
-              >
-                Let&apos;s Talk
-              </h1>
-              <div className="mt-4 flex items-center gap-1.5 text-caption text-white/70">
-                <a
-                  className="transition-colors hover:text-white"
-                  href="/"
-                >
-                  Home
-                </a>
-                <span aria-hidden="true">→</span>
-                <span>Contact</span>
+          <div className="grid grid-cols-1 lg:min-h-[calc(100svh-4rem)] lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+            {/* Image half */}
+            <div className="relative min-h-[260px] overflow-hidden border-b border-dotted border-edge sm:min-h-[320px] lg:min-h-full lg:border-b-0">
+              <Image
+                className="absolute inset-0 h-full w-full object-cover object-center"
+                src="/ascii-magic-17.png"
+                alt=""
+                fill
+                priority
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                aria-hidden="true"
+              />
+              <div
+                className="absolute inset-0 bg-black/20"
+                aria-hidden="true"
+              />
+              <div className="absolute left-6 top-6 sm:left-8 sm:top-8">
+                <p className="font-mono text-caption uppercase tracking-widest text-white/80">
+                  / contact /
+                </p>
               </div>
             </div>
-          </div>
-        </ContainerWrapper>
-      </section>
 
-      
-
-      {/* Content: Form + Details */}
-      <section aria-labelledby="contact-content-title">
-        <ContainerWrapper>
-          <div className="grid grid-cols-1 gap-10 p-4 sm:p-6 md:grid-cols-2 md:gap-12 md:p-8">
-            {/* Left: Heading + Details + Socials */}
-            <div className="flex flex-col gap-8">
+            {/* Content half */}
+            <div className="flex flex-col justify-center gap-10 p-6 sm:p-10 lg:p-12 xl:p-16">
               <div>
-                <p className="font-mono text-caption uppercase tracking-widest text-primary mb-2">
-                  / get in touch /
-                </p>
-                <h2
-                  id="contact-content-title"
-                  className="text-subheading font-normal text-foreground"
+                <h1
+                  id="contact-title"
+                  className="text-display font-normal text-foreground"
                 >
-                  We&apos;d love to hear from you.
-                </h2>
-                <p className="mt-3 text-body leading-relaxed text-muted-foreground">
+                  Contact
+                </h1>
+                <p className="mt-4 max-w-xl text-body leading-relaxed text-muted-foreground">
                   Tell us what you are trying to improve, automate, or launch.
                   We will help shape the right product and a practical path to
                   production.
                 </p>
               </div>
 
-              {/* Contact detail cards */}
+              {/* Form */}
+              <div>
+                <p className="font-mono text-caption uppercase tracking-widest text-primary mb-2">
+                  / send a message /
+                </p>
+                <h2 className="text-title font-normal text-foreground">
+                  Get In Touch
+                </h2>
+                <div className="mt-6">
+                  <ContactForm />
+                </div>
+              </div>
+            </div>
+          </div>
+        </ContainerWrapper>
+      </section>
+
+      {/* Section 2: Map + Address/Phone/Email */}
+      <section aria-labelledby="contact-find-title">
+        <ContainerWrapper>
+          <div className="grid grid-cols-1 pb-10 pt-10 sm:pb-14 sm:pt-14 lg:grid-cols-2">
+            {/* Details half */}
+            <div className="flex flex-col justify-center gap-8 p-6 sm:p-10 lg:p-12 xl:p-16">
+              <div>
+                <p className="font-mono text-caption uppercase tracking-widest text-primary mb-2">
+                  / find us /
+                </p>
+                <h2
+                  id="contact-find-title"
+                  className="text-subheading font-normal text-foreground"
+                >
+                  Nashik, Maharashtra
+                </h2>
+              </div>
+
               <div className="flex flex-col divide-y divide-dotted divide-edge">
                 {contactDetails.map((detail) => (
                   <div
@@ -216,52 +224,19 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* Right: Form card */}
-            <div className="border border-dotted border-edge bg-muted/20 p-5 sm:p-6">
-              <div className="mb-5">
-                <p className="font-mono text-caption uppercase tracking-widest text-primary mb-2">
-                  / send a message /
-                </p>
-                <h2 className="text-title font-normal text-foreground">
-                  Get In Touch
-                </h2>
-              </div>
-              <ContactForm />
-            </div>
-          </div>
-        </ContainerWrapper>
-      </section>
-
-      
-
-      {/* Map */}
-      <section aria-labelledby="contact-map-title">
-        <ContainerWrapper>
-          <div className="p-4 sm:p-6 md:p-8">
-            <div className="mb-4">
-              <p className="font-mono text-caption uppercase tracking-widest text-primary mb-1">
-                / find us /
-              </p>
-              <h2
-                id="contact-map-title"
-                className="text-title font-normal text-foreground"
-              >
-                Nashik, Maharashtra
-              </h2>
-            </div>
-
-            <div className="relative h-[300px] overflow-hidden border border-dotted border-edge sm:h-[350px]">
+            {/* Map half */}
+            <div className="relative min-h-[260px] border-b border-dotted border-edge lg:min-h-[360px] lg:border-b-0">
               <div className="contact-map-label">
                 <span aria-hidden="true" />
                 Nashik / MH / IN
               </div>
-              <LazyContactMap />
+              <div className="absolute inset-6 lg:inset-8">
+                <LazyContactMap />
+              </div>
             </div>
           </div>
         </ContainerWrapper>
       </section>
-
-      
 
       <Footer />
     </main>

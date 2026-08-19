@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { ADMIN_COOKIE, isAdminCookie } from "@/lib/admin-auth";
 import { getInsforge } from "@/lib/insforge";
 
@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
   if (body.action === "save_job") {
     const { data, error } = await getInsforge().database.rpc("career_admin_save_job", { p_secret: secret, p_job: body.job });
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });
-    revalidateTag("career-jobs", "max");
+    revalidatePath("/careers");
     return NextResponse.json({ job: data });
   }
 
@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
       p_job_id: body.jobId,
     });
     if (error) return NextResponse.json({ error: error.message }, { status: 400 });
-    revalidateTag("career-jobs", "max");
+    revalidatePath("/careers");
     return NextResponse.json({ job: data });
   }
 

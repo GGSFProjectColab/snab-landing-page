@@ -1,4 +1,3 @@
-import { unstable_cache } from "next/cache";
 import { getInsforge } from "./insforge";
 
 export type BlogStatus = "draft" | "published" | "archived";
@@ -23,7 +22,7 @@ export type BlogPost = {
   view_count: number;
 };
 
-async function fetchPublishedBlogPosts(): Promise<BlogPost[]> {
+export async function getBlogPosts(): Promise<BlogPost[]> {
   try {
     const { data, error } = await getInsforge().database
       .from("blogs")
@@ -33,7 +32,7 @@ async function fetchPublishedBlogPosts(): Promise<BlogPost[]> {
       .order("published_at", { ascending: false });
 
     if (error || !data) {
-      console.warn("Could not load blogs from database:", error?.message);
+      console.error("Could not load blogs from database:", error?.message || "No data returned");
       return [];
     }
 
@@ -47,7 +46,7 @@ async function fetchPublishedBlogPosts(): Promise<BlogPost[]> {
   }
 }
 
-async function fetchPublishedBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
   try {
     const { data, error } = await getInsforge().database
       .from("blogs")
@@ -57,6 +56,9 @@ async function fetchPublishedBlogPostBySlug(slug: string): Promise<BlogPost | nu
       .maybeSingle();
 
     if (error || !data) {
+      if (error) {
+        console.error(`Error fetching blog by slug "${slug}" from InsForge:`, error.message);
+      }
       return null;
     }
 
@@ -66,20 +68,10 @@ async function fetchPublishedBlogPostBySlug(slug: string): Promise<BlogPost | nu
       cover_image: blog.cover_image || "/seo/ascii-magic-21.png",
     };
   } catch (err) {
-    console.error("Error fetching blog by slug from InsForge:", err);
+    console.error(`Error fetching blog by slug "${slug}" from InsForge:`, err);
     return null;
   }
 }
-
-export const getBlogPosts = unstable_cache(fetchPublishedBlogPosts, ["published-blog-posts"], {
-  revalidate: 60,
-  tags: ["blog-posts"],
-});
-
-export const getBlogPostBySlug = unstable_cache(fetchPublishedBlogPostBySlug, ["published-blog-post-slug"], {
-  revalidate: 60,
-  tags: ["blog-posts"],
-});
 
 export function calculateReadTime(text: string): string {
   const plainText = text.replace(/<[^>]+>/g, " ").trim();

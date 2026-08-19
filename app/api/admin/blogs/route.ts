@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { ADMIN_COOKIE, isAdminCookie } from "@/lib/admin-auth";
 import { getInsforge } from "@/lib/insforge";
 import { calculateReadTime, slugify, type BlogPost } from "@/lib/blogs";
@@ -103,7 +103,6 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: result.error.message }, { status: 400 });
       }
 
-      revalidateTag("blog-posts", "max");
       revalidatePath("/blogs");
       revalidatePath(`/blogs/${generatedSlug}`);
 
@@ -135,7 +134,6 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: error.message }, { status: 400 });
       }
 
-      revalidateTag("blog-posts", "max");
       revalidatePath("/blogs");
 
       return NextResponse.json({ blog: data });
@@ -156,7 +154,6 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: error.message }, { status: 400 });
       }
 
-      revalidateTag("blog-posts", "max");
       revalidatePath("/blogs");
 
       return NextResponse.json({ success: true, id });

@@ -78,11 +78,9 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  verification: {
-    google:
-      process.env.GOOGLE_SITE_VERIFICATION ??
-      "AjAa6UHU8TWsbU-TPzdNbcgf_fjqkRi1d8qxx5SneDo",
-  },
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
   icons: {
     icon: "/favicon.png",
     shortcut: "/favicon.png",

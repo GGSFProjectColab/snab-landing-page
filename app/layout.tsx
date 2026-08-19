@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Manrope, Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
@@ -108,6 +109,20 @@ export default function RootLayout({
         geist.variable
       )}
     >
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-N716GFYQ2J"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-N716GFYQ2J');
+          `}
+        </Script>
+      </head>
       <body>
         <Providers>
           <SiteHeader />

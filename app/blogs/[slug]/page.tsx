@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, Clock, Calendar, User, Sparkles } from "lucide-react";
 import { ContainerWrapper } from "@/components/site/container";
 import { HeaderTitle } from "@/components/profile/header-title";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { GrainGradientShader } from "@/components/ui/grain-gradient-shader";
 import { getBlogPostBySlug, getBlogPosts, type BlogPost } from "@/lib/blogs";
 import { siteConfig, absoluteUrl } from "@/lib/site";
@@ -157,17 +158,25 @@ export default async function BlogPostPage({ params }: Props) {
 
               {/* Title & Excerpt */}
               <div className="relative z-10 max-w-3xl">
-                <h1
+                <TextGenerateEffect
+                  as="h1"
                   id="blog-post-title"
                   className="text-subheading sm:text-heading font-normal tracking-tight leading-tight text-foreground dark:text-white"
+                  staggerDuration={0.10}
+                  transition={{ duration: 0.55 }}
                 >
                   {post.title}
-                </h1>
+                </TextGenerateEffect>
 
                 {post.excerpt && (
-                  <p className="mt-2 text-body text-muted-foreground dark:text-slate-200 leading-relaxed">
+                  <TextGenerateEffect
+                    as="p"
+                    className="mt-2 text-body text-muted-foreground dark:text-slate-200 leading-relaxed"
+                    staggerDuration={0.045}
+                    transition={{ duration: 0.55 }}
+                  >
                     {post.excerpt}
-                  </p>
+                  </TextGenerateEffect>
                 )}
               </div>
 

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { ContainerWrapper } from "@/components/site/container";
 import { HeaderTitle } from "@/components/profile/header-title";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { createPageMetadata } from "@/lib/site";
 import { getBlogPosts, type BlogPost } from "@/lib/blogs";
 import { BlogCardSkeleton } from "./BlogCardSkeleton";
@@ -27,7 +28,7 @@ function FeaturedCard({ post }: { post: BlogPost }) {
       href={`/blogs/${post.slug}`}
       className="group grid grid-cols-1 gap-5 border border-dotted border-edge p-4 transition-colors hover:border-foreground/30 md:grid-cols-[340px_1fr] md:p-5 bg-muted/5 items-center"
     >
-      <div className="relative w-full h-48 sm:h-56 overflow-hidden bg-muted/15 border border-dotted border-edge flex items-center justify-center p-2">
+      <div className="relative w-full h-48 sm:h-56 overflow-hidden bg-muted/15 flex items-center justify-center p-2">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="w-full h-full object-contain mx-auto transition-transform duration-500 group-hover:scale-102"
@@ -72,7 +73,7 @@ function BlogCard({ post }: { post: BlogPost }) {
       href={`/blogs/${post.slug}`}
       className="group flex flex-col border border-dotted border-edge transition-colors hover:border-foreground/30 bg-muted/5"
     >
-      <div className="relative h-44 w-full overflow-hidden bg-muted/15 border-b border-dotted border-edge flex items-center justify-center p-2">
+      <div className="relative h-44 w-full overflow-hidden bg-muted/15 flex items-center justify-center p-2">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           className="w-full h-full object-contain mx-auto transition-transform duration-500 group-hover:scale-105"
@@ -135,12 +136,17 @@ async function BlogContent() {
         <section aria-labelledby="featured-post-title">
           <ContainerWrapper>
             <div className="p-4 sm:p-6">
-              <h2
-                id="featured-post-title"
-                className="mb-4 text-caption font-medium uppercase tracking-wider text-muted-foreground"
-              >
-                Featured
-              </h2>
+              <div className="mb-4">
+                <TextGenerateEffect
+                  as="h2"
+                  id="featured-post-title"
+                  className="text-caption font-medium uppercase tracking-wider text-muted-foreground"
+                  staggerDuration={0.10}
+                  transition={{ duration: 0.55 }}
+                >
+                  Featured
+                </TextGenerateEffect>
+              </div>
               <FeaturedCard post={featuredPost} />
             </div>
           </ContainerWrapper>

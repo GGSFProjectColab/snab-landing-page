@@ -5,6 +5,7 @@ import { ContainerWrapper } from "@/components/site/container";
 import { Footer } from "../Footer";
 import { LazyContactMap } from "./LazyContactMap";
 import { ContactForm } from "./ContactForm";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Contact Our AI & Software Product Team",
@@ -119,17 +120,25 @@ export default function ContactPage() {
             {/* Content half */}
             <div className="flex flex-col justify-center gap-10 p-6 sm:p-10 lg:p-12 xl:p-16">
               <div>
-                <h1
+                <TextGenerateEffect
+                  as="h1"
                   id="contact-title"
-                  className="text-display font-normal text-foreground"
+                  className="block font-normal text-foreground"
+                  wordClassName="text-display"
+                  staggerDuration={0.10}
+                  transition={{ duration: 0.55, ease: "easeOut" }}
+                  filter
                 >
                   Contact
-                </h1>
-                <p className="mt-4 max-w-xl text-body leading-relaxed text-muted-foreground">
-                  Tell us what you are trying to improve, automate, or launch.
-                  We will help shape the right product and a practical path to
-                  production.
-                </p>
+                </TextGenerateEffect>
+                <TextGenerateEffect
+                  as="p"
+                  className="mt-4 max-w-xl text-body leading-relaxed text-muted-foreground"
+                  staggerDuration={0.045}
+                  transition={{ duration: 0.55, ease: "easeOut" }}
+                >
+                  Tell us what you are trying to improve, automate, or launch. We will help shape the right product and a practical path to production.
+                </TextGenerateEffect>
               </div>
 
               {/* Form */}
@@ -137,9 +146,15 @@ export default function ContactPage() {
                 <p className="font-mono text-caption uppercase tracking-widest text-primary mb-2">
                   / send a message /
                 </p>
-                <h2 className="text-title font-normal text-foreground">
+                <TextGenerateEffect
+                  as="h2"
+                  className="block text-title font-normal text-foreground"
+                  staggerDuration={0.09}
+                  transition={{ duration: 0.55, ease: "easeOut" }}
+                  filter
+                >
                   Get In Touch
-                </h2>
+                </TextGenerateEffect>
                 <div className="mt-6">
                   <ContactForm />
                 </div>
@@ -159,12 +174,16 @@ export default function ContactPage() {
                 <p className="font-mono text-caption uppercase tracking-widest text-primary mb-2">
                   / find us /
                 </p>
-                <h2
+                <TextGenerateEffect
+                  as="h2"
                   id="contact-find-title"
                   className="text-subheading font-normal text-foreground"
+                  staggerDuration={0.09}
+                  transition={{ duration: 0.55, ease: "easeOut" }}
+                  filter
                 >
                   Nashik, Maharashtra
-                </h2>
+                </TextGenerateEffect>
               </div>
 
               <div className="flex flex-col divide-y divide-dotted divide-edge">

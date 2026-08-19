@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 
 export function ContactForm() {
@@ -86,9 +87,16 @@ export function ContactForm() {
     );
   }
 
+  const prefersReducedMotion = useReducedMotion() ?? false;
+
   return (
     <form className="flex flex-col gap-6" onSubmit={handleSubmit}>
-      <div className="flex flex-col gap-1.5">
+      <motion.div
+        className="flex flex-col gap-1.5"
+        initial={{ opacity: 0, y: 4 }}
+        animate={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+        transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.55, delay: 0, ease: "easeOut" }}
+      >
         <label
           className="font-mono text-caption uppercase tracking-widest text-muted-foreground"
           htmlFor="name"
@@ -106,9 +114,14 @@ export function ContactForm() {
           required
           disabled={isSubmitting}
         />
-      </div>
+      </motion.div>
 
-      <div className="flex flex-col gap-1.5">
+      <motion.div
+        className="flex flex-col gap-1.5"
+        initial={{ opacity: 0, y: 4 }}
+        animate={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+        transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.55, delay: 0.08, ease: "easeOut" }}
+      >
         <label
           className="font-mono text-caption uppercase tracking-widest text-muted-foreground"
           htmlFor="email"
@@ -126,9 +139,14 @@ export function ContactForm() {
           required
           disabled={isSubmitting}
         />
-      </div>
+      </motion.div>
 
-      <div className="flex flex-col gap-1.5">
+      <motion.div
+        className="flex flex-col gap-1.5"
+        initial={{ opacity: 0, y: 4 }}
+        animate={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+        transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.55, delay: 0.16, ease: "easeOut" }}
+      >
         <label
           className="font-mono text-caption uppercase tracking-widest text-muted-foreground"
           htmlFor="phone"
@@ -146,9 +164,14 @@ export function ContactForm() {
           required
           disabled={isSubmitting}
         />
-      </div>
+      </motion.div>
 
-      <div className="flex flex-col gap-1.5">
+      <motion.div
+        className="flex flex-col gap-1.5"
+        initial={{ opacity: 0, y: 4 }}
+        animate={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+        transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.55, delay: 0.24, ease: "easeOut" }}
+      >
         <label
           className="font-mono text-caption uppercase tracking-widest text-muted-foreground"
           htmlFor="message"
@@ -166,12 +189,15 @@ export function ContactForm() {
           required
           disabled={isSubmitting}
         />
-      </div>
+      </motion.div>
 
-      <button
+      <motion.button
         type="submit"
         className="inline-flex items-center gap-2 self-start bg-foreground text-background font-mono text-caption uppercase tracking-wider px-5 py-2.5 transition-opacity hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
         disabled={isSubmitting}
+        initial={{ opacity: 0, y: 4 }}
+        animate={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+        transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.55, delay: 0.32, ease: "easeOut" }}
       >
         {isSubmitting ? (
           <>
@@ -184,7 +210,7 @@ export function ContactForm() {
             <ArrowRight size={14} aria-hidden="true" />
           </>
         )}
-      </button>
+      </motion.button>
 
       {errorMessage && (
         <div className="flex items-center gap-2 text-red-500 text-button">

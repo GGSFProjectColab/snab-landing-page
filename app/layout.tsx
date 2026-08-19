@@ -81,7 +81,7 @@ export const metadata: Metadata = {
   verification: {
     google:
       process.env.GOOGLE_SITE_VERIFICATION ??
-      "LzmnfmtQZhfELE05osfB03fkqg3koKBbb1JdX00UtDE",
+      "AjAa6UHU8TWsbU-TPzdNbcgf_fjqkRi1d8qxx5SneDo",
   },
   icons: {
     icon: "/favicon.png",
@@ -113,7 +113,7 @@ export default function RootLayout({
     >
       <head>
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-N716GFYQ2J"
+          src="https://www.googletagmanager.com/gtag/js?id=G-BXK7SL583E"
           strategy="afterInteractive"
         />
         <Script id="gtag-init" strategy="afterInteractive">
@@ -121,7 +121,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-N716GFYQ2J');
+            gtag('config', 'G-BXK7SL583E');
           `}
         </Script>
       </head>

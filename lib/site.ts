@@ -38,7 +38,12 @@ export const siteConfig = {
 } as const;
 
 export function absoluteUrl(path = "/") {
-  return new URL(path, `${siteConfig.url}/`).toString();
+  if (!path) return siteConfig.url;
+  if (path.startsWith("http://") || path.startsWith("https://")) {
+    return path;
+  }
+  const cleanPath = path.startsWith("/") ? path : `/${path}`;
+  return new URL(cleanPath, `${siteConfig.url}/`).toString();
 }
 
 type PageMetadata = {

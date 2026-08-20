@@ -25,41 +25,65 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) {
     return {
-      title: "Blog Not Found | SNAB Innovations",
+      title: "Blog Not Found",
     };
   }
 
-  const ogImage = post.cover_image?.startsWith("http")
-    ? post.cover_image
-    : absoluteUrl(post.cover_image || "/seo/ascii-magic-21.png");
+  const rawImage = post.cover_image || "/seo/ascii-magic-21.png";
+  const ogImage = rawImage.startsWith("http://") || rawImage.startsWith("https://")
+    ? rawImage
+    : absoluteUrl(rawImage);
+
+  const isPng = ogImage.toLowerCase().includes(".png");
+  const isJpg = ogImage.toLowerCase().includes(".jpg") || ogImage.toLowerCase().includes(".jpeg");
+  const isWebp = ogImage.toLowerCase().includes(".webp");
+  const mimeType = isPng ? "image/png" : isWebp ? "image/webp" : isJpg ? "image/jpeg" : "image/png";
+
+  const canonicalUrl = absoluteUrl(`/blogs/${post.slug}`);
+  const description = post.excerpt || "Article by SNAB Innovations on AI and software engineering.";
 
   return {
-    title: `${post.title} | SNAB Innovations`,
-    description: post.excerpt || "Article by SNAB Innovations on AI and software engineering.",
+    title: post.title,
+    description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: post.title,
-      description: post.excerpt,
-      url: absoluteUrl(`/blogs/${post.slug}`),
+      description,
+      url: canonicalUrl,
+      siteName: siteConfig.name,
+      locale: "en_IN",
       type: "article",
       publishedTime: post.published_at || post.created_at,
+      modifiedTime: post.updated_at || post.created_at,
+      section: post.category,
       authors: [post.author_name],
       images: [
         {
           url: ogImage,
+          secureUrl: ogImage.startsWith("https://") ? ogImage : undefined,
           width: 1200,
           height: 630,
+          type: mimeType,
           alt: post.title,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
+      site: "@snabInnovations",
+      creator: "@snabInnovations",
       title: post.title,
-      description: post.excerpt,
-      images: [ogImage],
-    },
-    alternates: {
-      canonical: `/blogs/${post.slug}`,
+      description,
+      images: [
+        {
+          url: ogImage,
+          alt: post.title,
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
   };
 }
@@ -80,6 +104,11 @@ export default async function BlogPostPage({ params }: Props) {
     day: "numeric",
     year: "numeric",
   });
+
+  const rawImage = post.cover_image || "/seo/ascii-magic-21.png";
+  const ogImage = rawImage.startsWith("http://") || rawImage.startsWith("https://")
+    ? rawImage
+    : absoluteUrl(rawImage);
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -105,9 +134,7 @@ export default async function BlogPostPage({ params }: Props) {
       "@type": "WebPage",
       "@id": absoluteUrl(`/blogs/${post.slug}`),
     },
-    image: post.cover_image?.startsWith("http")
-      ? post.cover_image
-      : absoluteUrl(post.cover_image || "/seo/ascii-magic-21.png"),
+    image: ogImage,
   };
 
   return (

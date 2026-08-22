@@ -197,18 +197,18 @@ export function PageCurtainStage({
         ref={containerRef}
         className={cn(
           "relative w-full min-h-[560px] md:min-h-[640px] overflow-hidden rounded-2xl md:rounded-3xl",
-          "bg-[#fdfbf7] dark:bg-[#0c0b08] text-neutral-900 dark:text-neutral-100",
+          "bg-[#F7F7F4] dark:bg-[#14120B] text-neutral-900 dark:text-neutral-100",
           "border border-black/[0.08] dark:border-white/[0.12] shadow-2xl transition-colors duration-300",
           className
         )}
       >
-        {/* Ambient atmospheric background gradient glow matching the video */}
+        {/* Ambient atmospheric background gradient glow matching the website themes */}
         <div
           className="pointer-events-none absolute inset-0 transition-opacity duration-700"
           aria-hidden="true"
         >
           {/* Light mode gradient */}
-          <div className="absolute inset-0 block dark:hidden bg-[radial-gradient(ellipse_80%_80%_at_90%_40%,rgba(253,224,71,0.45),rgba(251,146,60,0.22)_45%,transparent_75%)]" />
+          <div className="absolute inset-0 block dark:hidden bg-[radial-gradient(ellipse_80%_80%_at_90%_40%,rgba(253,224,71,0.35),rgba(251,146,60,0.18)_45%,transparent_75%)]" />
           {/* Dark mode gradient */}
           <div className="absolute inset-0 hidden dark:block bg-[radial-gradient(ellipse_80%_80%_at_90%_40%,rgba(245,158,11,0.22),rgba(217,119,6,0.1)_45%,transparent_75%)]" />
           {/* Subtle noise grain for luxury texture */}
@@ -224,7 +224,7 @@ export function PageCurtainStage({
           )}
         </div>
 
-        {/* Animated Slanted Page Curtain Overlay */}
+        {/* Animated Slanted Page Curtain Overlay - Theme Adaptive */}
         <div
           ref={curtainRef}
           className="absolute inset-y-0 -left-[30%] -right-[30%] z-50 pointer-events-none invisible"
@@ -235,15 +235,15 @@ export function PageCurtainStage({
           }}
           aria-hidden="true"
         >
-          <div className="relative w-full h-full bg-[#0c0a09] dark:bg-[#000000] border-x border-white/10 shadow-[0_0_120px_rgba(0,0,0,0.95)] flex items-center justify-center overflow-hidden">
+          <div className="relative w-full h-full bg-[#F7F7F4] dark:bg-[#14120B] border-x border-black/15 dark:border-white/10 shadow-[0_0_120px_rgba(0,0,0,0.18)] dark:shadow-[0_0_120px_rgba(0,0,0,0.95)] flex items-center justify-center overflow-hidden transition-colors duration-300">
             {/* Ambient inner curtain sheen */}
-            <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] via-transparent to-black/50" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/[0.03] dark:from-white/[0.04] via-transparent to-black/[0.05] dark:to-black/60" />
 
             {/* Unskewed Centered Title */}
             <div
               ref={curtainTitleRef}
               style={{ transform: "skewX(7.5deg)" }}
-              className="relative z-10 font-instrument-serif text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[11.5rem] font-normal text-white tracking-[-0.03em] leading-none select-none pointer-events-none drop-shadow-2xl text-center px-4"
+              className="relative z-10 font-instrument-serif text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[11.5rem] font-normal text-[#14120B] dark:text-white tracking-[-0.03em] leading-none select-none pointer-events-none drop-shadow-xl dark:drop-shadow-2xl text-center px-4"
             >
               {curtainTitle}
             </div>

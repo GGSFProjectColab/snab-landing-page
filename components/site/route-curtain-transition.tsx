@@ -225,7 +225,7 @@ export function RouteCurtainTransition() {
       className="fixed inset-0 z-[9990] pointer-events-none overflow-hidden invisible"
       aria-hidden="true"
     >
-      {/* Animated Slanted Curtain */}
+      {/* Animated Slanted Curtain - Follows website theme palette (#F7F7F4 light, #14120B dark) */}
       <div
         ref={curtainRef}
         className="absolute inset-y-0 -left-[30vw] -right-[30vw] z-50 pointer-events-none"
@@ -235,15 +235,15 @@ export function RouteCurtainTransition() {
           willChange: "transform",
         }}
       >
-        <div className="relative w-full h-full bg-[#090807] dark:bg-[#000000] border-x border-white/10 shadow-[0_0_120px_rgba(0,0,0,0.95)] flex items-center justify-center overflow-hidden">
+        <div className="relative w-full h-full bg-[#F7F7F4] dark:bg-[#14120B] border-x border-black/15 dark:border-white/10 shadow-[0_0_120px_rgba(0,0,0,0.18)] dark:shadow-[0_0_120px_rgba(0,0,0,0.95)] flex items-center justify-center overflow-hidden transition-colors duration-300">
           {/* Ambient inner curtain gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] via-transparent to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/[0.03] dark:from-white/[0.04] via-transparent to-black/[0.05] dark:to-black/60" />
 
-          {/* Unskewed Centered Large Title */}
+          {/* Unskewed Centered Large Title with theme-adaptive typography */}
           <div
             ref={titleRef}
             style={{ transform: "skewX(7.5deg)" }}
-            className="relative z-10 font-instrument-serif text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] font-normal text-white tracking-[-0.03em] leading-none select-none pointer-events-none drop-shadow-2xl text-center px-6 max-w-[90vw] truncate"
+            className="relative z-10 font-instrument-serif text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] font-normal text-[#14120B] dark:text-white tracking-[-0.03em] leading-none select-none pointer-events-none drop-shadow-xl dark:drop-shadow-2xl text-center px-6 max-w-[90vw] truncate"
           >
             {curtainTitle}
           </div>

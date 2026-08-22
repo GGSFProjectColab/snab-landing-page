@@ -16,6 +16,7 @@ import {
   BookOpen,
   Mail,
   Info,
+  Layers,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
@@ -84,6 +85,8 @@ function getIcon(name?: string) {
       return BookOpen;
     case "mail":
       return Mail;
+    case "layers":
+      return Layers;
     default:
       return Info;
   }

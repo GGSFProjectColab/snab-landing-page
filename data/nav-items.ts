@@ -3,11 +3,23 @@ export type NavItem = {
   href: string;
   shiny?: boolean;
   description?: string;
-  iconName?: "briefcase" | "users" | "book-open" | "mail" | "info";
+  iconName?:
+    | "briefcase"
+    | "users"
+    | "book-open"
+    | "mail"
+    | "info"
+    | "layers";
 };
 
 export const NAV_ITEMS: NavItem[] = [
   { label: "About", href: "/about" },
+  {
+    label: "Services",
+    href: "/services",
+    description: "What we build, deploy & support",
+    iconName: "layers",
+  },
   {
     label: "Work",
     href: "/work",
@@ -35,6 +47,12 @@ export const NAV_ITEMS: NavItem[] = [
 ];
 
 export const COMPANY_DROPDOWN_LINKS: NavItem[] = [
+  {
+    label: "Services",
+    href: "/services",
+    description: "What we build, deploy & support",
+    iconName: "layers",
+  },
   {
     label: "Work",
     href: "/work",

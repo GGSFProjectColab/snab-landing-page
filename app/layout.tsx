@@ -12,6 +12,7 @@ import { Providers } from "@/components/site/providers";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteGradualBlur } from "@/components/site/site-gradual-blur";
 import { AppPreloader } from "@/components/site/app-preloader";
+import { RouteCurtainTransition } from "@/components/site/route-curtain-transition";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -130,6 +131,7 @@ export default function RootLayout({
           {children}
           <SiteGradualBlur />
           <AppPreloader />
+          <RouteCurtainTransition />
         </Providers>
       </body>
     </html>

@@ -191,9 +191,6 @@ export function MarqueeDemo() {
     <section aria-label="Backed by">
       <ContainerWrapper>
         <div className="relative overflow-hidden py-8 sm:py-10">
-          {/* Edge fade masks */}
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-16 sm:w-28 bg-gradient-to-r from-background to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-16 sm:w-28 bg-gradient-to-l from-background to-transparent" />
 
           {/* Centered Backed by label matching project typography */}
           <div className="flex justify-center text-center px-4 sm:px-6 md:px-10 mb-6 sm:mb-8">

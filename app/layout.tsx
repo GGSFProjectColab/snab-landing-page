@@ -11,8 +11,8 @@ import { siteConfig, absoluteUrl } from "@/lib/site";
 import { Providers } from "@/components/site/providers";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteGradualBlur } from "@/components/site/site-gradual-blur";
-import { AppPreloader } from "@/components/site/app-preloader";
 import { RouteCurtainTransition } from "@/components/site/route-curtain-transition";
+import { FpsCounter } from "@/components/site/fps-counter";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -108,7 +108,8 @@ export default function RootLayout({
         displayFont.variable,
         geistMono.variable,
         "font-sans",
-        geist.variable
+        geist.variable,
+        "light"
       )}
     >
       <head>
@@ -130,8 +131,8 @@ export default function RootLayout({
           <SiteHeader />
           {children}
           <SiteGradualBlur />
-          <AppPreloader />
           <RouteCurtainTransition />
+          <FpsCounter />
         </Providers>
       </body>
     </html>

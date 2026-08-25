@@ -194,17 +194,17 @@ export function MarqueeDemo() {
 
           {/* Centered Backed by label matching project typography */}
           <div className="flex justify-center text-center px-4 sm:px-6 md:px-10 mb-6 sm:mb-8">
-            <p className="font-mono text-caption uppercase tracking-[0.25em] text-muted-foreground">
+            <p className="font-mono text-caption uppercase tracking-[0.2em] antialiased text-muted-foreground [text-rendering:optimizeLegibility] [font-variant-ligatures:none]">
               Backed by
             </p>
           </div>
 
           {/* Large Logo & Brand Marquee */}
-          <Marquee pauseOnHover speed={32} className="sm:mt-0 mt-0">
+          <Marquee pauseOnHover speed={28} className="sm:mt-0 mt-0">
             {sponsors.map((sponsor) => (
               <div
                 key={sponsor.name}
-                className="mx-6 sm:mx-10 md:mx-12 flex items-center gap-3.5 sm:gap-4 shrink-0 opacity-85 hover:opacity-100 transition-opacity duration-200 cursor-default select-none"
+                className="mx-6 sm:mx-10 md:mx-12 flex items-center gap-3.5 sm:gap-4 shrink-0 opacity-85 hover:opacity-100 transition-opacity duration-150 cursor-default select-none will-change-transform [backface-visibility:hidden]"
               >
                 {sponsor.icon}
                 <span className="font-sans text-title font-normal tracking-tight text-foreground whitespace-nowrap">

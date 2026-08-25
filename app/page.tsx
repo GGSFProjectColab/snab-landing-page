@@ -6,7 +6,6 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { ContainerWrapper } from "@/components/site/container";
 import { HeaderTitle } from "@/components/profile/header-title";
-import { GrainGradientShader } from "@/components/ui/grain-gradient-shader";
 import Svg1 from "@/components/pixel-perfect/svg-1";
 import Svg9 from "@/components/pixel-perfect/svg-9";
 import { DitheredLogoVisual } from "@/components/ui/dithered-logo-visual";
@@ -271,7 +270,7 @@ export default function Home() {
         {/* Hero Section */}
         <section id="home" aria-labelledby="hero-title">
           <ContainerWrapper>
-            <div className="relative min-h-[580px] overflow-hidden bg-muted/30 lg:min-h-[calc(100dvh-4rem)] border-b border-dotted border-edge">
+            <div className="relative min-h-[580px] overflow-hidden lg:min-h-[calc(100dvh-4rem)] border-b border-dotted border-edge bg-cover bg-center bg-no-repeat bg-[url('https://res.cloudinary.com/dvzxfbcsd/image/upload/v1787656935/jmvt7wh7eew66m2z1loj.png')] dark:bg-[url('https://res.cloudinary.com/dvzxfbcsd/image/upload/v1787656054/glfm0fbkq0rutv73fjyv.png')]">
               <Hero20 />
             </div>
           </ContainerWrapper>
@@ -283,8 +282,8 @@ export default function Home() {
         {/* Scroll-Driven Text */}
         <section aria-label="What we build">
           <ContainerWrapper>
-            <div className="border-b border-dotted border-edge py-16 sm:py-20 md:py-28 px-4 sm:px-6 md:px-10">
-              <MagicText text="We believe technology should feel less like a tool and more like a dependable teammate. Every system we engineer begins with one question: how do we make someone's work a little simpler, a little sharper, a little more human? We don't just write code — we build trust, one considered decision at a time. From workflow orchestration and intelligent agents to cloud platforms and mobile products, we deliver systems that solve real problems for real people." />
+            <div className="border-b border-dotted border-edge py-12 sm:py-16 md:py-20 px-4 sm:px-6 md:px-10">
+              <MagicText text="We believe technology should feel like a dependable teammate. Every system we build starts with a simple question. How can we make work simpler, sharper and more human. We craft intelligent platforms that solve real problems for real people with care in every decision." />
             </div>
           </ContainerWrapper>
         </section>
@@ -636,9 +635,7 @@ export default function Home() {
         {/* Contact */}
         <section aria-labelledby="contact-title">
           <ContainerWrapper>
-            <div className="relative min-h-[240px] overflow-hidden bg-muted/30 sm:min-h-[280px]">
-              <GrainGradientShader />
-              <div className="absolute inset-0 bg-white/20 dark:bg-black/50" aria-hidden="true" />
+            <div className="relative min-h-[240px] overflow-hidden sm:min-h-[280px] bg-cover bg-center bg-no-repeat bg-[url('https://res.cloudinary.com/dvzxfbcsd/image/upload/v1787656935/jmvt7wh7eew66m2z1loj.png')] dark:bg-[url('https://res.cloudinary.com/dvzxfbcsd/image/upload/v1787656054/glfm0fbkq0rutv73fjyv.png')]">
               <div className="relative z-10 flex h-full flex-col items-start justify-center gap-4 py-8 px-5 sm:justify-end sm:py-10 sm:px-6 md:px-12">
                 <div>
                   <TextGenerateEffect

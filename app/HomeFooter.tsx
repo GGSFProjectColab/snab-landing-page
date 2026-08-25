@@ -185,6 +185,7 @@ export function HomeFooter() {
                 dispersionStrength={22}
                 returnSpeed={0.08}
                 topOffset={4}
+                interactive={false}
                 className="w-full h-[60px] sm:h-[85px] md:h-[115px] lg:h-[135px] p-0 m-0 pb-0"
               />
             </a>

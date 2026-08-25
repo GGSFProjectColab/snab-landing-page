@@ -153,7 +153,7 @@ export function RouteCurtainTransition() {
         duration: 0.55,
         ease: "power3.inOut",
         onComplete: () => {
-          // Screen 100% occluded: trigger router push and scroll to top
+          // Screen 100% occluded: trigger router push and reset scroll
           router.push(targetHref);
           window.scrollTo({ top: 0, left: 0, behavior: "instant" });
 

@@ -20,11 +20,13 @@ const Word: React.FC<WordProps> = ({ children, progress, range, prefersReducedMo
   const opacity = prefersReducedMotion ? 1 : scrollOpacity;
 
   return (
-    <span className="magic-text-word">
+    <span className="magic-text-word [contain:paint] [content-visibility:auto]">
       <span className="magic-text-ghost" aria-hidden="true">
         {children}
       </span>
-      <motion.span style={{ opacity }}>{children}</motion.span>
+      <motion.span style={{ opacity, willChange: "opacity" } as any} className="will-change-[opacity] [backface-visibility:hidden] [transform:translateZ(0)]">
+        {children}
+      </motion.span>
     </span>
   );
 };

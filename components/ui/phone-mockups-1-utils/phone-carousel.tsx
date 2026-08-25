@@ -1,15 +1,12 @@
 "use client";
 
 import React from "react";
-import dynamic from "next/dynamic";
 import { useTheme } from "next-themes";
 import { Wifi, Battery } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const GrainGradient = dynamic(
-  () => import("@paper-design/shaders-react").then((m) => m.GrainGradient),
-  { ssr: false }
-);
+const HERO_LIGHT = "https://res.cloudinary.com/dvzxfbcsd/image/upload/v1787656935/jmvt7wh7eew66m2z1loj.png";
+const HERO_DARK = "https://res.cloudinary.com/dvzxfbcsd/image/upload/v1787656054/glfm0fbkq0rutv73fjyv.png";
 
 export interface PhoneCarouselProps {
   className?: string;
@@ -39,38 +36,15 @@ export function PhoneCarousel({
               <Battery className="h-3 w-3 sm:h-3.5 sm:w-3.5 md:h-3.5 md:w-3.5" />
             </div>
           </div>
-          <div className="absolute inset-0">
-            {isDark ? (
-              <GrainGradient
-                width="100%"
-                height="100%"
-                colors={["#22c55e", "#f97316", "#eab308", "#06b6d4"]}
-                colorBack="#000000"
-                softness={0.79}
-                intensity={0.51}
-                noise={0.25}
-                shape="corners"
-                speed={1}
-                fit="cover"
-                minPixelRatio={1}
-                maxPixelCount={1000000}
-              />
-            ) : (
-              <GrainGradient
-                width="100%"
-                height="100%"
-                colors={["#86efac", "#fdba74", "#fde68a", "#a5f3fc"]}
-                colorBack="#F7F7F4"
-                softness={0.85}
-                intensity={0.4}
-                noise={0.15}
-                shape="corners"
-                speed={1}
-                fit="cover"
-                minPixelRatio={1}
-                maxPixelCount={1000000}
-              />
-            )}
+          <div className="absolute inset-0 overflow-hidden bg-black">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={isDark ? HERO_DARK : HERO_LIGHT}
+              alt=""
+              aria-hidden="true"
+              className="h-full w-full object-cover object-center"
+              draggable={false}
+            />
           </div>
           <div className="absolute bottom-1 md:bottom-1.5 left-1/2 z-30 h-0.5 sm:h-1 md:h-1.5 w-12 sm:w-16 md:w-20 lg:w-24 -translate-x-1/2 rounded-full bg-white/50 backdrop-blur-sm" />
         </div>

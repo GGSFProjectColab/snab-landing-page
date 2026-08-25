@@ -18,6 +18,7 @@ export interface CursorDrivenParticleTypographyProps {
   color?: string;
   opacity?: number;
   topOffset?: number;
+  interactive?: boolean;
 }
 
 class Particle {
@@ -153,6 +154,7 @@ export function CursorDrivenParticleTypography({
   color,
   opacity = 0.4,
   topOffset = 4,
+  interactive = true,
 }: CursorDrivenParticleTypographyProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -241,7 +243,7 @@ export function CursorDrivenParticleTypography({
                 y / dpr,
                 particleSize,
                 textColor,
-                dispersionStrength,
+                interactive ? dispersionStrength : 0,
                 returnSpeed
               )
             );
@@ -315,19 +317,23 @@ export function CursorDrivenParticleTypography({
       });
     }
 
-    canvas.addEventListener("mousemove", handleMouseMove);
-    canvas.addEventListener("mouseleave", handleMouseLeave);
-    canvas.addEventListener("touchmove", handleTouchMove, { passive: true });
-    canvas.addEventListener("touchend", handleTouchEnd);
+    if (interactive) {
+      canvas.addEventListener("mousemove", handleMouseMove);
+      canvas.addEventListener("mouseleave", handleMouseLeave);
+      canvas.addEventListener("touchmove", handleTouchMove, { passive: true });
+      canvas.addEventListener("touchend", handleTouchEnd);
+    }
 
     return () => {
       clearTimeout(timeoutId);
       resizeObserver.disconnect();
       themeObserver.disconnect();
-      canvas.removeEventListener("mousemove", handleMouseMove);
-      canvas.removeEventListener("mouseleave", handleMouseLeave);
-      canvas.removeEventListener("touchmove", handleTouchMove);
-      canvas.removeEventListener("touchend", handleTouchEnd);
+      if (interactive) {
+        canvas.removeEventListener("mousemove", handleMouseMove);
+        canvas.removeEventListener("mouseleave", handleMouseLeave);
+        canvas.removeEventListener("touchmove", handleTouchMove);
+        canvas.removeEventListener("touchend", handleTouchEnd);
+      }
       cancelAnimationFrame(animationFrameId);
     };
   }, [
@@ -341,6 +347,7 @@ export function CursorDrivenParticleTypography({
     color,
     opacity,
     topOffset,
+    interactive,
   ]);
 
   return (
@@ -351,7 +358,10 @@ export function CursorDrivenParticleTypography({
         className
       )}
     >
-      <canvas ref={canvasRef} className="block w-full h-full pointer-events-auto" />
+      <canvas
+        ref={canvasRef}
+        className={cn("block w-full h-full", interactive ? "pointer-events-auto" : "pointer-events-none")}
+      />
     </div>
   );
 }

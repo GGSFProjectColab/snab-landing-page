@@ -4,7 +4,6 @@
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { GrainGradientShader } from "@/components/ui/grain-gradient-shader";
 import { Reveal, RevealGroup } from "@/components/originkit/ui/hero-20/reveal";
 
 /** Public asset under /originkit/hero-20/ */
@@ -59,13 +58,6 @@ export const Section24Hero = () => {
 
   return (
     <div className="relative mx-auto flex min-h-[580px] lg:min-h-[calc(100dvh-4rem)] w-full flex-col items-center justify-center overflow-hidden py-14 sm:py-16 md:py-20">
-      {/* Old Gradient Background */}
-      <GrainGradientShader />
-      <div
-        className="absolute inset-0 dark:bg-black/30"
-        aria-hidden="true"
-      />
-
       {/* Hero Foreground Content */}
       <div className="relative z-10 mx-auto flex w-full max-w-[440px] flex-col items-center gap-5 sm:gap-6 px-4 sm:px-6 ipad:max-w-[760px] desktop-sm:max-w-[820px] full-hd:max-w-[940px]">
         <RevealGroup className="flex flex-col items-center gap-4 sm:gap-5" delay={0.1}>

@@ -161,7 +161,7 @@ const ServiceCardItem = memo(function ServiceCardItem({
               <DesktopAppVisual />
             </div>
           ) : service.visual === "dithering" ? (
-            <div className="relative aspect-video w-full max-w-[280px] sm:max-w-none h-[170px] sm:h-[220px] lg:h-[300px] overflow-hidden flex items-center justify-center">
+            <div className="relative w-full h-[170px] sm:h-[220px] lg:h-[300px] max-w-[320px] sm:max-w-[420px] lg:max-w-none mx-auto overflow-hidden flex items-center justify-center rounded-lg">
               <CloudShader paused={!isActive} />
             </div>
           ) : service.visual === "globe" ? (

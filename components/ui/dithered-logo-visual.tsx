@@ -1,28 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useTheme } from "next-themes";
 import { DitheredLogo } from "./dithered-logo";
 
 export function DitheredLogoVisual() {
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const isDark = mounted ? resolvedTheme === "dark" : true;
-
   return (
-    <div
-      className={`relative aspect-[4/3] w-full overflow-hidden p-6 flex items-center justify-center ${
-        isDark ? "bg-black" : "bg-[#f4f1eb]"
-      }`}
-    >
+    <div className="flex h-full w-full items-center justify-center">
       <DitheredLogo
         imageSrc="/logo.png"
-        className="h-full w-full text-white"
+        className="h-full w-full text-foreground"
         gridSize={120}
         scale={0.7}
         dotScale={1.2}
@@ -33,7 +18,7 @@ export function DitheredLogoVisual() {
         gamma={1.2}
         blur={3}
         diffusionStrength={1}
-        particleColor={isDark ? "#ffffff" : "#0f766e"}
+        particleColor="currentColor"
       />
     </div>
   );

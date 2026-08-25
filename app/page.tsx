@@ -158,6 +158,22 @@ const aboutSnabSteps = [
       "We ship what we build. Full-stack deployment, cloud infrastructure, monitoring, and a complete handoff so your product works reliably from day one. We don't hand off a prototype and disappear. We stay until the system is stable, the team is confident, and the product is ready to grow.",
     image: "/ascii-magic-13.png",
   },
+  {
+    step: "04",
+    title: "Continuous Validation",
+    subtitle: "Test & Learn",
+    content:
+      "We validate with real users and real data. Instrumented analytics, usability checks, and performance budgets keep decisions grounded. Every release is an opportunity to learn, refine the workflow, and compound value instead of guessing.",
+    image: "/ascii-magic-10.png",
+  },
+  {
+    step: "05",
+    title: "Evolve & Scale",
+    subtitle: "Support & Growth",
+    content:
+      "We stay for the long run. Monitoring, hardening, and iterative expansion ensure your platform scales with demand. From new integrations to model upgrades, we evolve the system in step with your business so momentum never stalls.",
+    image: "/ascii-magic-11.png",
+  },
 ];
 
 
@@ -473,10 +489,10 @@ export default function Home() {
 
         
 
-        {/* How We Work */}
+        {/* How We Work — full-section stacking inside dotted rails */}
         <section aria-labelledby="how-we-work-title">
           <ContainerWrapper>
-            <HeaderTitle title="How we work" id="how-we-work-title" className="border-b-0" />
+            <HeaderTitle title="How we work" id="how-we-work-title" />
             <ParallaxHowWeWork steps={aboutSnabSteps} />
           </ContainerWrapper>
         </section>

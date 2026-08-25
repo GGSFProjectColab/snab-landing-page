@@ -13,7 +13,7 @@ const Svg1 = () => {
         height="184.905"
         rx="15.5"
         transform="matrix(0.866025 0.5 -0.866025 0.5 161.431 6.34521)"
-        fill="black"
+        fill="var(--background)"
       />
       <rect
         y="0.5"
@@ -21,7 +21,7 @@ const Svg1 = () => {
         height="184.905"
         rx="15.5"
         transform="matrix(0.866025 0.5 -0.866025 0.5 161.431 6.34521)"
-        fill="black"
+        fill="var(--background)"
       />
       <rect
         y="0.5"
@@ -29,7 +29,7 @@ const Svg1 = () => {
         height="184.905"
         rx="15.5"
         transform="matrix(0.866025 0.5 -0.866025 0.5 161.431 6.34521)"
-        fill="black"
+        fill="var(--background)"
       />
       <rect
         y="0.5"
@@ -45,7 +45,7 @@ const Svg1 = () => {
         height="184.905"
         rx="15.5"
         transform="matrix(0.866025 0.5 -0.866025 0.5 161.431 0.25)"
-        fill="black"
+        fill="var(--background)"
       />
       <rect
         y="0.5"
@@ -53,7 +53,7 @@ const Svg1 = () => {
         height="184.905"
         rx="15.5"
         transform="matrix(0.866025 0.5 -0.866025 0.5 161.431 0.25)"
-        fill="black"
+        fill="var(--background)"
       />
       <rect
         y="0.5"
@@ -61,7 +61,7 @@ const Svg1 = () => {
         height="184.905"
         rx="15.5"
         transform="matrix(0.866025 0.5 -0.866025 0.5 161.431 0.25)"
-        fill="black"
+        fill="var(--background)"
       />
       <rect
         y="0.5"
@@ -77,7 +77,7 @@ const Svg1 = () => {
         height="152.216"
         rx="15.5"
         transform="matrix(0.866025 0.5 -0.866025 0.5 160.81 14.2739)"
-        fill="black"
+        fill="var(--background)"
       />
       <rect
         y="0.5"
@@ -85,7 +85,7 @@ const Svg1 = () => {
         height="152.216"
         rx="15.5"
         transform="matrix(0.866025 0.5 -0.866025 0.5 160.81 14.2739)"
-        fill="black"
+        fill="var(--background)"
       />
       <rect
         y="0.5"
@@ -93,7 +93,7 @@ const Svg1 = () => {
         height="152.216"
         rx="15.5"
         transform="matrix(0.866025 0.5 -0.866025 0.5 160.81 14.2739)"
-        fill="black"
+        fill="var(--background)"
       />
       <rect
         y="0.5"
@@ -109,7 +109,7 @@ const Svg1 = () => {
         height="152.216"
         rx="15.5"
         transform="matrix(0.866025 0.5 -0.866025 0.5 160.81 9.25)"
-        fill="black"
+        fill="var(--background)"
       />
       <rect
         y="0.5"
@@ -117,7 +117,7 @@ const Svg1 = () => {
         height="152.216"
         rx="15.5"
         transform="matrix(0.866025 0.5 -0.866025 0.5 160.81 9.25)"
-        fill="black"
+        fill="var(--background)"
       />
       <rect
         y="0.5"
@@ -125,7 +125,7 @@ const Svg1 = () => {
         height="152.216"
         rx="15.5"
         transform="matrix(0.866025 0.5 -0.866025 0.5 160.81 9.25)"
-        fill="black"
+        fill="var(--background)"
       />
       <rect
         y="0.5"
@@ -141,7 +141,7 @@ const Svg1 = () => {
         height="115.37"
         rx="15.5"
         transform="matrix(0.866025 0.5 -0.866025 0.5 161.589 21.8804)"
-        fill="black"
+        fill="var(--background)"
       />
       <rect
         y="0.5"
@@ -149,7 +149,7 @@ const Svg1 = () => {
         height="115.37"
         rx="15.5"
         transform="matrix(0.866025 0.5 -0.866025 0.5 161.589 21.8804)"
-        fill="black"
+        fill="var(--background)"
       />
       <rect
         y="0.5"
@@ -157,7 +157,7 @@ const Svg1 = () => {
         height="115.37"
         rx="15.5"
         transform="matrix(0.866025 0.5 -0.866025 0.5 161.589 21.8804)"
-        fill="black"
+        fill="var(--background)"
       />
       <rect
         y="0.5"
@@ -173,7 +173,7 @@ const Svg1 = () => {
         height="115.37"
         rx="15.5"
         transform="matrix(0.866025 0.5 -0.866025 0.5 161.589 18.0649)"
-        fill="black"
+        fill="var(--background)"
       />
       <rect
         y="0.5"
@@ -181,7 +181,7 @@ const Svg1 = () => {
         height="115.37"
         rx="15.5"
         transform="matrix(0.866025 0.5 -0.866025 0.5 161.589 18.0649)"
-        fill="black"
+        fill="var(--background)"
       />
       <rect
         y="0.5"
@@ -189,7 +189,7 @@ const Svg1 = () => {
         height="115.37"
         rx="15.5"
         transform="matrix(0.866025 0.5 -0.866025 0.5 161.589 18.0649)"
-        fill="black"
+        fill="var(--background)"
       />
       <rect
         y="0.5"

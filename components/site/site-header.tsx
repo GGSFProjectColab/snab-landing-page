@@ -34,7 +34,7 @@ function LogoMark({ className }: { className?: string }) {
       className={cn("flex items-center gap-2", className)}
     >
       <Image
-        className="brand-logo h-6 w-6 md:h-7 md:w-7 shrink-0 object-contain"
+        className="brand-logo h-5 w-5 md:h-6 md:w-6 shrink-0 object-contain"
         src="/logo.png"
         alt=""
         aria-hidden="true"
@@ -481,7 +481,7 @@ export function SiteHeader() {
 
   return (
     <header
-      className="sticky top-0 z-[500] h-12 bg-background/80 backdrop-blur-md md:h-14 full-bleed-border-b"
+      className="sticky top-0 z-[500] h-11 bg-background/80 backdrop-blur-md md:h-12 full-bleed-border-b"
       aria-label="Primary navigation"
     >
       <div className="mx-auto h-full w-full">
@@ -504,7 +504,7 @@ export function SiteHeader() {
 
             {/* Divider between nav links and theme toggle */}
             <div
-              className="mx-1 h-5 w-px border-l border-dotted border-edge"
+              className="mx-1 h-4 w-px border-l border-dotted border-edge"
               aria-hidden="true"
             />
             <ThemeToggle label="Switch between light and dark mode" />

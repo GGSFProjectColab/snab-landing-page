@@ -138,7 +138,7 @@ const ServiceCardItem = memo(function ServiceCardItem({
         </div>
 
         {/* Right Column: Visual — controlled: keep mounted, pause offscreen (original behaviour, throttle via paused) */}
-        <div className="relative flex h-full w-full items-center justify-center overflow-visible bg-background p-1.5 sm:p-4 lg:p-6 [contain:layout]">
+        <div className="relative flex h-full w-full items-center justify-center overflow-visible bg-background p-2 sm:p-4 lg:p-6">
           {service.visual === "flow" ? (
             <div className="relative h-full w-full max-h-[250px] sm:max-h-[290px] lg:max-h-[360px] flex items-center justify-center">
               <AIWorkflowFlow expanded={true} paused={!isActive} />
@@ -165,9 +165,9 @@ const ServiceCardItem = memo(function ServiceCardItem({
               <CloudShader paused={!isActive} />
             </div>
           ) : service.visual === "globe" ? (
-            <div className="relative aspect-square w-full max-w-[260px] sm:max-w-[340px] lg:max-w-[420px] flex items-center justify-center overflow-visible p-3 sm:p-4">
-              <div className="relative h-full w-full flex items-center justify-center">
-                <Globe paused={!isActive} className="scale-[0.88] sm:scale-[0.95] lg:scale-100" />
+            <div className="relative flex h-full w-full items-center justify-center overflow-visible p-4 sm:p-6">
+              <div className="relative flex aspect-square w-full h-auto max-w-[220px] max-h-[220px] sm:max-w-[300px] sm:max-h-[300px] lg:max-w-[360px] lg:max-h-[360px] shrink-0 items-center justify-center overflow-visible">
+                <Globe paused={!isActive} className="h-full w-full max-w-none max-h-none" />
               </div>
             </div>
           ) : (

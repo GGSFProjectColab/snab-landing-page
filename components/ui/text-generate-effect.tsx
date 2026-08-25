@@ -93,26 +93,13 @@ function renderAnimatedNodes(
   }
 
   if (React.isValidElement(node)) {
+    // Avoid wrapping client components (e.g. Highlighter) in motion for hydration stability
+    // Just advance the word counter and render the element directly.
+    // This keeps server and client HTML identical and lets the child handle its own animation
+    // in a lightweight, GPU-friendly way without extra opacity wrappers.
     const wordCount = Math.max(1, getWordCount(node));
     const idx = getIndex(wordCount);
-    return (
-      <motion.span
-        key={`elem-${idx}`}
-        initial={{ opacity: 0 }}
-        animate={options.trigger ? { opacity: 1 } : { opacity: 0 }}
-        transition={
-          options.prefersReducedMotion
-            ? { duration: 0, delay: 0 }
-            : {
-                ...options.transition,
-                delay: idx * options.staggerDuration,
-              }
-        }
-        className="inline will-change-[opacity]"
-      >
-        {node}
-      </motion.span>
-    );
+    return <React.Fragment key={`elem-${idx}`}>{node}</React.Fragment>;
   }
 
   if (Array.isArray(node)) {

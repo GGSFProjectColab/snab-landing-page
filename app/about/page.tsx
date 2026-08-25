@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { createPageMetadata } from "@/lib/site";
 import { ContainerWrapper } from "@/components/site/container";
-import { MagicText } from "@/components/ui/magic-text";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+import { Highlighter } from "@/components/ui/highlighter";
 import { TeamInteractiveSection } from "@/components/about/team-interactive-section";
 import { Footer } from "../Footer";
 
@@ -60,7 +60,15 @@ export default function AboutPage() {
                 staggerDuration={0.09}
                 transition={{ duration: 0.55 }}
               >
-                What's SNAB Innovations and why SNAB Innovations?
+                What&apos;s{" "}
+                <Highlighter action="highlight" color="#fde68a">
+                  <span className="font-medium text-stone-900 dark:text-emerald-100">SNAB Innovations</span>
+                </Highlighter>{" "}
+                and why{" "}
+                <Highlighter action="underline" color="#FF9800" strokeWidth={2}>
+                  <span className="font-medium text-foreground">SNAB Innovations</span>
+                </Highlighter>
+                ?
               </TextGenerateEffect>
               {/* Desktop Copy */}
               <div className="hidden lg:flex flex-col gap-4">
@@ -70,7 +78,15 @@ export default function AboutPage() {
                   staggerDuration={0.045}
                   transition={{ duration: 0.55 }}
                 >
-                  SNAB Innovations is an <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">engineering firm</mark> based in Nashik, Maharashtra, India. We partner with ambitious founders, operational leaders, and enterprise teams across North America, Europe, Southeast Asia, and India who require <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">dependable, production-grade systems</span> that don't just launch—they endure.
+                  SNAB Innovations is an{" "}
+                  <Highlighter action="highlight" color="#fde68a">
+                    <span className="font-medium text-stone-900 dark:text-emerald-100">engineering firm</span>
+                  </Highlighter>{" "}
+                  based in Nashik, Maharashtra, India. We partner with ambitious founders, operational leaders, and enterprise teams across North America, Europe, Southeast Asia, and India who require{" "}
+                  <Highlighter action="underline" color="#FF9800" strokeWidth={2}>
+                    <span className="font-medium text-foreground">dependable, production-grade systems</span>
+                  </Highlighter>{" "}
+                  that don&apos;t just launch—they endure.
                 </TextGenerateEffect>
                 <TextGenerateEffect
                   as="p"
@@ -78,7 +94,28 @@ export default function AboutPage() {
                   staggerDuration={0.045}
                   transition={{ duration: 0.55 }}
                 >
-                  We exist because modern software demands more than fragile AI prototypes. We combine <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">rigorous systems architecture</span>, <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">deterministic fallback mechanisms</span>, and practical engineering to build observable, maintainable platforms that earn trust and power critical business workflows long into the future.
+                  We exist because modern software demands more than{" "}
+                  <Highlighter action="underline" color="#87CEFA" strokeWidth={2}>
+                    <span className="font-medium text-foreground">fragile AI prototypes</span>
+                  </Highlighter>
+                  . We combine{" "}
+                  <Highlighter action="underline" color="#FF9800" strokeWidth={2}>
+                    <span className="font-medium text-foreground">rigorous systems architecture</span>
+                  </Highlighter>
+                  {", "}
+                  <Highlighter action="underline" color="#FF9800" strokeWidth={2}>
+                    <span className="font-medium text-foreground">deterministic fallback mechanisms</span>
+                  </Highlighter>
+                  {", "}
+                  and practical engineering to build{" "}
+                  <Highlighter action="highlight" color="#87CEFA" isView>
+                    <span className="font-medium text-stone-900 dark:text-sky-100">observable, maintainable platforms</span>
+                  </Highlighter>{" "}
+                  that earn trust and power{" "}
+                  <Highlighter action="underline" color="#FF9800" strokeWidth={2} isView>
+                    <span className="font-medium text-foreground">critical business workflows</span>
+                  </Highlighter>{" "}
+                  long into the future.
                 </TextGenerateEffect>
               </div>
 
@@ -90,7 +127,15 @@ export default function AboutPage() {
                   staggerDuration={0.045}
                   transition={{ duration: 0.55 }}
                 >
-                  SNAB Innovations is an <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">engineering firm</mark> based in Nashik, India. We bridge the gap between experimental AI prototypes and <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">dependable, production-grade systems</span> engineered to endure.
+                  SNAB Innovations is an{" "}
+                  <Highlighter action="highlight" color="#fde68a">
+                    <span className="font-medium text-stone-900 dark:text-emerald-100">engineering firm</span>
+                  </Highlighter>{" "}
+                  based in Nashik, India. We bridge the gap between experimental AI prototypes and{" "}
+                  <Highlighter action="underline" color="#FF9800" strokeWidth={2}>
+                    <span className="font-medium text-foreground">dependable, production-grade systems</span>
+                  </Highlighter>{" "}
+                  engineered to endure.
                 </TextGenerateEffect>
               </div>
             </div>
@@ -119,7 +164,19 @@ export default function AboutPage() {
                   staggerDuration={0.045}
                   transition={{ duration: 0.55 }}
                 >
-                  We deliver <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">end-to-end software engineering and applied intelligence</mark> tailored to high-growth companies and enterprise operators. Our capabilities span <Link href="/work" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">intelligent workflow automation ↗</Link>, custom full-stack web and mobile platforms, robust API architectures, and LLM integrations. We specialize in transforming complex manual processes into <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">observable, self-running digital pipelines</span> backed by automated evaluation harnesses, deterministic fallback systems, and enterprise data governance.
+                  We deliver{" "}
+                  <Highlighter action="highlight" color="#fde68a" isView>
+                    <span className="font-medium text-stone-900 dark:text-emerald-100">end-to-end software engineering and applied intelligence</span>
+                  </Highlighter>{" "}
+                  tailored to high-growth companies and enterprise operators. Our capabilities span{" "}
+                  <Link href="/work" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">
+                    intelligent workflow automation ↗
+                  </Link>
+                  , custom full-stack web and mobile platforms, robust API architectures, and LLM integrations. We specialize in transforming complex manual processes into{" "}
+                  <Highlighter action="underline" color="#FF9800" strokeWidth={2} isView>
+                    <span className="font-medium text-foreground">observable, self-running digital pipelines</span>
+                  </Highlighter>{" "}
+                  backed by automated evaluation harnesses, deterministic fallback systems, and enterprise data governance.
                 </TextGenerateEffect>
                 {/* Mobile */}
                 <TextGenerateEffect
@@ -128,7 +185,15 @@ export default function AboutPage() {
                   staggerDuration={0.045}
                   transition={{ duration: 0.55 }}
                 >
-                  We deliver <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">intelligent workflow systems</mark>, <Link href="/work" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">custom web and mobile platforms ↗</Link>, and robust software architectures tailored to eliminate operational friction and scale with your business.
+                  We deliver{" "}
+                  <Highlighter action="highlight" color="#fde68a" isView>
+                    <span className="font-medium text-stone-900 dark:text-emerald-100">intelligent workflow systems</span>
+                  </Highlighter>
+                  {", "}
+                  <Link href="/work" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">
+                    custom web and mobile platforms ↗
+                  </Link>
+                  , and robust software architectures tailored to eliminate operational friction and scale with your business.
                 </TextGenerateEffect>
               </div>
 
@@ -149,7 +214,19 @@ export default function AboutPage() {
                   staggerDuration={0.045}
                   transition={{ duration: 0.55 }}
                 >
-                  Alongside bespoke client development, we engineer <mark className="bg-yellow-300/70 text-stone-900 dark:bg-emerald-500/20 dark:text-emerald-200 dark:border dark:border-emerald-400/35 px-1.5 py-0.5 rounded-[3px] font-medium">proprietary intelligent platforms</mark> designed to solve acute operational challenges. Our product ecosystem includes <Link href="https://interviewxpert.in" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">InterviewXpert ↗</Link>, an intelligent platform that streamlines recruitment workflows and synthesizes candidate evaluation records, and <span className="text-foreground font-medium">NotaryXpert</span>, which automates document workflows, appointments, and client case tracking for legal professionals. Each product reflects our core philosophy: <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">dependable software built for daily production use</span>.
+                  Alongside bespoke client development, we engineer{" "}
+                  <Highlighter action="highlight" color="#fde68a" isView>
+                    <span className="font-medium text-stone-900 dark:text-emerald-100">proprietary intelligent platforms</span>
+                  </Highlighter>{" "}
+                  designed to solve acute operational challenges. Our product ecosystem includes{" "}
+                  <Link href="https://interviewxpert.in" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">
+                    InterviewXpert ↗
+                  </Link>
+                  , an intelligent platform that streamlines recruitment workflows and synthesizes candidate evaluation records, and <span className="text-foreground font-medium">NotaryXpert</span>, which automates document workflows, appointments, and client case tracking for legal professionals. Each product reflects our core philosophy:{" "}
+                  <Highlighter action="underline" color="#FF9800" strokeWidth={2} isView>
+                    <span className="font-medium text-foreground">dependable software built for daily production use</span>
+                  </Highlighter>
+                  .
                 </TextGenerateEffect>
                 {/* Mobile */}
                 <TextGenerateEffect
@@ -158,7 +235,15 @@ export default function AboutPage() {
                   staggerDuration={0.045}
                   transition={{ duration: 0.55 }}
                 >
-                  We build proprietary intelligent platforms like <Link href="https://interviewxpert.in" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">InterviewXpert ↗</Link> for hiring automation and <span className="text-foreground font-medium">NotaryXpert</span> for legal workflow management, <span className="text-foreground underline underline-offset-4 decoration-yellow-500/60 dark:decoration-emerald-400/70 font-medium">engineered for daily production use</span>.
+                  We build proprietary intelligent platforms like{" "}
+                  <Link href="https://interviewxpert.in" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">
+                    InterviewXpert ↗
+                  </Link>{" "}
+                  for hiring automation and <span className="text-foreground font-medium">NotaryXpert</span> for legal workflow management,{" "}
+                  <Highlighter action="underline" color="#FF9800" strokeWidth={2} isView>
+                    <span className="font-medium text-foreground">engineered for daily production use</span>
+                  </Highlighter>
+                  .
                 </TextGenerateEffect>
               </div>
             </div>
@@ -171,16 +256,37 @@ export default function AboutPage() {
         {/* ── Single dotted divider ───────────────────────── */}
         <div className="border-t border-dotted border-edge" />
 
-        {/* ── MagicText CTA ──────────────────────────────── */}
+        {/* ── CTA with Highlighter (pro, lightweight) ───────── */}
         <div className="py-16 sm:py-20 md:py-28 px-6 sm:px-10 md:px-14">
-          <MagicText text="We build systems that earn trust over time. With every decision we make we ask one question — does this hold up in the real world? Start a conversation with us. We would love to hear what you are working on." />
+          <TextGenerateEffect
+            as="p"
+            className="magic-text-container text-center leading-relaxed"
+            staggerDuration={0.06}
+            transition={{ duration: 0.55 }}
+          >
+            We build systems that{" "}
+            <Highlighter action="highlight" color="#fde68a" isView>
+              <span className="font-medium">earn trust over time</span>
+            </Highlighter>
+            . With every decision we make we ask one question — does this{" "}
+            <Highlighter action="underline" color="#FF9800" strokeWidth={2} isView>
+              <span className="font-medium">hold up in the real world</span>
+            </Highlighter>
+            ?{" "}
+            <Highlighter action="highlight" color="#87CEFA" isView>
+              <span className="font-medium text-stone-900 dark:text-sky-100">Start a conversation with us.</span>
+            </Highlighter>{" "}
+            We would love to hear what you are working on.
+          </TextGenerateEffect>
           <div className="mt-10 md:mt-14 flex justify-center">
-            <Link
-              href="/contact"
-              className="font-mono text-caption uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4"
-            >
-              CONTACT US ↗
-            </Link>
+            <Highlighter action="circle" color="#FF9800" strokeWidth={1.6} isView>
+              <Link
+                href="/contact"
+                className="font-mono text-caption uppercase tracking-widest text-muted-foreground hover:text-foreground transition-colors px-3 py-1.5"
+              >
+                CONTACT US ↗
+              </Link>
+            </Highlighter>
           </div>
         </div>
 

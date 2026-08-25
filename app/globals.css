@@ -580,6 +580,22 @@ html[data-magicui-theme-vt="active"]::view-transition-group(root) {
   }
 }
 
+/* ── Highlighter (lightweight, GPU) ───────────────────────── */
+.highlighter-bg {
+  /* light: solid warm highlight */
+  opacity: 1;
+}
+.light .highlighter-bg {
+  opacity: 1;
+  border: none;
+}
+.dark .highlighter-bg,
+:root:not(.light) .highlighter-bg {
+  /* dark: subtle translucent glow so text stays readable + pro look */
+  opacity: 0.24;
+  border: 1px solid color-mix(in srgb, var(--hl) 32%, transparent);
+}
+
 /* ── MagicText scroll-driven opacity ────────────────────────── */
 .magic-text-container {
   display: block;

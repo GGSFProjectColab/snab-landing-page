@@ -41,7 +41,7 @@ export interface DottedMapProps<
 export function DottedMap<M extends Marker = Marker>({
   width = 150,
   height = 75,
-  mapSamples = 5000,
+  mapSamples,
   markers = [],
   dotColor = "currentColor",
   markerColor = "#FF6900",
@@ -53,10 +53,12 @@ export function DottedMap<M extends Marker = Marker>({
   style,
   ...svgProps
 }: DottedMapProps<M>) {
+  const isMobile = typeof window !== "undefined" ? window.innerWidth < 768 : false
+  const effectiveSamples = mapSamples ?? (isMobile ? 2000 : 3000)
   const { points, addMarkers } = createMap({
     width,
     height,
-    mapSamples,
+    mapSamples: effectiveSamples,
   })
   const processedMarkers = addMarkers(markers)
 

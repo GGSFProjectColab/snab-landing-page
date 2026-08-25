@@ -137,8 +137,8 @@ const ServiceCardItem = memo(function ServiceCardItem({
           )}
         </div>
 
-        {/* Right Column: Visual - paused when offscreen to keep 60fps, research: only compositor props */}
-        <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-background p-1.5 sm:p-4 lg:p-6 [contain:content]">
+        {/* Right Column: Visual — controlled: keep mounted, pause offscreen (original behaviour, throttle via paused) */}
+        <div className="relative flex h-full w-full items-center justify-center overflow-visible bg-background p-1.5 sm:p-4 lg:p-6 [contain:layout]">
           {service.visual === "flow" ? (
             <div className="relative h-full w-full max-h-[250px] sm:max-h-[290px] lg:max-h-[360px] flex items-center justify-center">
               <AIWorkflowFlow expanded={true} paused={!isActive} />
@@ -165,8 +165,10 @@ const ServiceCardItem = memo(function ServiceCardItem({
               <CloudShader paused={!isActive} />
             </div>
           ) : service.visual === "globe" ? (
-            <div className="relative aspect-square w-full max-w-[190px] sm:max-w-[260px] lg:max-w-[360px] overflow-hidden flex items-center justify-center">
-              <Globe paused={!isActive} />
+            <div className="relative aspect-square w-full max-w-[260px] sm:max-w-[340px] lg:max-w-[420px] flex items-center justify-center overflow-visible p-3 sm:p-4">
+              <div className="relative h-full w-full flex items-center justify-center">
+                <Globe paused={!isActive} className="scale-[0.88] sm:scale-[0.95] lg:scale-100" />
+              </div>
             </div>
           ) : (
             <div className="flex items-center justify-center p-1">

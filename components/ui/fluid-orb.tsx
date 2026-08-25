@@ -136,8 +136,13 @@ const FluidOrb = ({
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    // Don't allocate WebGL when paused/offscreen or reduced-motion (saves compilation)
+    const prefersReduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (paused || prefersReduced) {
+      // Draw single static frame by skipping rAF loop via early return after one draw
+    }
 
-    const gl = canvas.getContext("webgl", { antialias: true, alpha: true });
+    const gl = canvas.getContext("webgl", { antialias: true, alpha: true, powerPreference: "low-power" });
     if (!gl) return;
 
     const program = gl.createProgram();
@@ -169,14 +174,14 @@ const FluidOrb = ({
     const uTime = gl.getUniformLocation(program, "u_time");
     gl.uniform3f(gl.getUniformLocation(program, "u_color"), ...hexToRgb(activeColor));
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     const px = Math.round(size * dpr);
     canvas.width = px;
     canvas.height = px;
     gl.viewport(0, 0, px, px);
     gl.uniform2f(uResolution, px, px);
 
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const shouldPause = paused || reduce;
     const start = performance.now();
     let raf = 0;
@@ -186,7 +191,7 @@ const FluidOrb = ({
       gl.drawArrays(gl.TRIANGLES, 0, 6);
       if (!shouldPause) raf = requestAnimationFrame(render);
     };
-    // Initial draw even when paused to show static frame
+    // Initial draw even when paused to show static frame (no loop)
     render(start);
 
     return () => {

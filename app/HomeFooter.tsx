@@ -188,11 +188,11 @@ export function HomeFooter() {
             >
               <CursorDrivenParticleTypography
                 text="hello@snab.co.in"
-                opacity={0.4}
-                particleSize={1.8}
-                particleDensity={3}
-                dispersionStrength={22}
-                returnSpeed={0.08}
+                opacity={0.35}
+                particleSize={1.6}
+                particleDensity={4}
+                dispersionStrength={0}
+                returnSpeed={0.06}
                 topOffset={4}
                 interactive={false}
                 className="w-full h-[60px] sm:h-[85px] md:h-[115px] lg:h-[135px] p-0 m-0 pb-0"

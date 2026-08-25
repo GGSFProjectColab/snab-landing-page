@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Manrope, Geist, Geist_Mono } from "next/font/google";
+import { Manrope, Geist, Geist_Mono, Instrument_Serif, Inter_Tight, Lato } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
 import "./footer.css";
@@ -14,24 +14,44 @@ import { SiteGradualBlur } from "@/components/site/site-gradual-blur";
 import { RouteCurtainTransition } from "@/components/site/route-curtain-transition";
 import { FpsCounter } from "@/components/site/fps-counter";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap", preload: true });
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
   display: "swap",
+  preload: false,
 });
 
 const bodyFont = Manrope({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
+  preload: true,
 });
 
-const displayFont = Manrope({
+const instrumentSerif = Instrument_Serif({
+  weight: ["400"],
   subsets: ["latin"],
-  variable: "--font-display",
+  variable: "--font-instrument-serif",
   display: "swap",
+  preload: false,
+});
+
+const interTight = Inter_Tight({
+  weight: ["300", "400", "500"],
+  subsets: ["latin"],
+  variable: "--font-tight",
+  display: "swap",
+  preload: false,
+});
+
+const lato = Lato({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-lato",
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -105,7 +125,9 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn(
         bodyFont.variable,
-        displayFont.variable,
+        instrumentSerif.variable,
+        interTight.variable,
+        lato.variable,
         geistMono.variable,
         "font-sans",
         geist.variable

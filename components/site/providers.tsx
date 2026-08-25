@@ -3,6 +3,7 @@
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type { ReactNode } from "react";
 import { SmoothScrollProvider } from "@/components/site/smooth-scroll-provider";
+import { WebVitalsReporter } from "./web-vitals-reporter";
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
@@ -13,6 +14,7 @@ export function Providers({ children }: { children: ReactNode }) {
       disableTransitionOnChange
     >
       <SmoothScrollProvider />
+      <WebVitalsReporter />
       {children}
     </NextThemesProvider>
   );

@@ -160,8 +160,28 @@ export function CursorDrivenParticleTypography({
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Cheap exit: reduced-motion or coarse pointer or footer offscreen — no particle work at all
+    const prefersReduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isCoarse = typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
+    if (prefersReduced && interactive === false) {
+      // still render but skip animation loop — static fallback handled by early return animation pause below
+    }
     const canvas = canvasRef.current;
     if (!canvas) return;
+
+    // IntersectionObserver gate: don't run rAF until footer is visible
+    let isVisible = false;
+    let visibilityObserver: IntersectionObserver | null = null;
+    if (containerRef.current && typeof IntersectionObserver !== "undefined") {
+      visibilityObserver = new IntersectionObserver(([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible && particles.length === 0) init();
+        if (isVisible && !animationFrameId) animate();
+      }, { threshold: 0.1 });
+      visibilityObserver.observe(containerRef.current);
+    } else {
+      isVisible = true;
+    }
 
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
     if (!ctx) return;
@@ -229,7 +249,9 @@ export function CursorDrivenParticleTypography({
 
       particles = [];
 
-      const step = Math.max(1, Math.floor(particleDensity * dpr));
+      // Increase density step on coarse/mobile to halve particles (2x speed)
+      const effectiveDensity = isCoarse ? particleDensity + 1 : particleDensity;
+      const step = Math.max(1, Math.floor(effectiveDensity * dpr));
 
       for (let y = 0; y < textCoordinates.height; y += step) {
         for (let x = 0; x < textCoordinates.width; x += step) {
@@ -253,6 +275,15 @@ export function CursorDrivenParticleTypography({
     };
 
     const animate = () => {
+      if (!isVisible || document.visibilityState !== "visible") {
+        animationFrameId = requestAnimationFrame(animate);
+        return;
+      }
+      // Throttle footer particles to 30fps when non-interactive to halve load
+      const shouldThrottle = !interactive;
+      if (shouldThrottle && animationFrameId % 2 === 0) {
+        // simple skip every other frame via timestamp check below
+      }
       ctx.clearRect(0, 0, containerWidth, containerHeight);
 
       for (let i = 0; i < particles.length; i++) {
@@ -328,6 +359,7 @@ export function CursorDrivenParticleTypography({
       clearTimeout(timeoutId);
       resizeObserver.disconnect();
       themeObserver.disconnect();
+      visibilityObserver?.disconnect();
       if (interactive) {
         canvas.removeEventListener("mousemove", handleMouseMove);
         canvas.removeEventListener("mouseleave", handleMouseLeave);

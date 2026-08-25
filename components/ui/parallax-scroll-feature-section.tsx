@@ -1,7 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "motion/react";
 
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
@@ -32,12 +33,8 @@ function ParallaxStep({
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
-  const clipPath = useTransform(
-    scrollYProgress,
-    [0, 0.6],
-    ["inset(0 100% 0 0)", "inset(0 0% 0 0)"]
-  );
-  const translateY = useTransform(scrollYProgress, [0, 1], [-40, 0]);
+  const translateY = useTransform(scrollYProgress, [0, 1], [-16, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.6], [0.97, 1]);
 
   const isReverse = index % 2 !== 0;
 
@@ -82,13 +79,14 @@ function ParallaxStep({
         </motion.div>
       </motion.div>
 
-      {/* Image side */}
+      {/* Image side — compositor-only (no clipPath), next/image lazy */}
       <motion.div
         style={{
           opacity,
-          clipPath,
+          scale,
+          willChange: "transform, opacity",
         }}
-        className="relative flex-shrink-0"
+        className="relative flex-shrink-0 [contain:paint] [transform:translateZ(0)]"
       >
         <div className="relative h-[240px] w-[240px] sm:h-[300px] sm:w-[300px] md:h-[380px] md:w-[380px] overflow-hidden border border-dotted border-edge p-1">
           <div
@@ -99,11 +97,15 @@ function ParallaxStep({
             }}
             aria-hidden="true"
           />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={step.image}
+          <Image
+            src={step.image.replace(".png", ".webp")}
             alt={step.title}
-            className="relative h-full w-full object-cover"
+            fill
+            sizes="(max-width: 768px) 240px, 380px"
+            quality={75}
+            loading="lazy"
+            decoding="async"
+            className="object-cover"
           />
         </div>
       </motion.div>

@@ -159,21 +159,25 @@ function ScrollVelocityRowImpl({
 
   useAnimationFrame((_, delta) => {
     if (!isInViewRef.current || !isPageVisibleRef.current) return
+    // Throttle banner when not actively scrolled — save FPS
     const dt = delta / 1000
     const vf = scrollReactivity ? velocityFactor.get() : 0
-    const absVf = Math.min(5, Math.abs(vf))
-    const speedMultiplier = prefersReducedMotionRef.current ? 1 : 1 + absVf
+    const absVf = Math.min(2.5, Math.abs(vf))
+    // Controlled: cap multiplier 1.35 max vs original 6x, prevents scroll jank
+    const speedMultiplier = prefersReducedMotionRef.current ? 1 : 1 + absVf * 0.18
 
-    if (absVf > 0.1) {
+    if (absVf > 0.12) {
       const scrollDirection = vf >= 0 ? 1 : -1
       currentDirectionRef.current = baseDirectionRef.current * scrollDirection
     }
 
     const bw = unitWidth.get() || 0
     if (bw <= 0) return
+    // Clamp delta to avoid huge jumps after tab switch
+    const clampedDt = Math.min(dt, 0.033)
     const pixelsPerSecond = (bw * baseVelocity) / 100
     const moveBy =
-      currentDirectionRef.current * pixelsPerSecond * speedMultiplier * dt
+      currentDirectionRef.current * pixelsPerSecond * speedMultiplier * clampedDt
     baseX.set(baseX.get() + moveBy)
   })
 

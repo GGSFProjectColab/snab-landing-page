@@ -4,12 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef, useCallback } from "react";
-import { createPortal, flushSync } from "react-dom";
+import { createPortal } from "react-dom";
 import {
   Menu,
   X,
-  Sun,
-  Moon,
   ChevronDown,
   Briefcase,
   Users,
@@ -21,6 +19,7 @@ import {
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 import { ShinyText } from "@/components/site/shiny-text";
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import {
   NAV_ITEMS,
   COMPANY_DROPDOWN_LINKS,
@@ -363,31 +362,6 @@ function MobileDrawer({
   );
 }
 
-function switchThemeWithTransition(
-  nextTheme: "light" | "dark",
-  setTheme: (theme: string) => void,
-) {
-  if (typeof document === "undefined") {
-    setTheme(nextTheme);
-    return;
-  }
-
-  const doc = document as Document & {
-    startViewTransition?: (cb: () => void | Promise<void>) => unknown;
-  };
-
-  if (!doc.startViewTransition) {
-    setTheme(nextTheme);
-    return;
-  }
-
-  doc.startViewTransition(() => {
-    flushSync(() => {
-      setTheme(nextTheme);
-    });
-  });
-}
-
 function ThemeToggleMobile({
   onClose,
   open,
@@ -397,6 +371,7 @@ function ThemeToggleMobile({
 }) {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -404,24 +379,49 @@ function ThemeToggleMobile({
 
   const isDark = resolvedTheme === "dark";
 
+  const handleLabelClick = useCallback(() => {
+    // Delegate to the triangle toggler so animation origin stays at the icon (GPU clip-path)
+    const btn = containerRef.current?.querySelector("button") as HTMLButtonElement | null;
+    btn?.click();
+  }, []);
+
+  // Lightweight placeholder during SSR/hydration to avoid mismatch
+  if (!mounted) {
+    return (
+      <div className="flex w-full items-center justify-between opacity-60">
+        <span className="text-button font-normal text-muted-foreground">Dark mode</span>
+        <span className="inline-flex size-8 items-center justify-center" aria-hidden="true" />
+      </div>
+    );
+  }
+
   return (
-    <button
-      type="button"
-      tabIndex={open ? 0 : -1}
-      aria-label="Switch between light and dark mode"
-      onClick={() => {
-        switchThemeWithTransition(isDark ? "light" : "dark", setTheme);
-        onClose();
-      }}
-      className="flex w-full items-center justify-between text-button font-normal text-muted-foreground transition-colors hover:text-primary"
-    >
-      <span>{isDark ? "Light mode" : "Dark mode"}</span>
-      {mounted && isDark ? (
-        <Sun className="size-4" />
-      ) : (
-        <Moon className="size-4" />
-      )}
-    </button>
+    <div className="flex w-full items-center justify-between gap-3">
+      <button
+        type="button"
+        tabIndex={open ? 0 : -1}
+        aria-label="Switch between light and dark mode"
+        onClick={handleLabelClick}
+        className="text-button font-normal text-muted-foreground transition-colors hover:text-primary"
+      >
+        <span>{isDark ? "Light mode" : "Dark mode"}</span>
+      </button>
+      <div ref={containerRef} className="shrink-0">
+        <AnimatedThemeToggler
+          variant="triangle"
+          duration={380}
+          fromCenter
+          theme={resolvedTheme as "light" | "dark"}
+          onThemeChange={(t) => {
+            setTheme(t);
+            onClose();
+          }}
+          className="inline-flex size-8 items-center justify-center text-muted-foreground transition-colors hover:text-primary [&_svg]:size-4"
+          aria-label="Switch between light and dark mode"
+          tabIndex={open ? 0 : -1}
+        />
+      </div>
+    </div>
   );
 }
 
@@ -439,25 +439,33 @@ function ThemeToggle({
     setMounted(true);
   }, []);
 
-  const isDark = resolvedTheme === "dark";
+  // Avoid hydration mismatch: render inert placeholder until mounted (no Sun/Moon flash)
+  if (!mounted) {
+    return (
+      <span
+        className={cn(
+          "inline-flex size-8 items-center justify-center text-muted-foreground",
+          className,
+        )}
+        aria-hidden="true"
+      />
+    );
+  }
 
   return (
-    <button
-      type="button"
-      aria-label={label}
-      title={label}
-      onClick={() => switchThemeWithTransition(isDark ? "light" : "dark", setTheme)}
+    <AnimatedThemeToggler
+      variant="triangle"
+      duration={380}
+      fromCenter
+      theme={(resolvedTheme as "light" | "dark") ?? "light"}
+      onThemeChange={setTheme}
       className={cn(
-        "inline-flex size-8 items-center justify-center text-muted-foreground transition-colors hover:text-primary",
+        "inline-flex size-8 items-center justify-center text-muted-foreground transition-colors hover:text-primary [&_svg]:size-4",
         className,
       )}
-    >
-      {mounted && isDark ? (
-        <Sun className="size-4" />
-      ) : (
-        <Moon className="size-4" />
-      )}
-    </button>
+      aria-label={label}
+      title={label}
+    />
   );
 }
 

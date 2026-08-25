@@ -236,11 +236,46 @@ export function IconCloud({
     setIsDragging(false)
   }
 
-  // Animation and rendering
+  // Visibility & reduced-motion gating
+  const [isVisible, setIsVisible] = useState(true)
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const io = new IntersectionObserver(([e]) => setIsVisible(e.isIntersecting), { threshold: 0.1 })
+    io.observe(canvas)
+    return () => io.disconnect()
+  }, [])
+
+  // Animation and rendering — paused when offscreen or reduced-motion
   useEffect(() => {
     const canvas = canvasRef.current
     const ctx = canvas?.getContext("2d")
     if (canvas && ctx) {
+      if (!isVisible) {
+        // Draw single static frame then stop
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        const centerX = canvas.width / 2
+        const centerY = canvas.height / 2
+        iconPositions.forEach((icon, index) => {
+          if (iconCanvasesRef.current[index] && imagesLoadedRef.current[index]) {
+            const cosX = Math.cos(rotationRef.current.x)
+            const sinX = Math.sin(rotationRef.current.x)
+            const cosY = Math.cos(rotationRef.current.y)
+            const sinY = Math.sin(rotationRef.current.y)
+            const rotatedX = icon.x * cosY - icon.z * sinY
+            const rotatedZ = icon.x * sinY + icon.z * cosY
+            const rotatedY = icon.y * cosX + rotatedZ * sinX
+            const scale = (rotatedZ + 200) / 300
+            ctx.save()
+            ctx.translate(centerX + rotatedX, centerY + rotatedY)
+            ctx.scale(scale, scale)
+            ctx.globalAlpha = Math.max(0.2, Math.min(1, (rotatedZ + 150) / 200))
+            ctx.drawImage(iconCanvasesRef.current[index], -20, -20, 40, 40)
+            ctx.restore()
+          }
+        })
+        return
+      }
       const animate = () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
 
@@ -348,6 +383,7 @@ export function IconCloud({
     isPaused,
     mousePos,
     targetRotation,
+    isVisible,
   ])
 
   return (

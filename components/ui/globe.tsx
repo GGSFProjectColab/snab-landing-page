@@ -9,15 +9,15 @@ import { cn } from "@/lib/utils"
 const MOVEMENT_DAMPING = 1400
 
 const GLOBE_CONFIG: COBEOptions = {
-  width: 800,
-  height: 800,
+  width: 400,
+  height: 400,
   onRender: () => {},
-  devicePixelRatio: 2,
+  devicePixelRatio: 1,
   phi: 0,
   theta: 0.3,
   dark: 0,
   diffuse: 0.4,
-  mapSamples: 16000,
+  mapSamples: 8000,
   mapBrightness: 1.2,
   baseColor: [1, 1, 1],
   markerColor: [251 / 255, 100 / 255, 21 / 255],
@@ -74,6 +74,17 @@ export function Globe({
   }
 
   useEffect(() => {
+    if (!canvasRef.current) return
+    const prefersReducedNow = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (prefersReducedNow) {
+      requestAnimationFrame(() => {
+        if (canvasRef.current) canvasRef.current.style.opacity = "1"
+      })
+      return
+    }
+    // When paused (offscreen carousel slide) keep canvas mounted but idle — draw static frame
+    const shouldIdle = paused
+
     const onResize = () => {
       if (canvasRef.current) {
         widthRef.current = canvasRef.current.offsetWidth
@@ -83,18 +94,18 @@ export function Globe({
     window.addEventListener("resize", onResize)
     onResize()
 
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    const shouldPause = paused || prefersReduced
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
+    const shouldPause = prefersReducedNow || shouldIdle
 
     const globe = createGlobe(canvasRef.current!, {
       ...config,
-      width: widthRef.current * 2,
-      height: widthRef.current * 2,
+      width: widthRef.current * dpr,
+      height: widthRef.current * dpr,
       onRender: (state) => {
-        if (!shouldPause && !pointerInteracting.current) phiRef.current += 0.005
+        if (!shouldPause && !pointerInteracting.current) phiRef.current += 0.003
         state.phi = phiRef.current + rs.get()
-        state.width = widthRef.current * 2
-        state.height = widthRef.current * 2
+        state.width = widthRef.current * dpr
+        state.height = widthRef.current * dpr
       },
     })
 
@@ -108,12 +119,12 @@ export function Globe({
   return (
     <div
       className={cn(
-        "absolute inset-0 mx-auto aspect-square w-full max-w-[600px]",
+        "relative mx-auto aspect-square h-full w-full max-w-[520px] overflow-visible",
         className
       )}
     >
       <canvas
-        className="size-full opacity-0 transition-opacity duration-500"
+        className="h-full w-full max-h-full max-w-full opacity-0 transition-opacity duration-500 block object-contain"
         ref={canvasRef}
         onPointerDown={(e) => {
           pointerInteracting.current = e.clientX

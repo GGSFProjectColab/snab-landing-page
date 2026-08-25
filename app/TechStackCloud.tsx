@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { IconCloud } from "@/components/ui/icon-cloud";
 import {
   Globe,
@@ -42,9 +42,18 @@ const iconComponents = [
 export function TechStackCloud() {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!ref.current) return;
+    const io = new IntersectionObserver(([e]) => setIsInView(e.isIntersecting), { threshold: 0.15 });
+    io.observe(ref.current);
+    return () => io.disconnect();
   }, []);
 
   const isDark = mounted ? resolvedTheme !== "light" : true;
@@ -58,8 +67,12 @@ export function TechStackCloud() {
     [foreground],
   );
 
+  if (!isInView) {
+    return <div ref={ref} className="flex h-full w-full items-center justify-center min-h-[200px]"><div className="h-20 w-20 rounded-full border border-dotted border-edge bg-muted/20" /></div>;
+  }
+
   return (
-    <div className="flex h-full w-full items-center justify-center">
+    <div ref={ref} className="flex h-full w-full items-center justify-center">
       <div className="scale-[0.55] sm:scale-75">
         <IconCloud
           key={isDark ? "dark" : "light"}

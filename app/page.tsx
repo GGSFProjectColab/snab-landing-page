@@ -11,18 +11,18 @@ import Svg9 from "@/components/pixel-perfect/svg-9";
 import { DitheredLogoVisual } from "@/components/ui/dithered-logo-visual";
 import { TechStackCloud } from "./TechStackCloud";
 import { DottedMap } from "@/components/ui/dotted-map";
-import { ParallaxHowWeWork } from "@/components/ui/parallax-scroll-feature-section";
 import { homeFaqs } from "@/lib/faqs";
 import { absoluteUrl, createPageMetadata, siteConfig } from "@/lib/site";
-import { AskAiSection } from "./AskAiSection";
-import { ServicesSection } from "./ServicesSection";
 import { MagicText } from "@/components/ui/magic-text";
 import { MarqueeDemo } from "@/components/ui/marquee-demo";
+import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+import { LazyAskAiSection as AskAiSection } from "./LazyAskAi";
+import { LazyServicesSection as ServicesSection } from "./LazyServices";
+import { LazyParallaxHowWeWork as ParallaxHowWeWork } from "./LazyParallax";
 import {
   ScrollVelocityContainer,
   ScrollVelocityRow,
 } from "@/components/ui/scroll-based-velocity";
-import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 
 
 
@@ -166,38 +166,38 @@ const whyChooseUs = [
   {
     title: "Intelligence-First Architecture",
     description: "We design every system with intelligence at its core, not as an afterthought.",
-    image: "/ascii-magic-6.png",
+    image: "/ascii-magic-6.webp",
     visual: "svg1",
   },
   {
     title: "Workflow-Centric Design",
     description: "We start with the workflow, not the model — ensuring real-world impact.",
-    image: "/ascii-magic-6.png",
+    image: "/ascii-magic-6.webp",
     visual: "dithered",
   },
   {
     title: "End-to-End Delivery",
     description: "From ideation to deployment, we own the full product lifecycle.",
-    image: "/ascii-magic-6.png",
+    image: "/ascii-magic-6.webp",
     visual: "svg9",
   },
   {
     title: "Production-Grade Systems",
     description: "Every solution is built for scale, reliability, and security from day one.",
-    image: "/ascii-magic-6.png",
+    image: "/ascii-magic-6.webp",
     visual: "dottedmap",
   },
   {
     title: "Cross-Platform Expertise",
     description: "Web, mobile, desktop — we build where your users need us.",
-    image: "/ascii-magic-6.png",
+    image: "/ascii-magic-6.webp",
     visual: "techstack",
   },
   {
     title: "Transparent Collaboration",
     description: "Shared milestones, demos, and decisions keep you close to the work.",
     image: "/transparent-collaboration.jpg",
-    imageLight: "/transparent-collaboration-light.jpg",
+    imageLight: "/transparent-collaboration-light.webp",
   },
 ];
 
@@ -529,6 +529,9 @@ export default function Home() {
                           alt={item.title}
                           fill
                           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                          quality={75}
+                          loading="lazy"
+                          decoding="async"
                         />
                         {"imageLight" in item && Boolean(item.imageLight) && (
                           <Image
@@ -537,6 +540,9 @@ export default function Home() {
                             alt={item.title}
                             fill
                             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                            quality={75}
+                            loading="lazy"
+                            decoding="async"
                           />
                         )}
                       </>
@@ -574,11 +580,11 @@ export default function Home() {
           <AskAiSection />
         </ContainerWrapper>
 
-        {/* Scroll Velocity Banner */}
+        {/* Scroll Velocity Banner — controlled: original scroll-reactive but throttled (baseVelocity 5 vs 20, capped multiplier) */}
         <ContainerWrapper>
           <section aria-label="Scroll velocity banner" className="overflow-hidden py-5 sm:py-7 border-b border-dotted border-edge">
             <ScrollVelocityContainer className="font-mono">
-              <ScrollVelocityRow baseVelocity={20} direction={1} className="py-1.5">
+              <ScrollVelocityRow baseVelocity={5} direction={1} className="py-1.5">
                 <span className="flex items-center gap-3 pr-3 text-5xl font-bold tracking-tight sm:text-6xl md:text-8xl lg:text-9xl">
                   <span>BUILD</span>
                   <span className="text-muted-foreground/35 font-light text-3xl sm:text-4xl md:text-5xl">//</span>
@@ -590,7 +596,7 @@ export default function Home() {
                   <span className="text-muted-foreground/35 font-light text-3xl sm:text-4xl md:text-5xl">//</span>
                 </span>
               </ScrollVelocityRow>
-              <ScrollVelocityRow baseVelocity={20} direction={-1} className="py-1.5">
+              <ScrollVelocityRow baseVelocity={5} direction={-1} className="py-1.5">
                 <span className="flex items-center gap-3 pr-3 text-5xl font-bold tracking-tight sm:text-6xl md:text-8xl lg:text-9xl text-muted-foreground/50">
                   <span>BUILD</span>
                   <span className="text-muted-foreground/25 font-light text-3xl sm:text-4xl md:text-5xl">//</span>

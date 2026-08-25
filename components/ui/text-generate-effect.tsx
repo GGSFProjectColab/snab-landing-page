@@ -62,19 +62,16 @@ function renderAnimatedNodes(
         <motion.span
           key={`w-${idx}-${i}`}
           initial={{
-            filter: options.filter ? "blur(4px)" : undefined,
             opacity: 0,
             y: 4,
           }}
           animate={
             options.trigger
               ? {
-                  filter: options.filter ? "blur(0px)" : undefined,
                   opacity: 1,
                   y: 0,
                 }
               : {
-                  filter: options.filter ? "blur(4px)" : undefined,
                   opacity: 0,
                   y: 4,
                 }
@@ -87,7 +84,7 @@ function renderAnimatedNodes(
                   delay: idx * options.staggerDuration,
                 }
           }
-          className={cn("inline-block will-change-[transform,opacity]", options.wordClassName)}
+          className={cn("inline-block will-change-[transform,opacity] [backface-visibility:hidden] [transform:translateZ(0)]", options.wordClassName)}
         >
           {part}
         </motion.span>
@@ -101,21 +98,8 @@ function renderAnimatedNodes(
     return (
       <motion.span
         key={`elem-${idx}`}
-        initial={{
-          filter: options.filter ? "blur(4px)" : undefined,
-          opacity: 0,
-        }}
-        animate={
-          options.trigger
-            ? {
-                filter: options.filter ? "blur(0px)" : undefined,
-                opacity: 1,
-              }
-            : {
-                filter: options.filter ? "blur(4px)" : undefined,
-                opacity: 0,
-              }
-        }
+        initial={{ opacity: 0 }}
+        animate={options.trigger ? { opacity: 1 } : { opacity: 0 }}
         transition={
           options.prefersReducedMotion
             ? { duration: 0, delay: 0 }

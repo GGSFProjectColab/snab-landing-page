@@ -143,11 +143,14 @@ export function AskAiSection() {
             {/* Dark mode image */}
             <Image
               className="w-full h-auto hidden dark:block"
-              src="/ascii-magic-15.png"
+              src="/ascii-magic-15.webp"
               alt="AI Assistant"
               width={500}
               height={500}
-              priority
+              loading="lazy"
+              decoding="async"
+              sizes="(max-width: 768px) 280px, 400px"
+              quality={75}
             />
             {/* Light mode image */}
             <Image
@@ -156,7 +159,10 @@ export function AskAiSection() {
               alt="AI Assistant"
               width={500}
               height={500}
-              priority
+              loading="lazy"
+              decoding="async"
+              sizes="(max-width: 768px) 280px, 400px"
+              quality={75}
             />
             {/* Copy button overlay */}
             <div className="absolute bottom-5 left-1/2 -translate-x-1/2">

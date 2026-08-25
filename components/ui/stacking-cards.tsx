@@ -16,12 +16,15 @@ import { cn } from '@/lib/utils';
 // - Reduced motion: useReducedMotion() disables scale entirely.
 // - Content respects container height budget: sticky offsets use fixed `top` calc, not animated, so layout is stable.
 
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
 export interface StackingStep {
   step: string;
   title: string;
   subtitle: string;
   content: string;
   image?: string;
+  lottie?: string;
 }
 
 interface CardProps {
@@ -40,8 +43,8 @@ const CARD_THEMES = [
   { bg: '#D6FF94', fg: '#0F1A0A', muted: 'rgba(15,26,10,0.62)', border: 'rgba(15,26,10,0.16)', soft: 'rgba(15,26,10,0.08)' }, // 01 Product Thinking — lime (Image2 01)
   { bg: '#0C1E1E', fg: '#E6FFD9', muted: 'rgba(230,255,217,0.66)', border: 'rgba(230,255,217,0.14)', soft: 'rgba(214,255,148,0.08)' }, // 02 Intelligence — dark (Image2 02)
   { bg: '#F5E8C7', fg: '#1A1500', muted: 'rgba(26,21,0,0.58)', border: 'rgba(26,21,0,0.13)', soft: 'rgba(26,21,0,0.06)' }, // 03 Production — cream (Image1)
-  { bg: '#FF6B2E', fg: '#1A0A00', muted: 'rgba(26,10,0,0.64)', border: 'rgba(26,10,0,0.18)', soft: 'rgba(26,10,0,0.09)' }, // 04 Validation — orange (Image1 Smart Actions)
-  { bg: '#A9D0FF', fg: '#0A1930', muted: 'rgba(10,25,48,0.60)', border: 'rgba(10,25,48,0.14)', soft: 'rgba(10,25,48,0.07)' }, // 05 Evolve — blue
+  { bg: '#A9D0FF', fg: '#0A1930', muted: 'rgba(10,25,48,0.60)', border: 'rgba(10,25,48,0.14)', soft: 'rgba(10,25,48,0.07)' }, // 04 Validation — blue
+  { bg: '#FF6B2E', fg: '#1A0A00', muted: 'rgba(26,10,0,0.64)', border: 'rgba(26,10,0,0.18)', soft: 'rgba(26,10,0,0.09)' }, // 05 Evolve — orange
 ] as const;
 
 function StackingCard({ index, step, total, progress }: CardProps) {
@@ -102,11 +105,22 @@ function StackingCard({ index, step, total, progress }: CardProps) {
             style={{ borderColor: theme.border, backgroundColor: theme.bg, color: theme.fg }}
           >
             <div className="w-full h-full grid place-items-center p-8 md:p-10 lg:p-12" style={{ backgroundColor: theme.bg, color: theme.fg }}>
-              <Geo
-                className="w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] md:w-[280px] md:h-[280px]"
-                strokeWidth={1.1}
-                aria-hidden
-              />
+              {step.lottie ? (
+                <div className="w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] md:w-[300px] md:h-[300px] flex items-center justify-center">
+                  <DotLottieReact
+                    src={step.lottie}
+                    loop
+                    autoplay
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              ) : (
+                <Geo
+                  className="w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] md:w-[280px] md:h-[280px]"
+                  strokeWidth={1.1}
+                  aria-hidden
+                />
+              )}
             </div>
           </div>
         </div>

@@ -141,6 +141,7 @@ const aboutSnabSteps = [
     content:
       "We start with the problem, not the technology. Every project begins by understanding your users, your workflows, and the outcomes that actually matter to your business. We map the gaps, challenge assumptions, and define what success looks like before a single line of code is written.",
     image: "/ascii-magic-14.png",
+    lottie: "https://lottie.host/1ef65794-8ffa-4434-9df0-707867b4f9e9/6gzMf8Bmh2.lottie",
   },
   {
     step: "02",
@@ -149,6 +150,7 @@ const aboutSnabSteps = [
     content:
       "We design systems where AI is the core, not a bolt-on feature added at the end. From agentic workflows and retrieval pipelines to fine-tuned models and intelligent automation, every layer is purpose-built for your specific context. We iterate fast, test in the open, and keep you in the loop at every step.",
     image: "/ascii-magic-12.png",
+    lottie: "https://lottie.host/a3cc2e9f-4d45-4bd0-864c-722948cfa434/lWKhF3h0Of.lottie",
   },
   {
     step: "03",
@@ -157,6 +159,7 @@ const aboutSnabSteps = [
     content:
       "We ship what we build. Full-stack deployment, cloud infrastructure, monitoring, and a complete handoff so your product works reliably from day one. We don't hand off a prototype and disappear. We stay until the system is stable, the team is confident, and the product is ready to grow.",
     image: "/ascii-magic-13.png",
+    lottie: "https://lottie.host/cdaeca48-df0a-47c6-ba7f-7aedb482782a/Zmri3LnUnb.lottie",
   },
   {
     step: "04",
@@ -165,6 +168,7 @@ const aboutSnabSteps = [
     content:
       "We validate with real users and real data. Instrumented analytics, usability checks, and performance budgets keep decisions grounded. Every release is an opportunity to learn, refine the workflow, and compound value instead of guessing.",
     image: "/ascii-magic-10.png",
+    lottie: "https://lottie.host/14b28c5c-a3f0-45a9-be87-e2099f9ec2a9/5koBdXC8HH.lottie",
   },
   {
     step: "05",
@@ -173,6 +177,7 @@ const aboutSnabSteps = [
     content:
       "We stay for the long run. Monitoring, hardening, and iterative expansion ensure your platform scales with demand. From new integrations to model upgrades, we evolve the system in step with your business so momentum never stalls.",
     image: "/ascii-magic-11.png",
+    lottie: "https://lottie.host/f14f5c8a-6a96-4277-902c-31477bb1548b/a9iuJ17RS5.lottie",
   },
 ];
 

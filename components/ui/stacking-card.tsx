@@ -2,6 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion, type MotionValue } from 'motion/react';
+import { Target, BrainCircuit, Rocket, Gauge, TrendingUp, type LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 // Performance notes (pro research):
@@ -30,107 +31,9 @@ interface CardProps {
   progress: MotionValue<number>;
 }
 
-// Geometric illustrations — inherit currentColor (per-card fg)
-function Sunburst() {
-  return (
-    <svg viewBox="0 0 200 200" className="w-full h-full max-w-[320px] max-h-[320px]" fill="none" stroke="currentColor" strokeWidth="1.1">
-      <circle cx="100" cy="100" r="12" />
-      <circle cx="100" cy="100" r="28" opacity="0.45" />
-      {Array.from({ length: 32 }).map((_, i) => {
-        const a = (i * 360) / 32;
-        const r1 = 34;
-        const r2 = 78;
-        const x1 = 100 + r1 * Math.cos((a * Math.PI) / 180);
-        const y1 = 100 + r1 * Math.sin((a * Math.PI) / 180);
-        const x2 = 100 + r2 * Math.cos((a * Math.PI) / 180);
-        const y2 = 100 + r2 * Math.sin((a * Math.PI) / 180);
-        return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} opacity={i % 2 === 0 ? 1 : 0.35} />;
-      })}
-      <circle cx="100" cy="100" r="78" opacity="0.12" />
-    </svg>
-  );
-}
-function HexStack() {
-  const sizes = [22, 34, 48, 62, 76];
-  return (
-    <svg viewBox="0 0 200 200" className="w-full h-full max-w-[320px] max-h-[320px]" fill="none" stroke="currentColor" strokeWidth="1.15">
-      {sizes.map((r, idx) => {
-        const pts = Array.from({ length: 6 })
-          .map((_, k) => {
-            const ang = -30 + k * 60;
-            const x = 100 + r * Math.cos((ang * Math.PI) / 180);
-            const y = 100 + r * Math.sin((ang * Math.PI) / 180);
-            return `${x},${y}`;
-          })
-          .join(' ');
-        return <polygon key={idx} points={pts} opacity={0.95 - idx * 0.12} />;
-      })}
-      <circle cx="100" cy="100" r="3.5" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-function PyramidWire() {
-  return (
-    <svg viewBox="0 0 200 160" className="w-full h-full max-w-[340px] max-h-[270px]" fill="none" stroke="currentColor" strokeWidth="1.15">
-      {/* outer */}
-      <path d="M100 16 L28 148 L172 148 Z" />
-      {/* strata */}
-      {[38, 62, 86, 110].map((y) => {
-        const t = (y - 16) / (148 - 16);
-        const xL = 100 - (100 - 28) * t;
-        const xR = 100 + (172 - 100) * t;
-        return <line key={y} x1={xL} y1={y} x2={xR} y2={y} />;
-      })}
-      {/* ribs */}
-      <line x1="100" y1="16" x2="100" y2="148" />
-      <line x1="100" y1="16" x2="64" y2="148" />
-      <line x1="100" y1="16" x2="136" y2="148" />
-      {/* base dotted */}
-      <line x1="28" y1="148" x2="172" y2="148" strokeDasharray="3 4" opacity="0.5" />
-    </svg>
-  );
-}
-function ConcentricRings() {
-  return (
-    <svg viewBox="0 0 200 200" className="w-full h-full max-w-[320px] max-h-[320px]" fill="none" stroke="currentColor" strokeWidth="1.15">
-      {[72, 54, 36, 18].map((r) => (
-        <circle key={r} cx="100" cy="100" r={r} />
-      ))}
-      <g fontSize="13" fontFamily="monospace" fill="currentColor" stroke="none" textAnchor="middle" dominantBaseline="middle">
-        <text x="100" y="58">−</text>
-        <text x="100" y="92">+</text>
-        <text x="100" y="124">−</text>
-        <text x="100" y="158">+</text>
-      </g>
-    </svg>
-  );
-}
-function VennGrowth() {
-  return (
-    <svg viewBox="0 0 200 150" className="w-full h-full max-w-[360px] max-h-[270px]" fill="none" stroke="currentColor" strokeWidth="1.15">
-      <circle cx="76" cy="78" r="42" />
-      <circle cx="124" cy="78" r="42" />
-      <circle cx="100" cy="48" r="42" />
-      {/* hatch intersection */}
-      <g opacity="0.85" clipPath="url(#vennClip5)">
-        <defs>
-          <clipPath id="vennClip5">
-            <path d="M100 48 a42 42 0 0 1 24 30 a42 42 0 0 1 -24 30 a42 42 0 0 1 -24 -30 a42 42 0 0 1 24 -30 Z" />
-          </clipPath>
-        </defs>
-        {Array.from({ length: 9 }).map((_, i) => (
-          <line key={i} x1={78 + i * 6} y1={58} x2={86 + i * 6} y2={96} />
-        ))}
-      </g>
-      {/* tiny growth arrow */}
-      <g transform="translate(144 18)" opacity="0.9">
-        <path d="M4 16 L12 8 L20 14 L20 4" fill="none" strokeWidth="1.2" />
-        <path d="M16 4 l4 4 l-4 0 Z" fill="currentColor" stroke="none" />
-      </g>
-    </svg>
-  );
-}
-const GEOMETRICS = [Sunburst, HexStack, PyramidWire, ConcentricRings, VennGrowth] as const;
+// Title-matched Lucide icons (researched picks) — rendered large, thin stroke (1.1) to match ref line-art aesthetic.
+// currentColor inheritance keeps per-card theme fg; tree-shaken, zero new deps (lucide-react already installed).
+const GEOMETRICS: readonly LucideIcon[] = [Target, BrainCircuit, Rocket, Gauge, TrendingUp];
 
 // Ref Image1 (orange #FF6321, cream #F5E8C7) + Image2 (lime #D6FF94, dark #0C1E1E, blue #A9D0FF) — per-card themes (right side only)
 const CARD_THEMES = [
@@ -199,9 +102,11 @@ function StackingCard({ index, step, total, progress }: CardProps) {
             style={{ borderColor: theme.border, backgroundColor: theme.bg, color: theme.fg }}
           >
             <div className="w-full h-full grid place-items-center p-8 md:p-10 lg:p-12" style={{ backgroundColor: theme.bg, color: theme.fg }}>
-              <div className="w-full max-w-[420px] aspect-square grid place-items-center" style={{ color: theme.fg }}>
-                <Geo />
-              </div>
+              <Geo
+                className="w-[220px] h-[220px] sm:w-[260px] sm:h-[260px] md:w-[280px] md:h-[280px]"
+                strokeWidth={1.1}
+                aria-hidden
+              />
             </div>
           </div>
         </div>

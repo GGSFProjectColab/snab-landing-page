@@ -292,8 +292,13 @@ export default function Home() {
         {/* Hero Section */}
         <section id="home" aria-labelledby="hero-title">
           <ContainerWrapper>
-            <div className="relative min-h-[580px] overflow-hidden lg:min-h-[calc(100dvh-4rem)] border-b border-dotted border-edge bg-cover bg-center bg-no-repeat bg-[url('https://res.cloudinary.com/dvzxfbcsd/image/upload/v1787656935/jmvt7wh7eew66m2z1loj.png')] dark:bg-[url('https://res.cloudinary.com/dvzxfbcsd/image/upload/v1787656054/glfm0fbkq0rutv73fjyv.png')]">
+            <div className="relative min-h-[580px] overflow-hidden lg:min-h-[calc(100dvh-4rem)] bg-cover bg-center bg-no-repeat bg-[url('https://res.cloudinary.com/dvzxfbcsd/image/upload/v1787656935/jmvt7wh7eew66m2z1loj.png')] dark:bg-[url('https://res.cloudinary.com/dvzxfbcsd/image/upload/v1787656054/glfm0fbkq0rutv73fjyv.png')]">
               <Hero20 />
+              {/* Bottom gradient fade for smooth UI blending */}
+              <div
+                className="pointer-events-none absolute inset-x-0 bottom-0 h-32 sm:h-44 md:h-56 bg-gradient-to-t from-background via-background/60 to-transparent"
+                aria-hidden="true"
+              />
             </div>
           </ContainerWrapper>
         </section>

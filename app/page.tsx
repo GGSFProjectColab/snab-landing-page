@@ -667,34 +667,37 @@ export default function Home() {
         {/* Contact */}
         <section aria-labelledby="contact-title">
           <ContainerWrapper>
-            <div className="relative min-h-[240px] overflow-hidden sm:min-h-[280px] bg-cover bg-center bg-no-repeat bg-[url('https://res.cloudinary.com/dvzxfbcsd/image/upload/v1787656935/jmvt7wh7eew66m2z1loj.png')] dark:bg-[url('https://res.cloudinary.com/dvzxfbcsd/image/upload/v1787656054/glfm0fbkq0rutv73fjyv.png')]">
-              <div className="relative z-10 flex h-full flex-col items-start justify-center gap-4 py-8 px-5 sm:justify-end sm:py-10 sm:px-6 md:px-12">
+            <div className="relative min-h-[260px] overflow-hidden sm:min-h-[280px] md:min-h-[320px] lg:min-h-[360px] bg-cover bg-center bg-no-repeat bg-[url('https://res.cloudinary.com/dvzxfbcsd/image/upload/v1787656935/jmvt7wh7eew66m2z1loj.png')] dark:bg-[url('https://res.cloudinary.com/dvzxfbcsd/image/upload/v1787656054/glfm0fbkq0rutv73fjyv.png')]">
+              <div className="relative z-10 flex h-full flex-col items-start justify-center gap-4 sm:gap-5 py-8 px-5 sm:justify-end sm:py-10 sm:px-6 md:py-12 md:px-12 lg:px-16">
                 <div>
+                  {/* Typo Size 1: Heading / Title */}
                   <TextGenerateEffect
                     as="h2"
                     id="contact-title"
-                    className="text-subheading font-normal text-foreground dark:text-white drop-shadow-sm"
+                    className="text-title sm:text-subheading md:text-heading font-normal tracking-tight leading-[1.15] text-foreground dark:text-white drop-shadow-sm"
                     staggerDuration={0.05}
                   >
                     Get in Touch
                   </TextGenerateEffect>
+                  {/* Typo Size 2: Body / Description */}
                   <TextGenerateEffect
                     as="p"
-                    className="mt-2 max-w-xl text-body leading-relaxed text-foreground/80 dark:text-white/90"
+                    className="mt-2 sm:mt-3 max-w-xl text-label sm:text-body leading-relaxed text-foreground/80 dark:text-white/90"
                     staggerDuration={0.02}
                   >
                     Have a project in mind? We&apos;d love to hear about it. Whether you need workflow orchestration, intelligent automation, or a new platform, our team is ready to help.
                   </TextGenerateEffect>
                 </div>
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                {/* Typo Size 3: CTA Button & Link */}
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                   <a
-                    className="bg-foreground px-4 py-2 text-button font-normal text-background transition-all hover:bg-foreground/90 sm:py-1.5"
+                    className="inline-flex items-center justify-center bg-foreground px-4 py-2 text-label sm:text-button font-normal text-background transition-all hover:bg-foreground/90 sm:py-1.5"
                     href="/contact"
                   >
                     Start a project
                   </a>
                   <a
-                    className="text-button text-foreground/70 underline underline-offset-4 transition-colors hover:text-foreground dark:text-white/80 dark:hover:text-white"
+                    className="text-label sm:text-button text-foreground/70 underline underline-offset-4 transition-colors hover:text-foreground dark:text-white/80 dark:hover:text-white"
                     href={`mailto:${siteConfig.email}`}
                   >
                     {siteConfig.email}

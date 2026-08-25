@@ -128,6 +128,7 @@ function AiChatbotCrtLogos() {
           { contentWidth: 24, contentHeight: 24 },
           { contentWidth: 24, contentHeight: 24 },
         ]}
+        continuous={true}
         className="absolute inset-0 pointer-events-none"
         style={{ aspectRatio: "unset" }}
       />

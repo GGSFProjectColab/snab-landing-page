@@ -73,6 +73,7 @@ type MountShadowMaskRendererOptions = {
   cells: ShadowMaskCells
   cellStyles: readonly ShadowMaskCellStyle[]
   sourceFactory: ShadowMaskSourceFactory
+  continuous?: boolean
 }
 
 const SHADOW_MASK_WIDTH = 800
@@ -358,6 +359,7 @@ function mountShadowMaskRenderer({
   cells,
   cellStyles,
   sourceFactory,
+  continuous = true,
 }: MountShadowMaskRendererOptions): RendererDisposer {
   if (!sourceFactory) {
     throw new Error('CRT marks shader requires a sourceFactory')
@@ -489,7 +491,7 @@ function mountShadowMaskRenderer({
   const render = (now: number) => {
     if (!running) return
     if (startedAt !== 0) {
-      if (now - startedAt >= SHADOW_MASK_DURATION) {
+      if (!continuous && now - startedAt >= SHADOW_MASK_DURATION) {
         // A mounted effect plays one pass and stops: no perpetual rAF after
         // the catalog duration. The imperative handle and interaction props
         // re-arm the loop through dispose.wake on demand.
@@ -510,7 +512,7 @@ function mountShadowMaskRenderer({
     const delta = lastTimeAt === 0 ? 1 / 60 : Math.min((now - lastTimeAt) / 1000, 0.05)
     lastTimeAt = now
     lastPaintAt = now
-    const motion = startedAt !== 0 && now - startedAt < SHADOW_MASK_DURATION ? 1 : 0
+    const motion = continuous || (startedAt !== 0 && now - startedAt < SHADOW_MASK_DURATION) ? 1 : 0
     time += delta * motion
     const frameScale = Math.max(0.25, Math.min(delta * 60, 3))
     const snap = 1 - Math.pow(1 - 0.18, frameScale)
@@ -625,11 +627,14 @@ function mountShadowMaskRenderer({
   dispose.refresh = () => {
     if (!running) return
     rebuildSource()
-    render(performance.now())
+    if (frame === 0) {
+      render(performance.now())
+    }
   }
   dispose.wake = () => {
     if (!running) return
-    if (startedAt !== 0 && performance.now() - startedAt < SHADOW_MASK_DURATION) {
+    if (frame !== 0) return
+    if (startedAt !== 0 && !continuous && performance.now() - startedAt < SHADOW_MASK_DURATION) {
       // The current pass is still playing; keep its timeline.
       return
     }
@@ -703,6 +708,7 @@ export type ShadowMaskEffectProps = {
   cells?: ShadowMaskCells
   cellStyles?: readonly ShadowMaskCellStyle[]
   interaction?: ShadowMaskInteraction
+  continuous?: boolean
   className?: string
   style?: CSSProperties
   ref?: Ref<ShadowMaskEffectHandle>
@@ -720,6 +726,7 @@ export function ShadowMaskEffect({
   cells = DEFAULT_CELLS,
   cellStyles = DEFAULT_CELL_STYLES,
   interaction,
+  continuous = true,
   className,
   style,
   ref,
@@ -836,6 +843,7 @@ export function ShadowMaskEffect({
         cells: resolvedCells,
         cellStyles,
         sourceFactory,
+        continuous,
       })
       rendererRef.current = renderer
       renderer.wake()
@@ -859,7 +867,7 @@ export function ShadowMaskEffect({
       rendererRef.current = null
       canvas.removeAttribute('data-render-ready')
     }
-  }, [cellCount, cellStyles, columns, rows, source])
+  }, [cellCount, cellStyles, columns, continuous, rows, source])
 
   return (
     <div

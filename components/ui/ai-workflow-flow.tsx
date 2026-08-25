@@ -253,7 +253,7 @@ const TableCard = memo(function TableCard({
   );
 });
 
-export function AIWorkflowFlow({ expanded = true }: { expanded?: boolean }) {
+export function AIWorkflowFlow({ expanded = true, paused = false }: { expanded?: boolean; paused?: boolean }) {
   const [mounted, setMounted] = useState(false);
   const [hoveredEntity, setHoveredEntity] = useState<string | null>(null);
   const { resolvedTheme } = useTheme();
@@ -264,6 +264,8 @@ export function AIWorkflowFlow({ expanded = true }: { expanded?: boolean }) {
   }, []);
 
   const isDark = mounted ? resolvedTheme === "dark" : true;
+  const prefersReduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const shouldPause = paused || prefersReduced;
 
   // Schema definitions strictly matching the reference
   const tables = {
@@ -533,14 +535,16 @@ export function AIWorkflowFlow({ expanded = true }: { expanded?: boolean }) {
                 </g>
               )}
 
-              {/* Animated Light Flow Pulse along path */}
-              <circle r="2.5" fill={isDark ? "#38bdf8" : "#0284c7"}>
-                <animateMotion
-                  dur={`${3.5 + idx * 0.5}s`}
-                  repeatCount="indefinite"
-                  path={rel.path}
-                />
-              </circle>
+              {/* Animated Light Flow Pulse along path - paused when offscreen to save FPS */}
+              {!shouldPause && (
+                <circle r="2.5" fill={isDark ? "#38bdf8" : "#0284c7"}>
+                  <animateMotion
+                    dur={`${3.5 + idx * 0.5}s`}
+                    repeatCount="indefinite"
+                    path={rel.path}
+                  />
+                </circle>
+              )}
 
               {/* Text Label with Pill Background */}
               <g transform={`translate(${rel.labelPos.x}, ${rel.labelPos.y})`}>

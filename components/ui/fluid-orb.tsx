@@ -10,6 +10,7 @@ export type FluidOrbProps = React.ComponentProps<"div"> & {
   color?: string;
   darkColor?: string;
   lightColor?: string;
+  paused?: boolean;
 };
 
 const VERT = `
@@ -116,6 +117,7 @@ const FluidOrb = ({
   color,
   darkColor = "#FF6A00",
   lightColor = "#10B981",
+  paused = false,
   className,
   style,
   ...props
@@ -175,14 +177,16 @@ const FluidOrb = ({
     gl.uniform2f(uResolution, px, px);
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const shouldPause = paused || reduce;
     const start = performance.now();
     let raf = 0;
 
     const render = (now: number) => {
-      gl.uniform1f(uTime, reduce ? 0 : (now - start) / 1000);
+      gl.uniform1f(uTime, shouldPause ? 0 : (now - start) / 1000);
       gl.drawArrays(gl.TRIANGLES, 0, 6);
-      if (!reduce) raf = requestAnimationFrame(render);
+      if (!shouldPause) raf = requestAnimationFrame(render);
     };
+    // Initial draw even when paused to show static frame
     render(start);
 
     return () => {
@@ -192,7 +196,7 @@ const FluidOrb = ({
       gl.deleteShader(frag);
       gl.deleteBuffer(buffer);
     };
-  }, [size, activeColor]);
+  }, [size, activeColor, paused]);
 
   return (
     <div

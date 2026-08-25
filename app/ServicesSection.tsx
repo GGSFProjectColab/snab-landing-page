@@ -137,19 +137,19 @@ const ServiceCardItem = memo(function ServiceCardItem({
           )}
         </div>
 
-        {/* Right Column: Visual, unchanged, no remount on text animation */}
-        <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-background p-1.5 sm:p-4 lg:p-6">
+        {/* Right Column: Visual - paused when offscreen to keep 60fps, research: only compositor props */}
+        <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-background p-1.5 sm:p-4 lg:p-6 [contain:content]">
           {service.visual === "flow" ? (
             <div className="relative h-full w-full max-h-[250px] sm:max-h-[290px] lg:max-h-[360px] flex items-center justify-center">
-              <AIWorkflowFlow expanded={true} />
+              <AIWorkflowFlow expanded={true} paused={!isActive} />
             </div>
           ) : service.visual === "orb" ? (
             <div className="flex flex-col items-center justify-center p-1 text-center">
               <div className="block lg:hidden">
-                <FluidOrb size={180} />
+                <FluidOrb size={180} paused={!isActive} />
               </div>
               <div className="hidden lg:block">
-                <FluidOrb size={300} />
+                <FluidOrb size={300} paused={!isActive} />
               </div>
             </div>
           ) : service.visual === "mobile" ? (
@@ -162,15 +162,15 @@ const ServiceCardItem = memo(function ServiceCardItem({
             </div>
           ) : service.visual === "dithering" ? (
             <div className="relative aspect-video w-full max-w-[280px] sm:max-w-none h-[170px] sm:h-[220px] lg:h-[300px] overflow-hidden flex items-center justify-center">
-              <CloudShader />
+              <CloudShader paused={!isActive} />
             </div>
           ) : service.visual === "globe" ? (
             <div className="relative aspect-square w-full max-w-[190px] sm:max-w-[260px] lg:max-w-[360px] overflow-hidden flex items-center justify-center">
-              <Globe />
+              <Globe paused={!isActive} />
             </div>
           ) : (
             <div className="flex items-center justify-center p-1">
-              <FluidOrb size={180} />
+              <FluidOrb size={180} paused={!isActive} />
             </div>
           )}
         </div>

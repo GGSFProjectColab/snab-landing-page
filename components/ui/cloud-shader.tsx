@@ -7,7 +7,7 @@ import { Dithering } from "@paper-design/shaders-react";
 const DARK_BACK = "#14120B";
 const LIGHT_BACK = "#F7F7F4";
 
-export function CloudShader() {
+export function CloudShader({ paused = false }: { paused?: boolean }) {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -16,6 +16,8 @@ export function CloudShader() {
   }, []);
 
   const isDark = mounted ? resolvedTheme === "dark" : true;
+  const prefersReduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const shouldPause = paused || prefersReduced;
 
   return (
     <div className="relative h-full w-full flex items-center justify-center">
@@ -28,7 +30,7 @@ export function CloudShader() {
           shape="sphere"
           type="4x4"
           size={2}
-          speed={1}
+          speed={shouldPause ? 0 : 1}
           scale={0.78}
         />
       )}

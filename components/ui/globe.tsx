@@ -39,9 +39,11 @@ const GLOBE_CONFIG: COBEOptions = {
 export function Globe({
   className,
   config = GLOBE_CONFIG,
+  paused = false,
 }: {
   className?: string
   config?: COBEOptions
+  paused?: boolean
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const phiRef = useRef(0)
@@ -81,12 +83,15 @@ export function Globe({
     window.addEventListener("resize", onResize)
     onResize()
 
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const shouldPause = paused || prefersReduced
+
     const globe = createGlobe(canvasRef.current!, {
       ...config,
       width: widthRef.current * 2,
       height: widthRef.current * 2,
       onRender: (state) => {
-        if (!pointerInteracting.current) phiRef.current += 0.005
+        if (!shouldPause && !pointerInteracting.current) phiRef.current += 0.005
         state.phi = phiRef.current + rs.get()
         state.width = widthRef.current * 2
         state.height = widthRef.current * 2
@@ -98,7 +103,7 @@ export function Globe({
       globe.destroy()
       window.removeEventListener("resize", onResize)
     }
-  }, [rs, config])
+  }, [rs, config, paused])
 
   return (
     <div

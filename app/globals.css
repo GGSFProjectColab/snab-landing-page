@@ -398,7 +398,7 @@ html[data-magicui-theme-vt="active"]::view-transition-new(root) {
 
 /* Sync View Transition group duration with JS duration var */
 html[data-magicui-theme-vt="active"]::view-transition-group(root) {
-  animation-duration: var(--magicui-theme-toggle-vt-duration, 400ms);
+  animation-duration: var(--magicui-theme-toggle-vt-duration, 380ms);
   animation-timing-function: ease-in-out;
 }
 

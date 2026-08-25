@@ -38,7 +38,7 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 
     return (data as BlogPost[]).map((blog) => ({
       ...blog,
-      cover_image: blog.cover_image || "/seo/ascii-magic-21.png",
+      cover_image: blog.cover_image || "/seo/SEO-OG.png",
     }));
   } catch (err) {
     console.error("Error fetching blogs from InsForge:", err);
@@ -65,7 +65,7 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
     const blog = data as BlogPost;
     return {
       ...blog,
-      cover_image: blog.cover_image || "/seo/ascii-magic-21.png",
+      cover_image: blog.cover_image || "/seo/SEO-OG.png",
     };
   } catch (err) {
     console.error(`Error fetching blog by slug "${slug}" from InsForge:`, err);

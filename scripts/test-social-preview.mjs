@@ -53,7 +53,7 @@ async function runSocialPreviewVerification() {
     return new URL(cleanPath, `${siteUrl}/`).toString();
   }
 
-  const rawImage = sampleBlog.cover_image || "/seo/ascii-magic-21.png";
+  const rawImage = sampleBlog.cover_image || "/seo/SEO-OG.png";
   const ogImage = rawImage.startsWith("http") ? rawImage : absoluteUrl(rawImage);
   const postUrl = absoluteUrl(`/blogs/${sampleBlog.slug}`);
 

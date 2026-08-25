@@ -20,7 +20,7 @@ export const metadata: Metadata = createPageMetadata({
 export const dynamic = "force-dynamic";
 
 function FeaturedCard({ post }: { post: BlogPost }) {
-  const imageSrc = post.cover_image || "/seo/ascii-magic-21.png";
+  const imageSrc = post.cover_image || "/seo/SEO-OG.png";
   const readTimeStr = post.read_time || "5 min read";
 
   return (
@@ -65,7 +65,7 @@ function FeaturedCard({ post }: { post: BlogPost }) {
 }
 
 function BlogCard({ post }: { post: BlogPost }) {
-  const imageSrc = post.cover_image || "/seo/ascii-magic-21.png";
+  const imageSrc = post.cover_image || "/seo/SEO-OG.png";
   const readTimeStr = post.read_time || "5 min read";
 
   return (

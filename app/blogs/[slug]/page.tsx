@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const rawImage = post.cover_image || "/seo/ascii-magic-21.png";
+  const rawImage = post.cover_image || "/seo/SEO-OG.png";
   const ogImage = rawImage.startsWith("http://") || rawImage.startsWith("https://")
     ? rawImage
     : absoluteUrl(rawImage);
@@ -105,7 +105,7 @@ export default async function BlogPostPage({ params }: Props) {
     year: "numeric",
   });
 
-  const rawImage = post.cover_image || "/seo/ascii-magic-21.png";
+  const rawImage = post.cover_image || "/seo/SEO-OG.png";
   const ogImage = rawImage.startsWith("http://") || rawImage.startsWith("https://")
     ? rawImage
     : absoluteUrl(rawImage);
@@ -312,7 +312,7 @@ export default async function BlogPostPage({ params }: Props) {
                   >
                     <div className="relative aspect-[4/3] overflow-hidden bg-muted/30">
                       <Image
-                        src={related.cover_image || "/seo/ascii-magic-21.png"}
+                        src={related.cover_image || "/seo/SEO-OG.png"}
                         alt={related.title}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

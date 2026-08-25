@@ -77,9 +77,9 @@ export function createPageMetadata({
       description,
       images: [
         {
-          url: absoluteUrl("/seo/ascii-magic-21.png"),
-          width: 1280,
-          height: 717,
+          url: absoluteUrl("/seo/SEO-OG.png"),
+          width: 1672,
+          height: 941,
           alt: socialTitle,
         },
       ],
@@ -88,7 +88,7 @@ export function createPageMetadata({
       card: "summary_large_image",
       title: socialTitle,
       description,
-      images: [absoluteUrl("/seo/ascii-magic-21.png")],
+      images: [absoluteUrl("/seo/SEO-OG.png")],
     },
     robots: noIndex
       ? {

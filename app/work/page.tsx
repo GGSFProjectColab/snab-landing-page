@@ -15,7 +15,7 @@ export const metadata: Metadata = createPageMetadata({
 const workItems = [
   {
     number: "01",
-    name: "Interview Expert",
+    name: "InterviewXpert",
     status: "Live",
     categories: ["INTERVIEW AUTOMATION", "AI PRODUCT", "WORKFLOW SOFTWARE"],
     description:
@@ -28,11 +28,12 @@ const workItems = [
     ],
     image: "/interviewxpert-dark.png",
     imageDark: "/interviewxpert.png",
-    imageAlt: "Interview Expert Interface Preview",
+    imageAlt: "InterviewXpert Interface Preview",
+    link: "https://interviewxpert.in",
   },
   {
     number: "02",
-    name: "Notary Expert",
+    name: "NotaryXpert",
     status: "Live",
     categories: ["NOTARY AUTOMATION", "LEGAL WORKFLOWS", "AI PRODUCT"],
     description:
@@ -44,7 +45,7 @@ const workItems = [
       "Case Tracking",
     ],
     image: "/notary-expert.png",
-    imageAlt: "Notary Expert Platform Preview",
+    imageAlt: "NotaryXpert Platform Preview",
   },
   {
     number: "03",
@@ -165,23 +166,25 @@ export default function WorkPage() {
                     </div>
                   </div>
 
-                  {/* Action Link */}
-                  <div className="mt-6">
-                    <a
-                      href={"link" in item && item.link ? item.link : "#"}
-                      target={"link" in item && item.link ? "_blank" : undefined}
-                      rel={"link" in item && item.link ? "noopener noreferrer" : undefined}
-                      className="inline-flex items-center gap-1.5 text-button font-normal text-foreground transition-colors hover:text-muted-foreground"
-                    >
-                      <span>Explore system</span>
-                      <span
-                        className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                        aria-hidden="true"
+                  {/* Action Link — only if item has a link (NotaryXpert has no link) */}
+                  {"link" in item && item.link ? (
+                    <div className="mt-6">
+                      <a
+                        href={item.link as string}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-button font-normal text-foreground transition-colors hover:text-muted-foreground"
                       >
-                        ↗
-                      </span>
-                    </a>
-                  </div>
+                        <span>Explore system</span>
+                        <span
+                          className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                          aria-hidden="true"
+                        >
+                          ↗
+                        </span>
+                      </a>
+                    </div>
+                  ) : null}
                 </div>
 
                 {/* Visual Preview Column */}

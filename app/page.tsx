@@ -38,7 +38,7 @@ export const metadata: Metadata = createPageMetadata({
 const projects = [
   {
     number: "01",
-    name: "Interview Expert",
+    name: "InterviewXpert",
     categories: ["INTERVIEW AUTOMATION", "INTELLIGENT PRODUCT", "WORKFLOW SOFTWARE"],
     description:
       "An intelligent platform that helps teams organize interview workflows, reduce administrative work, and turn interview information into structured, actionable records.",
@@ -50,11 +50,12 @@ const projects = [
     ],
     image: "/interviewxpert-dark.png",
     imageDark: "/interviewxpert.png",
-    imageAlt: "Interview Expert mark",
+    imageAlt: "InterviewXpert mark",
+    link: "https://interviewxpert.in",
   },
   {
     number: "02",
-    name: "Notary Expert",
+    name: "NotaryXpert",
     categories: ["NOTARY AUTOMATION", "LEGAL WORKFLOWS", "INTELLIGENT PRODUCT"],
     description:
       "An intelligent workflow platform that helps notary professionals manage documents, appointments, client communication, and case progress more efficiently.",
@@ -65,7 +66,7 @@ const projects = [
       "Case Tracking",
     ],
     image: "/notary-expert.png",
-    imageAlt: "Notary Expert seal",
+    imageAlt: "NotaryXpert seal",
   },
 ];
 
@@ -74,7 +75,7 @@ const services = [
     number: "01",
     title: "Workflow Orchestration",
     description:
-      "Intelligent automation pipelines that turn manual, repetitive work into reliable, self-running processes.",
+      "Intelligent automation pipelines that convert fragmented manual work into dependable self running processes engineered for accuracy scale and auditability.",
     capabilities: ["Process Automation", "Document Processing", "LLM Integration"],
     image: null,
     imageAlt: "",
@@ -84,7 +85,7 @@ const services = [
     number: "02",
     title: "Intelligent Agents",
     description:
-      "Autonomous AI agents that plan, reason, and take action inside your business systems — with human oversight built in.",
+      "Autonomous agents that plan reason and act inside your business systems with human oversight built in for safe delegation at scale.",
     capabilities: ["AI Agents", "Orchestration", "RAG"],
     image: null,
     imageAlt: "",
@@ -94,7 +95,7 @@ const services = [
     number: "03",
     title: "Mobile Apps",
     description:
-      "Native and cross-platform mobile applications that put your product in your customers' pockets.",
+      "Native and cross platform mobile applications that deliver fluid high performance experiences customers trust every day.",
     capabilities: ["iOS", "Android", "React Native", "Flutter"],
     image: null,
     imageAlt: "",
@@ -104,7 +105,7 @@ const services = [
     number: "04",
     title: "Desktop Apps",
     description:
-      "Fast, offline-capable desktop software built for demanding professional workflows and power users.",
+      "Fast offline capable desktop software engineered for demanding professional workflows and power users who need reliability.",
     capabilities: ["Windows", "macOS", "Linux", "Electron"],
     image: null,
     imageAlt: "",
@@ -114,7 +115,7 @@ const services = [
     number: "05",
     title: "Cloud Architecture",
     description:
-      "Scalable cloud architecture engineered for reliability, security, and cost efficiency from day one.",
+      "Scalable cloud architecture engineered for enterprise reliability security and cost efficiency from the first deployment.",
     capabilities: ["AWS", "GCP", "Azure", "Serverless"],
     image: null,
     imageAlt: "",
@@ -124,7 +125,7 @@ const services = [
     number: "06",
     title: "DevOps & Reliability",
     description:
-      "Delivery pipelines, infrastructure as code, and observability that keep releases fast and systems healthy.",
+      "Delivery pipelines and infrastructure as code that keep releases fast systems healthy and operations predictable.",
     capabilities: ["CI/CD", "Infrastructure as Code", "Monitoring"],
     image: null,
     imageAlt: "",
@@ -409,18 +410,22 @@ export default function Home() {
                     <p className="mt-2 font-mono text-caption text-muted-foreground">
                       {project.capabilities.join(" / ")}
                     </p>
-                    <a
-                      className="mt-4 inline-flex items-center gap-1 text-button font-normal transition-colors hover:text-muted-foreground"
-                      href="#"
-                    >
-                      View Project
-                      <span
-                        className="inline-block transition-transform duration-300 group-hover:rotate-0 -rotate-45"
-                        aria-hidden="true"
+                    {"link" in project && (project as { link?: string }).link ? (
+                      <a
+                        className="mt-4 inline-flex items-center gap-1 text-button font-normal transition-colors hover:text-muted-foreground"
+                        href={(project as { link?: string }).link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
-                        ↗
-                      </span>
-                    </a>
+                        View Project
+                        <span
+                          className="inline-block transition-transform duration-300 group-hover:rotate-0 -rotate-45"
+                          aria-hidden="true"
+                        >
+                          ↗
+                        </span>
+                      </a>
+                    ) : null}
                   </div>
                   <div className="hidden items-center justify-center md:flex">
                     <div className="relative h-[200px] w-[200px] overflow-hidden rounded-[10px] border border-dotted border-edge p-1">

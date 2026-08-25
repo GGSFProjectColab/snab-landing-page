@@ -5,7 +5,7 @@ import { CursorDrivenParticleTypography } from "@/components/ui/cursor-driven-pa
 
 interface FooterLink {
   label: string;
-  href: string;
+  href?: string;
   external?: boolean;
 }
 
@@ -18,8 +18,8 @@ const footerColumns: FooterColumn[] = [
   {
     title: "Product",
     links: [
-      { label: "Interview Expert", href: "https://interviewxpert.in", external: true },
-      { label: "Notary Expert", href: "https://notaryexpert.in", external: true },
+      { label: "InterviewXpert", href: "https://interviewxpert.in", external: true },
+      { label: "NotaryXpert" },
       { label: "NyayaAI", href: "https://nyayai.interviewxpert.in/", external: true },
       { label: "Termy", href: "https://termyy.vercel.app/", external: true },
     ],
@@ -148,22 +148,31 @@ export function HomeFooter() {
                     {column.title}
                   </h3>
                   <div className="flex flex-col gap-2">
-                    {column.links.map((item) => (
-                      <a
-                        className="inline-flex items-center gap-1 text-button text-muted-foreground transition-colors duration-200 hover:text-foreground hover:translate-x-1 transform"
-                        href={item.href}
-                        key={item.label}
-                        target={item.external ? "_blank" : undefined}
-                        rel={item.external ? "noopener noreferrer" : undefined}
-                      >
-                        <span>{item.label}</span>
-                        {item.external && (
-                          <span className="text-[10px] text-muted-foreground/60" aria-hidden="true">
-                            ↗
-                          </span>
-                        )}
-                      </a>
-                    ))}
+                    {column.links.map((item) =>
+                      item.href ? (
+                        <a
+                          className="inline-flex items-center gap-1 text-button text-muted-foreground transition-colors duration-200 hover:text-foreground hover:translate-x-1 transform"
+                          href={item.href}
+                          key={item.label}
+                          target={item.external ? "_blank" : undefined}
+                          rel={item.external ? "noopener noreferrer" : undefined}
+                        >
+                          <span>{item.label}</span>
+                          {item.external && (
+                            <span className="text-[10px] text-muted-foreground/60" aria-hidden="true">
+                              ↗
+                            </span>
+                          )}
+                        </a>
+                      ) : (
+                        <span
+                          key={item.label}
+                          className="inline-flex items-center gap-1 text-button text-muted-foreground"
+                        >
+                          {item.label}
+                        </span>
+                      )
+                    )}
                   </div>
                 </div>
               ))}

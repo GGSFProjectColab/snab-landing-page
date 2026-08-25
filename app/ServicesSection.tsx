@@ -3,6 +3,7 @@
 import { memo, useCallback, useEffect, useRef, useState } from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
 import { ContainerWrapper } from "@/components/site/container";
 import { HeaderTitle } from "@/components/profile/header-title";
 import { CloudShader } from "@/components/ui/cloud-shader";
@@ -22,60 +23,121 @@ import {
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 
-// ------------------------------------------------------
-// Single service card – layout preserved 1:1 from previous
-// ------------------------------------------------------
+// Perf safe variants: opacity plus y only, GPU composited, no blur on bullets
+const bulletContainerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.06,
+      delayChildren: 0.32,
+    },
+  },
+};
+
+const bulletItemVariants = {
+  hidden: { opacity: 0, y: 6 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.36, ease: "easeOut" as const },
+  },
+};
+
+// Single service card: desktop bullets are hidden md:block, mobile untouched
 const ServiceCardItem = memo(function ServiceCardItem({
   service,
+  isActive,
 }: {
   service: Service;
+  isActive: boolean;
 }) {
+  const prefersReducedMotion = useReducedMotion();
+
+  const shouldAnimate = isActive && !prefersReducedMotion;
+
   return (
     <div className="flex h-full w-full bg-background overflow-hidden">
       <div className="grid h-full w-full grid-rows-[auto_1fr] md:grid-rows-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-dotted divide-edge overflow-hidden">
         {/* Left Column */}
         <div className="flex flex-col justify-start p-3 sm:p-6 lg:p-8 overflow-hidden">
-          <TextGenerateEffect
-            as="h3"
-            className="text-base sm:text-xl lg:text-2xl font-medium sm:font-normal tracking-tight text-foreground"
-            staggerDuration={0.14}
-            transition={{ duration: 0.65 }}
-            filter={false}
-          >
-            {service.title}
-          </TextGenerateEffect>
+          {/* Title: AI generating blur reveal, retriggers on active change via key - Tier 1: Title */}
+          {shouldAnimate ? (
+            <TextGenerateEffect
+              key={`title-${service.number}`}
+              as="h3"
+              className="text-base md:text-title font-medium md:font-normal tracking-tight text-foreground"
+              staggerDuration={0.08}
+              transition={{ duration: 0.45, ease: "easeOut" }}
+              filter={true}
+            >
+              {service.title}
+            </TextGenerateEffect>
+          ) : (
+            <h3 className="text-base md:text-title font-medium md:font-normal tracking-tight text-foreground">
+              {service.title}
+            </h3>
+          )}
 
-          <TextGenerateEffect
-            as="p"
-            className="mt-1 sm:mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground max-w-lg"
-            staggerDuration={0.04}
-            transition={{ duration: 0.65 }}
-            filter={false}
-          >
-            {service.description}
-          </TextGenerateEffect>
+          {shouldAnimate ? (
+            <TextGenerateEffect
+              key={`desc-${service.number}`}
+              as="p"
+              className="mt-1 md:mt-2 text-xs md:text-body leading-relaxed text-muted-foreground max-w-lg"
+              staggerDuration={0.03}
+              transition={{ duration: 0.42, ease: "easeOut" }}
+              filter={false}
+            >
+              {service.description}
+            </TextGenerateEffect>
+          ) : (
+            <p className="mt-1 md:mt-2 text-xs md:text-body leading-relaxed text-muted-foreground max-w-lg">
+              {service.description}
+            </p>
+          )}
 
           {service.highlights && service.highlights.length > 0 && (
-            <div className="hidden md:block mt-2.5 sm:mt-4 space-y-1 sm:space-y-1.5">
-              <p className="font-mono text-[9px] sm:text-[10px] font-medium tracking-wider uppercase text-muted-foreground">
+            <div className="hidden md:block mt-5 space-y-2">
+              <p className="font-mono text-caption font-medium tracking-widest uppercase text-muted-foreground/80">
                 Key Highlights
               </p>
-              <div className="grid gap-1 sm:gap-1.5">
-                {service.highlights.map((highlight) => (
-                  <div
-                    key={highlight}
-                    className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground"
-                  >
-                    <CheckCircle2 size={13} className="mt-0.5 shrink-0 text-teal" />
-                    <span className="leading-tight sm:leading-snug">{highlight}</span>
-                  </div>
-                ))}
-              </div>
+
+              {shouldAnimate ? (
+                <motion.div
+                  key={`bullets-${service.number}`}
+                  initial="hidden"
+                  animate="visible"
+                  variants={bulletContainerVariants}
+                  className="grid gap-1.5"
+                >
+                  {service.highlights.map((highlight) => (
+                    <motion.div
+                      key={highlight}
+                      variants={bulletItemVariants}
+                      className="flex items-start gap-2 text-body leading-snug text-muted-foreground will-change-transform"
+                    >
+                      <CheckCircle2 size={14} className="mt-1 shrink-0 text-teal" />
+                      <span>{highlight}</span>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              ) : (
+                <div className="grid gap-1.5">
+                  {service.highlights.map((highlight) => (
+                    <div
+                      key={highlight}
+                      className="flex items-start gap-2 text-body leading-snug text-muted-foreground"
+                    >
+                      <CheckCircle2 size={14} className="mt-1 shrink-0 text-teal" />
+                      <span>{highlight}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>
 
-        {/* Right Column: Visual */}
+        {/* Right Column: Visual, unchanged, no remount on text animation */}
         <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-background p-1.5 sm:p-4 lg:p-6">
           {service.visual === "flow" ? (
             <div className="relative h-full w-full max-h-[250px] sm:max-h-[290px] lg:max-h-[360px] flex items-center justify-center">
@@ -117,9 +179,7 @@ const ServiceCardItem = memo(function ServiceCardItem({
   );
 });
 
-// ------------------------------------------------------
-// Tabs – identical grid styling, now drives carousel API
-// ------------------------------------------------------
+// Tabs: identical grid styling, now drives carousel API
 const GliderTabs = memo(function GliderTabs({
   services,
   activeStep,
@@ -136,7 +196,6 @@ const GliderTabs = memo(function GliderTabs({
         const mobileIsLastCol = (idx + 1) % 3 === 0;
         const mobileIsTopRow = idx < 3;
         const desktopIsLastCol = idx === services.length - 1;
-        // For 9 items the desktop grid wraps: keep border logic for 6-col layout
         const isDesktopLastColWrapped =
           services.length > 6 && (idx + 1) % 6 === 0;
 
@@ -153,11 +212,9 @@ const GliderTabs = memo(function GliderTabs({
               "transition-colors duration-150 rounded-none cursor-pointer select-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
               !mobileIsLastCol ? "border-r border-dotted border-edge md:border-r-0" : "",
               mobileIsTopRow ? "border-b border-dotted border-edge md:border-b-0" : "",
-              // desktop vertical dividers
               !desktopIsLastCol && !isDesktopLastColWrapped
                 ? "md:border-r md:border-dotted md:border-edge"
                 : "",
-              // handle wrap row border for 9 items
               services.length > 6 && idx < 6 ? "md:border-b md:border-dotted md:border-edge lg:border-b-0" : "",
               isActive
                 ? "bg-foreground text-background font-semibold"
@@ -172,9 +229,7 @@ const GliderTabs = memo(function GliderTabs({
   );
 });
 
-// ------------------------------------------------------
-// ServicesSection – carousel with autoplay + arrows
-// ------------------------------------------------------
+// ServicesSection: carousel with 5s autoplay, lightweight text animation
 export function ServicesSection({ services: initialServices }: { services?: Service[] }) {
   const [activeStep, setActiveStep] = useState(0);
   const [api, setApi] = useState<CarouselApi | undefined>(undefined);
@@ -184,9 +239,8 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
       ? ENRICHED_SERVICES
       : initialServices || ENRICHED_SERVICES;
 
-  // Autoplay plugin – 4s delay, pauses on hover / interaction, resumes after
   const autoplayRef = useRef(
-    Autoplay({ delay: 4000, stopOnInteraction: false, stopOnMouseEnter: true })
+    Autoplay({ delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true })
   );
 
   const onSelect = useCallback(
@@ -218,7 +272,6 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
   const scrollPrev = useCallback(() => api?.scrollPrev(), [api]);
   const scrollNext = useCallback(() => api?.scrollNext(), [api]);
 
-  // Pause autoplay on reduced-motion
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -238,7 +291,7 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
         {/* Tabs – drive carousel */}
         <GliderTabs services={services} activeStep={activeStep} onTabClick={handleTabClick} />
 
-        {/* Carousel stage – same height as before, now shadcn/embla */}
+        {/* Carousel stage – 5s autoplay, manual only on reduced motion */}
         <div className="relative w-full border-b border-dotted border-edge bg-background group/carousel">
           <Carousel
             opts={{
@@ -256,17 +309,17 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
             }}
           >
             <CarouselContent className="-ml-0">
-              {services.map((service) => (
+              {services.map((service, idx) => (
                 <CarouselItem key={`service-card-${service.number}`} className="pl-0 basis-full">
                   <div className="h-[360px] sm:h-[420px] md:h-[calc(100vh-190px)] md:min-h-[480px] md:max-h-[580px] w-full">
-                    <ServiceCardItem service={service} />
+                    <ServiceCardItem service={service} isActive={activeStep === idx} />
                   </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
           </Carousel>
 
-          {/* Arrow controls – dotted border theme, visible on hover/focus, always on mobile */}
+          {/* Arrow controls – dotted border theme */}
           <div className="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between px-2 sm:px-3">
             <button
               type="button"
@@ -286,7 +339,7 @@ export function ServicesSection({ services: initialServices }: { services?: Serv
             </button>
           </div>
 
-          {/* Bottom progress + dots for a11y / affordance */}
+          {/* Bottom progress + dots */}
           <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 sm:gap-2">
             {services.map((_, idx) => (
               <button

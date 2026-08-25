@@ -34,7 +34,7 @@ function LogoMark({ className }: { className?: string }) {
       className={cn("flex items-center gap-2", className)}
     >
       <Image
-        className="brand-logo h-7 w-7 md:h-8 md:w-8 shrink-0 object-contain"
+        className="brand-logo h-6 w-6 md:h-7 md:w-7 shrink-0 object-contain"
         src="/logo.png"
         alt=""
         aria-hidden="true"
@@ -481,7 +481,7 @@ export function SiteHeader() {
 
   return (
     <header
-      className="sticky top-0 z-[500] h-14 bg-background/80 backdrop-blur-md md:h-16 full-bleed-border-b"
+      className="sticky top-0 z-[500] h-12 bg-background/80 backdrop-blur-md md:h-14 full-bleed-border-b"
       aria-label="Primary navigation"
     >
       <div className="mx-auto h-full w-full">

@@ -57,7 +57,7 @@ export const Section24Hero = () => {
   const isDark = mounted ? resolvedTheme === "dark" : true;
 
   return (
-    <div className="relative mx-auto flex min-h-[580px] lg:min-h-[calc(100dvh-4rem)] w-full flex-col items-center justify-center overflow-hidden py-14 sm:py-16 md:py-20">
+    <div className="relative mx-auto flex min-h-[580px] lg:min-h-[calc(100dvh-4rem)] w-full flex-col items-center justify-start overflow-hidden pt-10 pb-14 sm:pt-14 sm:pb-16 md:pt-16 md:pb-20 lg:pt-20 full-hd:pt-24">
       {/* Hero Foreground Content */}
       <div className="relative z-10 mx-auto flex w-full max-w-[440px] flex-col items-center gap-5 sm:gap-6 px-4 sm:px-6 ipad:max-w-[760px] desktop-sm:max-w-[820px] full-hd:max-w-[940px]">
         <RevealGroup className="flex flex-col items-center gap-4 sm:gap-5" delay={0.1}>

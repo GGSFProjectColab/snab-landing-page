@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ArrowDown, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -66,40 +67,60 @@ export function ServicesAccordion({ services }: { services: Service[] }) {
             >
               <div className="overflow-hidden">
                 <div className="px-4 pb-8 sm:px-6 sm:pb-10 md:px-8 md:pb-12">
-                  <p className="max-w-xl text-body leading-relaxed text-muted-foreground">
-                    {service.description}
-                  </p>
-
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {service.capabilities.map((capability) => (
-                      <span
-                        key={capability}
-                        className="border border-dotted border-edge px-2.5 py-1 font-mono text-caption uppercase tracking-wider text-muted-foreground"
-                      >
-                        {capability}
-                      </span>
-                    ))}
-                  </div>
-
-                  {service.highlights && service.highlights.length > 0 && (
-                    <div className="mt-6 hidden space-y-1.5 md:block">
-                      <p className="font-mono text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-                        Key Highlights
+                  <div className="grid gap-6 md:gap-8 lg:gap-10 md:grid-cols-[1fr_300px] lg:grid-cols-[1fr_380px] items-start">
+                    {/* Left: Text content */}
+                    <div className="min-w-0">
+                      <p className="max-w-xl text-body leading-relaxed text-muted-foreground">
+                        {service.description}
                       </p>
-                      {service.highlights.map((highlight) => (
-                        <div
-                          key={highlight}
-                          className="flex items-start gap-2 text-sm text-muted-foreground"
-                        >
-                          <CheckCircle2
-                            size={13}
-                            className="mt-0.5 shrink-0 text-teal"
-                          />
-                          <span>{highlight}</span>
+
+                      <div className="mt-5 flex flex-wrap gap-2">
+                        {service.capabilities.map((capability) => (
+                          <span
+                            key={capability}
+                            className="border border-dotted border-edge px-2.5 py-1 font-mono text-caption uppercase tracking-wider text-muted-foreground"
+                          >
+                            {capability}
+                          </span>
+                        ))}
+                      </div>
+
+                      {service.highlights && service.highlights.length > 0 && (
+                        <div className="mt-6 hidden space-y-1.5 md:block">
+                          <p className="font-mono text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                            Key Highlights
+                          </p>
+                          {service.highlights.map((highlight) => (
+                            <div
+                              key={highlight}
+                              className="flex items-start gap-2 text-sm text-muted-foreground"
+                            >
+                              <CheckCircle2
+                                size={13}
+                                className="mt-0.5 shrink-0 text-teal"
+                              />
+                              <span>{highlight}</span>
+                            </div>
+                          ))}
                         </div>
-                      ))}
+                      )}
                     </div>
-                  )}
+
+                    {/* Right: Service image - full bleed, no borders/caption */}
+                    {service.image && (
+                      <div className="relative overflow-hidden">
+                        <div className="relative aspect-[4/3] w-full overflow-hidden">
+                          <Image
+                            src={service.image}
+                            alt={service.imageAlt || service.title}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, 380px"
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>

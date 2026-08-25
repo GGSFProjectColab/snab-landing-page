@@ -677,7 +677,12 @@ export default function Home() {
         {/* Contact */}
         <section aria-labelledby="contact-title">
           <ContainerWrapper>
-            <div className="relative min-h-[260px] overflow-hidden sm:min-h-[280px] md:min-h-[320px] lg:min-h-[360px] bg-cover bg-center bg-no-repeat bg-[url('https://res.cloudinary.com/dvzxfbcsd/image/upload/v1787656935/jmvt7wh7eew66m2z1loj.png')] dark:bg-[url('https://res.cloudinary.com/dvzxfbcsd/image/upload/v1787656054/glfm0fbkq0rutv73fjyv.png')]">
+            <div className="relative min-h-[260px] overflow-hidden sm:min-h-[280px] md:min-h-[320px] lg:min-h-[360px]">
+              {/* Contact background with same reduced brightness as hero */}
+              <div
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('https://res.cloudinary.com/dvzxfbcsd/image/upload/v1787656935/jmvt7wh7eew66m2z1loj.png')] brightness-[0.88] dark:bg-[url('https://res.cloudinary.com/dvzxfbcsd/image/upload/v1787656054/glfm0fbkq0rutv73fjyv.png')] dark:brightness-[0.82]"
+                aria-hidden="true"
+              />
               <div className="relative z-10 flex h-full flex-col items-start justify-center gap-4 sm:gap-5 py-8 px-5 sm:justify-end sm:py-10 sm:px-6 md:py-12 md:px-12 lg:px-16">
                 <div>
                   {/* Typo Size 1: Heading / Title */}

@@ -16,6 +16,7 @@ import {
   type ShadowMaskEffectHandle,
   type ShadowMaskSourceFactory,
 } from "@/components/ui/shadow-mask-effect";
+import { LLM_CONTEXT_TEXT } from "@/data/llm-context";
 
 const OPENAI_PATH =
   "M22.282 9.821a6 6 0 0 0-.516-4.91a6.05 6.05 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a6 6 0 0 0-3.998 2.9a6.05 6.05 0 0 0 .743 7.097a5.98 5.98 0 0 0 .51 4.911a6.05 6.05 0 0 0 6.515 2.9A6 6 0 0 0 13.26 24a6.06 6.06 0 0 0 5.772-4.206a6 6 0 0 0 3.997-2.9a6.06 6.06 0 0 0-.747-7.073zm-9.022 12.608a4.475 4.475 0 0 1-2.876-1.041l.142-.08l4.778-2.758a.795.795 0 0 0 .393-.681V9.133l2.02 1.169a.07.07 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.495 4.494zm-9.66-4.125a4.47 4.47 0 0 1-.535-3.014l.142.085l4.783 2.758a.771.771 0 0 0 .78 0l5.843-3.368v2.333a.08.08 0 0 1-.033.062l-4.778 2.758a4.499 4.499 0 0 1-6.141-1.646zM2.341 7.896a4.485 4.485 0 0 1 2.365-1.973V11.6a.766.766 0 0 0 .388.677l5.814 3.354l-2.02 1.169a.076.076 0 0 1-.071 0l-4.83-2.787a4.504 4.504 0 0 1-1.646-6.138zm16.596 3.856l-5.832-3.363l2.015-1.164a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.677 8.104v-5.677a.79.79 0 0 0-.407-.668zm2.01-3.023l-.142-.085l-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.499 4.499 0 0 1 6.68 4.66zM8.307 12.863l-2.02-1.164a.08.08 0 0 1-.038-.057V6.074a4.499 4.499 0 0 1 7.376-3.454l-.142.08l-4.778 2.758a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5l2.607 1.5v3l-2.598 1.5l-2.607-1.5z";
@@ -160,8 +161,13 @@ function AiChatbotCrtLogos() {
   );
 }
 
-async function copyToClipboard(text: string): Promise<boolean> {
-  if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+async function copyTextToClipboard(text: string): Promise<boolean> {
+  // 1. Try modern navigator.clipboard
+  if (
+    typeof navigator !== "undefined" &&
+    navigator.clipboard &&
+    typeof navigator.clipboard.writeText === "function"
+  ) {
     try {
       await navigator.clipboard.writeText(text);
       return true;
@@ -170,71 +176,54 @@ async function copyToClipboard(text: string): Promise<boolean> {
     }
   }
 
-  try {
-    const textArea = document.createElement("textarea");
-    textArea.value = text;
-    textArea.style.position = "fixed";
-    textArea.style.left = "-999999px";
-    textArea.style.top = "-999999px";
-    textArea.style.opacity = "0";
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    const successful = document.execCommand("copy");
-    document.body.removeChild(textArea);
-    return successful;
-  } catch (err) {
-    console.error("Clipboard copy failed:", err);
-    return false;
+  // 2. Fallback using invisible textarea
+  if (typeof document !== "undefined") {
+    try {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.left = "-9999px";
+      textarea.style.top = "-9999px";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      textarea.setSelectionRange(0, text.length);
+      const successful = document.execCommand("copy");
+      document.body.removeChild(textarea);
+      return successful;
+    } catch (err) {
+      console.error("Copy fallback failed:", err);
+    }
   }
+
+  return false;
 }
 
 function MorphCopyButton() {
   const [copied, setCopied] = useState(false);
-  const cachedTextRef = useRef<string | null>(null);
 
-  useEffect(() => {
-    // Preload llm.txt so copy is instant and preserves user-gesture activation
-    fetch("/llm.txt")
-      .then((res) => (res.ok ? res.text() : null))
-      .then((text) => {
-        if (text) cachedTextRef.current = text;
-      })
-      .catch(() => {});
-  }, []);
+  const handleCopy = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
 
-  const handleCopy = async () => {
-    let text = cachedTextRef.current;
-    if (!text) {
-      try {
-        const response = await fetch("/llm.txt");
-        if (response.ok) {
-          text = await response.text();
-          cachedTextRef.current = text;
-        }
-      } catch (error) {
-        console.error("Failed to fetch llm.txt:", error);
-      }
-    }
-
-    if (text) {
-      const ok = await copyToClipboard(text);
-      if (ok) {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-      }
-    }
+    await copyTextToClipboard(LLM_CONTEXT_TEXT);
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
   };
 
   return (
     <motion.button
       type="button"
       onClick={handleCopy}
-      whileHover={{ scale: 1.03 }}
-      whileTap={{ scale: 0.95 }}
-      className={`relative flex items-center justify-center h-[36px] px-5 sm:px-6 rounded-[40px] border backdrop-blur-md cursor-pointer select-none shadow-sm transition-all duration-200 ${
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.94 }}
+      className={`relative z-20 flex items-center justify-center h-[36px] px-5 sm:px-6 rounded-[40px] border backdrop-blur-md cursor-pointer select-none shadow-md transition-all duration-200 ${
         copied
-          ? "bg-emerald-500/15 border-emerald-500/50 text-emerald-600 dark:text-emerald-400"
+          ? "bg-emerald-500/15 border-emerald-500/50 text-emerald-600 dark:text-emerald-400 shadow-emerald-500/10"
           : "bg-white/85 hover:bg-white dark:bg-black/75 dark:hover:bg-black/90 text-foreground border-black/15 dark:border-white/20"
       }`}
     >
@@ -316,7 +305,7 @@ export function AskAiSection() {
               quality={75}
             />
             {/* Copy button overlay */}
-            <div className="absolute bottom-5 left-1/2 -translate-x-1/2">
+            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 pointer-events-auto">
               <MorphCopyButton />
             </div>
           </div>

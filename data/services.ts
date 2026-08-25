@@ -112,4 +112,58 @@ export const SERVICES: Service[] = [
     imageAlt: "DevOps and Reliability icon",
     visual: "globe",
   },
+  {
+    number: "07",
+    title: "Deployment & Rollout",
+    description:
+      "Automated release pipelines with zero downtime deployments multi environment promotion and instant rollback capabilities for reliable software delivery.",
+    capabilities: ["Zero Downtime", "Blue-Green", "Canary Releases", "Rollback Automation"],
+    highlights: [
+      "Zero downtime releases using blue green and canary strategies with real time health telemetry",
+      "Multi environment promotion pipelines spanning development staging and production",
+      "Automated rollback triggers with instant recovery upon anomaly or latency detection",
+      "Release gating with automated integration test suites and security compliance validation",
+      "Changelog automation audit trails and release notification workflows across channels",
+    ],
+    image: "/services/Deployment_icon_with_upward_arrow_202608251818.jpeg",
+    imageAlt: "Deployment and Rollout icon",
+    visual: "flow",
+  },
+  {
+    number: "08",
+    title: "SEO & Growth",
+    description:
+      "Technical SEO architectures performance optimization and data driven search strategies that maximize organic visibility and search engine authority.",
+    capabilities: ["Technical SEO", "Core Web Vitals", "Schema Markup", "Analytics"],
+    highlights: [
+      "Technical SEO architecture with server side rendering dynamic metadata and structured JSON-LD",
+      "Core Web Vitals optimization targeting sub second load times and top tier Lighthouse scores",
+      "Automated XML sitemaps canonical URL management and search engine indexing pipelines",
+      "Advanced analytics tracking event instrumentation and conversion funnel measurement",
+      "Semantic HTML structure crawl budget optimization and comprehensive audit reporting",
+    ],
+    image: "/services/SEO_icon_with_data_visualization_202608251819.jpeg",
+    imageAlt: "SEO and Growth icon",
+    visual: "dithering",
+  },
+  {
+    number: "09",
+    title: "Training & Development",
+    description:
+      "Empowering engineering teams through hands-on technical workshops AI enablement and tailored curriculum in modern software architecture.",
+    capabilities: ["AI Enablement", "Team Workshops", "Tech Mentoring", "Architecture Reviews"],
+    highlights: [
+      "Hands on engineering workshops on AI agent integration LLM workflows and modern tooling",
+      "Custom team training curricula covering modern full stack frameworks cloud and DevOps",
+      "Architecture reviews and pair programming sessions to upskill internal engineering teams",
+      "Best practice playbooks for AI prompt engineering evaluation harnesses and system security",
+      "Post training mentorship continuous code reviews and technical enablement support",
+    ],
+    image: "/services/Training_and_development_icon_2K_202608251819.jpeg",
+    imageAlt: "Training and Development icon",
+    visual: "orb",
+  },
 ];
+
+export const HOME_SERVICES: Service[] = SERVICES.slice(0, 6);
+

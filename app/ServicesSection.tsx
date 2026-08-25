@@ -14,7 +14,7 @@ import { MobileAppVisual } from "@/components/ui/mobile-app-visual";
 import { DesktopAppVisual } from "@/components/ui/desktop-app-visual";
 import { CheckCircle2 } from "lucide-react";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
-import { SERVICES as ENRICHED_SERVICES, type Service } from "@/data/services";
+import { HOME_SERVICES as ENRICHED_SERVICES, type Service } from "@/data/services";
 import {
   Carousel,
   CarouselContent,

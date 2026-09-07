@@ -1,4 +1,4 @@
-# snab.ai
+# snab.ai.
 
 Landing page for snab.ai, built with Next.js and deployed on Cloudflare Workers.
 

@@ -60,7 +60,7 @@ function NavLink({
       href={item.href}
       className={cn(
         "text-button font-normal tracking-tight transition-colors py-1 px-1.5",
-        isActive ? "text-primary font-medium" : "text-muted-foreground hover:text-primary",
+        isActive ? "text-primary font-bold" : "text-muted-foreground hover:text-primary",
       )}
     >
       {item.shiny ? (
@@ -167,7 +167,7 @@ function CompanyDropdown({
         className={cn(
           "inline-flex items-center gap-1 py-1 px-1.5 text-button font-normal tracking-tight transition-colors outline-none",
           isChildActive || isOpen
-            ? "text-primary font-medium"
+            ? "text-primary font-bold"
             : "text-muted-foreground hover:text-primary",
         )}
       >
@@ -209,7 +209,7 @@ function CompanyDropdown({
                   className={cn(
                     "group flex items-start gap-2.5 rounded-md px-2.5 py-2 transition-colors",
                     isActive
-                      ? "bg-accent text-primary font-medium"
+                      ? "bg-accent text-primary font-bold"
                       : "text-muted-foreground hover:bg-accent/70 hover:text-primary",
                   )}
                 >
@@ -332,7 +332,7 @@ function MobileDrawer({
                   className={cn(
                     "block py-3 text-button font-normal transition-colors",
                     isActive
-                      ? "text-primary font-medium"
+                      ? "text-primary font-bold"
                       : "text-muted-foreground hover:text-primary",
                   )}
                 >

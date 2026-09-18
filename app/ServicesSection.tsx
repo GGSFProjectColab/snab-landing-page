@@ -65,7 +65,7 @@ const ServiceCardItem = memo(function ServiceCardItem({
             <TextGenerateEffect
               key={`title-${service.number}`}
               as="h3"
-              className="text-base md:text-title font-medium md:font-normal tracking-tight text-foreground"
+              className="text-base md:text-title font-normal tracking-tight text-foreground"
               staggerDuration={0.08}
               transition={{ duration: 0.45, ease: "easeOut" }}
               filter={true}
@@ -73,7 +73,7 @@ const ServiceCardItem = memo(function ServiceCardItem({
               {service.title}
             </TextGenerateEffect>
           ) : (
-            <h3 className="text-base md:text-title font-medium md:font-normal tracking-tight text-foreground">
+            <h3 className="text-base md:text-title font-normal tracking-tight text-foreground">
               {service.title}
             </h3>
           )}
@@ -97,7 +97,7 @@ const ServiceCardItem = memo(function ServiceCardItem({
 
           {service.highlights && service.highlights.length > 0 && (
             <div className="hidden md:block mt-5 space-y-2">
-              <p className="font-mono text-caption font-medium tracking-widest uppercase text-muted-foreground/80">
+              <p className="font-mono text-caption font-bold tracking-widest uppercase text-muted-foreground/80">
                 Key Highlights
               </p>
 
@@ -219,7 +219,7 @@ const GliderTabs = memo(function GliderTabs({
                 : "",
               services.length > 6 && idx < 6 ? "md:border-b md:border-dotted md:border-edge lg:border-b-0" : "",
               isActive
-                ? "bg-foreground text-background font-semibold"
+                ? "bg-foreground text-background font-bold"
                 : "text-muted-foreground hover:text-foreground hover:bg-muted/30 bg-transparent"
             )}
           >

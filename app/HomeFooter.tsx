@@ -144,7 +144,7 @@ export function HomeFooter() {
                   } ${colIdx > 0 ? "md:pl-6" : "md:pl-6"} ${colIdx < footerColumns.length - 1 ? "md:pr-6" : "md:pr-6"}`}
                   key={column.title}
                 >
-                  <h3 className="text-caption font-medium uppercase tracking-wider text-foreground/80">
+                  <h3 className="text-caption font-bold uppercase tracking-wider text-foreground/80">
                     {column.title}
                   </h3>
                   <div className="flex flex-col gap-2">

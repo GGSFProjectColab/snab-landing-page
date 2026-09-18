@@ -616,25 +616,25 @@ export default function Home() {
               <ScrollVelocityRow baseVelocity={5} direction={1} className="py-1.5">
                 <span className="flex items-center gap-3 pr-3 text-5xl font-bold tracking-tight sm:text-6xl md:text-8xl lg:text-9xl">
                   <span>BUILD</span>
-                  <span className="text-muted-foreground/35 font-light text-3xl sm:text-4xl md:text-5xl">//</span>
+                  <span className="text-muted-foreground/35 font-normal text-3xl sm:text-4xl md:text-5xl">//</span>
                   <span>SHIP</span>
-                  <span className="text-muted-foreground/35 font-light text-3xl sm:text-4xl md:text-5xl">//</span>
+                  <span className="text-muted-foreground/35 font-normal text-3xl sm:text-4xl md:text-5xl">//</span>
                   <span>DESIGN</span>
-                  <span className="text-muted-foreground/35 font-light text-3xl sm:text-4xl md:text-5xl">//</span>
+                  <span className="text-muted-foreground/35 font-normal text-3xl sm:text-4xl md:text-5xl">//</span>
                   <span>LAUNCH</span>
-                  <span className="text-muted-foreground/35 font-light text-3xl sm:text-4xl md:text-5xl">//</span>
+                  <span className="text-muted-foreground/35 font-normal text-3xl sm:text-4xl md:text-5xl">//</span>
                 </span>
               </ScrollVelocityRow>
               <ScrollVelocityRow baseVelocity={5} direction={-1} className="py-1.5">
                 <span className="flex items-center gap-3 pr-3 text-5xl font-bold tracking-tight sm:text-6xl md:text-8xl lg:text-9xl text-muted-foreground/50">
                   <span>BUILD</span>
-                  <span className="text-muted-foreground/25 font-light text-3xl sm:text-4xl md:text-5xl">//</span>
+                  <span className="text-muted-foreground/25 font-normal text-3xl sm:text-4xl md:text-5xl">//</span>
                   <span>SHIP</span>
-                  <span className="text-muted-foreground/25 font-light text-3xl sm:text-4xl md:text-5xl">//</span>
+                  <span className="text-muted-foreground/25 font-normal text-3xl sm:text-4xl md:text-5xl">//</span>
                   <span>DESIGN</span>
-                  <span className="text-muted-foreground/25 font-light text-3xl sm:text-4xl md:text-5xl">//</span>
+                  <span className="text-muted-foreground/25 font-normal text-3xl sm:text-4xl md:text-5xl">//</span>
                   <span>LAUNCH</span>
-                  <span className="text-muted-foreground/25 font-light text-3xl sm:text-4xl md:text-5xl">//</span>
+                  <span className="text-muted-foreground/25 font-normal text-3xl sm:text-4xl md:text-5xl">//</span>
                 </span>
               </ScrollVelocityRow>
             </ScrollVelocityContainer>
@@ -655,7 +655,7 @@ export default function Home() {
                       {String(index + 1).padStart(2, "0")}
                     </span>
                     <details className="flex-1">
-                      <summary className="flex cursor-pointer items-center justify-between text-body font-medium">
+                      <summary className="flex cursor-pointer items-center justify-between text-body font-bold">
                         <span>{faq.question}</span>
                       </summary>
                       <p className="mt-3 pl-8 text-body leading-relaxed text-muted-foreground">

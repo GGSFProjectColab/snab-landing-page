@@ -24,6 +24,7 @@ const geistMono = Geist_Mono({
 
 const bodyFont = Manrope({
   subsets: ["latin"],
+  weight: ["400", "700"],
   variable: "--font-body",
   display: "swap",
   preload: true,
@@ -38,7 +39,7 @@ const instrumentSerif = Instrument_Serif({
 });
 
 const interTight = Inter_Tight({
-  weight: ["300", "400", "500"],
+  weight: ["400", "700"],
   subsets: ["latin"],
   variable: "--font-tight",
   display: "swap",

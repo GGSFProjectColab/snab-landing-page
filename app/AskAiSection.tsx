@@ -262,7 +262,7 @@ function MorphCopyButton() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -3 }}
           transition={{ duration: 0.15 }}
-          className="font-medium tracking-tight text-[13px] ml-2.5"
+          className="font-bold tracking-tight text-[13px] ml-2.5"
         >
           {copied ? "Copied!" : "Context.MD"}
         </motion.span>

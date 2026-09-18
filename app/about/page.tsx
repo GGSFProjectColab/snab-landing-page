@@ -16,6 +16,9 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function AboutPage() {
+  // Remote hero rendered directly from R2 (no local download) via next/image optimization.
+  const ABOUT_HERO_SRC =
+    "https://pub-93a426e794b240399700fdead8886cda.r2.dev/ChatGPT%20Image%20Sep%2018%2C%202026%2C%2001_01_50%20PM.png";
   return (
     <main className="flex-1">
       <ContainerWrapper>
@@ -42,10 +45,12 @@ export default function AboutPage() {
                 style={{ maxWidth: "720px", aspectRatio: "16 / 9" }}
               >
                 <Image
-                  src="/about-hero-header.jpg"
+                  src={ABOUT_HERO_SRC}
                   alt="SNAB Innovations studio"
                   fill
                   priority
+                  fetchPriority="high"
+                  quality={85}
                   className="object-cover object-center"
                   sizes="(max-width: 1024px) 100vw, 720px"
                 />

@@ -133,6 +133,18 @@ export default function RootLayout({
       )}
     >
       <head>
+        {/* How-We-Work lotties are self-hosted: preload the first (above-the-fold
+            for that section) so download starts with page load, not on scroll.
+            Rest are idle-prefetched by StackingHowWeWork. */}
+        <link
+          rel="preload"
+          href="/lottie/step-01.lottie"
+          as="fetch"
+          crossOrigin="anonymous"
+          fetchPriority="high"
+        />
+        <link rel="prefetch" href="/lottie/step-02.lottie" as="fetch" crossOrigin="anonymous" />
+        <link rel="prefetch" href="/lottie/step-03.lottie" as="fetch" crossOrigin="anonymous" />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-BXK7SL583E"
           strategy="afterInteractive"

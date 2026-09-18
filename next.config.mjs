@@ -31,6 +31,17 @@ const nextConfig = {
     ],
   },
   serverExternalPackages: ["tailwindcss"],
+  async headers() {
+    return [
+      {
+        // Self-hosted How-We-Work animations — immutable, cache for a year.
+        source: "/lottie/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+    ];
+  },
   experimental: {
     optimizePackageImports: [
       "lucide-react",

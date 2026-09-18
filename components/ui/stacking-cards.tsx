@@ -69,27 +69,51 @@ const CARD_THEMES = [
 ] as const;
 
 // ---------------------------------------------------------------------------
-// LazyLottie — lazy-mount only, plays forever once mounted (no pause/stop)
+// LazyLottie — first card mounts instantly, rest pre-trigger ~1 viewport early
 // ---------------------------------------------------------------------------
-// Mounts the WebAssembly canvas the first time the card enters the viewport.
-// After that it plays continuously with loop+autoplay — never interrupted.
-// This staggered init means cards load one by one as the user scrolls down
-// instead of all 5 WebAssembly runtimes initialising simultaneously on load.
+// Why the gif felt "very late" before:
+//  - .lottie files were fetched from lottie.host (extra DNS/TLS + redirect)
+//    only AFTER the card entered the viewport (150px margin).
+//  - So the user saw the placeholder icon, then waited for
+//    DNS + download + WASM init sequentially.
+//
+// Fix:
+//  - Files are now self-hosted in /public/lottie (same-origin, HTTP/2, cached).
+//  - First card is `eager`: mounts DotLottieReact immediately, no observer wait.
+//  - Other cards use a 1000px rootMargin so download+WASM init starts about
+//    one viewport BEFORE the card is visible — by scroll-in time it's ready.
+//  - StackingHowWeWork also idle-prefetches all files into HTTP cache.
+// After mount it plays continuously with loop+autoplay — never interrupted.
 // ---------------------------------------------------------------------------
 interface LazyLottieProps {
   src: string;
   FallbackIcon: LucideIcon;
   iconColor: string;
+  eager?: boolean;
 }
 
-const LazyLottie = memo(function LazyLottie({ src, FallbackIcon, iconColor }: LazyLottieProps) {
+const LazyLottie = memo(function LazyLottie({ src, FallbackIcon, iconColor, eager }: LazyLottieProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
+  // Eager (first card): mount immediately. Others: mount on near-viewport.
   // Once true, stays true — the canvas is never unmounted
-  const [shouldMount, setShouldMount] = useState(false);
+  const [shouldMount, setShouldMount] = useState(!!eager);
 
   useEffect(() => {
+    if (eager) return;
     const el = wrapperRef.current;
     if (!el) return;
+
+    // If already in (or near) viewport when the chunk hydrates, mount at once
+    // instead of waiting for the next intersection callback.
+    try {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 1000 && rect.bottom > -1000) {
+        setShouldMount(true);
+        return;
+      }
+    } catch {
+      /* fall through to observer */
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -100,15 +124,16 @@ const LazyLottie = memo(function LazyLottie({ src, FallbackIcon, iconColor }: La
         }
       },
       {
-        // 150px lookahead: start loading before the card is fully on-screen
-        rootMargin: '150px 0px 150px 0px',
+        // 1000px lookahead: start download + WASM init ~1 viewport early
+        // so the animation is already playing when the card scrolls in.
+        rootMargin: '1000px 0px 1000px 0px',
         threshold: 0,
       }
     );
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [eager]);
 
   return (
     <div
@@ -225,11 +250,12 @@ const StackingCard = memo(function StackingCard({ index, step, total, progress }
               style={{ backgroundColor: theme.bg, color: theme.fg }}
             >
               {step.lottie ? (
-                // FIX 1: LazyLottie — only one canvas active at a time
+                // FIX 1: first card eager (instant), rest lazy with 1000px lookahead
                 <LazyLottie
                   src={step.lottie}
                   FallbackIcon={Geo}
                   iconColor={theme.fg}
+                  eager={index === 0}
                 />
               ) : (
                 <Geo
@@ -257,6 +283,36 @@ export function StackingHowWeWork({ steps }: { steps: StackingStep[] }) {
     target: containerRef,
     offset: ['start start', 'end end'],
   });
+
+  // Warm the HTTP cache during idle time so DotLottieReact fetches hit cache.
+  // Self-hosted /lottie/*.lottie files are tiny (2–226KB) — prefetching all 5
+  // up front costs little and removes the scroll-in download waterfall.
+  useEffect(() => {
+    let cancelled = false;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const prefetch = () => {
+      if (cancelled) return;
+      for (const s of steps) {
+        if (!s.lottie) continue;
+        try {
+          fetch(s.lottie, { cache: 'force-cache' }).catch(() => {});
+        } catch {
+          /* ignore */
+        }
+      }
+    };
+    try {
+      const ric = (window as unknown as { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback;
+      if (typeof ric === 'function') ric.call(window, prefetch, { timeout: 1500 });
+      else timer = setTimeout(prefetch, 800);
+    } catch {
+      timer = setTimeout(prefetch, 800);
+    }
+    return () => {
+      cancelled = true;
+      if (timer) clearTimeout(timer);
+    };
+  }, [steps]);
 
   return (
     <div ref={containerRef} className="relative w-full">

@@ -200,7 +200,7 @@ export function MarqueeDemo() {
           </div>
 
           {/* Large Logo & Brand Marquee */}
-          <Marquee pauseOnHover speed={28} className="sm:mt-0 mt-0">
+          <Marquee pauseOnHover speed={120} className="sm:mt-0 mt-0">
             {sponsors.map((sponsor) => (
               <div
                 key={sponsor.name}

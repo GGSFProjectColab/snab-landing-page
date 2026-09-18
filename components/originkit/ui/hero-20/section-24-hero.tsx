@@ -4,7 +4,6 @@
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { Reveal, RevealGroup } from "@/components/originkit/ui/hero-20/reveal";
 
 /** Public asset under /originkit/hero-20/ */
 function asset(file: string) {
@@ -60,9 +59,9 @@ export const Section24Hero = () => {
     <div className="relative mx-auto flex min-h-[580px] lg:min-h-[calc(100dvh-4rem)] w-full flex-col items-center justify-center md:justify-start overflow-hidden py-14 sm:py-16 md:pt-16 md:pb-20 lg:pt-20 full-hd:pt-24">
       {/* Hero Foreground Content */}
       <div className="relative z-10 mx-auto flex w-full max-w-[440px] flex-col items-center gap-5 sm:gap-6 px-4 sm:px-6 ipad:max-w-[760px] desktop-sm:max-w-[820px] full-hd:max-w-[940px]">
-        <RevealGroup className="flex flex-col items-center gap-4 sm:gap-5" delay={0.1}>
-          {/* Badge */}
-          <Reveal className="relative flex items-center justify-center gap-[7.222px] border-[0.722px] border-dashed border-foreground/20 dark:border-white/25 px-4 py-2 sm:py-2.5 backdrop-blur-[2px] bg-background/20 dark:bg-black/20">
+        <div className="flex flex-col items-center gap-4 sm:gap-5">
+          {/* Badge — no backdrop-blur: blurring over animating WebGL is a major FPS cost */}
+          <div className="relative flex items-center justify-center gap-[7.222px] border-[0.722px] border-dashed border-foreground/20 dark:border-white/25 px-4 py-2 sm:py-2.5 bg-background/60 dark:bg-black/40">
             <CornerTicks />
             <span
               aria-hidden
@@ -84,11 +83,11 @@ export const Section24Hero = () => {
                 Engineering Intelligent Systems
               </span>
             </span>
-          </Reveal>
+          </div>
 
           {/* Headline and Description */}
           <div className="flex flex-col items-center gap-3 sm:gap-3.5">
-            <Reveal>
+            <div>
               <h1
                 id="hero-title"
                 className="text-center font-instrument-serif text-[44px] leading-[1.05] tracking-[-1.4px] text-foreground dark:text-white sm:text-[58px] sm:leading-[1.06] sm:tracking-[-1.8px] md:text-[72px] md:leading-[1.06] md:tracking-[-2.2px] full-hd:text-[90px] full-hd:leading-[1.06] full-hd:tracking-[-2.6px]"
@@ -97,19 +96,19 @@ export const Section24Hero = () => {
                 <br />
                 Built for Scale
               </h1>
-            </Reveal>
+            </div>
 
-            <Reveal>
+            <div>
               <p className="max-w-[340px] text-center font-tight text-[15px] leading-[23px] tracking-[-0.3px] text-foreground/80 dark:text-neutral-200 sm:max-w-[440px] sm:text-[17px] sm:leading-[26px] md:max-w-[540px] md:text-[18px] md:leading-[27px] full-hd:max-w-[600px] full-hd:text-[20px] full-hd:leading-[30px]">
                 Intelligent platforms, workflow orchestration, and bespoke software designed
                 and built for production reliability.
               </p>
-            </Reveal>
+            </div>
           </div>
-        </RevealGroup>
+        </div>
 
         {/* Dotted Square Buttons */}
-        <Reveal className="flex items-center gap-3 sm:gap-4 pt-1">
+        <div className="flex items-center gap-3 sm:gap-4 pt-1">
           <Link
             href="/contact"
             className="group relative inline-flex cursor-pointer items-center justify-center gap-2.5 border border-dotted border-foreground/40 dark:border-white/40 bg-foreground text-background dark:bg-white dark:text-neutral-950 px-5 py-2.5 sm:px-6 sm:py-3 transition-all duration-200 ease-out hover:opacity-90 active:scale-[0.98]"
@@ -125,7 +124,7 @@ export const Section24Hero = () => {
 
           <Link
             href="/about"
-            className="group relative inline-flex cursor-pointer items-center justify-center gap-2.5 border border-dotted border-edge bg-background/40 dark:bg-muted/30 hover:bg-background/70 dark:hover:bg-muted/60 text-foreground dark:text-white px-5 py-2.5 sm:px-6 sm:py-3 backdrop-blur-[2px] transition-all duration-200 ease-out active:scale-[0.98]"
+            className="group relative inline-flex cursor-pointer items-center justify-center gap-2.5 border border-dotted border-edge bg-background/70 dark:bg-muted/40 hover:bg-background/80 dark:hover:bg-muted/60 text-foreground dark:text-white px-5 py-2.5 sm:px-6 sm:py-3 transition-all duration-200 ease-out active:scale-[0.98]"
           >
             <span className="font-lato text-[13px] sm:text-[14px] leading-normal font-medium tracking-tight whitespace-nowrap">
               About us
@@ -134,7 +133,7 @@ export const Section24Hero = () => {
               src={asset(isDark ? "arrow-light.svg" : "arrow-dark.svg")}
             />
           </Link>
-        </Reveal>
+        </div>
       </div>
     </div>
   );

@@ -11,7 +11,6 @@ import { siteConfig, absoluteUrl } from "@/lib/site";
 import { Providers } from "@/components/site/providers";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteGradualBlur } from "@/components/site/site-gradual-blur";
-import { RouteCurtainTransition } from "@/components/site/route-curtain-transition";
 import { FpsCounter } from "@/components/site/fps-counter";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans", display: "swap", preload: true });
@@ -152,7 +151,6 @@ export default function RootLayout({
           <SiteHeader />
           {children}
           <SiteGradualBlur />
-          <RouteCurtainTransition />
           <FpsCounter />
         </Providers>
       </body>

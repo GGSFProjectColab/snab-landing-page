@@ -5,6 +5,27 @@ import { getInsforge } from "@/lib/insforge";
 
 export const dynamic = "force-dynamic";
 
+const ALLOWED_IMAGE_MIME = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/avif",
+  "image/gif",
+]);
+
+const ALLOWED_EXT = new Set(["jpg", "jpeg", "png", "webp", "avif", "gif"]);
+
+function inferMime(safeName: string, declared: string) {
+  if (ALLOWED_IMAGE_MIME.has(declared)) return declared;
+  const ext = safeName.split(".").pop()?.toLowerCase() || "";
+  if (ext === "jpg" || ext === "jpeg") return "image/jpeg";
+  if (ext === "png") return "image/png";
+  if (ext === "webp") return "image/webp";
+  if (ext === "avif") return "image/avif";
+  if (ext === "gif") return "image/gif";
+  return declared;
+}
+
 export async function POST(request: NextRequest) {
   const cookieStore = await cookies();
   if (!isAdminCookie(cookieStore.get(ADMIN_COOKIE)?.value)) {
@@ -26,8 +47,16 @@ export async function POST(request: NextRequest) {
 
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
-    const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, "_");
-    const mimeType = file.type || "image/jpeg";
+    const safeName = file.name.replace(/[^a-zA-Z0-9.-]/g, "_").slice(0, 120) || "image";
+    const ext = safeName.split(".").pop()?.toLowerCase() || "";
+    const mimeType = inferMime(safeName, file.type || "");
+
+    if (!ALLOWED_IMAGE_MIME.has(mimeType) || !ALLOWED_EXT.has(ext)) {
+      return NextResponse.json(
+        { error: "Only JPG, PNG, WEBP, AVIF, or GIF images are allowed." },
+        { status: 400 }
+      );
+    }
 
     // 1. First attempt: Upload to database-backed blog_assets table for 100% reliable serverless delivery
     const base64Data = buffer.toString("base64");
@@ -37,7 +66,7 @@ export async function POST(request: NextRequest) {
         {
           name: safeName,
           mime_type: mimeType,
-          size: file.size,
+          size: buffer.length,
           data: base64Data,
         },
       ])
@@ -49,7 +78,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({
         url: publicUrl,
         fileName: safeName,
-        size: file.size,
+        size: buffer.length,
         type: mimeType,
       });
     }
@@ -64,7 +93,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({
           url: storageData.url,
           fileName: safeName,
-          size: file.size,
+          size: buffer.length,
           type: mimeType,
         });
       }

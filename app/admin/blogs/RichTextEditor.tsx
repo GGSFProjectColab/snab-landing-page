@@ -37,6 +37,7 @@ import {
   Minimize2,
 } from "lucide-react";
 import { calculateReadTime } from "@/lib/blogs";
+import { sanitizeBlogHtml } from "@/lib/html-sanitize";
 
 interface RichTextEditorProps {
   value: string;
@@ -126,9 +127,20 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, "text/html");
 
+      doc.querySelectorAll(
+        "script, style, iframe, object, embed, link, meta, base, form, input, button, select, textarea"
+      ).forEach((el) => el.remove());
+
       doc.querySelectorAll("*").forEach((el) => {
         el.removeAttribute("style");
         el.removeAttribute("class");
+        // Strip event handlers and dangerous URLs from pasted content.
+        for (const attr of Array.from(el.attributes)) {
+          if (/^on/i.test(attr.name)) el.removeAttribute(attr.name);
+          if ((attr.name === "href" || attr.name === "src") && /^(javascript|vbscript|file|data:text\/html)/i.test(attr.value.trim())) {
+            el.removeAttribute(attr.name);
+          }
+        }
       });
 
       const cleanHtml = doc.body.innerHTML;
@@ -191,6 +203,7 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
     if (!linkUrl) return;
 
     let finalUrl = linkUrl.trim();
+    if (/^(javascript|vbscript|file|data:text\/html)/i.test(finalUrl)) return;
     if (
       !/^https?:\/\//i.test(finalUrl) &&
       !finalUrl.startsWith("/") &&
@@ -247,8 +260,11 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
 
         handleContentChange();
       } else {
-        const textToUse = linkText.trim() || finalUrl;
-        const html = `<a href="${finalUrl}" target="_blank" rel="noopener noreferrer" class="text-teal underline hover:text-teal/80 font-medium">${textToUse}</a>`;
+        const escapeHtml = (s: string) =>
+          s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+        const textToUse = escapeHtml(linkText.trim() || finalUrl);
+        const safeHref = escapeHtml(finalUrl);
+        const html = `<a href="${safeHref}" target="_blank" rel="noopener noreferrer" class="text-teal underline hover:text-teal/80 font-medium">${textToUse}</a>`;
         exec("insertHTML", html);
       }
     }
@@ -261,12 +277,18 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
 
   const handleInsertImage = () => {
     if (!imageUrl) return;
-    const captionHtml = imageCaption.trim()
-      ? `<figcaption class="mt-2 text-center text-xs text-muted-foreground font-mono">${imageCaption.trim()}</figcaption>`
+    const trimmedUrl = imageUrl.trim();
+    if (/^(javascript|vbscript|file|data:text\/html)/i.test(trimmedUrl)) return;
+    const escapeAttr = (s: string) =>
+      s.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const safeUrl = escapeAttr(trimmedUrl);
+    const safeCaption = escapeAttr(imageCaption.trim());
+    const captionHtml = safeCaption
+      ? `<figcaption class="mt-2 text-center text-xs text-muted-foreground font-mono">${safeCaption}</figcaption>`
       : "";
     const imgHtml = `
       <figure class="my-6 overflow-hidden border border-dotted border-edge p-2 bg-muted/20">
-        <img src="${imageUrl}" alt="${imageCaption || 'Blog image'}" class="w-full h-auto object-cover max-h-[500px]" />
+        <img src="${safeUrl}" alt="${safeCaption || 'Blog image'}" class="w-full h-auto object-cover max-h-[500px]" />
         ${captionHtml}
       </figure>
       <p><br></p>
@@ -718,8 +740,9 @@ export function RichTextEditor({ value, onChange, placeholder }: RichTextEditorP
           <div className="max-w-none min-h-[340px] text-foreground text-xs leading-relaxed blog-rich-content">
             <div
               dangerouslySetInnerHTML={{
-                __html:
-                  value || "<p class='text-muted-foreground italic'>No content yet. Write something to see preview.</p>",
+                __html: value
+                  ? sanitizeBlogHtml(value)
+                  : "<p class='text-muted-foreground italic'>No content yet. Write something to see preview.</p>",
               }}
             />
           </div>

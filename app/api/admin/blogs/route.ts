@@ -4,6 +4,9 @@ import { revalidatePath } from "next/cache";
 import { ADMIN_COOKIE, isAdminCookie } from "@/lib/admin-auth";
 import { getInsforge } from "@/lib/insforge";
 import { calculateReadTime, slugify, type BlogPost } from "@/lib/blogs";
+import { sanitizeBlogHtml } from "@/lib/html-sanitize";
+
+const VALID_BLOG_STATUS = new Set(["draft", "published", "archived"]);
 
 async function authorized() {
   const cookieStore = await cookies();
@@ -19,7 +22,8 @@ export async function GET() {
     const { data, error } = await getInsforge().database
       .from("blogs")
       .select("*")
-      .order("created_at", { ascending: false });
+      .order("created_at", { ascending: false })
+      .limit(1000);
 
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
@@ -45,27 +49,37 @@ export async function POST(request: NextRequest) {
       if (!blogData || !blogData.title?.trim()) {
         return NextResponse.json({ error: "Blog title is required" }, { status: 400 });
       }
+      if (blogData.title.trim().length > 200) {
+        return NextResponse.json({ error: "Blog title must be 200 characters or less." }, { status: 400 });
+      }
 
       const generatedSlug = blogData.slug?.trim()
         ? slugify(blogData.slug)
         : slugify(blogData.title);
+      if (!generatedSlug || generatedSlug.length > 200) {
+        return NextResponse.json({ error: "Blog slug is invalid." }, { status: 400 });
+      }
 
-      const readTime = blogData.read_time?.trim() || calculateReadTime(blogData.content || "");
+      const status = blogData.status && VALID_BLOG_STATUS.has(blogData.status)
+        ? blogData.status
+        : "published";
+      const sanitizedContent = sanitizeBlogHtml(blogData.content || "");
+      const readTime = blogData.read_time?.trim() || calculateReadTime(sanitizedContent);
       const now = new Date().toISOString();
 
       const payload = {
         title: blogData.title.trim(),
         slug: generatedSlug,
-        category: blogData.category?.trim() || "Engineering",
-        excerpt: blogData.excerpt?.trim() || "",
-        content: blogData.content || "",
-        cover_image: blogData.cover_image?.trim() || "",
-        author_name: blogData.author_name?.trim() || "SNAB Team",
-        author_image: blogData.author_image?.trim() || "",
-        author_role: blogData.author_role?.trim() || "",
-        read_time: readTime,
+        category: (blogData.category?.trim() || "Engineering").slice(0, 100),
+        excerpt: (blogData.excerpt?.trim() || "").slice(0, 500),
+        content: sanitizedContent,
+        cover_image: (blogData.cover_image?.trim() || "").slice(0, 500),
+        author_name: (blogData.author_name?.trim() || "SNAB Team").slice(0, 100),
+        author_image: (blogData.author_image?.trim() || "").slice(0, 500),
+        author_role: (blogData.author_role?.trim() || "").slice(0, 100),
+        read_time: readTime.slice(0, 50),
         featured: Boolean(blogData.featured),
-        status: blogData.status || "published",
+        status,
         updated_at: now,
       };
 
@@ -100,7 +114,11 @@ export async function POST(request: NextRequest) {
       }
 
       if (result.error) {
-        return NextResponse.json({ error: result.error.message }, { status: 400 });
+        const msg = result.error.message || "";
+        if (/duplicate|unique|slug/i.test(msg)) {
+          return NextResponse.json({ error: "A post with this slug already exists." }, { status: 409 });
+        }
+        return NextResponse.json({ error: "Could not save blog." }, { status: 400 });
       }
 
       revalidatePath("/blogs");

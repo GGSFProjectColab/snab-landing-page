@@ -9,6 +9,7 @@ import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { GrainGradientShader } from "@/components/ui/grain-gradient-shader";
 import { getBlogPostBySlug, getBlogPosts, type BlogPost } from "@/lib/blogs";
 import { siteConfig, absoluteUrl } from "@/lib/site";
+import { sanitizeBlogHtml } from "@/lib/html-sanitize";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ShareButtons } from "./ShareButtons";
 import { ViewCounter } from "./ViewCounter";
@@ -278,7 +279,7 @@ export default async function BlogPostPage({ params }: Props) {
                 {/* Plain, clean, readable blog typography */}
                 <article
                   className="blog-rich-content text-body text-foreground leading-relaxed"
-                  dangerouslySetInnerHTML={{ __html: post.content }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeBlogHtml(post.content) }}
                 />
 
                 {/* Bottom navigation & share */}

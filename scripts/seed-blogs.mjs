@@ -1,9 +1,12 @@
 import { createClient } from "@insforge/sdk";
 
-const client = createClient({
-  baseUrl: process.env.NEXT_PUBLIC_INSFORGE_BASE_URL || "https://zztrxs4z.ap-southeast.insforge.app",
-  anonKey: process.env.NEXT_PUBLIC_INSFORGE_ANON_KEY || "anon_d78fdf69395515e188c068ba4ffbf17850993aaa6c4182d569ebee4ee1d6187b",
-});
+const baseUrl = process.env.NEXT_PUBLIC_INSFORGE_BASE_URL;
+const anonKey = process.env.NEXT_PUBLIC_INSFORGE_ANON_KEY;
+if (!baseUrl || !anonKey) {
+  throw new Error("Missing NEXT_PUBLIC_INSFORGE_BASE_URL / NEXT_PUBLIC_INSFORGE_ANON_KEY env vars.");
+}
+
+const client = createClient({ baseUrl, anonKey });
 
 const initialBlogs = [
   {

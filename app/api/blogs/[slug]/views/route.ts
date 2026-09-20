@@ -9,6 +9,9 @@ type Params = {
 
 export async function POST(_req: Request, { params }: Params) {
   const { slug } = await params;
+  if (!slug || typeof slug !== "string" || slug.length > 200 || !/^[a-z0-9-]+$/i.test(slug)) {
+    return NextResponse.json({ error: "Invalid slug" }, { status: 400 });
+  }
 
   try {
     const insforge = getInsforge();
@@ -35,7 +38,7 @@ export async function POST(_req: Request, { params }: Params) {
 
     if (updateError) {
       console.error("View count update error:", updateError.message);
-      return NextResponse.json({ error: updateError.message }, { status: 500 });
+      return NextResponse.json({ error: "Could not update view count" }, { status: 500 });
     }
 
     return NextResponse.json({ view_count: newCount });

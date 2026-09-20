@@ -22,12 +22,19 @@ export async function GET(_request: NextRequest, { params }: { params: Promise<{
 
   if (error || !data) return NextResponse.json({ error: error?.message || "Résumé not found." }, { status: 404 });
   const resume = data as ResumePayload;
-  const fileName = resume.name.replace(/["\\\r\n]/g, "-");
+  const fileName = (resume.name || "resume").replace(/["\\\r\n]/g, "-").slice(0, 120);
+  const allowedResume = new Set([
+    "application/pdf",
+    "application/msword",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+  ]);
+  const safeType = allowedResume.has(resume.type) ? resume.type : "application/octet-stream";
+  const buffer = Buffer.from(resume.data, "base64");
 
-  return new NextResponse(Buffer.from(resume.data, "base64"), {
+  return new NextResponse(buffer, {
     headers: {
-      "Content-Type": resume.type,
-      "Content-Length": String(resume.size),
+      "Content-Type": safeType,
+      "Content-Length": String(buffer.length),
       "Content-Disposition": `inline; filename="${fileName}"`,
       "Cache-Control": "private, no-store",
       "X-Content-Type-Options": "nosniff",

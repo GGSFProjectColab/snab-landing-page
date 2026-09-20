@@ -5,16 +5,22 @@ export const dynamic = "force-dynamic";
 
 function getCORSHeaders(mimeType?: string, contentLength?: number, fileName?: string) {
   const safeFileName = (fileName || "image").replace(/["\\\r\n]/g, "-");
+  const allowed = new Set(["image/jpeg", "image/png", "image/webp", "image/avif", "image/gif"]);
+  // Serve unknown/legacy types (e.g. SVG) as a download to prevent script
+  // execution in site origin. Existing JPG/PNG behavior is unchanged.
+  const safeMime = mimeType && allowed.has(mimeType) ? mimeType : "application/octet-stream";
+  const disposition = safeMime === "application/octet-stream" ? "attachment" : "inline";
   return {
-    "Content-Type": mimeType || "image/jpeg",
+    "Content-Type": safeMime,
     ...(contentLength ? { "Content-Length": String(contentLength) } : {}),
-    "Content-Disposition": `inline; filename="${safeFileName}"`,
+    "Content-Disposition": `${disposition}; filename="${safeFileName}"`,
     "Cache-Control": "public, max-age=31536000, immutable",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Range",
     "Accept-Ranges": "bytes",
     "X-Content-Type-Options": "nosniff",
+    "Content-Security-Policy": "sandbox",
   };
 }
 

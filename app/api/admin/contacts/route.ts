@@ -17,7 +17,8 @@ export async function GET() {
     const { data, error } = await getInsforge().database
       .from("contacts")
       .select("*")
-      .order("created_at", { ascending: false });
+      .order("created_at", { ascending: false })
+      .limit(1000);
 
     if (error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
@@ -42,10 +43,14 @@ export async function POST(request: NextRequest) {
     const { action } = body;
 
     const now = new Date().toISOString();
+    const VALID_STATUS = new Set(["unread", "read", "replied", "archived"]);
+    const isValidId = (v: unknown) => typeof v === "string" && v.length > 0 && v.length <= 100;
+    const isValidIds = (v: unknown) =>
+      Array.isArray(v) && v.length > 0 && v.length <= 100 && v.every(isValidId);
 
     if (action === "update_status") {
       const { id, status } = body;
-      if (!id || !status) {
+      if (!isValidId(id) || !VALID_STATUS.has(status)) {
         return NextResponse.json(
           { error: "Missing contact ID or status." },
           { status: 400 }
@@ -68,7 +73,7 @@ export async function POST(request: NextRequest) {
 
     if (action === "delete_contact") {
       const { id } = body;
-      if (!id) {
+      if (!isValidId(id)) {
         return NextResponse.json(
           { error: "Missing contact ID." },
           { status: 400 }
@@ -89,7 +94,7 @@ export async function POST(request: NextRequest) {
 
     if (action === "bulk_update_status") {
       const { ids, status } = body;
-      if (!Array.isArray(ids) || ids.length === 0 || !status) {
+      if (!isValidIds(ids) || !VALID_STATUS.has(status)) {
         return NextResponse.json(
           { error: "Missing contact IDs or status." },
           { status: 400 }
@@ -110,7 +115,7 @@ export async function POST(request: NextRequest) {
 
     if (action === "bulk_delete") {
       const { ids } = body;
-      if (!Array.isArray(ids) || ids.length === 0) {
+      if (!isValidIds(ids)) {
         return NextResponse.json(
           { error: "Missing contact IDs." },
           { status: 400 }

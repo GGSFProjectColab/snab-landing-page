@@ -64,6 +64,8 @@
   --skeleton-color: #fff;
   --sky-400: #38bdf8;
   --sky-500: #0ea5e9;
+  --scrollbar-thumb: rgba(255, 255, 255, 0.24);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.38);
 }
 
 mark {
@@ -123,6 +125,8 @@ mark {
   --skeleton-shimmer: rgba(255, 255, 255, 0.6);
   --skeleton-page-bg: #F7F7F4;
   --skeleton-color: #6f6a62;
+  --scrollbar-thumb: rgba(20, 18, 11, 0.32);
+  --scrollbar-thumb-hover: rgba(20, 18, 11, 0.48);
 }
 
 .dark {
@@ -175,6 +179,8 @@ mark {
   --skeleton-shimmer: rgba(255, 255, 255, 0.075);
   --skeleton-page-bg: #14120B;
   --skeleton-color: #fff;
+  --scrollbar-thumb: rgba(255, 255, 255, 0.24);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.38);
 }
 
 .shiki {
@@ -202,12 +208,44 @@ mark {
   html {
     scroll-behavior: smooth;
     overflow-x: clip;
+    /* Reserve classic scrollbar width so centered rails don't shift left
+       when the vertical scrollbar appears (Windows Chrome/Edge). */
+    scrollbar-gutter: stable;
+    /* Slim native scrollbar (Firefox): keeps layout space, themed thumb. */
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
   }
 
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body), "Segoe UI", Helvetica, sans-serif;
     overflow-x: clip;
+  }
+
+  /* Slim native scrollbar (Chromium/Safari): transparent track so the
+     dotted rails show through, themed thumb. Scrollability kept for a11y —
+     never `display: none`. */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    min-height: 48px;
+    border: 3px solid transparent;
+    border-radius: 999px;
+    background: var(--scrollbar-thumb);
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    border: 3px solid transparent;
+    background: var(--scrollbar-thumb-hover);
+    background-clip: content-box;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -227,12 +265,12 @@ mark {
   .full-bleed-border-t::before {
     content: "";
     position: absolute;
-    left: 50%;
+    left: 0;
+    right: 0;
     z-index: 1;
-    width: 100vw;
+    width: auto;
     height: 0;
     border-bottom: 1px dotted var(--edge);
-    transform: translateX(-50%);
     pointer-events: none;
   }
 

@@ -56,10 +56,10 @@ export const Section24Hero = () => {
   const isDark = mounted ? resolvedTheme === "dark" : true;
 
   return (
-    <div className="relative mx-auto flex min-h-[580px] lg:min-h-[calc(100dvh-4rem)] w-full flex-col items-center justify-center md:justify-start overflow-hidden py-14 sm:py-16 md:pt-16 md:pb-20 lg:pt-20 full-hd:pt-24">
+    <div className="relative mx-auto flex min-h-[inherit] w-full flex-1 flex-col items-center justify-center overflow-hidden px-6 py-16 md:py-20 lg:py-24">
       {/* Hero Foreground Content */}
-      <div className="relative z-10 mx-auto flex w-full max-w-[440px] flex-col items-center gap-5 sm:gap-6 px-4 sm:px-6 ipad:max-w-[760px] desktop-sm:max-w-[820px] full-hd:max-w-[940px]">
-        <div className="flex flex-col items-center gap-4 sm:gap-5">
+      <div className="relative z-10 mx-auto flex w-full max-w-2xl flex-col items-center justify-center gap-5 sm:gap-6 text-center ipad:max-w-4xl desktop-sm:max-w-5xl full-hd:max-w-6xl">
+        <div className="flex w-full flex-col items-center justify-center gap-4 text-center sm:gap-5">
           {/* Badge — no backdrop-blur: blurring over animating WebGL is a major FPS cost */}
           <div className="relative flex items-center justify-center gap-[7.222px] border-[0.722px] border-dashed border-foreground/20 dark:border-white/25 px-4 py-2 sm:py-2.5 bg-background/60 dark:bg-black/40">
             <CornerTicks />
@@ -86,11 +86,11 @@ export const Section24Hero = () => {
           </div>
 
           {/* Headline and Description */}
-          <div className="flex flex-col items-center gap-3 sm:gap-3.5">
-            <div>
+          <div className="flex w-full flex-col items-center justify-center gap-3 text-center sm:gap-3.5">
+            <div className="flex w-full justify-center">
               <h1
                 id="hero-title"
-                className="text-center font-instrument-serif text-[44px] leading-[1.05] tracking-[-1.4px] text-foreground dark:text-white sm:text-[58px] sm:leading-[1.06] sm:tracking-[-1.8px] md:text-[72px] md:leading-[1.06] md:tracking-[-2.2px] full-hd:text-[90px] full-hd:leading-[1.06] full-hd:tracking-[-2.6px]"
+                className="max-w-full text-balance text-center font-instrument-serif text-[44px] leading-[1.05] tracking-[-1.4px] text-foreground dark:text-white sm:text-[58px] sm:leading-[1.06] sm:tracking-[-1.8px] md:text-[72px] md:leading-[1.06] md:tracking-[-2.2px] full-hd:text-[90px] full-hd:leading-[1.06] full-hd:tracking-[-2.6px]"
               >
                 Engineered for Intelligence,
                 <br />
@@ -98,8 +98,8 @@ export const Section24Hero = () => {
               </h1>
             </div>
 
-            <div>
-              <p className="max-w-[340px] text-center font-tight text-[15px] leading-[23px] tracking-[-0.3px] text-foreground/80 dark:text-neutral-200 sm:max-w-[440px] sm:text-[17px] sm:leading-[26px] md:max-w-[540px] md:text-[18px] md:leading-[27px] full-hd:max-w-[600px] full-hd:text-[20px] full-hd:leading-[30px]">
+            <div className="flex w-full justify-center">
+              <p className="mx-auto max-w-[340px] text-balance text-center font-tight text-[15px] leading-[23px] tracking-[-0.3px] text-foreground/80 dark:text-neutral-200 sm:max-w-[440px] sm:text-[17px] sm:leading-[26px] md:max-w-[540px] md:text-[18px] md:leading-[27px] full-hd:max-w-[600px] full-hd:text-[20px] full-hd:leading-[30px]">
                 Intelligent platforms, workflow orchestration, and bespoke software designed
                 and built for production reliability.
               </p>
@@ -108,7 +108,7 @@ export const Section24Hero = () => {
         </div>
 
         {/* Dotted Square Buttons */}
-        <div className="flex items-center gap-3 sm:gap-4 pt-1">
+        <div className="flex w-full flex-wrap items-center justify-center gap-3 sm:gap-4 pt-1">
           <Link
             href="/contact"
             className="group relative inline-flex cursor-pointer items-center justify-center gap-2.5 border border-dotted border-foreground/40 dark:border-white/40 bg-foreground text-background dark:bg-white dark:text-neutral-950 px-5 py-2.5 sm:px-6 sm:py-3 transition-all duration-200 ease-out hover:opacity-90 active:scale-[0.98]"

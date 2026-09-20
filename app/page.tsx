@@ -293,7 +293,7 @@ export default function Home() {
         {/* Hero Section */}
         <section id="home" aria-labelledby="hero-title">
           <ContainerWrapper>
-            <div className="relative min-h-[580px] overflow-hidden lg:min-h-[calc(100dvh-4rem)]">
+            <div className="relative flex min-h-[580px] overflow-hidden lg:min-h-[calc(100svh-3rem)]">
               {/* Hero background — Originkit Cloud Sky */}
               <HeroCloudBackground />
               <Hero20 />

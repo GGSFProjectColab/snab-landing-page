@@ -18,6 +18,11 @@ import {
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
+import {
+  useFluidHover,
+  useRegisterFluidHoverItem,
+} from "@/hooks/use-fluid-hover";
+import { FluidHoverHighlight } from "@/components/fluid-hover-highlight";
 import { ShinyText } from "@/components/site/shiny-text";
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import {
@@ -91,6 +96,71 @@ function getIcon(name?: string) {
   }
 }
 
+function CompanyDropdownRow({
+  item,
+  index,
+  activePath,
+  registerItem,
+  isLit,
+  setActiveIndex,
+  onNavigate,
+}: {
+  item: NavItem;
+  index: number;
+  activePath: string;
+  registerItem: (index: number, element: HTMLElement | null) => void;
+  isLit: boolean;
+  setActiveIndex: (index: number | null) => void;
+  onNavigate: () => void;
+}) {
+  const ref = useRef<HTMLAnchorElement>(null);
+  useRegisterFluidHoverItem(registerItem, index, ref);
+  const Icon = getIcon(item.iconName);
+  const isActive =
+    activePath === item.href ||
+    (item.href !== "/" && activePath.startsWith(item.href));
+
+  return (
+    <Link
+      ref={ref}
+      href={item.href}
+      role="menuitem"
+      onClick={onNavigate}
+      onFocus={() => setActiveIndex(index)}
+      className={cn(
+        "group relative z-10 flex items-start gap-2.5 rounded-md px-2.5 py-2 transition-colors outline-none",
+        isActive
+          ? "bg-accent text-primary font-bold"
+          : isLit
+            ? "text-primary"
+            : "text-muted-foreground",
+      )}
+    >
+      <Icon
+        className={cn(
+          "size-4 mt-0.5 shrink-0 transition-colors",
+          isActive || isLit ? "text-primary" : "text-muted-foreground",
+        )}
+      />
+      <div className="flex flex-col min-w-0">
+        <span
+          className={cn(
+            "text-button font-normal",
+            isActive || isLit ? "text-primary" : "text-foreground",
+          )}
+        >
+          {item.label}
+        </span>
+        {item.description && (
+          <span className="text-caption text-xs text-muted-foreground font-normal line-clamp-1">
+            {item.description}
+          </span>
+        )}
+      </div>
+    </Link>
+  );
+}
+
 function CompanyDropdown({
   activePath,
 }: {
@@ -99,6 +169,8 @@ function CompanyDropdown({
   const [isOpen, setIsOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+  const hover = useFluidHover(listRef);
 
   const isChildActive = COMPANY_DROPDOWN_LINKS.some(
     (item) =>
@@ -125,6 +197,12 @@ function CompanyDropdown({
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
     };
   }, []);
+
+  // The popup stays mounted while closed (visibility toggle), so remeasure
+  // when it opens and hide the highlight until rects settle.
+  useEffect(() => {
+    if (isOpen) hover.remeasure();
+  }, [isOpen, hover.remeasure]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -192,41 +270,25 @@ function CompanyDropdown({
             : "opacity-0 scale-95 -translate-y-1 pointer-events-none invisible",
         )}
       >
-        <div className="w-64 sm:w-72 rounded-lg border border-border bg-background p-1">
-          <div className="flex flex-col">
-            {COMPANY_DROPDOWN_LINKS.map((item) => {
-              const Icon = getIcon(item.iconName);
-              const isActive =
-                activePath === item.href ||
-                (item.href !== "/" && activePath.startsWith(item.href));
-
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  role="menuitem"
-                  onClick={() => setIsOpen(false)}
-                  className={cn(
-                    "group flex items-start gap-2.5 rounded-md px-2.5 py-2 transition-colors",
-                    isActive
-                      ? "bg-accent text-primary font-bold"
-                      : "text-muted-foreground hover:bg-accent/70 hover:text-primary",
-                  )}
-                >
-                  <Icon className="size-4 mt-0.5 shrink-0 text-muted-foreground group-hover:text-primary transition-colors" />
-                  <div className="flex flex-col min-w-0">
-                    <span className="text-button font-normal text-foreground group-hover:text-primary">
-                      {item.label}
-                    </span>
-                    {item.description && (
-                      <span className="text-caption text-xs text-muted-foreground font-normal line-clamp-1">
-                        {item.description}
-                      </span>
-                    )}
-                  </div>
-                </Link>
-              );
-            })}
+        <div className="w-64 sm:w-72 rounded-lg border border-border bg-background">
+          <div
+            ref={listRef}
+            className="relative flex flex-col p-1"
+            {...hover.handlers}
+          >
+            <FluidHoverHighlight hover={hover} className="rounded-md bg-accent" />
+            {COMPANY_DROPDOWN_LINKS.map((item, i) => (
+              <CompanyDropdownRow
+                key={item.href}
+                item={item}
+                index={i}
+                activePath={activePath}
+                registerItem={hover.registerItem}
+                isLit={hover.activeIndex === i}
+                setActiveIndex={hover.setActiveIndex}
+                onNavigate={() => setIsOpen(false)}
+              />
+            ))}
           </div>
         </div>
       </div>

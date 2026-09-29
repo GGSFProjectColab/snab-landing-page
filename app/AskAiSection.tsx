@@ -327,7 +327,7 @@ export function AskAiSection() {
             className="mt-3 text-heading font-normal tracking-tight"
             staggerDuration={0.06}
           >
-            Feeling fatigue? Ask AI
+            Tired of scrolling? Ask AI
           </TextGenerateEffect>
           <TextGenerateEffect
             as="p"

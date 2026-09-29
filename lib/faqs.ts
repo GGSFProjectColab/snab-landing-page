@@ -39,5 +39,20 @@ export const homeFaqs = [
     answer:
       "Yes. Post-launch work can include monitoring, maintenance, security and dependency updates, model or workflow evaluation, performance improvements, and planned feature development. The support arrangement is matched to the product's operating needs.",
   },
+  {
+    question: "What does your project process look like?",
+    answer:
+      "We start by understanding your goals, users, and constraints. From there, we agree on scope and milestones, build in reviewable increments, and prepare the product for launch with the documentation and handover your team needs.",
+  },
+  {
+    question: "Can you work with our existing team and systems?",
+    answer:
+      "Yes. We can collaborate with your in-house team and work with your existing codebase, tools, and infrastructure. We assess the current setup first and recommend changes based on the project goals.",
+  },
+  {
+    question: "What should we include in an initial project discussion?",
+    answer:
+      "Share the problem you want to solve, who the product is for, any relevant deadlines, and what you have already built or explored. You do not need a complete specification; we can help shape the requirements together.",
+  },
 ] as const;
 

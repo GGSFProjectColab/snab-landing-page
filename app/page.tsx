@@ -8,10 +8,12 @@ import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { ContainerWrapper } from "@/components/site/container";
 import { HeaderTitle } from "@/components/profile/header-title";
 import Svg1 from "@/components/pixel-perfect/svg-1";
+import Svg2 from "@/components/pixel-perfect/svg-2";
+import Svg3 from "@/components/pixel-perfect/svg-3";
+import Svg4 from "@/components/pixel-perfect/svg-4";
+import Svg5 from "@/components/pixel-perfect/svg-5";
 import Svg9 from "@/components/pixel-perfect/svg-9";
 import { DitheredLogoVisual } from "@/components/ui/dithered-logo-visual";
-import { TechStackCloud } from "./TechStackCloud";
-import { DottedMap } from "@/components/ui/dotted-map";
 import { homeFaqs } from "@/lib/faqs";
 import { absoluteUrl, createPageMetadata, siteConfig } from "@/lib/site";
 import { MagicText } from "@/components/ui/magic-text";
@@ -184,7 +186,15 @@ const aboutSnabSteps = [
 
 
 
-const whyChooseUs = [
+type WhyChooseUsItem = {
+  title: string;
+  description: string;
+  image?: string;
+  imageLight?: string;
+  visual?: string;
+};
+
+const whyChooseUs: WhyChooseUsItem[] = [
   {
     title: "Intelligence-First Architecture",
     description: "We design every system with intelligence at its core, not as an afterthought.",
@@ -195,7 +205,7 @@ const whyChooseUs = [
     title: "Workflow-Centric Design",
     description: "We start with the workflow, not the model — ensuring real-world impact.",
     image: "/ascii-magic-6.webp",
-    visual: "dithered",
+    visual: "svg2",
   },
   {
     title: "End-to-End Delivery",
@@ -207,19 +217,20 @@ const whyChooseUs = [
     title: "Production-Grade Systems",
     description: "Every solution is built for scale, reliability, and security from day one.",
     image: "/ascii-magic-6.webp",
-    visual: "dottedmap",
+    visual: "svg3",
   },
   {
     title: "Cross-Platform Expertise",
     description: "Web, mobile, desktop — we build where your users need us.",
     image: "/ascii-magic-6.webp",
-    visual: "techstack",
+    visual: "svg4",
   },
   {
     title: "Transparent Collaboration",
     description: "Shared milestones, demos, and decisions keep you close to the work.",
     image: "/transparent-collaboration.jpg",
     imageLight: "/transparent-collaboration-light.webp",
+    visual: "svg5",
   },
 ];
 
@@ -532,28 +543,15 @@ export default function Home() {
                   <div className={`relative aspect-[4/3] w-full overflow-hidden p-6 ${isDithered ? "flex items-center justify-center" : "flex items-center justify-center bg-muted/30"}`}>
                     {isDithered && <DitheredLogoVisual />}
                     {!isDithered && "visual" in item && item.visual === "svg1" && <Svg1 />}
+                    {!isDithered && "visual" in item && item.visual === "svg2" && <Svg2 />}
+                    {!isDithered && "visual" in item && item.visual === "svg3" && <Svg3 />}
+                    {!isDithered && "visual" in item && item.visual === "svg4" && <Svg4 />}
+                    {!isDithered && "visual" in item && item.visual === "svg5" && <Svg5 />}
                     {!isDithered && "visual" in item && item.visual === "svg9" && <Svg9 />}
-                    {!isDithered && "visual" in item && item.visual === "techstack" && <TechStackCloud />}
-                    {!isDithered && "visual" in item && item.visual === "dottedmap" && (
-                      <DottedMap
-                        markers={[
-                          { lat: 40.7128, lng: -74.006, size: 0.8, pulse: true },
-                          { lat: 51.5074, lng: -0.1278, size: 0.8, pulse: true },
-                          { lat: 19.076, lng: 72.8777, size: 0.8, pulse: true },
-                          { lat: 35.6762, lng: 139.6503, size: 0.8, pulse: true },
-                          { lat: -33.8688, lng: 151.2093, size: 0.8, pulse: true },
-                        ]}
-                        dotColor="currentColor"
-                        markerColor="hsl(var(--primary))"
-                        dotRadius={0.25}
-                        stagger
-                        pulse
-                      />
-                    )}
-                    {!isDithered && !("visual" in item) && (
+                    {!isDithered && !item.visual && item.image && (
                       <>
                         <Image
-                          className={`object-cover transition-transform duration-500 group-hover:scale-105 ${"imageLight" in item && item.imageLight ? "hidden dark:block" : ""}`}
+                          className={`object-cover transition-transform duration-500 group-hover:scale-105 ${item.imageLight ? "hidden dark:block" : ""}`}
                           src={item.image}
                           alt={item.title}
                           fill
@@ -562,7 +560,7 @@ export default function Home() {
                           loading="lazy"
                           decoding="async"
                         />
-                        {"imageLight" in item && Boolean(item.imageLight) && (
+                        {Boolean(item.imageLight) && (
                           <Image
                             className="object-cover transition-transform duration-500 group-hover:scale-105 block dark:hidden"
                             src={item.imageLight as string}

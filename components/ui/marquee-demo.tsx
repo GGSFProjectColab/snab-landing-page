@@ -1,7 +1,7 @@
 import { Marquee } from "@/components/ui/marquee"
 import { ContainerWrapper } from "@/components/site/container"
 
-const sponsors = [
+const technologies = [
   {
     name: "AWS",
     icon: (
@@ -103,27 +103,27 @@ const sponsors = [
 
 export function MarqueeDemo() {
   return (
-    <section aria-label="Backed by">
+    <section aria-label="Powered by leading cloud and AI infrastructure">
       <ContainerWrapper>
         <div className="relative overflow-hidden py-8 sm:py-10">
 
-          {/* Centered Backed by label matching project typography */}
+          {/* Centered label matching project typography */}
           <div className="flex justify-center text-center px-4 sm:px-6 md:px-10 mb-6 sm:mb-8">
             <p className="font-mono text-caption uppercase tracking-[0.2em] antialiased text-muted-foreground [text-rendering:optimizeLegibility] [font-variant-ligatures:none]">
-              Backed by
+              Powered by Leading Cloud &amp; AI Infrastructure
             </p>
           </div>
 
           {/* Large Logo & Brand Marquee */}
           <Marquee pauseOnHover speed={90} className="sm:mt-0 mt-0">
-            {sponsors.map((sponsor) => (
+            {technologies.map((tech) => (
               <div
-                key={sponsor.name}
+                key={tech.name}
                 className="mx-6 sm:mx-10 md:mx-12 flex items-center gap-3.5 sm:gap-4 shrink-0 opacity-85 hover:opacity-100 transition-opacity duration-150 cursor-default select-none will-change-transform [backface-visibility:hidden]"
               >
-                {sponsor.icon}
+                {tech.icon}
                 <span className="font-sans text-title font-normal tracking-tight text-foreground whitespace-nowrap">
-                  {sponsor.name}
+                  {tech.name}
                 </span>
               </div>
             ))}

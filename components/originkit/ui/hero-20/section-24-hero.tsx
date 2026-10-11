@@ -80,7 +80,7 @@ export const Section24Hero = () => {
                 className="size-[16px] sm:size-[18px] dark:invert"
               />
               <span className="font-lato text-[12px] sm:text-[13.5px] leading-[1.4] font-bold tracking-[-0.2px] text-foreground dark:text-white">
-                Engineering Intelligent Systems
+                Software Development Company • Nashik
               </span>
             </span>
           </div>
@@ -100,8 +100,7 @@ export const Section24Hero = () => {
 
             <div className="flex w-full justify-center">
               <p className="mx-auto max-w-[340px] text-balance text-center font-tight text-[15px] leading-[23px] tracking-[-0.3px] text-foreground/80 dark:text-neutral-200 sm:max-w-[440px] sm:text-[17px] sm:leading-[26px] md:max-w-[540px] md:text-[18px] md:leading-[27px] full-hd:max-w-[600px] full-hd:text-[20px] full-hd:leading-[30px]">
-                Intelligent platforms, workflow orchestration, and bespoke software designed
-                and built for production reliability.
+                Top software development company in Nashik. We engineer custom software, web &amp; mobile applications, and intelligent platforms built for production reliability.
               </p>
             </div>
           </div>

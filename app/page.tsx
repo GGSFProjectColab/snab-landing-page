@@ -31,12 +31,34 @@ import {
 
 
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Software Engineering Firm | SNAB Innovations",
-  description:
-    "Build intelligent platforms, workflow orchestration, web products, and mobile apps with SNAB Innovations, an engineering firm in Nashik, India.",
-  path: "/",
-});
+export const metadata: Metadata = {
+  ...createPageMetadata({
+    title: "SNAB Innovations — Software Development Company in Nashik",
+    description:
+      "SNAB Innovations is a top software development company in Nashik. We build custom software, web & mobile apps, and AI platforms. Get a free consultation today!",
+    path: "/",
+  }),
+  keywords: [
+    "software company in nashik",
+    "software development company in nashik",
+    "best software company in nashik",
+    "custom software development company nashik",
+    "top software development company in nashik",
+    "software development agency in nashik",
+    "software developers in nashik",
+    "it company in nashik",
+    "web development company in nashik",
+    "mobile app development company in nashik",
+    "snab innovations",
+    "snab innovation",
+    "snab innovations nashik",
+    "snab",
+    "hire software developers in nashik",
+    "custom software development company",
+    "ai software development company",
+    "software engineering studio nashik",
+  ],
+};
 
 const projects = [
   {
@@ -249,31 +271,93 @@ export default function Home() {
         publisher: { "@id": `${siteConfig.url}/#organization` },
       },
       {
-        "@type": "Organization",
+        "@type": ["Organization", "ProfessionalService", "LocalBusiness"],
         "@id": `${siteConfig.url}/#organization`,
         name: siteConfig.name,
+        legalName: "SNAB Innovations LLP",
+        alternateName: ["SNAB", "SNAB Innovation", "SNAB Innovations Nashik"],
         url: siteConfig.url,
         logo: {
           "@type": "ImageObject",
           url: absoluteUrl("/logo.png"),
         },
+        image: absoluteUrl("/seo/SEO-OG.png"),
         email: siteConfig.email,
-        description: siteConfig.description,
+        description:
+          "SNAB Innovations is a top software development company in Nashik. We engineer custom software, web & mobile applications, SaaS platforms, and intelligent AI systems for startups and enterprises worldwide.",
         address: {
           "@type": "PostalAddress",
-          addressLocality: siteConfig.location.locality,
-          addressRegion: siteConfig.location.region,
-          postalCode: siteConfig.location.postalCode,
-          addressCountry: siteConfig.location.country,
+          streetAddress: "Nashik",
+          addressLocality: "Nashik",
+          addressRegion: "Maharashtra",
+          postalCode: "422005",
+          addressCountry: "IN",
         },
-        areaServed: "Worldwide",
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: 19.9975,
+          longitude: 73.7898,
+        },
+        areaServed: [
+          { "@type": "City", "name": "Nashik" },
+          { "@type": "State", "name": "Maharashtra" },
+          { "@type": "Country", "name": "India" },
+          "Worldwide",
+        ],
+        priceRange: "$$",
+        currenciesAccepted: "INR, USD, EUR, GBP",
+        paymentAccepted: "Bank Transfer, Credit Card, Wire Transfer",
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Software Engineering & Development Services",
+          itemListElement: [
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Custom Software Development",
+                description:
+                  "Bespoke software architecture, business automation, and enterprise platforms tailored to exact business requirements.",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Web Application Development",
+                description:
+                  "High-performance, scalable full-stack web applications built with modern frameworks including Next.js, React, and cloud backends.",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Mobile App Development",
+                description:
+                  "Native and cross-platform mobile apps for iOS and Android engineered with Flutter and React Native.",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "AI Product Development & Workflow Orchestration",
+                description:
+                  "Intelligent workflow automation pipelines, autonomous agentic systems, and retrieval-augmented generation (RAG) engines.",
+              },
+            },
+          ],
+        },
         knowsAbout: [
-          "Intelligent product development",
-          "Workflow orchestration",
-          "Bespoke software development",
-          "Web application development",
-          "Intelligent agents",
-          "Retrieval-augmented generation",
+          "Custom Software Development",
+          "Software Development Company in Nashik",
+          "Software Company in Nashik",
+          "Web Application Development",
+          "Mobile App Development",
+          "Enterprise AI Systems",
+          "Workflow Automation",
+          "Cloud Architecture & DevOps",
         ],
         contactPoint: {
           "@type": "ContactPoint",
@@ -281,6 +365,12 @@ export default function Home() {
           email: siteConfig.email,
           availableLanguage: ["English", "Hindi", "Marathi"],
         },
+        sameAs: [
+          "https://www.linkedin.com/company/snab-innovations/posts/?feedView=all",
+          "https://x.com/snabInnovations",
+          "https://instagram.com/snabinnovations",
+          "https://youtube.com/@snabinnovations",
+        ],
       },
       {
         "@type": "FAQPage",

@@ -19,9 +19,10 @@ const getBaseUrl = () => {
 export const siteConfig = {
   name: "SNAB Innovations",
   shortName: "SNAB",
+  legalName: "SNAB Innovations LLP",
   url: getBaseUrl().replace(/\/$/, ""),
   description:
-    "SNAB Innovations designs and engineers intelligent platforms, workflow orchestration, web products, and mobile apps from Nashik, India.",
+    "SNAB Innovations is a top software development company in Nashik. We build custom software, web & mobile apps, and AI platforms. Get a free consultation today!",
   location: {
     locality: "Nashik",
     region: "Maharashtra",

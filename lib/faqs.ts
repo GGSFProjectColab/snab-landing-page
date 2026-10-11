@@ -1,5 +1,15 @@
 export const homeFaqs = [
   {
+    question: "Is SNAB Innovations a software development company in Nashik?",
+    answer:
+      "Yes. SNAB Innovations is a premier software development company based in Nashik, Maharashtra, India. We engineer custom software systems, scalable web applications, mobile apps, workflow automation pipelines, and enterprise AI platforms for startups, growing businesses, and enterprises locally in Nashik and globally.",
+  },
+  {
+    question: "Why choose SNAB Innovations for software development?",
+    answer:
+      "Clients partner with SNAB Innovations for our production-first engineering standards, dedicated developer expertise, transparent milestone delivery, and complete source code ownership. From discovery to deployment and post-launch scaling, our Nashik team builds reliable, high-performance software that drives business growth.",
+  },
+  {
     question: "What does SNAB Innovations build?",
     answer:
       "We design and engineer intelligent products, workflow automation, web platforms, mobile and desktop applications, and bespoke internal systems. We can take a new idea from discovery to launch or add dependable intelligence to an existing product.",

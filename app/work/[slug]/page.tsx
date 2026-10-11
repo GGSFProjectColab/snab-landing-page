@@ -751,10 +751,21 @@ export default async function ProductDetailPage({ params }: Props) {
                   ) : null}
                 </div>
 
-                {/* Compact, Focused Video Player Frame */}
-                <div className="max-w-3xl mx-auto">
-                  <div className="rounded-xl border border-dotted border-edge bg-card/30 p-2.5 sm:p-4 shadow-xl">
-                    <div className="relative aspect-video w-full overflow-hidden rounded-lg border border-dotted border-edge/80 bg-black shadow-inner">
+                {/* Laptop Mockup Device Frame */}
+                <div className="max-w-4xl mx-auto px-1 sm:px-4">
+                  {/* Laptop Lid (Screen Bezel) */}
+                  <div className="relative rounded-t-2xl sm:rounded-t-[28px] border border-neutral-700/80 dark:border-neutral-700/70 bg-neutral-950 p-2.5 sm:p-4 pb-2 sm:pb-3 shadow-2xl">
+                    {/* Top Bezel with Camera */}
+                    <div className="flex items-center justify-center pb-2 pt-0.5 sm:pt-1">
+                      <div className="flex items-center gap-1.5">
+                        <span className="h-2 w-2 rounded-full bg-neutral-900 border border-neutral-700/90 flex items-center justify-center">
+                          <span className="h-1 w-1 rounded-full bg-teal/70" />
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Screen Glass & Video Player */}
+                    <div className="relative aspect-video w-full overflow-hidden rounded-lg sm:rounded-xl border border-neutral-800/90 bg-black shadow-inner">
                       <iframe
                         src={`https://www.youtube-nocookie.com/embed/${product.videoEmbed.youtubeId}?rel=0&modestbranding=1`}
                         title={product.videoEmbed.title}
@@ -763,28 +774,15 @@ export default async function ProductDetailPage({ params }: Props) {
                         className="absolute inset-0 h-full w-full"
                       />
                     </div>
+                  </div>
 
-                    <div className="mt-3.5 flex flex-wrap items-center justify-between gap-3 px-1">
-                      <div className="flex items-center gap-2">
-                        <span className="inline-flex items-center gap-1.5 rounded-full border border-teal/30 bg-teal/10 px-2 py-0.5 font-mono text-[10px] uppercase text-teal">
-                          <span className="h-1.5 w-1.5 rounded-full bg-teal" />
-                          Official Demo
-                        </span>
-                        <span className="font-mono text-caption text-foreground/80 truncate max-w-[280px] sm:max-w-md">
-                          {product.videoEmbed.title}
-                        </span>
-                      </div>
-
-                      <a
-                        href={`https://www.youtube.com/watch?v=${product.videoEmbed.youtubeId}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 font-mono text-caption uppercase text-muted-foreground hover:text-teal transition-colors"
-                      >
-                        <span>Open on YouTube</span>
-                        <ExternalLink size={12} aria-hidden="true" />
-                      </a>
+                  {/* Laptop Base (Chassis Deck & Opening Notch) */}
+                  <div className="relative -mt-0.5 w-full">
+                    <div className="h-3.5 sm:h-5 w-full rounded-b-xl sm:rounded-b-2xl bg-gradient-to-b from-neutral-700 via-neutral-800 to-neutral-900 border-x border-b border-neutral-700/80 shadow-lg flex items-start justify-center">
+                      <div className="w-20 sm:w-28 h-1.5 sm:h-2 rounded-b-md bg-neutral-950/90 border-b border-neutral-600/50" />
                     </div>
+                    {/* Ambient Contact Shadow */}
+                    <div className="mx-auto w-[88%] h-4 sm:h-5 bg-black/50 blur-md rounded-full -mt-1" aria-hidden="true" />
                   </div>
                 </div>
               </div>

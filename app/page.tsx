@@ -476,7 +476,8 @@ export default function Home() {
                       </div>
                       <TextGenerateEffect
                         as="h3"
-                        className="mt-1 text-title font-normal"
+                        className="mt-1 work-card-title block"
+                        wordClassName="work-card-title"
                         staggerDuration={0.05}
                       >
                         {project.name}
@@ -516,7 +517,8 @@ export default function Home() {
                     </div>
                     <TextGenerateEffect
                       as="h3"
-                      className="mt-2 text-title font-normal"
+                      className="mt-2 work-card-title block"
+                      wordClassName="work-card-title"
                       staggerDuration={0.05}
                     >
                       {project.name}

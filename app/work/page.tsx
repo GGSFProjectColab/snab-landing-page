@@ -141,7 +141,7 @@ export default function WorkPage() {
                     </div>
 
                     {/* Title with link to dedicated deep-dive page */}
-                    <h2 className="mt-2 text-title font-normal tracking-tight">
+                    <h2 className="mt-2 work-card-title tracking-tight">
                       <Link
                         href={`/work/${item.slug}`}
                         className="hover:text-teal transition-colors"

@@ -19,6 +19,7 @@ import { ContainerWrapper } from "@/components/site/container";
 import { Footer } from "../../Footer";
 import { HeaderTitle } from "@/components/profile/header-title";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+import { LaptopVideoMockup } from "@/components/ui/laptop-video-mockup";
 import { PRODUCTS, getProductBySlug, getAllProductSlugs } from "@/data/products";
 
 type Props = {
@@ -365,7 +366,8 @@ export default async function ProductDetailPage({ params }: Props) {
               <TextGenerateEffect
                 as="h1"
                 id="product-title"
-                className="text-display font-normal tracking-tight text-foreground"
+                className="work-hero-title font-bold tracking-tight text-foreground block"
+                wordClassName="work-hero-title font-bold tracking-tight text-foreground"
                 staggerDuration={0.08}
                 transition={{ duration: 0.55 }}
               >
@@ -751,40 +753,13 @@ export default async function ProductDetailPage({ params }: Props) {
                   ) : null}
                 </div>
 
-                {/* Laptop Mockup Device Frame */}
-                <div className="max-w-4xl mx-auto px-1 sm:px-4">
-                  {/* Laptop Lid (Screen Bezel) */}
-                  <div className="relative rounded-t-2xl sm:rounded-t-[28px] border border-neutral-700/80 dark:border-neutral-700/70 bg-neutral-950 p-2.5 sm:p-4 pb-2 sm:pb-3 shadow-2xl">
-                    {/* Top Bezel with Camera */}
-                    <div className="flex items-center justify-center pb-2 pt-0.5 sm:pt-1">
-                      <div className="flex items-center gap-1.5">
-                        <span className="h-2 w-2 rounded-full bg-neutral-900 border border-neutral-700/90 flex items-center justify-center">
-                          <span className="h-1 w-1 rounded-full bg-teal/70" />
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Screen Glass & Video Player */}
-                    <div className="relative aspect-video w-full overflow-hidden rounded-lg sm:rounded-xl border border-neutral-800/90 bg-black shadow-inner">
-                      <iframe
-                        src={`https://www.youtube-nocookie.com/embed/${product.videoEmbed.youtubeId}?rel=0&modestbranding=1`}
-                        title={product.videoEmbed.title}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                        className="absolute inset-0 h-full w-full"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Laptop Base (Chassis Deck & Opening Notch) */}
-                  <div className="relative -mt-0.5 w-full">
-                    <div className="h-3.5 sm:h-5 w-full rounded-b-xl sm:rounded-b-2xl bg-gradient-to-b from-neutral-700 via-neutral-800 to-neutral-900 border-x border-b border-neutral-700/80 shadow-lg flex items-start justify-center">
-                      <div className="w-20 sm:w-28 h-1.5 sm:h-2 rounded-b-md bg-neutral-950/90 border-b border-neutral-600/50" />
-                    </div>
-                    {/* Ambient Contact Shadow */}
-                    <div className="mx-auto w-[88%] h-4 sm:h-5 bg-black/50 blur-md rounded-full -mt-1" aria-hidden="true" />
-                  </div>
-                </div>
+                {/* Interactive Ultra-Realistic Laptop Mockup */}
+                <LaptopVideoMockup
+                  youtubeId={product.videoEmbed.youtubeId}
+                  title={product.videoEmbed.title}
+                  description={product.videoEmbed.description}
+                  productName={product.name}
+                />
               </div>
             </ContainerWrapper>
           </section>
@@ -863,7 +838,7 @@ export default async function ProductDetailPage({ params }: Props) {
                         <span>SYS-{item.number}</span>
                         <span className="text-teal">• Live</span>
                       </div>
-                      <h4 className="text-title font-normal text-foreground group-hover:text-teal transition-colors">
+                      <h4 className="work-card-title text-foreground group-hover:text-teal transition-colors">
                         {item.name}
                       </h4>
                       <p className="mt-1 text-label text-muted-foreground line-clamp-2">

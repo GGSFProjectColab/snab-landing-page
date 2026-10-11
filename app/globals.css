@@ -872,4 +872,35 @@ html[data-magicui-theme-vt="active"]::view-transition-group(root) {
   100% {
     background-position: 50% 0, 60% 50%;
   }
+}
+
+/* ── Work / Systems Title Typography (Large, bold, high-contrast) ── */
+.work-hero-title {
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem) !important;
+  font-weight: 800 !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.035em !important;
+  color: var(--foreground) !important;
+}
+
+.work-hero-title * {
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  letter-spacing: inherit !important;
+  color: inherit !important;
+}
+
+.work-card-title {
+  font-size: clamp(1.4rem, 2.4vw, 2.25rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--foreground) !important;
+}
+
+.work-card-title * {
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
 }

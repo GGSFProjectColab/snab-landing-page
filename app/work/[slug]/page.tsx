@@ -20,6 +20,7 @@ import { Footer } from "../../Footer";
 import { HeaderTitle } from "@/components/profile/header-title";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
 import { LaptopVideoMockup } from "@/components/ui/laptop-video-mockup";
+import { HoverFaqAccordion } from "@/components/ui/hover-faq";
 import { PRODUCTS, getProductBySlug, getAllProductSlugs } from "@/data/products";
 
 type Props = {
@@ -780,34 +781,7 @@ export default async function ProductDetailPage({ params }: Props) {
                 </p>
               </div>
 
-              <div className="rounded-lg border border-dotted border-edge divide-y divide-dotted divide-edge bg-card/10">
-                {product.faqs.map((faq, index) => (
-                  <details
-                    key={faq.question}
-                    className="group p-5 sm:p-6 transition-colors hover:bg-card/25 open:bg-card/20"
-                  >
-                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-normal text-body sm:text-title text-foreground">
-                      <div className="flex items-start gap-4">
-                        <span className="font-mono text-caption text-teal pt-0.5 shrink-0">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
-                        <span className="font-medium text-foreground group-hover:text-teal transition-colors">
-                          {faq.question}
-                        </span>
-                      </div>
-                      <span
-                        className="font-mono text-title text-muted-foreground transition-transform duration-200 group-open:rotate-45 shrink-0 select-none ml-2"
-                        aria-hidden="true"
-                      >
-                        +
-                      </span>
-                    </summary>
-                    <div className="mt-3 pl-8 sm:pl-10 text-body leading-relaxed text-muted-foreground border-t border-dotted border-edge/40 pt-3">
-                      <p>{faq.answer}</p>
-                    </div>
-                  </details>
-                ))}
-              </div>
+              <HoverFaqAccordion faqs={product.faqs} />
             </div>
           </ContainerWrapper>
         </section>

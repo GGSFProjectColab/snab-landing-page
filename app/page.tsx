@@ -19,6 +19,7 @@ import { absoluteUrl, createPageMetadata, siteConfig } from "@/lib/site";
 import { MagicText } from "@/components/ui/magic-text";
 import { MarqueeDemo } from "@/components/ui/marquee-demo";
 import { TextGenerateEffect } from "@/components/ui/text-generate-effect";
+import { HoverFaqAccordion } from "@/components/ui/hover-faq";
 import { LazyAskAiSection as AskAiSection } from "./LazyAskAi";
 import { LazyServicesSection as ServicesSection } from "./LazyServices";
 import { LazyParallaxHowWeWork as ParallaxHowWeWork } from "./LazyParallax";
@@ -738,24 +739,8 @@ export default function Home() {
         <section id="faq" aria-labelledby="faq-title">
           <ContainerWrapper>
             <HeaderTitle title="Common questions" id="faq-title" />
-            <div className="">
-              {homeFaqs.map((faq, index) => (
-                <div className="p-3 sm:p-4" key={faq.question}>
-                  <div className="flex items-start gap-4">
-                    <span className="font-mono text-caption text-muted-foreground">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <details className="flex-1">
-                      <summary className="flex cursor-pointer items-center justify-between text-body font-bold">
-                        <span>{faq.question}</span>
-                      </summary>
-                      <p className="mt-3 pl-8 text-body leading-relaxed text-muted-foreground">
-                        {faq.answer}
-                      </p>
-                    </details>
-                  </div>
-                </div>
-              ))}
+            <div className="p-3 sm:p-4">
+              <HoverFaqAccordion faqs={homeFaqs} />
             </div>
             <div className="bottom-rail bg-edge" aria-hidden="true" />
           </ContainerWrapper>

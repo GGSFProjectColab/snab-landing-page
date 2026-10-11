@@ -221,13 +221,25 @@ export default function AboutPage() {
                 >
                   Alongside bespoke client development, we engineer{" "}
                   <Highlighter action="highlight" color="#fde68a" isView>
-                    <span className="font-medium text-stone-900 dark:text-emerald-100">proprietary intelligent platforms</span>
+                    <span className="font-medium text-stone-900 dark:text-emerald-100">proprietary intelligent platforms and high-utility software</span>
                   </Highlighter>{" "}
                   designed to solve acute operational challenges. Our product ecosystem includes{" "}
                   <Link href="https://interviewxpert.in" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">
                     InterviewXpert ↗
                   </Link>
-                  , an intelligent platform that streamlines recruitment workflows and synthesizes candidate evaluation records, and <span className="text-foreground font-medium">NotaryXpert</span>, which automates document workflows, appointments, and client case tracking for legal professionals. Each product reflects our core philosophy:{" "}
+                  , an intelligent recruitment workflow platform;{" "}
+                  <Link href="https://notery.interviewxpert.in/login" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">
+                    NotaryXpert ↗
+                  </Link>{" "}
+                  for legal case tracking;{" "}
+                  <Link href="https://www.filezenith.com" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">
+                    FileZenith ↗
+                  </Link>
+                  , a 100% client-side private PDF &amp; image studio; and{" "}
+                  <Link href="https://www.usefeekit.com" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">
+                    FeeKit ↗
+                  </Link>
+                  , hosting 199+ financial calculation engines and US/UK tax compliance utilities. Each product reflects our core philosophy:{" "}
                   <Highlighter action="underline" color="#FF9800" strokeWidth={2} isView>
                     <span className="font-medium text-foreground">dependable software built for daily production use</span>
                   </Highlighter>
@@ -240,15 +252,23 @@ export default function AboutPage() {
                   staggerDuration={0.045}
                   transition={{ duration: 0.55 }}
                 >
-                  We build proprietary intelligent platforms like{" "}
+                  We engineer proprietary intelligent platforms including{" "}
                   <Link href="https://interviewxpert.in" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">
                     InterviewXpert ↗
-                  </Link>{" "}
-                  for hiring automation and <span className="text-foreground font-medium">NotaryXpert</span> for legal workflow management,{" "}
-                  <Highlighter action="underline" color="#FF9800" strokeWidth={2} isView>
-                    <span className="font-medium text-foreground">engineered for daily production use</span>
-                  </Highlighter>
-                  .
+                  </Link>
+                  ,{" "}
+                  <Link href="https://notery.interviewxpert.in/login" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">
+                    NotaryXpert ↗
+                  </Link>
+                  ,{" "}
+                  <Link href="https://www.filezenith.com" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">
+                    FileZenith ↗
+                  </Link>
+                  , and{" "}
+                  <Link href="https://www.usefeekit.com" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium underline underline-offset-4 decoration-dotted decoration-yellow-500/70 dark:decoration-emerald-400/80 hover:decoration-solid hover:text-yellow-600 dark:hover:text-emerald-300 transition-colors">
+                    FeeKit ↗
+                  </Link>
+                  . Each product reflects our core philosophy: dependable software built for daily production use.
                 </TextGenerateEffect>
               </div>
             </div>

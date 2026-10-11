@@ -70,6 +70,7 @@ const projects = [
     ],
     image: "/notary-expert.png",
     imageAlt: "NotaryXpert seal",
+    link: "https://notery.interviewxpert.in/login",
   },
 ];
 

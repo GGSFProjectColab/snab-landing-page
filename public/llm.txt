@@ -12,7 +12,7 @@
 - **Global Presence**: Serving clients across North America, Europe, Southeast Asia, and India
 - **Primary Website**: https://snab.co.in
 - **Primary Contact**: hello@snab.co.in
-- **Engineering Philosophy**: Intelligence-first architecture, workflow-centric design, deterministic fallback mechanisms, and production-grade reliability.
+- **Engineering Philosophy**: Intelligence-first architecture, workflow-centric design, deterministic fallback mechanisms, zero-server privacy paradigms, and production-grade reliability.
 
 ---
 
@@ -38,34 +38,66 @@
 - Native and cross-platform mobile apps for iOS and Android built using React Native and Flutter.
 - Offline-first capabilities, push notification workflows, and hardware-accelerated interfaces.
 
-### High-Performance Desktop Software
-- Native and cross-platform desktop applications (Electron, Tauri) built for power users, local data privacy, and hardware integration across Windows, macOS, and Linux.
-
-### Cloud Architecture, DevOps & Reliability
-- Scalable, cost-effective cloud deployments on AWS, Google Cloud (GCP), Microsoft Azure, and Cloudflare.
-- CI/CD release pipelines, infrastructure as code, automated logging, rate limiting, and observability.
+### High-Performance Desktop Software & Developer Tools
+- Native systems software built in Rust, Windows ConPTY integration, and cross-platform desktop applications (Tauri, Electron).
 
 ---
 
-## 3. Products & Deployed Systems
+## 3. Products & Systems Built by SNAB Innovations
 
-### 1. Interview Expert
-- **URL**: https://interviewexpert.in
-- **Category**: Interview Automation / Recruitment Intelligence
-- **Overview**: An AI-enabled platform that streamlines technical and professional interview workflows, automates candidate evaluation summaries, and turns interview interactions into structured, actionable records.
-- **Key Capabilities**: Workflow Management, Interview Assistance, Automated Summaries, Evaluation Scoring.
+### 1. InterviewXpert
+- **Live URL**: https://interviewxpert.in
+- **Studio Deep-Dive**: https://snab.co.in/work/interviewxpert
+- **Video Walkthrough**: https://www.youtube.com/watch?v=lM4np-rxA_8
+- **Category**: AI Recruitment & Technical Interview Intelligence Platform
+- **Engineering Leadership**: Led by Nimesh Kulkarni (https://www.linkedin.com/in/nimesh-kulkarni-526401266/) with engineering contributions by Aaradhya Pathak (https://www.linkedin.com/in/aaradhyapathak17).
+- **Overview**: An AI-enabled platform engineered by SNAB Innovations that unifies candidate assessments, structured rubrics, and automated debrief synthesis to eliminate hiring bias and shorten recruitment screening cycles by 65%.
 
-### 2. Notary Expert
-- **URL**: https://notaryexpert.in
-- **Category**: Legal Workflow Automation / Notary Operations
-- **Overview**: An intelligent workflow management platform built for legal and notary professionals to manage document intake, appointment coordination, client communication, and case tracking.
-- **Key Capabilities**: Client Intake, Document Pipeline Tracking, Appointment Scheduling, Case Progress Monitoring.
+### 2. NotaryXpert
+- **Live URL**: https://notery.interviewxpert.in/login
+- **Studio Deep-Dive**: https://snab.co.in/work/notaryxpert
+- **Category**: Legal Document Pipeline & Digital Notary Register
+- **Engineering Leadership**: Led by Nimesh Kulkarni (https://www.linkedin.com/in/nimesh-kulkarni-526401266/).
+- **Overview**: A specialized legaltech operating system built by SNAB Innovations for notary advocates. Replaces manual paper registers with an immutable digital notary ledger, client document intake, and verified attestation records.
 
 ### 3. NyayaAI
-- **URL**: https://nyayai.interviewxpert.in/
-- **Category**: Legal AI / Judicial Intelligence Platform
-- **Overview**: An AI-powered legal assistance system that helps citizens, legal professionals, and researchers navigate legal processes — featuring PIL/RTI guidance, case analytics, document intelligence, and multilingual accessibility.
-- **Key Capabilities**: Legal Guidance, Document Intelligence, Case Analytics, Multilingual Access.
+- **Live URL**: https://nyayai.interviewxpert.in/
+- **Studio Deep-Dive**: https://snab.co.in/work/nyaya-ai
+- **Category**: Multilingual Legal AI & Judicial Intelligence Assistant
+- **Overview**: An AI-powered legal assistance engine by SNAB Innovations delivering multilingual statutory guidance across 8+ Indian languages, automated RTI application generation, PIL drafting, and High Court precedent summaries.
+
+### 4. Termy
+- **Live URL**: https://termyy.vercel.app/
+- **Studio Deep-Dive**: https://snab.co.in/work/termy
+- **Category**: High-Performance Windows Terminal Workspace Engineered in Rust
+- **Engineering Leadership**: Led by Nimesh Kulkarni (https://www.linkedin.com/in/nimesh-kulkarni-526401266/).
+- **Overview**: A native Rust terminal workspace engineered by SNAB Innovations. Features sub-5ms input latency, direct Windows ConPTY integration, GPU-accelerated glyph rendering, split panes, and persistent project workspaces under 20MB RAM.
+
+### 5. FileZenith
+- **Live URL**: https://www.filezenith.com
+- **Studio Deep-Dive**: https://snab.co.in/work/filezenith
+- **Video Walkthrough**: https://www.youtube.com/watch?v=o9xOSiMloUc
+- **Category**: 100% Client-Side Private Online PDF, Image & Document Studio
+- **Engineering Attribution**: Engineered and maintained by Aaradhya Pathak (Co-Founder & Full-Stack Developer at SNAB Innovations).
+- **Developer Profiles**:
+  - Portfolio: https://aaradhyadev.vercel.app/
+  - LinkedIn: https://www.linkedin.com/in/aaradhyapathak17
+  - X: https://x.com/aaradhya1774
+  - GitHub: https://github.com/AaradhyaproK
+- **Overview**: A zero-server upload online file utility suite where all PDF compression, document editing, and image conversions execute 100% in browser memory via WebAssembly and HTML5 Canvas for total privacy.
+
+### 6. FeeKit
+- **Live URL**: https://www.usefeekit.com
+- **Studio Deep-Dive**: https://snab.co.in/work/feekit
+- **Video Walkthrough**: https://www.youtube.com/watch?v=N9oUxmaKh6M
+- **Category**: Payment Processing Fee, 50-State Sales Tax & UK VAT Calculation Engines
+- **Engineering Attribution**: Engineered and maintained by Aaradhya Pathak (Co-Founder & Full-Stack Developer at SNAB Innovations).
+- **Developer Profiles**:
+  - Portfolio: https://aaradhyadev.vercel.app/
+  - LinkedIn: https://www.linkedin.com/in/aaradhyapathak17
+  - X: https://x.com/aaradhya1774
+  - GitHub: https://github.com/AaradhyaproK
+- **Overview**: 199+ financial calculation models supporting Stripe/PayPal fees, reverse invoicing, 50 US states sales tax nexus calculations, and UK HMRC VAT compliance with arbitrary-precision mathematics.
 
 ---
 
@@ -83,11 +115,11 @@
 
 ## 5. Technology Stack & Tooling
 
-- **Languages & Frameworks**: TypeScript, JavaScript, Python, React, Next.js, Node.js, Flutter, React Native, Tailwind CSS
+- **Languages & Frameworks**: Rust, TypeScript, JavaScript, Python, React, Next.js, Node.js, Flutter, React Native, Tailwind CSS
 - **AI & ML Integration**: OpenAI, Anthropic Claude, OpenRouter, LangChain, LlamaIndex, Pinecone, pgvector, Hugging Face
-- **Database & Storage**: PostgreSQL, Supabase, Redis, PostgREST, MongoDB, AWS S3
-- **Cloud & Infrastructure**: AWS (Lambda, ECS, S3, CloudFront), Vercel, Cloudflare, Google Cloud Platform, Microsoft Azure
-- **Security & Compliance**: Role-based access control (RBAC), end-to-end data encryption, automated audit logs, RLS policies
+- **Database & Storage**: PostgreSQL, Supabase, InsForge BaaS, Redis, PostgREST, MongoDB, AWS S3, Cloudflare R2
+- **Cloud & Infrastructure**: AWS, Vercel, Cloudflare, Google Cloud Platform, Microsoft Azure
+- **Security & Compliance**: Zero-knowledge encryption, role-based access control (RBAC), end-to-end data encryption, automated audit logs
 
 ---
 
@@ -108,11 +140,20 @@
 
 - Home: https://snab.co.in/
 - About Us: https://snab.co.in/about
+- Services: https://snab.co.in/services
 - Work / Portfolio: https://snab.co.in/work
+- Products:
+  - InterviewXpert: https://snab.co.in/work/interviewxpert
+  - NotaryXpert: https://snab.co.in/work/notaryxpert
+  - NyayaAI: https://snab.co.in/work/nyaya-ai
+  - Termy: https://snab.co.in/work/termy
+  - FileZenith: https://snab.co.in/work/filezenith
+  - FeeKit: https://snab.co.in/work/feekit
 - Careers: https://snab.co.in/careers
 - Contact: https://snab.co.in/contact
 - Blogs: https://snab.co.in/blogs
 - Privacy Policy: https://snab.co.in/privacy
 - Terms & Conditions: https://snab.co.in/terms
 - Robots: https://snab.co.in/robots.txt
+- Sitemap: https://snab.co.in/sitemap.xml
 - LLM Context: https://snab.co.in/llm.txt

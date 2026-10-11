@@ -1,10 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 
 export function ContactForm() {
+  const router = useRouter();
+  const prefersReducedMotion = useReducedMotion() ?? false;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -14,6 +18,10 @@ export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    router.prefetch("/thank-you");
+  }, [router]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -60,6 +68,7 @@ export function ContactForm() {
 
       setIsSuccess(true);
       setFormData({ name: "", email: "", phone: "", message: "" });
+      router.push("/thank-you");
     } catch (err: any) {
       setErrorMessage(err.message || "Something went wrong. Please try again or email us directly.");
     } finally {
@@ -73,21 +82,18 @@ export function ContactForm() {
         <div className="flex items-center gap-2 text-teal">
           <CheckCircle2 size={18} className="shrink-0" />
           <p className="text-button font-medium">
-            Message sent successfully! We&apos;ll get back to you soon.
+            Message sent! Redirecting to confirmation page...
           </p>
         </div>
-        <button
-          type="button"
-          onClick={() => setIsSuccess(false)}
+        <Link
+          href="/thank-you"
           className="self-start font-mono text-caption uppercase tracking-wider text-muted-foreground transition-colors hover:text-foreground underline underline-offset-4"
         >
-          Send another message
-        </button>
+          Click here if not redirected automatically
+        </Link>
       </div>
     );
   }
-
-  const prefersReducedMotion = useReducedMotion() ?? false;
 
   return (
     <form className="flex flex-col gap-6" onSubmit={handleSubmit}>

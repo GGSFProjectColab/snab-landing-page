@@ -1,94 +1,98 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { Footer } from "../Footer";
-import { createPageMetadata } from "@/lib/site";
+import { createPageMetadata, siteConfig } from "@/lib/site";
 import { ContainerWrapper } from "@/components/site/container";
 import { HeaderTitle } from "@/components/profile/header-title";
+import { PRODUCTS } from "@/data/products";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "Work | SNAB Innovations",
-  description:
-    "Explore selected AI products, platforms, and custom software systems built by SNAB Innovations.",
-  path: "/work",
-});
-
-const workItems = [
-  {
-    number: "01",
-    name: "InterviewXpert",
-    status: "Live",
-    categories: ["INTERVIEW AUTOMATION", "AI PRODUCT", "WORKFLOW SOFTWARE"],
+export const metadata: Metadata = {
+  ...createPageMetadata({
+    title: "Software Products & Intelligent Systems | SNAB Innovations",
     description:
-      "An AI-enabled platform that helps teams organize interview workflows, reduce administrative overhead, and convert candidate interactions into structured, actionable intelligence.",
-    capabilities: [
-      "Workflow Management",
-      "Interview Assistance",
-      "Automated Summaries",
-      "Evaluation Support",
-    ],
-    image: "/interviewxpert-dark.png",
-    imageDark: "/interviewxpert.png",
-    imageAlt: "InterviewXpert Interface Preview",
-    link: "https://interviewxpert.in",
-  },
-  {
-    number: "02",
-    name: "NotaryXpert",
-    status: "Live",
-    categories: ["NOTARY AUTOMATION", "LEGAL WORKFLOWS", "AI PRODUCT"],
-    description:
-      "An intelligent workflow platform empowering notary professionals to manage legal document pipelines, appointments, client communication, and case tracking.",
-    capabilities: [
-      "Client Intake",
-      "Document Workflows",
-      "Appointment Coordination",
-      "Case Tracking",
-    ],
-    image: "/notary-expert.png",
-    imageAlt: "NotaryXpert Platform Preview",
-  },
-  {
-    number: "03",
-    name: "NyayaAI",
-    status: "Live",
-    categories: ["LEGAL AI", "AI PRODUCT", "JUDICIAL TECH"],
-    description:
-      "An AI-powered legal assistance platform that helps citizens, lawyers, and judges navigate the justice system — with PIL/RTI guidance, court statistics dashboards, document intelligence, and multilingual access.",
-    capabilities: [
-      "Legal Guidance",
-      "Document Intelligence",
-      "Case Analytics",
-      "Multilingual Access",
-    ],
-    image: "/nyaya-ai.png",
-    imageAlt: "NyayaAI Logo",
-    link: "https://nyayai.interviewxpert.in/",
-    contain: true,
-  },
-  {
-    number: "04",
-    name: "Termy",
-    status: "Live",
-    categories: ["RUST DESKTOP", "TERMINAL WORKSPACE", "OPEN SOURCE"],
-    description:
-      "A focused Windows terminal workspace, engineered in Rust. Run PowerShell and Command Prompt through ConPTY with persistent project workspaces, split panes, and restored layouts. An open-source agentic coding environment.",
-    capabilities: [
-      "ConPTY Sessions",
-      "Split Panes",
-      "Persistent Workspaces",
-      "Layout Restoration",
-    ],
-    image: "/termy.png",
-    imageAlt: "Termy App Icon",
-    link: "https://termyy.vercel.app/",
-    contain: true,
-    imagePadding: "p-8",
-  },
-  ];
+      "Explore proprietary software platforms and developer tools engineered by SNAB Innovations in Nashik, including InterviewXpert, NotaryXpert, NyayaAI, Termy, FileZenith, and FeeKit.",
+    path: "/work",
+  }),
+  keywords: [
+    "SNAB Innovations products",
+    "SNAB Innovations work",
+    "SNAB software systems",
+    "InterviewXpert SNAB",
+    "NotaryXpert SNAB",
+    "NyayaAI SNAB",
+    "Termy SNAB",
+    "FileZenith SNAB",
+    "FeeKit SNAB",
+    "software engineering studio Nashik",
+    "production AI systems",
+    "workflow automation platforms India",
+    "developer tools India",
+  ],
+};
 
 export default function WorkPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": `${siteConfig.url}/work#collection`,
+        url: `${siteConfig.url}/work`,
+        name: "Software Products & Intelligent Systems | SNAB Innovations",
+        description:
+          "Proprietary software platforms and developer tools engineered by SNAB Innovations, including InterviewXpert, NotaryXpert, NyayaAI, Termy, FileZenith, and FeeKit.",
+        isPartOf: {
+          "@type": "WebSite",
+          "@id": `${siteConfig.url}/#website`,
+          name: siteConfig.name,
+          url: siteConfig.url,
+        },
+        about: {
+          "@type": "Organization",
+          name: siteConfig.name,
+          url: siteConfig.url,
+        },
+        mainEntity: {
+          "@type": "ItemList",
+          itemListElement: PRODUCTS.map((item, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: item.name,
+            description: item.summary,
+            url: `${siteConfig.url}/work/${item.slug}`,
+          })),
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `${siteConfig.url}/work#breadcrumb`,
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteConfig.url,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Work",
+            item: `${siteConfig.url}/work`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <main className="min-h-screen bg-background text-foreground">
+      {/* Schema.org CollectionPage & ItemList Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Hero Header */}
       <section aria-labelledby="work-hero-title">
         <ContainerWrapper>
@@ -112,10 +116,10 @@ export default function WorkPage() {
       {/* Main Work Showcase List */}
       <section aria-labelledby="selected-work-title">
         <ContainerWrapper>
-          <HeaderTitle title="Work we've shipped" id="selected-work-title" />
+          <HeaderTitle title="Products & Systems Built by Snab Innovations" id="selected-work-title" />
 
-          <div className="divide-y divide-dotted divide-edge">
-            {workItems.map((item) => (
+          <div className="divide-y divide-dotted border-b border-dotted border-edge divide-edge">
+            {PRODUCTS.map((item) => (
               <div
                 key={item.number}
                 className="group p-4 sm:p-6 md:p-8 md:grid md:grid-cols-[1fr_auto] md:gap-8 md:items-center"
@@ -136,9 +140,14 @@ export default function WorkPage() {
                       </span>
                     </div>
 
-                    {/* Title */}
+                    {/* Title with link to dedicated deep-dive page */}
                     <h2 className="mt-2 text-title font-normal tracking-tight">
-                      {item.name}
+                      <Link
+                        href={`/work/${item.slug}`}
+                        className="hover:text-teal transition-colors"
+                      >
+                        {item.name}
+                      </Link>
                     </h2>
 
                     {/* Category Badges */}
@@ -159,37 +168,49 @@ export default function WorkPage() {
                     </p>
 
                     {/* Capabilities list */}
-                    <div className="mt-4 border-t border-dotted border-edge pt-3">
-                      <span className="block font-mono text-caption text-muted-foreground/80">
+                    <div className="mt-4 border-t border-dotted border-edge pt-2.5">
+                      <span className="block font-mono text-[11px] leading-relaxed text-muted-foreground/60">
                         {item.capabilities.join(" • ")}
                       </span>
                     </div>
                   </div>
 
-                  {/* Action Link — only if item has a link (NotaryXpert has no link) */}
-                  {"link" in item && item.link ? (
-                    <div className="mt-6">
+                  {/* Action Links: Dedicated Page + Optional Live URL */}
+                  <div className="mt-6 flex flex-wrap items-center gap-4">
+                    <Link
+                      href={`/work/${item.slug}`}
+                      className="inline-flex items-center gap-1.5 text-button font-medium text-foreground transition-colors hover:text-teal"
+                    >
+                      <span>View system details</span>
+                      <span
+                        className="inline-block transition-transform duration-200 group-hover:translate-x-1"
+                        aria-hidden="true"
+                      >
+                        →
+                      </span>
+                    </Link>
+
+                    {item.link ? (
                       <a
-                        href={item.link as string}
+                        href={item.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 text-button font-normal text-foreground transition-colors hover:text-muted-foreground"
+                        className="inline-flex items-center gap-1 font-mono text-caption uppercase text-muted-foreground transition-colors hover:text-foreground"
                       >
-                        <span>Explore system</span>
-                        <span
-                          className="inline-block transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                          aria-hidden="true"
-                        >
-                          ↗
-                        </span>
+                        <span>Visit live site</span>
+                        <span aria-hidden="true">↗</span>
                       </a>
-                    </div>
-                  ) : null}
+                    ) : null}
+                  </div>
                 </div>
 
                 {/* Visual Preview Column */}
                 <div className="mt-6 md:mt-0 flex justify-center">
-                  <div className="relative h-[220px] w-full max-w-[280px] sm:max-w-[320px] md:h-[240px] md:w-[240px] overflow-hidden rounded-[10px] border border-dotted border-edge p-2 bg-accent/20 transition-colors group-hover:border-foreground/20">
+                  <Link
+                    href={`/work/${item.slug}`}
+                    aria-label={`View ${item.name} details`}
+                    className="relative h-[220px] w-full max-w-[280px] sm:max-w-[320px] md:h-[240px] md:w-[240px] overflow-hidden rounded-[10px] border border-dotted border-edge p-2 bg-accent/20 transition-all group-hover:border-teal/50 hover:border-teal/50"
+                  >
                     <div
                       className="absolute inset-0 opacity-10"
                       style={{
@@ -200,25 +221,25 @@ export default function WorkPage() {
                     />
                     <div className="relative h-full w-full overflow-hidden rounded-[6px]">
                       <Image
-                        className={`h-full w-full ${"contain" in item && item.contain ? "object-contain" : "object-cover object-top"} transition-transform duration-500 group-hover:scale-105 ${"imageDark" in item && item.imageDark ? "block dark:hidden" : ""} ${(item as { imagePadding?: string }).imagePadding ?? ""}`}
+                        className={`h-full w-full ${item.contain ? "object-contain" : "object-cover object-top"} transition-transform duration-500 group-hover:scale-105 ${item.imageDark ? "block dark:hidden" : ""} ${item.imagePadding ?? ""}`}
                         src={item.image}
                         alt={item.imageAlt}
                         width={400}
                         height={400}
                         sizes="(max-width: 768px) 100vw, 240px"
                       />
-                      {"imageDark" in item && item.imageDark && (
+                      {item.imageDark ? (
                         <Image
-                          className={`h-full w-full ${"contain" in item && item.contain ? "object-contain" : "object-cover object-top"} transition-transform duration-500 group-hover:scale-105 hidden dark:block ${(item as { imagePadding?: string }).imagePadding ?? ""}`}
-                          src={item.imageDark as string}
+                          className={`h-full w-full ${item.contain ? "object-contain" : "object-cover object-top"} transition-transform duration-500 group-hover:scale-105 hidden dark:block ${item.imagePadding ?? ""}`}
+                          src={item.imageDark}
                           alt={item.imageAlt}
                           width={400}
                           height={400}
                           sizes="(max-width: 768px) 100vw, 240px"
                         />
-                      )}
+                      ) : null}
                     </div>
-                  </div>
+                  </Link>
                 </div>
               </div>
             ))}

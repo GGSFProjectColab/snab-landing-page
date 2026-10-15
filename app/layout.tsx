@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Manrope, Geist, Geist_Mono, Instrument_Serif, Inter_Tight, Lato } from "next/font/google";
+import { Manrope, Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
 import "./footer.css";
@@ -28,30 +28,6 @@ const bodyFont = Manrope({
   variable: "--font-body",
   display: "swap",
   preload: true,
-});
-
-const instrumentSerif = Instrument_Serif({
-  weight: ["400"],
-  subsets: ["latin"],
-  variable: "--font-instrument-serif",
-  display: "swap",
-  preload: false,
-});
-
-const interTight = Inter_Tight({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  variable: "--font-tight",
-  display: "swap",
-  preload: false,
-});
-
-const lato = Lato({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  variable: "--font-lato",
-  display: "swap",
-  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -145,15 +121,20 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn(
         bodyFont.variable,
-        instrumentSerif.variable,
-        interTight.variable,
-        lato.variable,
         geistMono.variable,
         "font-sans",
         geist.variable
       )}
     >
       <head>
+        {/* Google Fonts for display typography (loaded via CDN with preconnect to prevent Turbopack build crashes) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;700&family=Lato:wght@400;700&display=swap"
+        />
+
         {/* How-We-Work lotties are self-hosted: preload the first (above-the-fold
             for that section) so download starts with page load, not on scroll.
             Rest are idle-prefetched by StackingHowWeWork. */}

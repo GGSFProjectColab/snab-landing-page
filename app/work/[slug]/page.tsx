@@ -88,7 +88,8 @@ export default async function ProductDetailPage({ params }: Props) {
   const categoryMap: Record<string, string> = {
     interviewxpert: "BusinessApplication, DeveloperApplication",
     notaryxpert: "BusinessApplication, LegalApplication",
-    "nyaya-ai": "BusinessApplication, LegalApplication",
+    "hire-excellence": "BusinessApplication, RecruitmentApplication",
+    "nyaya-ai": "BusinessApplication, RecruitmentApplication",
     termy: "DeveloperApplication, UtilityApplication",
     filezenith: "UtilityApplication, MultimediaApplication",
     feekit: "FinanceApplication, BusinessApplication",

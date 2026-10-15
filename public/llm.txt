@@ -62,11 +62,12 @@
 - **Engineering Leadership**: Led by Nimesh Kulkarni (https://www.linkedin.com/in/nimesh-kulkarni-526401266/).
 - **Overview**: A specialized legaltech operating system built by SNAB Innovations for notary advocates. Replaces manual paper registers with an immutable digital notary ledger, client document intake, and verified attestation records.
 
-### 3. NyayaAI
-- **Live URL**: https://nyayai.interviewxpert.in/
-- **Studio Deep-Dive**: https://snab.co.in/work/nyaya-ai
-- **Category**: Multilingual Legal AI & Judicial Intelligence Assistant
-- **Overview**: An AI-powered legal assistance engine by SNAB Innovations delivering multilingual statutory guidance across 8+ Indian languages, automated RTI application generation, PIL drafting, and High Court precedent summaries.
+### 3. Hire Excellence
+- **Live URL**: https://hire-excellence.n1m35h.in
+- **Studio Deep-Dive**: https://snab.co.in/work/hire-excellence
+- **Category**: AI-First Hiring Network & Autonomous Voice Interview Platform
+- **Engineering Leadership**: Led by Nimesh Kulkarni (https://www.linkedin.com/in/nimesh-kulkarni-526401266/).
+- **Overview**: An AI-first hiring and professional social network engineered by SNAB Innovations. Features 5-minute autonomous conversational voice interviews over LiveKit WebRTC, objective job-description alignment scoring, verified corporate domains, and ranked shortlists with audit-ready rationales.
 
 ### 4. Termy
 - **Live URL**: https://termyy.vercel.app/
@@ -147,7 +148,7 @@
 - Products:
   - InterviewXpert: https://snab.co.in/work/interviewxpert
   - NotaryXpert: https://snab.co.in/work/notaryxpert
-  - NyayaAI: https://snab.co.in/work/nyaya-ai
+  - Hire Excellence: https://snab.co.in/work/hire-excellence
   - Termy: https://snab.co.in/work/termy
   - FileZenith: https://snab.co.in/work/filezenith
   - FeeKit: https://snab.co.in/work/feekit

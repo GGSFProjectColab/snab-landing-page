@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   ...createPageMetadata({
     title: "Software Products & Intelligent Systems | SNAB Innovations",
     description:
-      "Explore proprietary software platforms and developer tools engineered by SNAB Innovations in Nashik, including InterviewXpert, NotaryXpert, NyayaAI, Termy, FileZenith, and FeeKit.",
+      "Explore proprietary software platforms and developer tools engineered by SNAB Innovations in Nashik, including InterviewXpert, NotaryXpert, Hire Excellence, Termy, FileZenith, and FeeKit.",
     path: "/work",
   }),
   keywords: [
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     "SNAB software systems",
     "InterviewXpert SNAB",
     "NotaryXpert SNAB",
-    "NyayaAI SNAB",
+    "Hire Excellence SNAB",
     "Termy SNAB",
     "FileZenith SNAB",
     "FeeKit SNAB",
@@ -41,7 +41,7 @@ export default function WorkPage() {
         url: `${siteConfig.url}/work`,
         name: "Software Products & Intelligent Systems | SNAB Innovations",
         description:
-          "Proprietary software platforms and developer tools engineered by SNAB Innovations, including InterviewXpert, NotaryXpert, NyayaAI, Termy, FileZenith, and FeeKit.",
+          "Proprietary software platforms and developer tools engineered by SNAB Innovations, including InterviewXpert, NotaryXpert, Hire Excellence, Termy, FileZenith, and FeeKit.",
         isPartOf: {
           "@type": "WebSite",
           "@id": `${siteConfig.url}/#website`,

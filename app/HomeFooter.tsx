@@ -20,7 +20,7 @@ const footerColumns: FooterColumn[] = [
     links: [
       { label: "InterviewXpert", href: "https://interviewxpert.in", external: true },
       { label: "NotaryXpert", href: "https://notery.interviewxpert.in/login", external: true },
-      { label: "NyayaAI", href: "https://nyayai.interviewxpert.in/", external: true },
+      { label: "Hire Excellence", href: "https://hire-excellence.n1m35h.in", external: true },
       { label: "Termy", href: "https://termyy.vercel.app/", external: true },
       { label: "FileZenith", href: "https://www.filezenith.com", external: true },
       { label: "FeeKit", href: "https://www.usefeekit.com", external: true },

@@ -61,11 +61,11 @@
 - **Overview**: An intelligent workflow management platform built for legal and notary professionals to manage document intake, appointment coordination, client communication, and case tracking.
 - **Key Capabilities**: Client Intake, Document Pipeline Tracking, Appointment Scheduling, Case Progress Monitoring.
 
-### 3. NyayaAI
-- **URL**: https://nyayai.interviewxpert.in/
-- **Category**: Legal AI / Judicial Intelligence Platform
-- **Overview**: An AI-powered legal assistance system that helps citizens, legal professionals, and researchers navigate legal processes — featuring PIL/RTI guidance, case analytics, document intelligence, and multilingual accessibility.
-- **Key Capabilities**: Legal Guidance, Document Intelligence, Case Analytics, Multilingual Access.
+### 3. Hire Excellence
+- **URL**: https://hire-excellence.n1m35h.in
+- **Category**: AI Voice Recruitment / Talent Intelligence Network
+- **Overview**: An AI-first hiring and professional social network where an autonomous conversational AI conducts five-minute spoken first-round interviews, evaluates responses against role criteria, and generates ranked shortlists with audit-ready rationales.
+- **Key Capabilities**: Autonomous Voice Interviews, WebRTC Realtime Audio, Role Scoring, Ranked Shortlists, Resume to Profile Parsing.
 
 ---
 

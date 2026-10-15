@@ -349,124 +349,178 @@ export const PRODUCTS: ProductItem[] = [
     },
   },
   {
-    slug: "nyaya-ai",
+    slug: "hire-excellence",
     number: "03",
-    name: "NyayaAI",
-    tagline: "Multilingual Legal AI & Judicial Intelligence Assistant",
-    headline: "Democratizing Legal Access and Judicial Intelligence Across India",
+    name: "Hire Excellence",
+    tagline: "AI-First Hiring & Professional Network Powered by Autonomous Voice Screening",
+    headline: "Replacing Keyword Resumes with Real-Time Spoken Signal and Ranked Shortlists",
     status: "Live",
-    categories: ["LEGAL AI", "AI PRODUCT", "JUDICIAL TECH", "CIVIC TECH"],
+    categories: ["AI VOICE AGENTS", "TALENT INTELLIGENCE", "HIRING NETWORK", "FULL-STACK CLOUDFLARE"],
     summary:
-      "NyayaAI is an AI-powered legal assistance platform engineered by SNAB Innovations. Built to empower citizens, advocates, and judicial officers with PIL/RTI guidance, multilingual document intelligence, and real-time court analytics.",
+      "Hire Excellence is an AI-first hiring network where an autonomous conversational voice agent conducts a 5-minute spoken interview for every applicant, delivering ranked shortlists scored against the role.",
     description:
-      "NyayaAI bridges the gap between intricate statutory frameworks and common citizens. By indexing vast corpora of constitutional law, case citations, High Court judgments, and statutory procedures, NyayaAI provides conversational legal summaries, automated drafting templates, and court statistics in multiple Indian languages.",
+      "Hire Excellence eliminates resume inflation and preliminary screening calls. An autonomous conversational AI conducts a 5-minute spoken interview for every applicant over low-latency WebRTC, evaluating responses directly against role rubrics to deliver an objective, ranked shortlist.",
     problemStatement:
-      "The legal system is intimidating, expensive, and opaque for ordinary citizens, while advocates spend dozens of hours manually searching through disparate judgment gazettes and procedural forms.",
+      "Modern recruiting is broken on both ends. Job seekers face silent rejections and opaque algorithmic ATS filters that favor keyword stuffing over genuine ability. Concurrently, hiring teams are overwhelmed by thousands of automated resume submissions, spending 30+ hours weekly conducting repetitive initial screening calls only to find misaligned candidates.",
     solution:
-      "A multilingual legal intelligence engine that converts complex legal jargon into clear rights advisory, assists in drafting RTI and PIL petitions, and analyzes precedent patterns with factual citations.",
+      "Hire Excellence combines an open professional social network with an automated conversational voice assessment harness. Every applicant completes an asynchronous 5-minute spoken interview or timed technical screening. The AI evaluates depth of experience, situational reasoning, and domain mastery directly against the job description, producing an audit-ready scorecard with fit ratings, specific candidate strengths, and documented areas of concern.",
     capabilities: [
-      "Constitutional & PIL Guidance",
-      "RTI Application Generator",
-      "Multilingual Legal Translation",
-      "Precedent Document Intelligence",
-      "Court Case Tracking & Analytics",
+      "Voice AI Interviews",
+      "Ranked Shortlists",
+      "Resume Parsing",
+      "Timed MCQ Screening",
+      "Verified Companies",
+      "Professional Feed",
     ],
     features: [
       {
-        title: "Multilingual Legal Co-Counsel",
+        title: "Autonomous 5-Minute Spoken Voice Interviews",
         description:
-          "Conversational guidance in Hindi, Marathi, English, and regional languages explaining legal rights, bail provisions, and procedural steps.",
+          "Candidates complete a fluid, interactive first-round interview conducted by an LLM-powered voice agent over LiveKit WebRTC at their convenience before the position's closing date.",
       },
       {
-        title: "RTI & PIL Document Architect",
+        title: "Evidence-Based Role Evaluation & Shortlisting",
         description:
-          "Step-by-step petition generator ensuring all statutory requirements, jurisdictional references, and prayer clauses are accurately framed.",
+          "Every response is objectively benchmarked against the role's specific technical and behavioral criteria, generating an audit-ready 0-100 score, fit rating, and documented reasoning.",
       },
       {
-        title: "Judgment Precedent Summarizer",
+        title: "Server-Side Timed Technical Assessments",
         description:
-          "Rapid synthesis of 100+ page judicial rulings into key holdings, dissenting opinions, and referenced statutory provisions.",
+          "For quantitative or engineering roles, hiring managers can substitute or supplement voice interviews with anti-cheat, server-timed multiple-choice questionnaires with instant grading.",
       },
       {
-        title: "Court Analytics & Case Timelines",
+        title: "Automated Profile Generation & ATS PDF Export",
         description:
-          "Historical analytics on disposal rates, bench tendencies, and case stage durations across Indian district and High Courts.",
+          "Uploading a resume instantly populates an applicant's full profile—work history, education, and technical skills—with bidirectional export to a clean, ATS-compliant PDF resume.",
+      },
+      {
+        title: "Unified Pipeline & Candidate Dossiers",
+        description:
+          "Recruiters manage the full lifecycle from application to offer in a single streamlined pipeline, featuring synchronized voice playback, complete transcripts, and comparative metrics.",
+      },
+      {
+        title: "Domain-Verified Company Trust & Activity Feed",
+        description:
+          "Eliminates ghost jobs and phishing through mandatory corporate domain email verification, integrated with an authentic professional feed for company culture, updates, and hiring discussions.",
       },
     ],
     techStack: [
       {
-        category: "Frontend",
-        technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Motion"],
+        category: "Frontend & Runtime",
+        technologies: ["Next.js 16 (App Router)", "Vinext Edge Runtime", "TypeScript", "Tailwind CSS", "GSAP & Motion"],
       },
       {
-        category: "AI & NLP Pipeline",
-        technologies: ["Custom Legal RAG Engine", "Multilingual Indic Embeddings", "Vector DB (pgvector)", "Citation Verification Safeguards"],
+        category: "Voice AI & Real-Time Engine",
+        technologies: [
+          "LiveKit WebRTC Audio Gateway",
+          "Low-Latency Conversational Voice Agent",
+          "Streaming STT & TTS",
+          "Semantic Role-Fit Scoring Harness",
+        ],
       },
       {
-        category: "Data & Storage",
-        technologies: ["PostgreSQL", "Cloudflare CDN", "FastAPI Service Workers"],
+        category: "Edge Cloud & Database",
+        technologies: [
+          "Cloudflare Workers",
+          "Cloudflare D1 (Distributed Edge SQL)",
+          "Wrangler Migrations",
+          "Cloudflare Edge CDN",
+        ],
+      },
+      {
+        category: "Auth & Security",
+        technologies: [
+          "Clerk Authentication (OAuth, Magic Link)",
+          "Domain DNS Email Verification",
+          "Anti-Cheat Timing Guardrails",
+        ],
       },
     ],
     architectureHighlights: [
-      "Hallucination-guarded retrieval pipeline verifying every legal section reference against gazetted statutory text.",
-      "Strict zero-retention privacy protocol for sensitive legal queries and citizen consultations.",
-      "High-throughput vector search processing queries across millions of legal precedent paragraphs in under 350ms.",
+      "Sub-200ms conversational audio latency engineered via LiveKit WebRTC edge nodes directly connected to streaming transcription and voice synthesis pipelines.",
+      "Edge-first data architecture running on Cloudflare D1 distributed SQLite, executing applicant queries and ranking aggregations in under 25ms globally.",
+      "Transparent, anti-hallucination evaluation engine that binds every candidate score to specific timestamped transcript quotes and job criteria justifications.",
+      "Multi-tenant corporate isolation requiring DNS-backed work email domain validation, guaranteeing 100% legitimate employer listings across the network.",
     ],
     metrics: [
-      { label: "Supported Languages", value: "8+", detail: "Major Indian languages with native legal semantics" },
-      { label: "Drafting Speedup", value: "10x", detail: "RTI and initial legal notice preparation speed" },
-      { label: "Citation Accuracy", value: "99.1%", detail: "Factual statute and judgment benchmark validation" },
+      { label: "First-Round Screening Time", value: "5 Mins", detail: "Per applicant with zero scheduling overhead" },
+      { label: "Recruiter Time Saved", value: "85%", detail: "Replaces introductory phone screens with ranked shortlists" },
+      { label: "Candidate Hearing Rate", value: "100%", detail: "Every applicant gets evaluated on real voice signal" },
     ],
     faqs: [
       {
-        question: "What is NyayaAI and what legal services does it provide?",
+        question: "What is Hire Excellence and how does it work?",
         answer:
-          "NyayaAI is an AI-powered legal accessibility and judicial intelligence assistant engineered by SNAB Innovations. It assists citizens and legal professionals with multilingual statutory guidance, Right to Information (RTI) drafting, Public Interest Litigation (PIL) guidance, and case precedent summaries across Indian law.",
+          "Hire Excellence is an AI-first hiring platform and professional network engineered by SNAB Innovations. Unlike traditional job boards that rely on keyword-stuffed resumes, Hire Excellence has an autonomous AI voice agent conduct a five-minute spoken first-round interview for every single applicant. Responses are evaluated against the job description to produce a ranked, evidence-backed shortlist for recruiters.",
       },
       {
-        question: "Which Indian languages are supported by NyayaAI?",
+        question: "How does the 5-minute autonomous voice interview work?",
         answer:
-          "NyayaAI supports 8+ major Indian languages including Hindi, Marathi, Bengali, Tamil, Telugu, Gujarati, and English, allowing citizens to understand legal rights, court procedures, and statutory sections in their native tongue.",
+          "When a candidate applies to a position, they receive an invitation to complete a 5-minute conversational voice interview on their own schedule before the deadline. Powered by LiveKit WebRTC and conversational AI, the agent asks pertinent behavioral and technical questions, listens in real time, and follows up dynamically based on what the candidate shares.",
       },
       {
-        question: "How does NyayaAI prevent hallucinations in legal citations?",
+        question: "Is Hire Excellence free to use for job seekers and employers?",
         answer:
-          "NyayaAI implements a dual-check retrieval-augmented generation (RAG) architecture that validates every referenced legal section, judgment citation, and statutory act against verified official gazettes and court records before returning information to the user.",
+          "Yes. Hire Excellence is completely free for both candidates and employers. Candidates can create a verified profile, take voice interviews, and explore jobs at no cost. Employers can verify their company, post open positions, and review ranked shortlists without platform fees.",
       },
       {
-        question: "Can citizens use NyayaAI to draft Right to Information (RTI) petitions?",
+        question: "Can hiring managers use multiple-choice assessments instead of voice interviews?",
         answer:
-          "Yes. NyayaAI features a guided RTI drafting architect that formulates precise information requests, identifies the appropriate Public Information Officer (PIO) authority, and structures the application to comply with statutory RTI standards.",
+          "Yes. Recruiters have full flexibility to choose between a 5-minute conversational voice interview or a timed multiple-choice assessment with server-enforced countdown timers and instant scoring, depending on what the specific role demands.",
       },
       {
-        question: "Is NyayaAI developed by SNAB Innovations?",
+        question: "How are company pages and employer accounts verified?",
         answer:
-          "Yes. NyayaAI is an initiative researched, architected, and engineered by SNAB Innovations to advance civic technology and democratize legal access.",
+          "To prevent fraudulent postings and ghost jobs, every company page on Hire Excellence is bound to an active corporate web domain and must be verified using an authorized work email on that domain. Only verified corporate accounts can post active requisitions.",
+      },
+      {
+        question: "Who engineered Hire Excellence?",
+        answer:
+          "Hire Excellence was architected and engineered by Nimesh Kulkarni (Founder & Systems Architect at SNAB Innovations) with the SNAB Innovations product engineering team, demonstrating our studio's commitment to high-signal AI platforms and distributed edge architecture.",
       },
     ],
-    link: "https://nyayai.interviewxpert.in/",
-    image: "/nyaya-ai.png",
-    imageAlt: "NyayaAI Judicial and Legal Intelligence Platform Logo",
-    contain: true,
+    link: "https://hire-excellence.n1m35h.in",
+    leadEngineer: "Nimesh Kulkarni",
+    leadEngineerUrl: "https://www.linkedin.com/in/nimesh-kulkarni-526401266/",
+    contributors: [
+      {
+        name: "SNAB Innovations Team",
+        role: "Product Architecture & AI Enablement",
+        url: "https://snab.co.in",
+      },
+    ],
+    engineerProfile: {
+      name: "Nimesh Kulkarni",
+      role: "Founder & Systems Architect at SNAB Innovations",
+      bio: "Architected Hire Excellence to eliminate resume keyword inflation and bring objective, evidence-based voice signals to talent acquisition. Engineered with Next.js on Cloudflare edge workers, LiveKit WebRTC low-latency audio pipelines, and Cloudflare D1 distributed storage.",
+      links: [
+        { label: "Portfolio", url: "https://www.n1m35h.in/", platform: "portfolio" },
+        { label: "LinkedIn", url: "https://www.linkedin.com/in/nimesh-kulkarni-526401266/", platform: "linkedin" },
+        { label: "GitHub", url: "https://github.com/GitNimay", platform: "github" },
+      ],
+    },
+    image: "/hire-excellence-og.jpg",
+    imageAlt: "Hire Excellence AI-First Hiring Network & Voice Interview Workspace",
     seo: {
-      title: "NyayaAI — Multilingual Legal AI & Judicial Intelligence Assistant | SNAB Innovations",
+      title: "Hire Excellence — AI-First Hiring Network & Spoken Interview Platform | SNAB Innovations",
       description:
-        "NyayaAI by SNAB Innovations is an AI legal intelligence assistant delivering multilingual statutory guidance, RTI drafting, judgment analysis, and court analytics across India.",
+        "Hire Excellence by SNAB Innovations is an AI-first hiring network. An autonomous AI conducts 5-minute spoken voice interviews for every applicant, scoring responses against job descriptions to provide ranked shortlists.",
       keywords: [
-        "NyayaAI",
-        "Nyaya AI",
-        "NyayaAI SNAB",
-        "NyayaAI SNAB Innovations",
-        "SNAB NyayaAI",
-        "nyayai.interviewxpert.in",
-        "legal AI assistant India",
-        "multilingual legal AI",
-        "RTI drafting tool AI",
-        "PIL guidance software",
-        "court case intelligence India",
-        "Indian law AI assistant",
-        "High Court judgment analysis",
-        "SNAB Innovations AI systems",
+        "Hire Excellence",
+        "Hire Excellence SNAB",
+        "Hire Excellence AI",
+        "hire-excellence.n1m35h.in",
+        "Nimesh Kulkarni Hire Excellence",
+        "AI voice interview platform",
+        "autonomous hiring network",
+        "AI recruitment platform",
+        "LiveKit voice agent hiring",
+        "Cloudflare D1 recruitment software",
+        "signal based hiring",
+        "ranked shortlist AI",
+        "SNAB Innovations products",
+        "recruitment tech India",
+        "talent intelligence platform",
       ],
     },
   },
@@ -906,7 +960,11 @@ export const PRODUCTS: ProductItem[] = [
 ];
 
 export function getProductBySlug(slug: string): ProductItem | undefined {
-  return PRODUCTS.find((p) => p.slug.toLowerCase() === slug.toLowerCase());
+  const normalized = slug.toLowerCase();
+  if (normalized === "nyaya-ai") {
+    return PRODUCTS.find((p) => p.slug === "hire-excellence");
+  }
+  return PRODUCTS.find((p) => p.slug.toLowerCase() === normalized);
 }
 
 export function getAllProductSlugs(): string[] {

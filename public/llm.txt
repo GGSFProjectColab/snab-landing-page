@@ -70,7 +70,7 @@
 - **Overview**: An AI-first hiring and professional social network engineered by SNAB Innovations. Features 5-minute autonomous conversational voice interviews over LiveKit WebRTC, objective job-description alignment scoring, verified corporate domains, and ranked shortlists with audit-ready rationales.
 
 ### 4. Termy
-- **Live URL**: https://termyy.vercel.app/
+- **Live URL**: https://termy-rho.vercel.app/
 - **Studio Deep-Dive**: https://snab.co.in/work/termy
 - **Category**: High-Performance Windows Terminal Workspace Engineered in Rust
 - **Engineering Leadership**: Led by Nimesh Kulkarni (https://www.linkedin.com/in/nimesh-kulkarni-526401266/).
